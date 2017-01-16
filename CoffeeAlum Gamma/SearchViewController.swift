@@ -66,6 +66,7 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
             name = nameTextField.text
             education = studiedInTextField.text
             location = cityUserLivesTextField.text
+            
             self.thisUser = User(name: name, account: .alum, education: education, location: location)
             
             // Deinitializes the observer
@@ -92,7 +93,6 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     var adaptiveKeyboard: AdaptiveKeyboard!
     
     // Creating an instance of each class
-    var userDataModel: UserDataModel!
     var thisUser: User?
 
     
@@ -106,14 +106,12 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
 
 
     // Filtered Users
-    var filteredUserResults = [UserDataModel]()
     
     // MARK: - Lists of Data
     // Search data list for te Collection View
     var searchDataList = [BannerDataModel]()
     
     // User profile list for the cell
-    var userProfileList = [UserDataModel]()
     
     // Testing for Firebase
     var name: String!
