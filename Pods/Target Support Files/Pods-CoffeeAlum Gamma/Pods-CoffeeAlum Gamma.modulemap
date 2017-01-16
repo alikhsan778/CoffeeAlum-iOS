@@ -1,0 +1,6 @@
+framework module Pods_CoffeeAlum_Gamma {
+  umbrella header "Pods-CoffeeAlum Gamma-umbrella.h"
+
+  export *
+  module * { export * }
+}
