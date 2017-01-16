@@ -12,7 +12,7 @@ import Firebase
 
 class User: Hashable {
     var name:String
-    var account: StudentOrAlum
+    var account: AccountType
     var employer: String = ""
     var role: String = ""
     var education: String = ""
@@ -26,7 +26,7 @@ class User: Hashable {
         return self.uid.hashValue
     }
     
-    init(name:String, account:StudentOrAlum, education: String, location: String){
+    init(name:String, account:AccountType, education: String, location: String){
         self.name = name
         self.account = account
         self.education = education
@@ -109,6 +109,7 @@ class User: Hashable {
 
 enum AccountType: String {
     case student = "student"
-    case alumni = "alumni"
+    case alum = "alumn"
     case admin = "admin"
+    case mentor = "mentor"
 }

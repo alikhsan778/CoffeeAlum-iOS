@@ -16,7 +16,7 @@ class UserDataModel {
     // User email
     var email: String?
     // Student or alum of type enum
-    var studentOrAlum: StudentOrAlum?
+    var accountType: AccountType?
     // User short bio
     var userShortBio: String?
     // User education background
@@ -31,10 +31,10 @@ class UserDataModel {
     var profilePicture: String?
     
     // Initializing all the variables
-    init(name: String?, email: String?, studentOrAlum: StudentOrAlum?, educationalBackground: String?, userLocation: String?, userShortBio: String?, memberOfGroup: [String?], profilePicture: String?) {
+    init(name: String?, email: String?, accountType: AccountType?, educationalBackground: String?, userLocation: String?, userShortBio: String?, memberOfGroup: [String?], profilePicture: String?) {
         self.name = name
         self.email = email
-        self.studentOrAlum = studentOrAlum
+        self.accountType = accountType
         self.educationalBackground = educationalBackground
         self.userLocation = userLocation
         self.userShortBio = userShortBio

@@ -119,7 +119,7 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     var name: String!
     var education: String!
     var location: String!
-    var account: StudentOrAlum!
+    var account: AccountType!
     
     // MARK: - Overrided Methods
     override func viewWillAppear(_ animated: Bool) {

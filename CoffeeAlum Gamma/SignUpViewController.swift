@@ -112,6 +112,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 // There's no error
                 if error == nil {
                     
+                    
+                    
+                    
                     /*
                      If I use segue, it will perform it even without this condition
                      which allows a user to access the content without even filling 
@@ -121,7 +124,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     self.presentListOfCoffeeMeetupsViewController()
                     
                 } else {
-                    // There's an error
                     // TODO: Throw an error
                 }
             })
