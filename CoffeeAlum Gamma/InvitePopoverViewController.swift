@@ -10,11 +10,20 @@ import Foundation
 
 class InvitePopoverViewController: UIViewController {
     
-    override func viewDidLoad() {
+    @IBAction func inviteButtonAction(_ sender: UIButton) {
         
-   
     }
     
+    @IBAction func dateTextField(_ sender: UITextField) {
+        
+    }
     
+    @IBAction func timeTextField(_ sender: UITextField) {
+        
+    }
+    
+    override func viewDidLoad() {
+        
+    }
     
 }

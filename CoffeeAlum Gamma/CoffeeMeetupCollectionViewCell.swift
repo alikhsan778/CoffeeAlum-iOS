@@ -13,8 +13,8 @@ class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var backingView: UIView!
     
     override func awakeFromNib() {
-        backingView.addPresetCornerRadius()
-        // backingView.addPresetShadow()
+        // backingView.addPresetCornerRadius()
+      
     }
 }
 

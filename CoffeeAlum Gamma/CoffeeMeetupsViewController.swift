@@ -8,13 +8,15 @@
 
 import UIKit
 
-class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDelegate {
+class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     // MARK: - IBOutlets
     @IBOutlet weak var headlineLabel: UILabel!
     
     // MARK: - List of Datas
     var listOfBanners = [BannerDataModel]()
+    
+    var testData = ["Test"]
     
     // MARK: - User Interaction Properties
     var tapGesture = UITapGestureRecognizer()
@@ -54,32 +56,3 @@ class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDeleg
     
 }
 
-// MARK: - UICollectionView extension
-extension CoffeeMeetupsViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoffeeMeetupCell", for: indexPath) as! CoffeeMeetupCollectionViewCell
-        
-        return cell
-        
-    }
-    
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout extension
-extension CoffeeMeetupsViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.bounds.width, height: view.bounds.height - 150)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return -50
-    }
-    
-}

@@ -10,7 +10,6 @@ import Foundation
 
 class InvitationViewController: UIViewController {
     
-    
     @IBOutlet weak var profilePicture: UIImageView!
     
     @IBOutlet weak var personInvitingLabel: UILabel!
@@ -27,5 +26,8 @@ class InvitationViewController: UIViewController {
         
     }
     
+    override func viewDidLoad() {
+        
+    }
     
 }

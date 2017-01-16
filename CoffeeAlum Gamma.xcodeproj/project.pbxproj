@@ -48,6 +48,9 @@
 		DDDDBB551E2C98050084D5A5 /* InvitePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDBB541E2C98050084D5A5 /* InvitePopoverViewController.swift */; };
 		DDDDBB571E2D278B0084D5A5 /* SearchViewController + ProfilePopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDBB561E2D278B0084D5A5 /* SearchViewController + ProfilePopover.swift */; };
 		DDDDBB5A1E2D3AC70084D5A5 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDBB591E2D3AC70084D5A5 /* InvitationViewController.swift */; };
+		DDDDBB5C1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDBB5B1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift */; };
+		DDDDBB5F1E2D573B0084D5A5 /* CoffeeMeetupsViewController + Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDBB5E1E2D573B0084D5A5 /* CoffeeMeetupsViewController + Popover.swift */; };
+		DDDDBB611E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDBB601E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift */; };
 		DDEC13251E198B94002C7CCF /* StickyCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13241E198B94002C7CCF /* StickyCollectionViewFlowLayout.swift */; };
 		DDEC13271E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */; };
 		DDEC13291E199AB6002C7CCF /* UIView + CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13281E199AB6002C7CCF /* UIView + CornerRadius.swift */; };
@@ -118,6 +121,9 @@
 		DDDDBB541E2C98050084D5A5 /* InvitePopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePopoverViewController.swift; sourceTree = "<group>"; };
 		DDDDBB561E2D278B0084D5A5 /* SearchViewController + ProfilePopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchViewController + ProfilePopover.swift"; sourceTree = "<group>"; };
 		DDDDBB591E2D3AC70084D5A5 /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
+		DDDDBB5B1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileGlimpseViewController + Popover.swift"; sourceTree = "<group>"; };
+		DDDDBB5E1E2D573B0084D5A5 /* CoffeeMeetupsViewController + Popover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoffeeMeetupsViewController + Popover.swift"; sourceTree = "<group>"; };
+		DDDDBB601E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoffeeMeetupsViewController + CollectionView.swift"; sourceTree = "<group>"; };
 		DDEC13241E198B94002C7CCF /* StickyCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeMeetupCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDEC13281E199AB6002C7CCF /* UIView + CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView + CornerRadius.swift"; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 				DD12E0E61E245064006A2663 /* ProfileGlimpseViewController.swift */,
 				DD12E0F21E2595D9006A2663 /* ProfileGlimpseViewController + TableView.swift */,
 				DD12E0FE1E25B174006A2663 /* ProfileGlimpseViewController + CollectionView.swift */,
+				DDDDBB5B1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift */,
 			);
 			name = ProfileGlimpseViewController;
 			sourceTree = "<group>";
@@ -324,8 +331,8 @@
 		DDBE230B1E0F26B600C0497E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DDDDBB5D1E2D571B0084D5A5 /* CoffeeMeetupsViewController */,
 				DDDDBB581E2D3AAF0084D5A5 /* InvitationViewController */,
-				DDBE26B71E11DF0800C0497E /* CoffeeMeetupsViewController.swift */,
 				DDDDBB531E2C97E80084D5A5 /* InvitePopoverViewController */,
 				DD12E0E81E2454FE006A2663 /* Messages */,
 				DDEC132D1E19E12F002C7CCF /* PersonalProfileViewController */,
@@ -385,6 +392,16 @@
 				DDDDBB591E2D3AC70084D5A5 /* InvitationViewController.swift */,
 			);
 			name = InvitationViewController;
+			sourceTree = "<group>";
+		};
+		DDDDBB5D1E2D571B0084D5A5 /* CoffeeMeetupsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DDBE26B71E11DF0800C0497E /* CoffeeMeetupsViewController.swift */,
+				DDDDBB601E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift */,
+				DDDDBB5E1E2D573B0084D5A5 /* CoffeeMeetupsViewController + Popover.swift */,
+			);
+			name = CoffeeMeetupsViewController;
 			sourceTree = "<group>";
 		};
 		DDEC13231E198B7D002C7CCF /* Layouts */ = {
@@ -618,6 +635,7 @@
 				DDDDBB571E2D278B0084D5A5 /* SearchViewController + ProfilePopover.swift in Sources */,
 				DD43A7D61E16CE46005C31A7 /* SidebarMenuViewController.swift in Sources */,
 				DDEC13311E19FEC8002C7CCF /* UIView + Shadow.swift in Sources */,
+				DDDDBB5C1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift in Sources */,
 				DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */,
 				DD78A2861E12D80D00935C8D /* UserDataModel.swift in Sources */,
 				DDEC132C1E19D5E0002C7CCF /* StudentOrAlum.swift in Sources */,
@@ -641,6 +659,7 @@
 				DDEC13291E199AB6002C7CCF /* UIView + CornerRadius.swift in Sources */,
 				DD12E0F01E245D37006A2663 /* SearchViewController + SearchBar.swift in Sources */,
 				DD43A80C1E17AD65005C31A7 /* SearchViewController.swift in Sources */,
+				DDDDBB611E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift in Sources */,
 				DD12E0EA1E245504006A2663 /* MessagesViewController.swift in Sources */,
 				DDDDBB551E2C98050084D5A5 /* InvitePopoverViewController.swift in Sources */,
 				DD43A8101E1817AF005C31A7 /* BannerDataModel.swift in Sources */,
@@ -648,6 +667,7 @@
 				DD12E1011E25B316006A2663 /* TagCollectionViewCell.swift in Sources */,
 				DD12E0F31E2595D9006A2663 /* ProfileGlimpseViewController + TableView.swift in Sources */,
 				DD43A80E1E181750005C31A7 /* SearchCollectionViewCell.swift in Sources */,
+				DDDDBB5F1E2D573B0084D5A5 /* CoffeeMeetupsViewController + Popover.swift in Sources */,
 				DDBE23091E0F107B00C0497E /* CustomGradientView.swift in Sources */,
 				DDBE22E61E0EED7D00C0497E /* AppDelegate.swift in Sources */,
 				DD12E0FB1E25A55A006A2663 /* Coffee.swift in Sources */,

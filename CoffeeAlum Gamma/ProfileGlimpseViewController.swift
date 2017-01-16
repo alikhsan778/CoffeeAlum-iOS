@@ -8,10 +8,11 @@
 
 import Foundation
 
-class ProfileGlimpseViewController: UIViewController {
+class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBAction func meetupButtonAction(_ sender: UIButton) {
-        
+        // Setting up popover for invitation view controller
+        setupPopover()
     }
     
     @IBOutlet weak var profilePicture: UIImageView!
