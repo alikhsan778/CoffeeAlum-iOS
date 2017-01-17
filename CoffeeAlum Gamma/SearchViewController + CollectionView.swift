@@ -23,10 +23,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // Assigning the specific cell as SearchCollectionViewCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCell", for: indexPath) as! SearchCollectionViewCell
         
-        // Accessing each object within the list of searchData
         let userForCell = filteredUsers[indexPath.row]
         
         cell.userNameLabelOutlet.text = userForCell.name

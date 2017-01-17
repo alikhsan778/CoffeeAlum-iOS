@@ -13,7 +13,7 @@ import Firebase
 class User: Hashable {
     var name:String
     var email: String = ""
-    var account: AccountType
+    var account: AccountType = .alum
     var employer: String = ""
     var role: String = ""
     var education: String = ""
@@ -40,13 +40,10 @@ class User: Hashable {
     init(snapshot: FIRDataSnapshot){
         uid = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
-        name = snapshotValue["name"] as! String
+        name = snapshotValue["name"] as? String ?? ""
         
-        let accountBool = snapshotValue["account"] as? Bool ?? false
+        let accountBool = snapshotValue["account"] as? String ?? ""
         
-        if accountBool{
-            self.account = .alum
-        }
             
         else{self.account = .student}
         
