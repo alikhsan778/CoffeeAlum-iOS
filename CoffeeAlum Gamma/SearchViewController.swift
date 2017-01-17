@@ -62,21 +62,20 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
         let locationCondition = checkIfTextFieldHasBeenFilled(for: cityUserLivesTextField, showStatusIn: cityLocationLabel)
         
         if (nameCondition == true) && (studyInCondition == true) && (locationCondition == true) {
-            // Record all the things written to the data model
+            
+            //Build a user object
             name = nameTextField.text
             education = studiedInTextField.text
             location = cityUserLivesTextField.text
             
+            
             self.thisUser = User(name: name, account: .alum, education: education, location: location)
+            thisUser!.save()
+            
             
             // Deinitializes the observer
             adaptiveKeyboard.unregisterKeyboardNotifications()
-            
-            // POST to Firebase
-            post()
-            
-            
-            // Dimisses the popover view
+  
             dismissPopover(view: completeProfileView)
         }
         
