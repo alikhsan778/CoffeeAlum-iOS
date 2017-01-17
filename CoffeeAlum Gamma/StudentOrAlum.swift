@@ -1,5 +1,5 @@
 //
-//  StudentOrAlum.swift
+//  AccountType.swift
 //  CoffeeAlum Gamma
 //
 //  Created by Trevin Wisaksana on 1/1/17.
@@ -9,6 +9,8 @@
 import Foundation
 
 // Student or alum state
-enum StudentOrAlum {
-    case student, alum
-}
+
+
+
+
+
