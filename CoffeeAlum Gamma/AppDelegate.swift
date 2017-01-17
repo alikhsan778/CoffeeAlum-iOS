@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         // Checks if the current user is already logged in
-        if let user = FIRAuth.auth()?.currentUser {
+        if let _ = FIRAuth.auth()?.currentUser {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
