@@ -54,7 +54,6 @@
 		DDEC13251E198B94002C7CCF /* StickyCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13241E198B94002C7CCF /* StickyCollectionViewFlowLayout.swift */; };
 		DDEC13271E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */; };
 		DDEC13291E199AB6002C7CCF /* UIView + CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13281E199AB6002C7CCF /* UIView + CornerRadius.swift */; };
-		DDEC132C1E19D5E0002C7CCF /* StudentOrAlum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC132B1E19D5E0002C7CCF /* StudentOrAlum.swift */; };
 		DDEC132F1E19E13C002C7CCF /* PersonalProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC132E1E19E13C002C7CCF /* PersonalProfileViewController.swift */; };
 		DDEC13311E19FEC8002C7CCF /* UIView + Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13301E19FEC8002C7CCF /* UIView + Shadow.swift */; };
 /* End PBXBuildFile section */
@@ -128,7 +127,6 @@
 		DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeMeetupCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDEC13281E199AB6002C7CCF /* UIView + CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView + CornerRadius.swift"; sourceTree = "<group>"; };
 		DDEC132A1E19AF1B002C7CCF /* CoffeeAlum Gamma.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoffeeAlum Gamma.entitlements"; sourceTree = "<group>"; };
-		DDEC132B1E19D5E0002C7CCF /* StudentOrAlum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentOrAlum.swift; sourceTree = "<group>"; };
 		DDEC132E1E19E13C002C7CCF /* PersonalProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalProfileViewController.swift; sourceTree = "<group>"; };
 		DDEC13301E19FEC8002C7CCF /* UIView + Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView + Shadow.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -352,7 +350,6 @@
 				DD12E0FA1E25A55A006A2663 /* Coffee.swift */,
 				DD43A80F1E1817AF005C31A7 /* BannerDataModel.swift */,
 				BD471DFE1E2D7DAF002CB142 /* Helper.swift */,
-				DDEC132B1E19D5E0002C7CCF /* StudentOrAlum.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -637,7 +634,6 @@
 				DDEC13311E19FEC8002C7CCF /* UIView + Shadow.swift in Sources */,
 				DDDDBB5C1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift in Sources */,
 				DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */,
-				DDEC132C1E19D5E0002C7CCF /* StudentOrAlum.swift in Sources */,
 				DDBE22E81E0EED7D00C0497E /* SignUpViewController.swift in Sources */,
 				DDEC132F1E19E13C002C7CCF /* PersonalProfileViewController.swift in Sources */,
 				DD12E0EE1E2456C2006A2663 /* SearchViewController + CustomPopover.swift in Sources */,

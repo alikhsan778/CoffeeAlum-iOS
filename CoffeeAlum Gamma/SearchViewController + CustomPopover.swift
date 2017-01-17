@@ -69,11 +69,11 @@ extension SearchViewController {
         
         view.frame.size = CGSize(width: self.view.frame.width * 0.90, height: self.view.frame.height * 0.95)
         view.center = self.view.center
-        
         view.layer.cornerRadius = 12
         view.layer.masksToBounds = true
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         self.view!.addSubview(view)
+        
         // Bringing the popover view to front
         self.view!.bringSubview(toFront: view)
         
@@ -97,10 +97,8 @@ extension SearchViewController {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {() -> Void in
             // Animation to scale before disappearing
             view.transform = CGAffineTransform.init(scaleX: 1.1, y: 1.1)
-            // Setting the alpha to zero
-            view.alpha = 0
             
-            // Erasing the blur in the background
+            view.alpha = 0
             self.blurEffectView.removeFromSuperview()
             
             // Updating this bool to prevent this popup from showing again
@@ -109,24 +107,11 @@ extension SearchViewController {
             self.setNeedsStatusBarAppearanceUpdate()
             
         }, completion: { (success: Bool) in
-            // Removing the view from the super view
             view.removeFromSuperview()
         })
         
     }
     
-    // MARK: - Firebase Methods
-    func post() {
-        // If the user is logged in
-        guard let user = FIRAuth.auth()?.currentUser else {
-            return
-        }
-        
-        thisUser!.uid = user.uid
-        let data = thisUser!.toAnyObject()
-        let databaseReference = FIRDatabaseReference()
-        databaseReference.child("users").child(user.uid).setValue(data)
-        
-    }
+
     
 }

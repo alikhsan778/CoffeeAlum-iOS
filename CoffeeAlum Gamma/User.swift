@@ -14,6 +14,7 @@ class User: Hashable {
     var name:String
     var email: String = ""
     var account: AccountType = .alum
+    var bio: String = ""
     var employer: String = ""
     var role: String = ""
     var education: String = ""
@@ -23,7 +24,7 @@ class User: Hashable {
     var portrait: String = ""
     var uid: String = ""
     var ref: FIRDatabaseReference?
-    var db = FIRDatabase.database().reference()
+    var db = FIRDatabase.database().reference().child("users")
     
     var hashValue: Int {
         return self.uid.hashValue
@@ -40,13 +41,16 @@ class User: Hashable {
     init(snapshot: FIRDataSnapshot){
         uid = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
+
+        
         name = snapshotValue["name"] as? String ?? ""
         
-        let accountBool = snapshotValue["account"] as? String ?? ""
+        let accountString = snapshotValue["account"] as? String
+        if let account = accountString{
+            self.account = AccountType(rawValue: account)!
+        }
         
-            
-        else{self.account = .student}
-        
+        bio = snapshotValue["bio"] as? String ?? ""
         education = snapshotValue["education"] as? String ?? ""
         employer = snapshotValue["employer"] as? String ?? ""
         role = snapshotValue["role"] as? String ?? ""
@@ -119,7 +123,7 @@ class User: Hashable {
 
 enum AccountType: String {
     case student = "student"
-    case alum = "alumn"
+    case alum = "alum"
     case admin = "admin"
     case mentor = "mentor"
 }

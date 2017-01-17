@@ -9,10 +9,17 @@
 import Foundation
 
 // Setting up profile glimpse popover
+
 extension SearchViewController {
     
-    func setupProfileGlimpsePopover() {
+    func setupProfileGlimpsePopover(user:User) {
         let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ProfileGlimpse") as! ProfileGlimpseViewController
+        
+        
+        // populate profile fields
+        popoverContent.occupationLabel.text = user.employer
+        
+        // popover view mechanics
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
         let popover = popoverContent.popoverPresentationController
         popoverContent.preferredContentSize = CGSize(width: self.view.frame.width * 0.9, height: self.view.frame.height * 0.9)
