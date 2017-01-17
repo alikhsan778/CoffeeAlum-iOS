@@ -82,6 +82,8 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
         
     }
     
+    ///////////////////////////////////////////////////////////////////////////////////////
+    
     
     // MARK: - Miscellaneous Properties
     // Creating an instance of Firebase Database reference 
@@ -118,6 +120,7 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     var education: String!
     var location: String!
     var account: AccountType!
+    var uid: String = FIRAuth.auth()!.currentUser!.uid
     
     // MARK: - Overrided Methods
     override func viewWillAppear(_ animated: Bool) {
@@ -136,6 +139,18 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     
     
     override func viewDidLoad() {
+        let thisUserRef = userRef.child(FIRAuth.auth()!.currentUser!.uid)
+       
+        //Check if user has filled out intro form; Populate the local user object
+
+        thisUserRef.observe(.value, with: { snapshot in
+            if !snapshot.hasChild("name"){
+                self.setupPopover(view: self.completeProfileView)
+            }
+            self.thisUser = User(snapshot: snapshot)
+        })
+     
+        
         
         // Sets up the reveal view controller for sidebar menu
         revealViewControllerSetup()
@@ -162,7 +177,7 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // Setup for popover
-        setupPopover(view: completeProfileView)
+//        setupPopover(view: completeProfileView)
     }
     
     // MARK: RevealViewController Setup
@@ -194,6 +209,11 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
     }
+    
+    func setViewsForUser(){
+        
+    }
+    
     
 }
 

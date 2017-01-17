@@ -28,6 +28,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var shadowView: UIView!
     
     @IBOutlet weak var backingView: UIView!
+    
 
     
     /* confirmPasswordTextField:
@@ -50,6 +51,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var confirmPasswordLabel: UILabel!
 
     
+    var userRef:FIRDatabaseReference = FIRDatabase.database().reference().child("users")
+    
     // MARK: - Overrided Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,7 +60,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         // Placing the text fields as the Adaptive Keyboard initializer
         adaptiveKeyboard = AdaptiveKeyboard(scrollView: scrollViewOutlet, textField: emailTextField, passwordTextField, confirmPasswordTextField, pushHeight: 80)
         
-        // Prevents the user from being able to scroll
         scrollViewOutlet.isScrollEnabled = false
         
         // Used for adjust the scroll view when text field is being editted to give room
@@ -90,44 +92,45 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBActions
     @IBAction private func signUpButtonAction(_ sender: UIButton) {
-        // Checks if the email has fulfilled its requirements
         let emailCondition = hasFullfilledEmailRequirementsIn(emailAddressTextField: emailTextField)
-        // Checks if the new password has fulfilled its requirements
         let passwordCondition = hasFulfilledPasswordRequirementsIn(textField: passwordTextField)
-        // Checks if the new password matches with the confirm password
         let confirmPasswordCondition = hasFulfilledConfirmPasswordRequirements(newPasswordTextField: passwordTextField, confirmTextField: confirmPasswordTextField)
+        
+        
+        let credentialAlert = UIAlertController(title: "Invalid Credentials", message: "Credentials incorrect or poorly formatted", preferredStyle: .alert)
+        credentialAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         
         // Extracting the String for email and password
         guard let email = emailTextField.text, let password = passwordTextField.text else {
-            print("Credentials are invalid")
+            present(credentialAlert, animated: true, completion: nil)
             return
         }
         
-        // All these three requirements must be true in order to sign up
-        if (emailCondition == true) && (passwordCondition == true) && (confirmPasswordCondition == true) {
+        if (emailCondition) && (passwordCondition) && (confirmPasswordCondition) {
             // MARK: Firebase Auth
             // Success in signing up, create user in Firebase
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 // There's no error
                 if error == nil {
+                    // Create Firebase path for this user and save email
+                    let thisUserRef = self.userRef.child(user!.uid)
+                    thisUserRef.setValue(["email":email]){ ( error, ref) -> Void in
+                        self.presentListOfCoffeeMeetupsViewController()
+                    }
                     
-                    
-                    
-                    
-                    /*
-                     If I use segue, it will perform it even without this condition
-                     which allows a user to access the content without even filling 
-                     any sign up information.
-                    */
             
-                    self.presentListOfCoffeeMeetupsViewController()
-                    
                 } else {
-                    // TODO: Throw an error
+                    let alert = UIAlertController(title: "An Error Occurred", message: "Your Connection has timed out", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             })
             
-        } 
+        }
+        
+        else{
+            self.present(credentialAlert, animated: true, completion: nil)
+        }
         
     }
     
@@ -271,9 +274,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     // Method to allow the next view controller to be presented
     private func presentListOfCoffeeMeetupsViewController() {
-        // Accessing the storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        // The next view controller
         let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
         // Present the next view controller
         self.present(swRevealViewController, animated: true, completion: nil)
