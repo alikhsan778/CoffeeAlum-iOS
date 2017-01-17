@@ -62,7 +62,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         // Used for adjust the scroll view when text field is being editted to give room
         adaptiveKeyboard.registerKeyboardNotifications()
-        
     }
     
     override func viewDidLoad() {
