@@ -19,24 +19,48 @@ class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationContr
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var occupationLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    
+    @IBOutlet weak var tableView: UITableView!
     //Missing
 
     
     
-    // TESTING CELLS
+    // VARS
     let mainCells: [String] = ["About", "Education", "LinkedIn", "Website"]
+    var filteredCells: [String] = []
     var data: [(header: String, expanded: Bool)] = []
+    var user: User?
     
     
     
     override func viewDidLoad() {
-        data = mainCells.map{($0, false)}
-        
+        filteredCells = mainCells.filter({ header -> Bool in
+            return includeData(header: header)
+        })
+        data = filteredCells.map{($0, false)}
     }
     
     override func viewDidLayoutSubviews() {
+        self.occupationLabel.text = user!.employer
+        self.locationLabel.text = user!.location
+        self.usernameLabel.text = user!.name
         setupSidebarMenuPanGesture()
+    }
+    
+    func includeData(header: String) -> Bool{
+        var selected: String
+        switch header {
+        case "About":
+            selected = user!.bio
+        case "Education":
+            selected = user!.education
+        case "LinkedIn":
+            selected = user!.linkedIn
+        case "Website":
+            selected = user!.website
+        default:
+            selected = user!.linkedIn
+        }
+        return selected != ""
     }
     
 }

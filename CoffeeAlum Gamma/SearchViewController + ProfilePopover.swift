@@ -16,11 +16,9 @@ extension SearchViewController {
         let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ProfileGlimpse") as! ProfileGlimpseViewController
         
         
-        // populate profile fields
-        popoverContent.occupationLabel.text = user.employer
-        popoverContent.locationLabel.text = user.location
-        popoverContent.usernameLabel.text = user.name
-        popoverContent.bioLabel.text = user.bio
+        // pass the user data
+        popoverContent.user = self.thisUser!
+
         
         
         // popover view mechanics

@@ -12,38 +12,61 @@ import Foundation
 extension ProfileGlimpseViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mainCells.count
+        return filteredCells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileGlimpseCell") as! ProfileGlimplseCell
+        let rowHeader = filteredCells[indexPath.row]
         
-        let rowContent = mainCells[indexPath.row]
-        
-        cell.titleLabel.text = rowContent
-       
+        cell.titleLabel.text = rowHeader
+        cell.infoLabel.text = infoForCell(info: rowHeader)
+        cell.infoLabel.isHidden = !data[indexPath.row].expanded
+
+
         return cell
     }
     
+    func infoForCell(info: String) -> String{
+        switch info{
+        case "About":
+            return user!.bio
+        case "Education":
+            return user!.education
+        case "LinkedIn":
+            return user!.linkedIn
+        case "Website":
+            return user!.website
+        default:
+            return user!.linkedIn
+
+            
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.data[indexPath.row].1 = !self.data[indexPath.row].1
+        if infoForCell(info: data[indexPath.row].header) != "" {
+            self.data[indexPath.row].1 = !self.data[indexPath.row].1
+        }
         tableView.reloadRows(at: [indexPath], with: .automatic)
+
     }
 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if data[indexPath.row].expanded{
             if indexPath.row == 1{
-                return 200
+                return UITableViewAutomaticDimension
             }
             else{
-                return 100
+                return UITableViewAutomaticDimension
             }
 //            return UITableViewAutomaticDimension // Or some other set height
         }
         else{
-            return 50
+            return 100
         }
         
     }

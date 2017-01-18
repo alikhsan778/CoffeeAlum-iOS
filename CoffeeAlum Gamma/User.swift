@@ -19,6 +19,8 @@ class User: Hashable {
     var role: String = ""
     var education: String = ""
     var location: String = ""
+    var linkedIn: String = ""
+    var website: String = ""
     var coffeeIds: [String] = []
     var coffees: [Coffee] = []
     var portrait: String = ""
@@ -54,6 +56,8 @@ class User: Hashable {
         education = snapshotValue["education"] as? String ?? ""
         employer = snapshotValue["employer"] as? String ?? ""
         role = snapshotValue["role"] as? String ?? ""
+        linkedIn = snapshotValue["linkedIn"] as? String ?? ""
+        website = snapshotValue["website"] as? String ?? ""
         
         
         if let locationData = snapshotValue["location"]{
