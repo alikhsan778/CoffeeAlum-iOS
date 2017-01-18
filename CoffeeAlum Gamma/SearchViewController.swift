@@ -110,7 +110,6 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     
     // MARK: - Lists of Data
     // Search data list for te Collection View
-    var searchDataList = [BannerDataModel]()
     
     // User profile list for the cell
     

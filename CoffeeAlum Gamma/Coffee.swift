@@ -21,11 +21,12 @@ class Coffee {
     var fromEventId: String = "" // the id stored locally when the user creates this meeting
     var toEventId: String = ""
     
+    var id: String = ""
     var accepted: Bool = false
     var viewed: Bool = false
     var rescheduled: Bool = false
     var key: String = ""
-    var ref: FIRDatabaseReference?
+    var ref: FIRDatabaseReference = FIRDatabase.database().reference().child("coffees")
     
     
     init(fromId:String, fromName:String, toId: String, toName: String){
@@ -57,13 +58,29 @@ class Coffee {
         toId = snapshotValue["toId"] as! String
         fromName = snapshotValue["fromName"] as! String
         toName = snapshotValue["fromName"] as! String
-        fromEventId = snapshotValue["fromEventId"] as! String
-        toEventId = snapshotValue["toEventId"] as! String
+        fromEventId = snapshotValue["fromEventId"] as? String ?? ""
+        toEventId = snapshotValue["toEventId"] as? String ?? ""
         accepted = snapshotValue["accepted"] as! Bool
         viewed = snapshotValue["viewed"] as! Bool
         rescheduled = snapshotValue["rescheduled"] as! Bool
         key = snapshot.key
         ref = snapshot.ref
+    }
+    
+    func save(new: Bool){
+        if new {
+            let fromUserRef = ref.child(fromId).child("coffeeIds")
+            let toUserRef = ref.child(toId).child("coffeeIds")
+            let newRef = self.ref.childByAutoId()
+            newRef.setValue(self.toAnyObject()){ (error, ref) -> Void in
+                fromUserRef.setValue([ref.key:ref.key])
+                toUserRef.setValue([ref.key:ref.key])
+            }
+            
+            
+            
+        }
+        
     }
     
     
@@ -85,6 +102,8 @@ class Coffee {
         ]
     }
     
+ 
+    
 }
 
 enum CoffeeRole {
@@ -92,9 +111,5 @@ enum CoffeeRole {
     case to
 }
 
-extension Date {
-    func convertToString() -> String{
-        return DateFormatter.localizedString(from: self, dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.medium)
-    }
-}
+
 

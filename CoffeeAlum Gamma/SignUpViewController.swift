@@ -249,10 +249,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     // Method to check if the email address entered is valid
     private func validateEmailAddressIn(textField: UITextField) -> Bool {
-        // Access the string in the text field
         let emailAddress = textField.text
-        // Regular expression to validate email address
         let emailRegularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
         // Uses NSPredicate to filter through the email address string using the Regular Expression
         let emailCheck = NSPredicate(format:"SELF MATCHES %@", emailRegularExpression)
         // Returns a Bool to check if the condition passes
@@ -261,11 +260,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     // Method to check if the password entered matches the confirm password
     private func passwordMatchesIn(passwordTextField: UITextField, confirmPasswordTextField: UITextField) -> Bool {
-        // Password from password text field
         let password = passwordTextField.text
-        // Password from confirm password text field
         let confirmPassword = confirmPasswordTextField.text
-        // Checks if the two passwords are the same
         if password == confirmPassword {
             return true
         }
@@ -282,9 +278,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     // Method to show useful error message
     func displayUsefulErrorMessage(errorMessage message: String, label: UILabel) {
-        // Changing the label into the useful error message
         label.text = message
-        // Changing the color of the text to red
         label.textColor = UIColor.red
     }
     

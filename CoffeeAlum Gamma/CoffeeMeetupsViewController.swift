@@ -13,8 +13,6 @@ class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDeleg
     // MARK: - IBOutlets
     @IBOutlet weak var headlineLabel: UILabel!
     
-    // MARK: - List of Datas
-    var listOfBanners = [BannerDataModel]()
     
     var testData = ["Test"]
     

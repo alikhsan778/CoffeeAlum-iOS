@@ -28,7 +28,6 @@
 		DD43A7D81E16D3CB005C31A7 /* AdaptiveKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D71E16D3CB005C31A7 /* AdaptiveKeyboard.swift */; };
 		DD43A80C1E17AD65005C31A7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A80B1E17AD65005C31A7 /* SearchViewController.swift */; };
 		DD43A80E1E181750005C31A7 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */; };
-		DD43A8101E1817AF005C31A7 /* BannerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A80F1E1817AF005C31A7 /* BannerDataModel.swift */; };
 		DDBE22E61E0EED7D00C0497E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */; };
 		DDBE22E81E0EED7D00C0497E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E71E0EED7D00C0497E /* SignUpViewController.swift */; };
 		DDBE22EB1E0EED7D00C0497E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDBE22E91E0EED7D00C0497E /* Main.storyboard */; };
@@ -95,7 +94,6 @@
 		DD43A7D71E16D3CB005C31A7 /* AdaptiveKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveKeyboard.swift; sourceTree = "<group>"; };
 		DD43A80B1E17AD65005C31A7 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
-		DD43A80F1E1817AF005C31A7 /* BannerDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerDataModel.swift; sourceTree = "<group>"; };
 		DDBE22E21E0EED7D00C0497E /* CoffeeAlum Gamma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeeAlum Gamma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDBE22E71E0EED7D00C0497E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +202,7 @@
 				DD12E0FE1E25B174006A2663 /* ProfileGlimpseViewController + CollectionView.swift */,
 				DDDDBB5B1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift */,
 				DD12E0F41E25963C006A2663 /* ProfileGlimpseCell.swift */,
+				DDDDBB541E2C98050084D5A5 /* InvitePopoverViewController.swift */,
 			);
 			name = ProfileGlimpseViewController;
 			sourceTree = "<group>";
@@ -330,7 +329,6 @@
 			children = (
 				DDDDBB5D1E2D571B0084D5A5 /* CoffeeMeetupsViewController */,
 				DDDDBB581E2D3AAF0084D5A5 /* InvitationViewController */,
-				DDDDBB531E2C97E80084D5A5 /* InvitePopoverViewController */,
 				DD12E0E81E2454FE006A2663 /* Messages */,
 				DDEC132D1E19E12F002C7CCF /* PersonalProfileViewController */,
 				DD43A7D21E15EAA7005C31A7 /* Menu */,
@@ -346,7 +344,6 @@
 			children = (
 				DD12E0FC1E25A561006A2663 /* User.swift */,
 				DD12E0FA1E25A55A006A2663 /* Coffee.swift */,
-				DD43A80F1E1817AF005C31A7 /* BannerDataModel.swift */,
 				BD471DFE1E2D7DAF002CB142 /* Helper.swift */,
 			);
 			name = Models;
@@ -370,14 +367,6 @@
 				DDBE23161E1059D100C0497E /* SignInViewController.swift */,
 			);
 			name = "Sign Up or Sign In";
-			sourceTree = "<group>";
-		};
-		DDDDBB531E2C97E80084D5A5 /* InvitePopoverViewController */ = {
-			isa = PBXGroup;
-			children = (
-				DDDDBB541E2C98050084D5A5 /* InvitePopoverViewController.swift */,
-			);
-			name = InvitePopoverViewController;
 			sourceTree = "<group>";
 		};
 		DDDDBB581E2D3AAF0084D5A5 /* InvitationViewController */ = {
@@ -653,7 +642,6 @@
 				DDDDBB611E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift in Sources */,
 				DD12E0EA1E245504006A2663 /* MessagesViewController.swift in Sources */,
 				DDDDBB551E2C98050084D5A5 /* InvitePopoverViewController.swift in Sources */,
-				DD43A8101E1817AF005C31A7 /* BannerDataModel.swift in Sources */,
 				BD471DFF1E2D7DAF002CB142 /* Helper.swift in Sources */,
 				DDEC13271E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift in Sources */,
 				DD12E1011E25B316006A2663 /* TagCollectionViewCell.swift in Sources */,

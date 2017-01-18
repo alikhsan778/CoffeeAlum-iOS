@@ -7,14 +7,19 @@
 //
 
 import Foundation
+import Firebase
 
 class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
+    
+    
     @IBAction func meetupButtonAction(_ sender: UIButton) {
         // Setting up popover for invitation view controller
-        setupPopover()
+        setupPopover(viewedUser: self.viewedUser!)
     }
     
+    
+    @IBOutlet weak var meetupButton: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var occupationLabel: UILabel!
@@ -28,7 +33,8 @@ class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationContr
     let mainCells: [String] = ["About", "Education", "LinkedIn", "Website"]
     var filteredCells: [String] = []
     var data: [(header: String, expanded: Bool)] = []
-    var user: User?
+    var viewedUser: User?
+    var thisUser: User?
     
     
     
@@ -40,25 +46,29 @@ class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationContr
     }
     
     override func viewDidLayoutSubviews() {
-        self.occupationLabel.text = user!.employer
-        self.locationLabel.text = user!.location
-        self.usernameLabel.text = user!.name
+        self.occupationLabel.text = viewedUser!.employer
+        self.locationLabel.text = viewedUser!.location
+        self.usernameLabel.text = viewedUser!.name
         setupSidebarMenuPanGesture()
+        if self.viewedUser!.uid == FIRAuth.auth()?.currentUser!.uid{
+            self.meetupButton.isHidden = true
+        } else{meetupButton.isHidden = false}
+        
     }
     
     func includeData(header: String) -> Bool{
         var selected: String
         switch header {
         case "About":
-            selected = user!.bio
+            selected = viewedUser!.bio
         case "Education":
-            selected = user!.education
+            selected = viewedUser!.education
         case "LinkedIn":
-            selected = user!.linkedIn
+            selected = viewedUser!.linkedIn
         case "Website":
-            selected = user!.website
+            selected = viewedUser!.website
         default:
-            selected = user!.linkedIn
+            selected = viewedUser!.linkedIn
         }
         return selected != ""
     }

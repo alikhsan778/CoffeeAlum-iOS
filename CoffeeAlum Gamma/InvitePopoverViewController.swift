@@ -7,10 +7,24 @@
 //
 
 import Foundation
+import Firebase
 
 class InvitePopoverViewController: UIViewController {
+    var viewedUser: User?
+    var thisUser: User?
+    var date: String?
+    var time: String?
+    var location: String?
+    
     
     @IBAction func inviteButtonAction(_ sender: UIButton) {
+        if inviteComplete(){
+            let coffee = Coffee(date: date!, time: time!, location: location!
+                , fromId: thisUser!.uid, toId: viewedUser!.uid, fromName: thisUser!.name, toName: viewedUser!.name)
+            coffee.dateSent = Date().convertToString()
+        }
+        
+        
         
     }
     
@@ -24,6 +38,16 @@ class InvitePopoverViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        
     }
+    
+    func inviteComplete() -> Bool{
+        if let date = self.date, let time = self.time, let location = self.location {
+            return true
+        }else{return false}
+    }
+    
+    
+    
     
 }
