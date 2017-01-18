@@ -18,6 +18,10 @@ extension SearchViewController {
         
         // populate profile fields
         popoverContent.occupationLabel.text = user.employer
+        popoverContent.locationLabel.text = user.location
+        popoverContent.usernameLabel.text = user.name
+        popoverContent.bioLabel.text = user.bio
+        
         
         // popover view mechanics
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover

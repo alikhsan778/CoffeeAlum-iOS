@@ -11,5 +11,8 @@ import Foundation
 class ProfileGlimplseCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel! 
     
 }
+
+

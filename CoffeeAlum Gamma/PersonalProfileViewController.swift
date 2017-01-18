@@ -38,6 +38,4 @@ class PersonalProfileViewController: UIViewController {
         // Using the Pan Gesture Recognizer to reveal the "SWRevealViewController"
         setupSidebarMenuPanGesture()
     }
-    
-    
 }

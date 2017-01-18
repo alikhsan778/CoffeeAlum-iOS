@@ -10,7 +10,6 @@
 		2ABCFF63F50CD3CB1F326EEC /* Pods_CoffeeAlum_Gamma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CE17F3A92A641C2D43E3FC /* Pods_CoffeeAlum_Gamma.framework */; };
 		854D9B54B95FE78467EEDE55 /* Pods_CoffeeAlum_GammaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3744DE10DE3C1E0FCA74F1BB /* Pods_CoffeeAlum_GammaTests.framework */; };
 		BD471DFF1E2D7DAF002CB142 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD471DFE1E2D7DAF002CB142 /* Helper.swift */; };
-		BD471E011E2DBF75002CB142 /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD471E001E2DBF75002CB142 /* MainNavController.swift */; };
 		DD12E0E11E244FED006A2663 /* SearchViewController + CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0DF1E244FED006A2663 /* SearchViewController + CollectionView.swift */; };
 		DD12E0E41E24501D006A2663 /* UIViewController + SidebarMenuPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */; };
 		DD12E0E71E245064006A2663 /* ProfileGlimpseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0E61E245064006A2663 /* ProfileGlimpseViewController.swift */; };
@@ -76,7 +75,6 @@
 		6809F7CA622D05815B54528B /* Pods-CoffeeAlum GammaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeAlum GammaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoffeeAlum GammaTests/Pods-CoffeeAlum GammaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		79DC63532945DE1EF1E07948 /* Pods-CoffeeAlum Gamma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeAlum Gamma.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoffeeAlum Gamma/Pods-CoffeeAlum Gamma.release.xcconfig"; sourceTree = "<group>"; };
 		BD471DFE1E2D7DAF002CB142 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		BD471E001E2DBF75002CB142 /* MainNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		DD12E0DF1E244FED006A2663 /* SearchViewController + CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchViewController + CollectionView.swift"; sourceTree = "<group>"; };
 		DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController + SidebarMenuPan.swift"; sourceTree = "<group>"; };
 		DD12E0E61E245064006A2663 /* ProfileGlimpseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGlimpseViewController.swift; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 				DD12E0DF1E244FED006A2663 /* SearchViewController + CollectionView.swift */,
 				DD12E0EF1E245D37006A2663 /* SearchViewController + SearchBar.swift */,
 				DDDDBB561E2D278B0084D5A5 /* SearchViewController + ProfilePopover.swift */,
-				BD471E001E2DBF75002CB142 /* MainNavController.swift */,
 			);
 			name = SearchViewController;
 			sourceTree = "<group>";
@@ -206,6 +203,7 @@
 				DD12E0F21E2595D9006A2663 /* ProfileGlimpseViewController + TableView.swift */,
 				DD12E0FE1E25B174006A2663 /* ProfileGlimpseViewController + CollectionView.swift */,
 				DDDDBB5B1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift */,
+				DD12E0F41E25963C006A2663 /* ProfileGlimpseCell.swift */,
 			);
 			name = ProfileGlimpseViewController;
 			sourceTree = "<group>";
@@ -360,7 +358,6 @@
 				DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */,
 				DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */,
 				DD12E0EB1E245531006A2663 /* MessageCollectionViewCell.swift */,
-				DD12E0F41E25963C006A2663 /* ProfileGlimpseCell.swift */,
 				DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */,
 			);
 			name = Views;
@@ -656,7 +653,6 @@
 				DDDDBB611E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift in Sources */,
 				DD12E0EA1E245504006A2663 /* MessagesViewController.swift in Sources */,
 				DDDDBB551E2C98050084D5A5 /* InvitePopoverViewController.swift in Sources */,
-				BD471E011E2DBF75002CB142 /* MainNavController.swift in Sources */,
 				DD43A8101E1817AF005C31A7 /* BannerDataModel.swift in Sources */,
 				BD471DFF1E2D7DAF002CB142 /* Helper.swift in Sources */,
 				DDEC13271E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift in Sources */,
