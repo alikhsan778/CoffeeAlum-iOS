@@ -20,12 +20,12 @@ class Coffee {
     var toName: String  // name of user that received invitation
     var fromEventId: String = "" // the id stored locally when the user creates this meeting
     var toEventId: String = ""
+
     
-    var id: String = ""
     var accepted: Bool = false
     var viewed: Bool = false
     var rescheduled: Bool = false
-    var key: String = ""
+    var id: String = ""
     var ref: FIRDatabaseReference = FIRDatabase.database().reference().child("coffees")
     
     
@@ -63,21 +63,28 @@ class Coffee {
         accepted = snapshotValue["accepted"] as! Bool
         viewed = snapshotValue["viewed"] as! Bool
         rescheduled = snapshotValue["rescheduled"] as! Bool
-        key = snapshot.key
+        id = snapshot.key
         ref = snapshot.ref
     }
     
     func save(new: Bool){
+        let fromUserRef = ref.child(fromId).child("coffeeIds")
+        let toUserRef = ref.child(toId).child("coffeeIds")
         if new {
-            let fromUserRef = ref.child(fromId).child("coffeeIds")
-            let toUserRef = ref.child(toId).child("coffeeIds")
             let newRef = self.ref.childByAutoId()
             newRef.setValue(self.toAnyObject()){ (error, ref) -> Void in
                 fromUserRef.setValue([ref.key:ref.key])
                 toUserRef.setValue([ref.key:ref.key])
             }
-            
-            
+        }
+        
+        else {
+            let currentRef = self.ref.child(id)
+            currentRef.setValue(self.toAnyObject()){ (error, ref) -> Void in
+                fromUserRef.setValue([ref.key:ref.key])
+                toUserRef.setValue([ref.key:ref.key])
+                // the above lines are redundant, but trigger listeners for the right coffee Date
+            }
             
         }
         

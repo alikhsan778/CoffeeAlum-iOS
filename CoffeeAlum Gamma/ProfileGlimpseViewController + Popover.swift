@@ -25,6 +25,7 @@ extension ProfileGlimpseViewController {
         
         popoverContent.viewedUser = viewedUser
         popoverContent.thisUser = self.thisUser
+        popoverContent.delegate = self
         
         
         self.present(popoverContent, animated: true, completion: nil)
@@ -33,6 +34,10 @@ extension ProfileGlimpseViewController {
     // Required for the Popover transition
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+    
+    func inviteSent(){
+        //TODO:Change the meetup button icon
     }
     
 }

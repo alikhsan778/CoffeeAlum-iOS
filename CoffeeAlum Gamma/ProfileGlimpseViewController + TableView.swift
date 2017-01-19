@@ -31,15 +31,15 @@ extension ProfileGlimpseViewController: UITableViewDataSource, UITableViewDelega
     func infoForCell(info: String) -> String{
         switch info{
         case "About":
-            return user!.bio
+            return viewedUser!.bio
         case "Education":
-            return user!.education
+            return viewedUser!.education
         case "LinkedIn":
-            return user!.linkedIn
+            return viewedUser!.linkedIn
         case "Website":
-            return user!.website
+            return viewedUser!.website
         default:
-            return user!.linkedIn
+            return viewedUser!.linkedIn
 
             
         }

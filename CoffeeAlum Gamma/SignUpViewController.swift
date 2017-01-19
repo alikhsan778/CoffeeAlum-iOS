@@ -115,7 +115,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     // Create Firebase path for this user and save email
                     let thisUserRef = self.userRef.child(user!.uid)
                     thisUserRef.setValue(["email":email]){ ( error, ref) -> Void in
-                        self.presentListOfCoffeeMeetupsViewController()
+                        self.presentSearchViewController()
                     }
                     
             
@@ -269,7 +269,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Method to allow the next view controller to be presented
-    private func presentListOfCoffeeMeetupsViewController() {
+    private func presentSearchViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
         // Present the next view controller

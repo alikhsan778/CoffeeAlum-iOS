@@ -11,6 +11,11 @@ import UIKit
 class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var backingView: UIView!
+    @IBOutlet weak var nameOfInviter: UILabel!
+    @IBOutlet weak var pictureOfInviter: UIImageView!
+    @IBOutlet weak var roleOfOther: UILabel!
+    
+    
     
     override func awakeFromNib() {
         // backingView.addPresetCornerRadius()

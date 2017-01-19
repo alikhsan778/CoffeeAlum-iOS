@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
     
     
     

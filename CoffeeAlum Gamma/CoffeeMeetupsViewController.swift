@@ -7,14 +7,44 @@
 //
 
 import UIKit
+import Firebase
 
 class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+    //TODO: These vars are too heavy, think of more elegant solution for next version
     
     // MARK: - IBOutlets
     @IBOutlet weak var headlineLabel: UILabel!
+    // TODO: Connect outlet
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var db = FIRDatabase.database().reference()
+    var coffeeRef: FIRDatabaseReference { get { return db.child("coffees") } }
+    var sentInviteCoffee: [(coffee: Coffee, user: User)] = []
+    var gotInviteCoffee: [(coffee: Coffee, user: User)] = []
+    
+    var allCoffee: [(coffee: Coffee, user: User)] {get { return sentInviteCoffee + gotInviteCoffee }}
+    
+    
+    var pendingCoffee: [(coffee: Coffee, user: User)] {
+        
+        get {
+            
+        return allCoffee.filter({!$0.coffee.accepted})
+        
+        }
+    }
+    
+    var upComingCoffee: [(coffee: Coffee, user: User)] { get {
+        return allCoffee.filter({!$0.coffee.accepted})
+        }
+    }
     
     
     var testData = ["Test"]
+    // TODO: Create a button that switches the data based on what the user wants
+    
+    var data:[(Coffee, User)]?
+    
     
     // MARK: - User Interaction Properties
     var tapGesture = UITapGestureRecognizer()
@@ -31,11 +61,47 @@ class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDeleg
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Minor adjustment to make the labe adaptize to size
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        let sentInviteCoffeRef = coffeeRef.queryOrdered(byChild: "fromId").queryEqual(toValue: uid)
+        let gotInviteCoffeeRef = coffeeRef.queryOrdered(byChild: "toId").queryEqual(toValue: uid)
+        let userRef = db.child("users")
+        
+        
+       // You sent invite; looking for the person to sent it TO
+        sentInviteCoffeRef.observe(.value, with: { snapshot in
+            for item in snapshot.children{
+                let coffeeSnap = item as? FIRDataSnapshot
+                let coffee = Coffee(snapshot: coffeeSnap!)
+                let otherUserRef = userRef.child(coffee.toId)
+                
+                otherUserRef.observe(.value, with: { snapshot in
+                    let meetingUser = User(snapshot: snapshot)
+                    self.sentInviteCoffee.append((coffee,meetingUser))
+                    self.collectionView.reloadData()
+                })
+            }
+        })
+        
+        
+        // You got the invite; looking for person I received it FROM
+        gotInviteCoffeeRef.observe(.value, with: { snapshot in
+            for item in snapshot.children{
+                let coffeeSnap = item as? FIRDataSnapshot
+                let coffee = Coffee(snapshot: coffeeSnap!)
+                let otherUserRef = userRef.child(coffee.fromId)
+                
+                otherUserRef.observe(.value, with: { snapshot in
+                    let meetingUser = User(snapshot: snapshot)
+                    self.sentInviteCoffee.append((coffee,meetingUser))
+                    self.collectionView.reloadData()
+                })
+            }
+        })
 
+
+        
         // Setting up the delegate to work with the button
         self.revealViewController().delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

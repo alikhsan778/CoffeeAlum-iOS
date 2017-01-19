@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2ABCFF63F50CD3CB1F326EEC /* Pods_CoffeeAlum_Gamma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CE17F3A92A641C2D43E3FC /* Pods_CoffeeAlum_Gamma.framework */; };
 		854D9B54B95FE78467EEDE55 /* Pods_CoffeeAlum_GammaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3744DE10DE3C1E0FCA74F1BB /* Pods_CoffeeAlum_GammaTests.framework */; };
+		BD39AF5F1E300B44000E3E4C /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39AF5E1E300B44000E3E4C /* LocationSearchTableViewController.swift */; };
 		BD471DFF1E2D7DAF002CB142 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD471DFE1E2D7DAF002CB142 /* Helper.swift */; };
 		DD12E0E11E244FED006A2663 /* SearchViewController + CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0DF1E244FED006A2663 /* SearchViewController + CollectionView.swift */; };
 		DD12E0E41E24501D006A2663 /* UIViewController + SidebarMenuPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */; };
@@ -73,6 +74,7 @@
 		67D9E1BB9AF380D07EF0F957 /* Pods-CoffeeAlum Gamma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeAlum Gamma.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoffeeAlum Gamma/Pods-CoffeeAlum Gamma.debug.xcconfig"; sourceTree = "<group>"; };
 		6809F7CA622D05815B54528B /* Pods-CoffeeAlum GammaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeAlum GammaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoffeeAlum GammaTests/Pods-CoffeeAlum GammaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		79DC63532945DE1EF1E07948 /* Pods-CoffeeAlum Gamma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeAlum Gamma.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoffeeAlum Gamma/Pods-CoffeeAlum Gamma.release.xcconfig"; sourceTree = "<group>"; };
+		BD39AF5E1E300B44000E3E4C /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		BD471DFE1E2D7DAF002CB142 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		DD12E0DF1E244FED006A2663 /* SearchViewController + CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchViewController + CollectionView.swift"; sourceTree = "<group>"; };
 		DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController + SidebarMenuPan.swift"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				DDDDBB5B1E2D52CD0084D5A5 /* ProfileGlimpseViewController + Popover.swift */,
 				DD12E0F41E25963C006A2663 /* ProfileGlimpseCell.swift */,
 				DDDDBB541E2C98050084D5A5 /* InvitePopoverViewController.swift */,
+				BD39AF5E1E300B44000E3E4C /* LocationSearchTableViewController.swift */,
 			);
 			name = ProfileGlimpseViewController;
 			sourceTree = "<group>";
@@ -353,7 +356,6 @@
 			isa = PBXGroup;
 			children = (
 				DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */,
-				DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */,
 				DD12E0EB1E245531006A2663 /* MessageCollectionViewCell.swift */,
 				DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */,
 			);
@@ -383,6 +385,7 @@
 				DDBE26B71E11DF0800C0497E /* CoffeeMeetupsViewController.swift */,
 				DDDDBB601E2D582C0084D5A5 /* CoffeeMeetupsViewController + CollectionView.swift */,
 				DDDDBB5E1E2D573B0084D5A5 /* CoffeeMeetupsViewController + Popover.swift */,
+				DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */,
 			);
 			name = CoffeeMeetupsViewController;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				DDBE22E81E0EED7D00C0497E /* SignUpViewController.swift in Sources */,
 				DDEC132F1E19E13C002C7CCF /* PersonalProfileViewController.swift in Sources */,
 				DD12E0EE1E2456C2006A2663 /* SearchViewController + CustomPopover.swift in Sources */,
+				BD39AF5F1E300B44000E3E4C /* LocationSearchTableViewController.swift in Sources */,
 				DDBE23111E0F5DB600C0497E /* CustomBezierView.swift in Sources */,
 				DDBE230F1E0F546200C0497E /* CustomLabel.swift in Sources */,
 				DDBE22EE1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld in Sources */,

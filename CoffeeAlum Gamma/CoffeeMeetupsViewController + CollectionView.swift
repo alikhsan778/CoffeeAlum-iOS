@@ -11,8 +11,19 @@ import Foundation
 // MARK: - UICollectionView extension
 extension CoffeeMeetupsViewController: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testData.count
+        
+        if section == 0{
+            return upComingCoffee.count
+        }
+        
+        else {
+            return pendingCoffee.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -24,10 +35,21 @@ extension CoffeeMeetupsViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoffeeMeetupCell", for: indexPath) as! CoffeeMeetupCollectionViewCell
         
-        let listElement = testData[indexPath.row]
+        var thisData:(coffee:Coffee,user:User)
         
+        if indexPath.section == 0 {thisData = upComingCoffee[indexPath.row]}
+        else                      {thisData = upComingCoffee[indexPath.row]}
+        
+        cell.nameOfInviter.text = thisData.user.name
+        cell.pictureOfInviter.image = thisData.user.portrait.toImage()
+        if thisData.user.employer == "" {
+            cell.roleOfOther.text = "Student at \(thisData.user.education)"
+        }
+            
+        else{
+            cell.roleOfOther.text = "\(thisData.user.role) at \(thisData.user.employer)"
+        }
         return cell
-        
     }
     
 }
