@@ -137,6 +137,8 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     
     
     override func viewDidLoad() {
+        print(self.parent)
+        print(self.childViewControllers)
         let thisUserRef = userRef.child(FIRAuth.auth()!.currentUser!.uid)
        
         //Check if user has filled out intro form; Populate the local user object

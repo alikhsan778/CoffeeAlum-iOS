@@ -7,68 +7,72 @@
 //
 
 import Foundation
+import Firebase
 
 class PersonalProfileViewController: UIViewController {
     
-    var user: User?
+    var thisUser: User?
 //    var tags: [Tag] TODO: Implement tag tracking feature; Add tags to search
     
+    
     @IBOutlet weak var nameTextField: UITextField!
-    
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var occupationTextField: UITextField!
-    
     @IBOutlet weak var employerTextField: UITextField!
-    
     @IBOutlet weak var educationalBackgroundTextField: UITextField!
-    
     @IBOutlet weak var personalWebsiteTextField: UITextField!
-    
     @IBOutlet weak var bioTextField: UITextField!
-    
     @IBOutlet weak var linkedInProfileTextField: UITextField!
-    
     @IBOutlet weak var profilePicture: UIImageView!
     
     override func viewDidLoad() {
+        let thisUserRef = FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid)
+        
+        thisUserRef.observe(.value, with: { snapshot in
+            self.thisUser = User(snapshot: snapshot)
+            self.populateFields()
+        })
+        
+    }
+    
+    func populateFields(){
         addGestures()
-        nameTextField.text = user!.name
-        emailTextField.text = user!.email
-        occupationTextField.text = user!.role
-        employerTextField.text  = user!.employer
-        educationalBackgroundTextField.text = user!.education
-        personalWebsiteTextField.text = user!.website
-        bioTextField.text = user!.bio
-        linkedInProfileTextField.text = user!.linkedIn
-        profilePicture.image = user!.portrait.toImage()
+        nameTextField.text = thisUser!.name
+        emailTextField.text = thisUser!.email
+        occupationTextField.text = thisUser!.role
+        employerTextField.text  = thisUser!.employer
+        educationalBackgroundTextField.text = thisUser!.education
+        personalWebsiteTextField.text = thisUser!.website
+        bioTextField.text = thisUser!.bio
+        linkedInProfileTextField.text = thisUser!.linkedIn
+        profilePicture.image = thisUser!.portrait.toImage()
     }
     
     func submitButton(){
         //put nameTextFieldCondition here
         
-        user!.name = nameTextField.text ?? ""
+        thisUser!.name = nameTextField.text ?? ""
         if nameTextField.text!.characters.count < 2 {
             return //TODO: give useful error message
         }
         
-        user!.email = emailTextField.text ?? ""
+        thisUser!.email = emailTextField.text ?? ""
         if !Helper.validate(email: emailTextField.text!){
             return //TODO: give useful error message
         }
         
-        user!.role = occupationTextField.text ?? ""
-        user!.employer = employerTextField.text ?? ""
-        user!.education = educationalBackgroundTextField.text ?? ""
-        user!.website = personalWebsiteTextField.text ?? ""
-        user!.bio = bioTextField.text ?? ""
-        user!.linkedIn = linkedInProfileTextField.text ?? ""
+        thisUser!.role = occupationTextField.text ?? ""
+        thisUser!.employer = employerTextField.text ?? ""
+        thisUser!.education = educationalBackgroundTextField.text ?? ""
+        thisUser!.website = personalWebsiteTextField.text ?? ""
+        thisUser!.bio = bioTextField.text ?? ""
+        thisUser!.linkedIn = linkedInProfileTextField.text ?? ""
         
         if let image = profilePicture.image {
-            user!.portrait = image.toString()
+            thisUser!.portrait = image.toString()
         }
         
-        user!.save()
+        thisUser!.save()
     }
     
     func addGestures(){
