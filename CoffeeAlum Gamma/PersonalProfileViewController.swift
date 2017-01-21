@@ -29,6 +29,12 @@ class PersonalProfileViewController: UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
     
+    @IBAction func sideBarMenuButton(_ sender: UIButton) {
+        // Connects to the revealToggle method in the SWRevealViewController custom code
+        sender.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
+    }
+    
+    
     override func viewDidLoad() {
         
         
