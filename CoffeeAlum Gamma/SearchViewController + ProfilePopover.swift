@@ -12,12 +12,15 @@ import Foundation
 
 extension SearchViewController {
     
-    func setupProfileGlimpsePopover(user:User) {
+    func setupProfileGlimpsePopover(viewedUser:User) {
         let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ProfileGlimpse") as! ProfileGlimpseViewController
         
         
-        // populate profile fields
-        popoverContent.occupationLabel.text = user.employer
+        // pass the user data
+        popoverContent.viewedUser = viewedUser
+        popoverContent.thisUser = self.thisUser
+
+        
         
         // popover view mechanics
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover

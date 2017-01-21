@@ -19,7 +19,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Setup to enable profile glimpse popover
         let user = filteredUsers[indexPath.row]
-        setupProfileGlimpsePopover(user:user)
+        setupProfileGlimpsePopover(viewedUser:user)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

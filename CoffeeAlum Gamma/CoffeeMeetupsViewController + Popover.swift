@@ -23,6 +23,7 @@ extension CoffeeMeetupsViewController {
         
         popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         
+        
         self.present(popoverContent, animated: true, completion: nil)
     }
     

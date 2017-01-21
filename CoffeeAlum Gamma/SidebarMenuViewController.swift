@@ -27,6 +27,8 @@ class SidebarMenuViewController: UIViewController {
         self.present(signInViewController, animated: true, completion: nil)
     }
     
+    // TODO: putting the following func into button connecting to login
+    
     override func viewDidLoad() {
        
     }
