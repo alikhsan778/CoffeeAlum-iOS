@@ -51,9 +51,7 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
         self.account = .alum
     }
     
-    @IBAction func closePopover(with segue: UIStoryboardSegue) {
-        
-    }
+    @IBAction func closePopover(with segue: UIStoryboardSegue) {}
     
     @IBAction func getStartedButtonAction(_ sender: UIButton) {
         
