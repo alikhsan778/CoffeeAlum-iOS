@@ -11,13 +11,12 @@ import Firebase
 
 class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
     
-    
-    
     @IBAction func meetupButtonAction(_ sender: UIButton) {
         // Setting up popover for invitation view controller
         setupPopover(viewedUser: self.viewedUser!)
     }
     
+    // @IBAction func unwind(segue: UIStoryboardSegue) {}
     
     @IBOutlet weak var meetupButton: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -27,7 +26,6 @@ class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationContr
     @IBOutlet weak var tableView: UITableView!
     //Missing
 
-    
     
     // VARS
     let mainCells: [String] = ["About", "Education", "LinkedIn", "Website"]
