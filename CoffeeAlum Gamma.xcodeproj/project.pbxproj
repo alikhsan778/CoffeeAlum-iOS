@@ -29,6 +29,7 @@
 		DD43A7D81E16D3CB005C31A7 /* AdaptiveKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D71E16D3CB005C31A7 /* AdaptiveKeyboard.swift */; };
 		DD43A80C1E17AD65005C31A7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A80B1E17AD65005C31A7 /* SearchViewController.swift */; };
 		DD43A80E1E181750005C31A7 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */; };
+		DD6251DC1E4B709C001E6FFC /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD6251DB1E4B709C001E6FFC /* TagCollectionViewCell.xib */; };
 		DDBE22E61E0EED7D00C0497E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */; };
 		DDBE22E81E0EED7D00C0497E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E71E0EED7D00C0497E /* SignUpViewController.swift */; };
 		DDBE22EB1E0EED7D00C0497E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDBE22E91E0EED7D00C0497E /* Main.storyboard */; };
@@ -96,6 +97,7 @@
 		DD43A7D71E16D3CB005C31A7 /* AdaptiveKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveKeyboard.swift; sourceTree = "<group>"; };
 		DD43A80B1E17AD65005C31A7 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD6251DB1E4B709C001E6FFC /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
 		DDBE22E21E0EED7D00C0497E /* CoffeeAlum Gamma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeeAlum Gamma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDBE22E71E0EED7D00C0497E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +268,25 @@
 			name = "Keyboard Customization";
 			sourceTree = "<group>";
 		};
+		DD6251D91E4B7071001E6FFC /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				DD12E0EB1E245531006A2663 /* MessageCollectionViewCell.swift */,
+				DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */,
+				DD6251DA1E4B7085001E6FFC /* TagCollectionViewCell */,
+			);
+			name = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		DD6251DA1E4B7085001E6FFC /* TagCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */,
+				DD6251DB1E4B709C001E6FFC /* TagCollectionViewCell.xib */,
+			);
+			name = TagCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		DDBE22D91E0EED7D00C0497E = {
 			isa = PBXGroup;
 			children = (
@@ -355,9 +376,7 @@
 		DDBE230D1E0F26CB00C0497E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */,
-				DD12E0EB1E245531006A2663 /* MessageCollectionViewCell.swift */,
-				DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */,
+				DD6251D91E4B7071001E6FFC /* CollectionViewCells */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -506,6 +525,7 @@
 			files = (
 				DDBE22F31E0EED7D00C0497E /* LaunchScreen.storyboard in Resources */,
 				DDBE26BB1E11F14D00C0497E /* GoogleService-Info.plist in Resources */,
+				DD6251DC1E4B709C001E6FFC /* TagCollectionViewCell.xib in Resources */,
 				DDBE22F01E0EED7D00C0497E /* Assets.xcassets in Resources */,
 				DDBE22EB1E0EED7D00C0497E /* Main.storyboard in Resources */,
 			);

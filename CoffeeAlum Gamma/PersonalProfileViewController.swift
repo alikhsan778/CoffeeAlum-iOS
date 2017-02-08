@@ -39,6 +39,8 @@ class PersonalProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         addGestures()
+        
+        // Sets up the user profile information
         nameTextField.text = user!.name
         emailTextField.text = user!.email
         occupationTextField.text = user!.role
@@ -110,7 +112,7 @@ extension PersonalProfileViewController: UIImagePickerControllerDelegate, UINavi
         self.present(cameraAlert, animated: true, completion: nil)
     }
     
-    //Open either camera or gallery
+    // Open either camera or gallery
     func openMedia(source: UIImagePickerControllerSourceType){
         if UIImagePickerController.isSourceTypeAvailable(source){
             let imagePicker = UIImagePickerController()
