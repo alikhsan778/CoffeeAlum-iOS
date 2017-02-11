@@ -7,14 +7,21 @@
 //
 
 import Foundation
-import FirebaseAuth
+import Firebase
 
 class SidebarMenuViewController: UIViewController {
     
+    
+    var thisUser: User?
     // MARK: - IBOutlets
     @IBOutlet var sidebarMenuView: UIView!
+    @IBOutlet weak var profileButton: UIButton!
     
     // MARK: - IBActions
+    @IBAction func profileButtonAction(_ sender: UIButton) {
+      
+    }
+    
     @IBAction func logOutButtonAction(_ sender: UIButton) {
         try! FIRAuth.auth()?.signOut()
         
@@ -25,12 +32,16 @@ class SidebarMenuViewController: UIViewController {
         let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
         // Present the next view controller
         self.present(signInViewController, animated: true, completion: nil)
+        
     }
     
     // TODO: putting the following func into button connecting to login
-    
     override func viewDidLoad() {
-       
+        let thisUserRef = FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid)
+        
+        thisUserRef.observe(.value, with: { [unowned self](snapshot) in
+          self.thisUser = User(snapshot: snapshot)
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

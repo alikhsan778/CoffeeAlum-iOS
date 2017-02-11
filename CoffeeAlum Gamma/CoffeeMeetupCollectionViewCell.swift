@@ -15,11 +15,8 @@ class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pictureOfInviter: UIImageView!
     @IBOutlet weak var roleOfOther: UILabel!
     
-    
-    
     override func awakeFromNib() {
         // backingView.addPresetCornerRadius()
-      
     }
 }
 

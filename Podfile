@@ -13,6 +13,9 @@ target 'CoffeeAlum Gamma' do
   target 'CoffeeAlum GammaTests' do
     inherit! :search_paths
     # Pods for testing
+    pod ‘Firebase/Core’
+    pod ‘FirebaseAuth’
+    pod ‘Firebase/Database’
   end
 
 end

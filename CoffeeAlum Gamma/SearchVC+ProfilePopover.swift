@@ -19,8 +19,6 @@ extension SearchViewController {
         // pass the user data
         popoverContent.viewedUser = viewedUser
         popoverContent.thisUser = self.thisUser
-
-        
         
         // popover view mechanics
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover

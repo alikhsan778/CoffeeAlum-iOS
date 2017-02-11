@@ -116,6 +116,7 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     var education: String!
     var location: String!
     var account: AccountType!
+    // TODO: -
     var uid: String = FIRAuth.auth()!.currentUser!.uid
     
     // MARK: - Overrided Methods
@@ -135,6 +136,8 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     
     
     override func viewDidLoad() {
+        print(self.parent)
+        print(self.childViewControllers)
         let thisUserRef = userRef.child(FIRAuth.auth()!.currentUser!.uid)
        
         //Check if user has filled out intro form; Populate the local user object
@@ -205,11 +208,6 @@ class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewCo
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
     }
-    
-    func setViewsForUser(){
-        
-    }
-    
     
 }
 

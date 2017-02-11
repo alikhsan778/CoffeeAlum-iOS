@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate {
-    //TODO: These vars are too heavy, think of more elegant solution for next version
+    // TODO: These vars are too heavy, think of more elegant solution for next version
     
     // MARK: - IBOutlets
     @IBOutlet weak var headlineLabel: UILabel!

@@ -11,7 +11,8 @@ import UIKit
 import Firebase
 
 class User: Hashable {
-    var name:String
+    
+    var name: String
     var email: String = ""
     var account: AccountType = .alum
     var bio: String = ""
@@ -40,17 +41,20 @@ class User: Hashable {
     }
     
     
-    init(snapshot: FIRDataSnapshot){
+    init(snapshot: FIRDataSnapshot) {
+        
         uid = snapshot.key
-        let snapshotValue = snapshot.value as! [String: AnyObject]
-
+        
+        let snapshotValue = snapshot.value as! [String : AnyObject]
         
         name = snapshotValue["name"] as? String ?? ""
         
-        let accountString = snapshotValue["account"] as? String
-        if let account = accountString{
-            self.account = AccountType(rawValue: account)!
+        guard let accountString = snapshotValue["account"] as? String else {
+            return
         }
+        
+        self.account = AccountType(rawValue: accountString)!
+        
         
         bio = snapshotValue["bio"] as? String ?? ""
         education = snapshotValue["education"] as? String ?? ""
@@ -59,40 +63,37 @@ class User: Hashable {
         linkedIn = snapshotValue["linkedIn"] as? String ?? ""
         website = snapshotValue["website"] as? String ?? ""
         
-        
-        if let locationData = snapshotValue["location"]{
-            location = locationData as! String
+        // Protects from crashing
+        guard let locationData = snapshotValue["location"],
+              let coffeeIdsData = snapshotValue["coffees"],
+              let portraitsData = snapshotValue["portrait"],
+              let emailData = snapshotValue["email"],
+              let uidata = snapshotValue["uid"]
+              else {
+                return
         }
         
-        if let coffeeIdsData = snapshotValue["coffees"] {
-            for item in coffeeIdsData.children{
-                let value = item as! FIRDataSnapshot
-                let thisCoffee = Coffee(snapshot: value)
-                coffees.append(thisCoffee)
-            }
-        }
+        location = locationData as! String
+        portrait = portraitsData as! String
+        email = emailData as! String
+        uid = uidata as! String
         
-        if let portraitsData = snapshotValue["portrait"]{
-            portrait = portraitsData as! String
+        for item in coffeeIdsData.children {
+            let value = item as! FIRDataSnapshot
+            let thisCoffee = Coffee(snapshot: value)
+            coffees.append(thisCoffee)
         }
-        
-        if let emailData = snapshotValue["email"]{
-            email = emailData as! String
-        }
-        
-        if let uidata = snapshotValue["uid"]{
-            uid = uidata as! String
-        }
+    
         
         uid = snapshot.key
         ref = snapshot.ref
     }
     
-    func toAnyObject() -> NSDictionary{
-        var coffeeIdDict : [String:String] = [:]
-        //TODO: Eliminate the redundancy below time permitting
-        //Each Id is its own key for ease of access
-        coffeeIds.map({coffeeIdDict[$0] = $0})
+    func toAnyObject() -> NSDictionary {
+        let coffeeIdDict : [String:String] = [:]
+        // TODO: Eliminate the redundancy below time permitting
+        // Each Id is its own key for ease of access
+        // coffeeIds.map({coffeeIdDict[$0] = $0})
         
         return [
             "name": name,
@@ -108,7 +109,7 @@ class User: Hashable {
         ]
     }
     
-    func save(){
+    func save() {
         let id = FIRAuth.auth()!.currentUser!.uid
         if self.ref == nil{
             self.ref = db.child(id)
@@ -123,11 +124,3 @@ class User: Hashable {
     
 }
 
-
-
-enum AccountType: String {
-    case student = "student"
-    case alum = "alum"
-    case admin = "admin"
-    case mentor = "mentor"
-}

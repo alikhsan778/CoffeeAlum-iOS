@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 
 class Coffee {
+    
     var date: String = "TBD"
     var time: String = "TBD"
     var dateSent: String
@@ -20,7 +21,6 @@ class Coffee {
     var toName: String  // name of user that received invitation
     var fromEventId: String = "" // the id stored locally when the user creates this meeting
     var toEventId: String = ""
-
     
     var accepted: Bool = false
     var viewed: Bool = false
@@ -29,7 +29,7 @@ class Coffee {
     var ref: FIRDatabaseReference = FIRDatabase.database().reference().child("coffees")
     
     
-    init(fromId:String, fromName:String, toId: String, toName: String){
+    init(fromId: String, fromName: String, toId: String, toName: String){
         self.fromId = fromId
         self.toId = toId
         self.fromName = fromName
@@ -37,7 +37,7 @@ class Coffee {
         self.dateSent = Date().convertToString()
     }
     
-    init(date: String, time:String, location: String, fromId:String, toId: String,fromName:String, toName: String){
+    init(date: String, time:String, location: String, fromId: String, toId: String,fromName: String, toName: String) {
         self.date = date
         self.time = time
         self.location = location
@@ -48,7 +48,7 @@ class Coffee {
         self.dateSent = Date().convertToString()
     }
     
-    init(snapshot:FIRDataSnapshot){
+    init(snapshot:FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         date = snapshotValue["date"] as! String
         time = snapshotValue["time"] as! String
@@ -67,7 +67,7 @@ class Coffee {
         ref = snapshot.ref
     }
     
-    func save(new: Bool){
+    func save(new: Bool) {
         let fromUserRef = ref.child(fromId).child("coffeeIds")
         let toUserRef = ref.child(toId).child("coffeeIds")
         if new {
@@ -91,7 +91,7 @@ class Coffee {
     }
     
     
-    func toAnyObject() -> Any{
+    func toAnyObject() -> Any {
         return [
             "date":date,
             "time":time,

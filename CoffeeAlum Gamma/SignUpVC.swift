@@ -133,18 +133,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
-    
-    @IBAction private func facebookLoginButtonAction(_ sender: UIButton) {
-        
-    }
-    
+  
     @IBAction private func googleLoginButtonAction(_ sender: UIButton) {
         
     }
     
-    @IBAction private func linkedInButtonAction(_ sender: UIButton) {
-        
-    }
     
     // MARK: - Firebase Methods
     func firabaseDatabaseReference() {
