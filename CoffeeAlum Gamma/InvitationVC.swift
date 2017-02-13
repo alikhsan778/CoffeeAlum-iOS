@@ -8,7 +8,7 @@
 
 import Foundation
 
-class InvitationViewController: UIViewController {
+class InvitationVC: UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
     

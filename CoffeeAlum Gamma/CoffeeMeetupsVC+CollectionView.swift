@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - UICollectionView extension
-extension CoffeeMeetupsViewController: UICollectionViewDataSource {
+extension CoffeeMeetupsVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -55,7 +55,7 @@ extension CoffeeMeetupsViewController: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout extension
-extension CoffeeMeetupsViewController: UICollectionViewDelegateFlowLayout {
+extension CoffeeMeetupsVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.bounds.width, height: view.bounds.height - 150)

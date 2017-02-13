@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class SearchViewController: UIViewController, UITextViewDelegate, SWRevealViewControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
+class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!

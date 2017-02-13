@@ -9,7 +9,7 @@
 import Foundation
 
 // Setting up the Table View
-extension ProfileGlimpseViewController: UITableViewDataSource, UITableViewDelegate {
+extension ProfileGlimpseVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCells.count

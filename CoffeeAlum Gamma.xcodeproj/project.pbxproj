@@ -24,6 +24,9 @@
 		DD12E0FD1E25A561006A2663 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0FC1E25A561006A2663 /* User.swift */; };
 		DD12E0FF1E25B174006A2663 /* ProfileGlimpseVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0FE1E25B174006A2663 /* ProfileGlimpseVC+CollectionView.swift */; };
 		DD12E1011E25B316006A2663 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */; };
+		DD361B841E4F5BD000C5979F /* MessagesVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B831E4F5BD000C5979F /* MessagesVC+CollectionView.swift */; };
+		DD361B861E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B851E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift */; };
+		DD361B881E51706700C5979F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B871E51706700C5979F /* LocationManager.swift */; };
 		DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D01E15BCFE005C31A7 /* SWRevealViewController.m */; };
 		DD43A7D61E16CE46005C31A7 /* SidebarMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D51E16CE46005C31A7 /* SidebarMenuVC.swift */; };
 		DD43A7D81E16D3CB005C31A7 /* AdaptiveKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D71E16D3CB005C31A7 /* AdaptiveKeyboard.swift */; };
@@ -99,6 +102,9 @@
 		DD12E0FC1E25A561006A2663 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DD12E0FE1E25B174006A2663 /* ProfileGlimpseVC+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileGlimpseVC+CollectionView.swift"; sourceTree = "<group>"; };
 		DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD361B831E4F5BD000C5979F /* MessagesVC+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessagesVC+CollectionView.swift"; sourceTree = "<group>"; };
+		DD361B851E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationSearchTableVC+TableView.swift"; sourceTree = "<group>"; };
+		DD361B871E51706700C5979F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DD43A7CE1E15BCFD005C31A7 /* CoffeeAlum Gamma-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoffeeAlum Gamma-Bridging-Header.h"; sourceTree = "<group>"; };
 		DD43A7CF1E15BCFE005C31A7 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		DD43A7D01E15BCFE005C31A7 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -202,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				BD39AF5E1E300B44000E3E4C /* LocationSearchTableVC.swift */,
+				DD361B851E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift */,
 			);
 			name = LocationTableVC;
 			sourceTree = "<group>";
@@ -222,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				DD12E0E91E245504006A2663 /* MessagesVC.swift */,
+				DD361B831E4F5BD000C5979F /* MessagesVC+CollectionView.swift */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -387,6 +395,7 @@
 		DDBE230A1E0F10A100C0497E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				DD361B871E51706700C5979F /* LocationManager.swift */,
 				DD43A80A1E174499005C31A7 /* Keyboard Customization */,
 				DD43A8041E172440005C31A7 /* Custom UIElements */,
 			);
@@ -694,9 +703,11 @@
 			files = (
 				DDDDBB571E2D278B0084D5A5 /* SearchVC+ProfilePopover.swift in Sources */,
 				DD6251DE1E4B9C6A001E6FFC /* AccountType.swift in Sources */,
+				DD361B881E51706700C5979F /* LocationManager.swift in Sources */,
 				DD43A7D61E16CE46005C31A7 /* SidebarMenuVC.swift in Sources */,
 				DDEC13311E19FEC8002C7CCF /* UIView + Shadow.swift in Sources */,
 				DDDDBB5C1E2D52CD0084D5A5 /* ProfileGlimpseVC+Popover.swift in Sources */,
+				DD361B861E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift in Sources */,
 				DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */,
 				DDBE22E81E0EED7D00C0497E /* SignUpVC.swift in Sources */,
 				DDEC132F1E19E13C002C7CCF /* PersonalProfileVC.swift in Sources */,
@@ -705,6 +716,7 @@
 				DDBE23111E0F5DB600C0497E /* CustomBezierView.swift in Sources */,
 				DD6251F31E4D913F001E6FFC /* InvitePopoverVC+MapView.swift in Sources */,
 				DDBE230F1E0F546200C0497E /* CustomLabel.swift in Sources */,
+				DD361B841E4F5BD000C5979F /* MessagesVC+CollectionView.swift in Sources */,
 				DDBE22EE1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld in Sources */,
 				DDBE23151E0F6B7600C0497E /* CustomButton.swift in Sources */,
 				DDBE23171E1059D100C0497E /* SignInVC.swift in Sources */,

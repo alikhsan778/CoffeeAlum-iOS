@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class ProfileGlimpseViewController: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
+class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
     
     @IBAction func meetupButtonAction(_ sender: UIButton) {
         // Setting up popover for invitation view controller

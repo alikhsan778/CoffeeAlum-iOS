@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search View Controller-->
+        <!--SearchVC-->
         <scene sceneID="bbj-qf-2Y9">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" id="CSD-hz-Zpk" customClass="SearchViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="CSD-hz-Zpk" customClass="SearchVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uhE-8d-gJU"/>
                         <viewControllerLayoutGuide type="bottom" id="gMb-NP-Mrd"/>
@@ -445,10 +445,10 @@
             </objects>
             <point key="canvasLocation" x="2629" y="837"/>
         </scene>
-        <!--Profile Glimpse View Controller-->
+        <!--Profile GlimpseVC-->
         <scene sceneID="t59-wT-4W3">
             <objects>
-                <viewController storyboardIdentifier="ProfileGlimpse" modalTransitionStyle="crossDissolve" id="y2s-Y3-Tlo" customClass="ProfileGlimpseViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileGlimpse" modalTransitionStyle="crossDissolve" id="y2s-Y3-Tlo" customClass="ProfileGlimpseVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bHu-4F-jnt"/>
                         <viewControllerLayoutGuide type="bottom" id="wsZ-2W-Y9d"/>
@@ -569,7 +569,6 @@
                         <color key="backgroundColor" red="0.98958333333333337" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="YuC-i7-QSq"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -588,10 +587,10 @@
             </objects>
             <point key="canvasLocation" x="3308.6956521739135" y="836.41304347826099"/>
         </scene>
-        <!--Invite Popover View Controller-->
+        <!--Invite PopoverVC-->
         <scene sceneID="iI5-wx-QCi">
             <objects>
-                <viewController storyboardIdentifier="InviteViewController" id="5pv-4h-vdT" customClass="InvitePopoverViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteViewController" id="5pv-4h-vdT" customClass="InvitePopoverVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6pd-vL-qL8"/>
                         <viewControllerLayoutGuide type="bottom" id="QXk-O2-yZk"/>
@@ -680,21 +679,23 @@
                             <constraint firstAttribute="trailing" secondItem="24d-tw-Ayo" secondAttribute="trailing" id="yyg-Y9-rdw"/>
                         </constraints>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="414" height="736"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="450"/>
+                    <connections>
+                        <outlet property="mapView" destination="jpr-y2-0d8" id="8wb-GQ-Zgc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m8c-rb-XTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3931.884057971015" y="856.79347826086962"/>
         </scene>
-        <!--Location Search Table View Controller-->
+        <!--Location Search TableVC-->
         <scene sceneID="npf-Bv-1qZ">
             <objects>
-                <tableViewController storyboardIdentifier="locationSearchTableViewController" id="CyC-3E-mSv" customClass="LocationSearchTableViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LocationSearchTableVC" id="CyC-3E-mSv" customClass="LocationSearchTableVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="N4n-Ie-Yct">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="450"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -736,7 +737,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="03g-DS-daW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4523" y="857"/>
+            <point key="canvasLocation" x="4482" y="856"/>
         </scene>
     </scenes>
     <resources>

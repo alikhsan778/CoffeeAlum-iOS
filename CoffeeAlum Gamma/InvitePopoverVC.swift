@@ -14,60 +14,89 @@ protocol InviteDelegate{
     func inviteSent()
 }
 
-class InvitePopoverViewController: UIViewController {
+class InvitePopoverVC: UIViewController {
     
     var viewedUser: User?
+    
     var thisUser: User?
+    
     var date: String?
+    
     var time: String?
     
+    var coffee: Coffee?
+    
+    var coreLocationManager = CLLocationManager()
+    
+    var locationManager: LocationManager!
+    
     var location: String?
+    
     var locationSet: Bool = false
-    let locationManager = CLLocationManager()
-    var resultSearchController:UISearchController? = nil
-    var selectedPin:MKPlacemark? = nil
+    
+    var resultSearchController: UISearchController? = nil
+    
+    var selectedPin: MKPlacemark? = nil
     
     var delegate: InviteDelegate?
     
-    @IBOutlet weak var mapView: MKMapView! // TODO: Connect here
+    @IBOutlet weak var mapView: MKMapView!
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Assigning the delegate to self
+        coreLocationManager.delegate = self
+        // Setup the map view
+        // userLocationHelper()
+        setupLocation()
+    }
+    
+    /*
+     - Sets the coffee data
+     – Sends the information to Firebase
+     */
     @IBAction func inviteButtonAction(_ sender: UIButton) {
-        if inviteComplete(){
-            let coffee = Coffee(date: date!, time: time!, location: location!
-                , fromId: thisUser!.uid, toId: viewedUser!.uid, fromName: thisUser!.name, toName: viewedUser!.name)
-            coffee.save(new: true)
-        }
-        
-        else{
+        if inviteComplete() {
+            // Testing
+            coffee = Coffee(date: date!,
+                                time: time!,
+                                location: mapView.userLocation.title!,
+                                fromId: thisUser!.uid,
+                                toId: viewedUser!.uid,
+                                fromName: thisUser!.name,
+                                toName: viewedUser!.name)
+            
+            self.coffee?.save(new: true) // Saves the meetup data
+        } else {
+            print("Incomplete") // Testing
             // TODO: Create warning for incomplete invite
             self.dismiss(animated: true, completion: {
                 self.delegate!.inviteSent()
             })
         }
         
-        
-        
     }
     
+    /// Sets the date data
     @IBAction func dateTextField(_ sender: UITextField) {
-        
+        date = sender.text
     }
     
+    /// Sets the time data
     @IBAction func timeTextField(_ sender: UITextField) {
-        
+        time = sender.text
     }
     
-    override func viewDidLoad() {
-        
-        
-    }
-    
-    func inviteComplete() -> Bool{
+    /// Method to check if the invitation information is nil or not
+    func inviteComplete() -> Bool {
         if let date = self.date, let time = self.time, let location = self.location {
+            print(date, time, location)
             return true
-        } else { return false }
+        } else {
+            return false
+        }
     }
-}
+    }
 
 

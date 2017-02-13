@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class SignInViewController: UIViewController, UITextFieldDelegate {
+class SignInVC: UIViewController, UITextFieldDelegate {
     
     // Used to push the text field away from the keyboard to prevent keyboard overlapping
     var adaptiveKeyboard: AdaptiveKeyboard!

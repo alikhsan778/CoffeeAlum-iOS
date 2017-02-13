@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Coffee Meetups View Controller-->
+        <!--Coffee MeetupsVC-->
         <scene sceneID="2h4-K8-aRf">
             <objects>
-                <viewController storyboardIdentifier="CoffeeMeetupsViewController" id="wtU-yX-Tjg" customClass="CoffeeMeetupsViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CoffeeMeetupsViewController" id="wtU-yX-Tjg" customClass="CoffeeMeetupsVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5N2-Yz-sju"/>
                         <viewControllerLayoutGuide type="bottom" id="TaU-Zq-u0F"/>
@@ -100,10 +100,10 @@
             </objects>
             <point key="canvasLocation" x="2629" y="193"/>
         </scene>
-        <!--Invitation View Controller-->
+        <!--InvitationVC-->
         <scene sceneID="7kx-sl-WL9">
             <objects>
-                <viewController storyboardIdentifier="InvitationViewController" id="qlu-nJ-Odz" customClass="InvitationViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InvitationVC" id="qlu-nJ-Odz" customClass="InvitationVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MSr-CG-OPd"/>
                         <viewControllerLayoutGuide type="bottom" id="XQW-3D-ais"/>
@@ -155,20 +155,20 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Pty-Jh-ol8">
                                         <rect key="frame" x="137" y="22" width="115" height="90"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Person inviting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfy-UP-hAK">
-                                                <rect key="frame" x="0.0" y="0.0" width="115" height="23.333333333333314"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Person inviting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfy-UP-hAK">
+                                                <rect key="frame" x="0.0" y="0.0" width="115" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WII-fX-DS4">
-                                                <rect key="frame" x="0.0" y="33.333333333333314" width="115" height="23.333333333333371"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date and time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WII-fX-DS4">
+                                                <rect key="frame" x="0.0" y="32" width="115" height="24"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwH-co-kaa">
-                                                <rect key="frame" x="0.0" y="66.666666666666686" width="115" height="23.333333333333314"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwH-co-kaa">
+                                                <rect key="frame" x="0.0" y="66" width="115" height="24"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -258,10 +258,10 @@
             </objects>
             <point key="canvasLocation" x="974" y="406"/>
         </scene>
-        <!--Sidebar Menu View Controller-->
+        <!--Sidebar MenuVC-->
         <scene sceneID="9nm-kw-SUN">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" id="gyg-xl-L5f" customClass="SidebarMenuViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="gyg-xl-L5f" customClass="SidebarMenuVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Ti-HY-3gA"/>
                         <viewControllerLayoutGuide type="bottom" id="JCS-x0-CVd"/>
@@ -433,7 +433,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRa-sn-val" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2628.985507246377" y="-498.09782608695656"/>
+            <point key="canvasLocation" x="2629" y="-508"/>
         </scene>
         <!--SignInViewController-->
         <scene sceneID="CHL-fR-xfo">
@@ -459,15 +459,15 @@
                 <viewControllerPlaceholder storyboardIdentifier="InviteViewController" storyboardName="Search" referencedIdentifier="InviteViewController" id="9fn-E3-Ltd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62k-Ac-LpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3216" y="836"/>
+            <point key="canvasLocation" x="3111" y="836"/>
         </scene>
-        <!--locationSearchTableViewController-->
+        <!--LocationSearchTableVC-->
         <scene sceneID="4Gb-Eu-sGc">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="locationSearchTableViewController" storyboardName="Search" referencedIdentifier="locationSearchTableViewController" id="qMJ-GJ-XRs" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="LocationSearchTableVC" storyboardName="Search" referencedIdentifier="LocationSearchTableVC" id="qMJ-GJ-XRs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j35-vl-rF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3577" y="836"/>
+            <point key="canvasLocation" x="3383" y="836"/>
         </scene>
         <!--ProfileGlimpse-->
         <scene sceneID="K9b-TA-vxd">
@@ -475,7 +475,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="ProfileGlimpse" storyboardName="Search" referencedIdentifier="ProfileGlimpse" id="OJp-fv-Ths" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rcs-hn-G0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2950" y="836"/>
+            <point key="canvasLocation" x="2869" y="836"/>
         </scene>
     </scenes>
     <resources>

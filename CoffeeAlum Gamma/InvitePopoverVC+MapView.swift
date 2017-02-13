@@ -10,7 +10,8 @@ import UIKit
 import MapKit
 
 // Location settings
-extension InvitePopoverViewController: MKMapViewDelegate {
+extension InvitePopoverVC: MKMapViewDelegate {
+    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
@@ -29,13 +30,13 @@ extension InvitePopoverViewController: MKMapViewDelegate {
         let driveButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSquare))
         
         driveButton.setBackgroundImage(UIImage(named: "car"), for: .normal)
-        driveButton.addTarget(self, action: "getDirections", for: .touchUpInside)
+        driveButton.addTarget(self, action: #selector(InvitePopoverVC.getDirections), for: .touchUpInside)
         pinView?.leftCalloutAccessoryView = driveButton
         
         //Set Meeting Location Button
         let setLocationButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSquare))
         setLocationButton.setBackgroundImage(UIImage(named: "car"), for: .normal)
-        setLocationButton.addTarget(self, action: "setLocation", for: .touchUpInside)
+        setLocationButton.addTarget(self, action: #selector(InvitePopoverVC.setLocation), for: .touchUpInside)
         
         if !locationSet{
             pinView?.rightCalloutAccessoryView = setLocationButton
@@ -58,4 +59,5 @@ extension InvitePopoverViewController: MKMapViewDelegate {
         // TODO: update location label here
         mapView.reloadInputViews()
     }
+ 
 }

@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Collection View Extension
 // Extension of the View Controller for the CollectionView
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredUsers.count

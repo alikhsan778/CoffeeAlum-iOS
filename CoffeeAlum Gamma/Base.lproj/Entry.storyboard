@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sign Up View Controller-->
+        <!--Sign UpVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignUpViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SignUpVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -313,10 +313,10 @@
             </objects>
             <point key="canvasLocation" x="825" y="405"/>
         </scene>
-        <!--Sign In View Controller-->
+        <!--Sign InVC-->
         <scene sceneID="L2F-oE-7Cn">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" id="dDu-87-vJj" customClass="SignInViewController" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="dDu-87-vJj" customClass="SignInVC" customModule="CoffeeAlum_Gamma" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="38Q-5i-GMn"/>
                         <viewControllerLayoutGuide type="bottom" id="t9E-dh-gl8"/>

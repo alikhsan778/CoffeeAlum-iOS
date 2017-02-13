@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class SidebarMenuViewController: UIViewController {
+class SidebarMenuVC: UIViewController {
     
     
     var thisUser: User?

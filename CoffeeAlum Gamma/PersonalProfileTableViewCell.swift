@@ -8,7 +8,16 @@
 
 import UIKit
 
+protocol PersonalProfileDelegate {
+    func updateUserInformation()
+}
+
 class PersonalProfileTableViewCell: UITableViewCell {
+    
+    // Delegate object
+    var delegate: PersonalProfileDelegate!
+    
+    // MARK: - IBOutlets
     
     @IBOutlet weak var nameTextField: UITextField!
     
@@ -21,5 +30,7 @@ class PersonalProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var educationalBackgroundTextField: UITextField!
     
     @IBOutlet weak var linkedInProfileTextField: UITextField!
+    
+    
     
 }

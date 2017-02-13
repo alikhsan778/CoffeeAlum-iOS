@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ProfileGlimpseViewController: UICollectionViewDataSource {
+extension ProfileGlimpseVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1

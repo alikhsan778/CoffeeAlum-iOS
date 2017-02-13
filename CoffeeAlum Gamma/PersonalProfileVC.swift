@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class PersonalProfileVC: UIViewController {
+class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     
     // User object
     var thisUser: User!
@@ -45,6 +45,9 @@ class PersonalProfileVC: UIViewController {
     
     /// Method to retrieve user information.
     func retrieveUserInfo() {
+        
+        // Removing current objects to prevent replication
+        userList.removeAll()
         
         // Firebase objects
         let uid = FIRAuth.auth()!.currentUser!.uid
@@ -91,7 +94,7 @@ class PersonalProfileVC: UIViewController {
     
     // Saves the user edit
     /*
-    func saveButton(){
+    func saveButton() {
         // Put nameTextFieldCondition here
         
         thisUser!.name = nameTextField.text ?? ""
@@ -118,6 +121,11 @@ class PersonalProfileVC: UIViewController {
         thisUser!.save()
     }
     */
+    
+    // Method to save the updated user information
+    func updateUserInformation() {
+        thisUser.save()
+    }
     
     func addGestures(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))

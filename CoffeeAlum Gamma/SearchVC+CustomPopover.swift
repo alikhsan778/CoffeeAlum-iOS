@@ -8,7 +8,7 @@
 
 import Firebase
 
-extension SearchViewController {
+extension SearchVC {
     
     // MARK: - Text Field Methods
     // Method that returns a Bool if the new password requirement is fulfilled

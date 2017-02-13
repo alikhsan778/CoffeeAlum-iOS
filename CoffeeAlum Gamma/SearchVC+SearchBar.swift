@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 // Extension that handles the search bar
-extension SearchViewController {
+extension SearchVC {
     
     
     // MARK: - Text View Methods

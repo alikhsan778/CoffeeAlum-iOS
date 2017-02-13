@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     // TODO: These vars are too heavy, think of more elegant solution for next version
     
     // MARK: - IBOutlets
@@ -22,7 +22,7 @@ class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDeleg
     var sentInviteCoffee: [(coffee: Coffee, user: User)] = []
     var gotInviteCoffee: [(coffee: Coffee, user: User)] = []
     
-    var allCoffee: [(coffee: Coffee, user: User)] {get { return sentInviteCoffee + gotInviteCoffee }}
+    var allCoffee: [(coffee: Coffee, user: User)] { get { return sentInviteCoffee + gotInviteCoffee }}
     
     
     var pendingCoffee: [(coffee: Coffee, user: User)] {
@@ -54,7 +54,6 @@ class CoffeeMeetupsViewController: UIViewController, SWRevealViewControllerDeleg
     @IBAction func sidebarMenuButtonAction(_ sender: UIButton) {
         // Connects to the revealToggle method in the SWRevealViewController custom code
         sender.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
-        
     }
     
     

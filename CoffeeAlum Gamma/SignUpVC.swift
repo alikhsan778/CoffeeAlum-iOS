@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignUpViewController: UIViewController, UITextFieldDelegate {
+class SignUpVC: UIViewController, UITextFieldDelegate {
     
     // TODO: Create already 
     
@@ -28,8 +28,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var shadowView: UIView!
     
     @IBOutlet weak var backingView: UIView!
-    
-
     
     /* confirmPasswordTextField:
     Used to compare to new password so that the users

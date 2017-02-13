@@ -8,27 +8,13 @@
 
 import Foundation
 
-class MessagesViewController: UIViewController {
+class MessagesVC: UIViewController {
     
     @IBOutlet weak var listOfMessageCollectionView: UICollectionView!
-    
     
     override func viewDidLayoutSubviews() {
         // Method to allow the sidebar to be used
         setupSidebarMenuPanGesture()
-    }
-    
-}
-
-extension MessagesViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCollectionViewCell
-        return cell
     }
     
 }

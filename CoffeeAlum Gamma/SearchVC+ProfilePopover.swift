@@ -10,10 +10,10 @@ import Foundation
 
 // Setting up profile glimpse popover
 
-extension SearchViewController {
+extension SearchVC {
     
     func setupProfileGlimpsePopover(viewedUser:User) {
-        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ProfileGlimpse") as! ProfileGlimpseViewController
+        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ProfileGlimpse") as! ProfileGlimpseVC
         
         
         // pass the user data

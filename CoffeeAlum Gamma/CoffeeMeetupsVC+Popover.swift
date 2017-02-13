@@ -8,10 +8,10 @@
 
 import Foundation
 
-extension CoffeeMeetupsViewController {
+extension CoffeeMeetupsVC {
     
     func setupPopover() {
-        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "InvitationViewController") as! InvitationViewController
+        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "InvitationVC") as! InvitationVC
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
         let popover = popoverContent.popoverPresentationController
         popoverContent.preferredContentSize = CGSize(width: self.view.frame.width * 0.85, height: self.view.frame.height * 0.85)

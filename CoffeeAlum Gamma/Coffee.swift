@@ -67,22 +67,21 @@ class Coffee {
         ref = snapshot.ref
     }
     
+    // Saves the coffee information
     func save(new: Bool) {
         let fromUserRef = ref.child(fromId).child("coffeeIds")
         let toUserRef = ref.child(toId).child("coffeeIds")
         if new {
             let newRef = self.ref.childByAutoId()
             newRef.setValue(self.toAnyObject()){ (error, ref) -> Void in
-                fromUserRef.setValue([ref.key:ref.key])
-                toUserRef.setValue([ref.key:ref.key])
+                fromUserRef.setValue([ref.key : ref.key])
+                toUserRef.setValue([ref.key : ref.key])
             }
-        }
-        
-        else {
+        } else {
             let currentRef = self.ref.child(id)
             currentRef.setValue(self.toAnyObject()){ (error, ref) -> Void in
-                fromUserRef.setValue([ref.key:ref.key])
-                toUserRef.setValue([ref.key:ref.key])
+                fromUserRef.setValue([ref.key : ref.key])
+                toUserRef.setValue([ref.key : ref.key])
                 // the above lines are redundant, but trigger listeners for the right coffee Date
             }
             
@@ -108,8 +107,6 @@ class Coffee {
             "rescheduled": rescheduled
         ]
     }
-    
- 
     
 }
 

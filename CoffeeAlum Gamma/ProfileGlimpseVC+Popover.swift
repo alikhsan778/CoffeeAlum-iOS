@@ -8,10 +8,10 @@
 
 import Foundation
 
-extension ProfileGlimpseViewController {
+extension ProfileGlimpseVC {
     
-    func setupPopover(viewedUser:User) {
-        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "InviteViewController") as! InvitePopoverViewController
+    func setupPopover(viewedUser: User) {
+        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "InviteViewController") as! InvitePopoverVC
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
         let popover = popoverContent.popoverPresentationController
         popoverContent.preferredContentSize = CGSize(width: self.view.frame.width * 0.85, height: self.view.frame.height * 0.85)
@@ -27,7 +27,6 @@ extension ProfileGlimpseViewController {
         popoverContent.thisUser = self.thisUser
         popoverContent.delegate = self
         
-        
         self.present(popoverContent, animated: true, completion: nil)
     }
     
@@ -37,7 +36,8 @@ extension ProfileGlimpseViewController {
     }
     
     func inviteSent(){
-        //TODO:Change the meetup button icon
+        // TODO: Change the meetup button icon
+        
     }
     
 }
