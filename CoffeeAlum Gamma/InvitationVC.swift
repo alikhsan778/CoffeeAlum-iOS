@@ -19,11 +19,13 @@ class InvitationVC: UIViewController {
     @IBOutlet weak var placeLabel: UILabel!
     
     @IBAction func declineButtonAction(_ sender: UIButton) {
-        
+        // Dismisses the popover
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func acceptButtonAction(_ sender: UIButton) {
-        
+        // Dismisses the popover
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

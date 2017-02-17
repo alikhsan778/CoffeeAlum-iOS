@@ -434,7 +434,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hcs-jS-6PE">
-                                                <rect key="frame" x="226" y="372.5" width="112" height="66"/>
+                                                <rect key="frame" x="226" y="373" width="112" height="65.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1LV-b3-6kR">
@@ -479,7 +479,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-cZ-Lab">
-                                                <rect key="frame" x="61.5" y="291" width="216" height="25"/>
+                                                <rect key="frame" x="61.5" y="291.5" width="216" height="25"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Wa6-T6-TVn">
                                                         <rect key="frame" x="0.0" y="2.5" width="160" height="20.5"/>

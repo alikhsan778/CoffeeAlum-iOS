@@ -14,7 +14,6 @@
 		DD12E0E11E244FED006A2663 /* SearchVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0DF1E244FED006A2663 /* SearchVC+CollectionView.swift */; };
 		DD12E0E41E24501D006A2663 /* UIViewController + SidebarMenuPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */; };
 		DD12E0E71E245064006A2663 /* ProfileGlimpseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0E61E245064006A2663 /* ProfileGlimpseVC.swift */; };
-		DD12E0EA1E245504006A2663 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0E91E245504006A2663 /* MessagesVC.swift */; };
 		DD12E0EC1E245531006A2663 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0EB1E245531006A2663 /* MessageCollectionViewCell.swift */; };
 		DD12E0EE1E2456C2006A2663 /* SearchVC+CustomPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0ED1E2456C2006A2663 /* SearchVC+CustomPopover.swift */; };
 		DD12E0F01E245D37006A2663 /* SearchVC+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0EF1E245D37006A2663 /* SearchVC+SearchBar.swift */; };
@@ -24,7 +23,7 @@
 		DD12E0FD1E25A561006A2663 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0FC1E25A561006A2663 /* User.swift */; };
 		DD12E0FF1E25B174006A2663 /* ProfileGlimpseVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E0FE1E25B174006A2663 /* ProfileGlimpseVC+CollectionView.swift */; };
 		DD12E1011E25B316006A2663 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */; };
-		DD361B841E4F5BD000C5979F /* MessagesVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B831E4F5BD000C5979F /* MessagesVC+CollectionView.swift */; };
+		DD35937D1E5755D4003A57CF /* InvitationVC+MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD35937C1E5755D4003A57CF /* InvitationVC+MapView.swift */; };
 		DD361B861E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B851E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift */; };
 		DD361B881E51706700C5979F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B871E51706700C5979F /* LocationManager.swift */; };
 		DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D01E15BCFE005C31A7 /* SWRevealViewController.m */; };
@@ -92,7 +91,6 @@
 		DD12E0DF1E244FED006A2663 /* SearchVC+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchVC+CollectionView.swift"; sourceTree = "<group>"; };
 		DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController + SidebarMenuPan.swift"; sourceTree = "<group>"; };
 		DD12E0E61E245064006A2663 /* ProfileGlimpseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGlimpseVC.swift; sourceTree = "<group>"; };
-		DD12E0E91E245504006A2663 /* MessagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		DD12E0EB1E245531006A2663 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD12E0ED1E2456C2006A2663 /* SearchVC+CustomPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchVC+CustomPopover.swift"; sourceTree = "<group>"; };
 		DD12E0EF1E245D37006A2663 /* SearchVC+SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchVC+SearchBar.swift"; sourceTree = "<group>"; };
@@ -102,7 +100,7 @@
 		DD12E0FC1E25A561006A2663 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DD12E0FE1E25B174006A2663 /* ProfileGlimpseVC+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileGlimpseVC+CollectionView.swift"; sourceTree = "<group>"; };
 		DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
-		DD361B831E4F5BD000C5979F /* MessagesVC+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessagesVC+CollectionView.swift"; sourceTree = "<group>"; };
+		DD35937C1E5755D4003A57CF /* InvitationVC+MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InvitationVC+MapView.swift"; sourceTree = "<group>"; };
 		DD361B851E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationSearchTableVC+TableView.swift"; sourceTree = "<group>"; };
 		DD361B871E51706700C5979F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DD43A7CE1E15BCFD005C31A7 /* CoffeeAlum Gamma-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoffeeAlum Gamma-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -225,15 +223,6 @@
 			name = SearchVC;
 			sourceTree = "<group>";
 		};
-		DD12E0E81E2454FE006A2663 /* Messages */ = {
-			isa = PBXGroup;
-			children = (
-				DD12E0E91E245504006A2663 /* MessagesVC.swift */,
-				DD361B831E4F5BD000C5979F /* MessagesVC+CollectionView.swift */,
-			);
-			name = Messages;
-			sourceTree = "<group>";
-		};
 		DD12E0F11E2595B0006A2663 /* ProfileGlimpseVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +244,21 @@
 				DD6251E61E4BBD2C001E6FFC /* Search.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		DD35937E1E57560D003A57CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DDEC132A1E19AF1B002C7CCF /* CoffeeAlum Gamma.entitlements */,
+				DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */,
+				DD361B871E51706700C5979F /* LocationManager.swift */,
+				DDBE22F41E0EED7D00C0497E /* Info.plist */,
+				DDBE22EC1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld */,
+				DDBE26BA1E11F14D00C0497E /* GoogleService-Info.plist */,
+				DDBE22EF1E0EED7D00C0497E /* Assets.xcassets */,
+			);
+			name = "Supporting Files";
+			path = "CoffeeAlum Gamma";
 			sourceTree = "<group>";
 		};
 		DD43A7CA1E15BC9E005C31A7 /* SWRevealViewController */ = {
@@ -295,14 +299,14 @@
 			name = "Custom UIElements";
 			sourceTree = "<group>";
 		};
-		DD43A8071E174063005C31A7 /* Extensions */ = {
+		DD43A8071E174063005C31A7 /* UIElement Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				DDEC13281E199AB6002C7CCF /* UIView + CornerRadius.swift */,
 				DDEC13301E19FEC8002C7CCF /* UIView + Shadow.swift */,
 				DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */,
 			);
-			name = Extensions;
+			name = "UIElement Extensions";
 			sourceTree = "<group>";
 		};
 		DD43A80A1E174499005C31A7 /* Keyboard Customization */ = {
@@ -316,6 +320,7 @@
 		DD6251D91E4B7071001E6FFC /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */,
 				DD12E0EB1E245531006A2663 /* MessageCollectionViewCell.swift */,
 				DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */,
 				DD6251DA1E4B7085001E6FFC /* TagCollectionViewCell */,
@@ -354,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				DDBE22E41E0EED7D00C0497E /* CoffeeAlum Gamma */,
+				DD35937E1E57560D003A57CF /* Supporting Files */,
 				DD43A7CA1E15BC9E005C31A7 /* SWRevealViewController */,
 				DDBE22FC1E0EED7E00C0497E /* CoffeeAlum GammaTests */,
 				DDBE22E31E0EED7D00C0497E /* Products */,
@@ -374,19 +380,13 @@
 		DDBE22E41E0EED7D00C0497E /* CoffeeAlum Gamma */ = {
 			isa = PBXGroup;
 			children = (
-				DDEC132A1E19AF1B002C7CCF /* CoffeeAlum Gamma.entitlements */,
 				DDBE230B1E0F26B600C0497E /* View Controllers (VC) */,
 				DDBE230D1E0F26CB00C0497E /* Views */,
 				DDBE230C1E0F26C400C0497E /* Models */,
 				DDEC13231E198B7D002C7CCF /* Layouts */,
-				DD43A8071E174063005C31A7 /* Extensions */,
+				DD43A8071E174063005C31A7 /* UIElement Extensions */,
 				DD3593731E560419003A57CF /* Storyboards */,
 				DDBE230A1E0F10A100C0497E /* Custom */,
-				DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */,
-				DDBE22EF1E0EED7D00C0497E /* Assets.xcassets */,
-				DDBE22F41E0EED7D00C0497E /* Info.plist */,
-				DDBE26BA1E11F14D00C0497E /* GoogleService-Info.plist */,
-				DDBE22EC1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld */,
 			);
 			path = "CoffeeAlum Gamma";
 			sourceTree = "<group>";
@@ -403,7 +403,6 @@
 		DDBE230A1E0F10A100C0497E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				DD361B871E51706700C5979F /* LocationManager.swift */,
 				DD43A80A1E174499005C31A7 /* Keyboard Customization */,
 				DD43A8041E172440005C31A7 /* Custom UIElements */,
 			);
@@ -413,12 +412,11 @@
 		DDBE230B1E0F26B600C0497E /* View Controllers (VC) */ = {
 			isa = PBXGroup;
 			children = (
+				DDBE26B61E11DEE000C0497E /* Sign Up or Sign In */,
 				DDDDBB5D1E2D571B0084D5A5 /* CoffeeMeetupsVC */,
 				DDDDBB581E2D3AAF0084D5A5 /* InvitationViewController */,
-				DD12E0E81E2454FE006A2663 /* Messages */,
 				DDEC132D1E19E12F002C7CCF /* PersonalProfileVC */,
 				DD43A7D21E15EAA7005C31A7 /* Menu */,
-				DDBE26B61E11DEE000C0497E /* Sign Up or Sign In */,
 				DD6251F11E4D90FD001E6FFC /* InvitePopoverVC */,
 				DD0A30C81E4E698B009D619F /* LocationTableVC */,
 				DD12E0F11E2595B0006A2663 /* ProfileGlimpseVC */,
@@ -460,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				DDDDBB591E2D3AC70084D5A5 /* InvitationVC.swift */,
+				DD35937C1E5755D4003A57CF /* InvitationVC+MapView.swift */,
 			);
 			name = InvitationViewController;
 			sourceTree = "<group>";
@@ -470,7 +469,6 @@
 				DDBE26B71E11DF0800C0497E /* CoffeeMeetupsVC.swift */,
 				DDDDBB601E2D582C0084D5A5 /* CoffeeMeetupsVC+CollectionView.swift */,
 				DDDDBB5E1E2D573B0084D5A5 /* CoffeeMeetupsVC+Popover.swift */,
-				DDEC13261E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift */,
 			);
 			name = CoffeeMeetupsVC;
 			sourceTree = "<group>";
@@ -715,6 +713,7 @@
 				DD43A7D61E16CE46005C31A7 /* SidebarMenuVC.swift in Sources */,
 				DDEC13311E19FEC8002C7CCF /* UIView + Shadow.swift in Sources */,
 				DDDDBB5C1E2D52CD0084D5A5 /* ProfileGlimpseVC+Popover.swift in Sources */,
+				DD35937D1E5755D4003A57CF /* InvitationVC+MapView.swift in Sources */,
 				DD361B861E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift in Sources */,
 				DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */,
 				DDBE22E81E0EED7D00C0497E /* SignUpVC.swift in Sources */,
@@ -724,7 +723,6 @@
 				DDBE23111E0F5DB600C0497E /* CustomBezierView.swift in Sources */,
 				DD6251F31E4D913F001E6FFC /* InvitePopoverVC+MapView.swift in Sources */,
 				DDBE230F1E0F546200C0497E /* CustomLabel.swift in Sources */,
-				DD361B841E4F5BD000C5979F /* MessagesVC+CollectionView.swift in Sources */,
 				DDBE22EE1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld in Sources */,
 				DDBE23151E0F6B7600C0497E /* CustomButton.swift in Sources */,
 				DDBE23171E1059D100C0497E /* SignInVC.swift in Sources */,
@@ -742,7 +740,6 @@
 				DD43A80C1E17AD65005C31A7 /* SearchVC.swift in Sources */,
 				DDDDBB611E2D582C0084D5A5 /* CoffeeMeetupsVC+CollectionView.swift in Sources */,
 				DD6251EE1E4C2C88001E6FFC /* PersonalProfileVC+TableView.swift in Sources */,
-				DD12E0EA1E245504006A2663 /* MessagesVC.swift in Sources */,
 				DDDDBB551E2C98050084D5A5 /* InvitePopoverVC.swift in Sources */,
 				BD471DFF1E2D7DAF002CB142 /* Helper.swift in Sources */,
 				DDEC13271E198E5B002C7CCF /* CoffeeMeetupCollectionViewCell.swift in Sources */,

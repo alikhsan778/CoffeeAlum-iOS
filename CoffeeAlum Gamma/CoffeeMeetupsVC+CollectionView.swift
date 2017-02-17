@@ -15,38 +15,40 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         return 2
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // Upcoming coffee events
         if section == 0 {
             return upComingCoffee.count
-        }
-        // Coffee requests that is pending
-        else {
+        } else {
             return pendingCoffee.count
         }
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Setting up popover
         setupPopover()
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoffeeMeetupCell", for: indexPath) as! CoffeeMeetupCollectionViewCell
         
-        var thisData:(coffee:Coffee,user:User)
+        var thisData:(coffee:Coffee, user:User)
         
-        if indexPath.section == 0 {thisData = upComingCoffee[indexPath.row]}
-        else                      {thisData = upComingCoffee[indexPath.row]}
+        if indexPath.section == 0 {
+            thisData = upComingCoffee[indexPath.row]
+        } else {
+            thisData = upComingCoffee[indexPath.row]
+        }
         
         cell.nameOfInviter.text = thisData.user.name
         // cell.pictureOfInviter.image = thisData.user.portrait.toImage()
         if thisData.user.employer == "" {
             cell.roleOfOther.text = "Student at \(thisData.user.education)"
-        }
-            
-        else{
+        } else {
             cell.roleOfOther.text = "\(thisData.user.role) at \(thisData.user.employer)"
         }
         return cell
@@ -60,6 +62,7 @@ extension CoffeeMeetupsVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.bounds.width, height: view.bounds.height * 0.2)
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return -50
