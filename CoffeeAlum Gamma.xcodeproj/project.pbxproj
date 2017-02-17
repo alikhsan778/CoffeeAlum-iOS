@@ -246,6 +246,17 @@
 			name = ProfileGlimpseVC;
 			sourceTree = "<group>";
 		};
+		DD3593731E560419003A57CF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DDBE22F11E0EED7D00C0497E /* LaunchScreen.storyboard */,
+				DD6251E31E4BBCFA001E6FFC /* Entry.storyboard */,
+				DDBE22E91E0EED7D00C0497E /* Main.storyboard */,
+				DD6251E61E4BBD2C001E6FFC /* Search.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		DD43A7CA1E15BC9E005C31A7 /* SWRevealViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,13 +380,10 @@
 				DDBE230C1E0F26C400C0497E /* Models */,
 				DDEC13231E198B7D002C7CCF /* Layouts */,
 				DD43A8071E174063005C31A7 /* Extensions */,
+				DD3593731E560419003A57CF /* Storyboards */,
 				DDBE230A1E0F10A100C0497E /* Custom */,
 				DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */,
 				DDBE22EF1E0EED7D00C0497E /* Assets.xcassets */,
-				DDBE22E91E0EED7D00C0497E /* Main.storyboard */,
-				DD6251E61E4BBD2C001E6FFC /* Search.storyboard */,
-				DD6251E31E4BBCFA001E6FFC /* Entry.storyboard */,
-				DDBE22F11E0EED7D00C0497E /* LaunchScreen.storyboard */,
 				DDBE22F41E0EED7D00C0497E /* Info.plist */,
 				DDBE26BA1E11F14D00C0497E /* GoogleService-Info.plist */,
 				DDBE22EC1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld */,

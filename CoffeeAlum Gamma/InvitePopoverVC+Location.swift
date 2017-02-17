@@ -11,42 +11,8 @@ import MapKit
 
 extension InvitePopoverVC: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            coreLocationManager.requestLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            print("location:: \(location)")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error:: (error)")
-    }
-    
-    func setupLocation() {
-        
-        coreLocationManager.desiredAccuracy = kCLLocationAccuracyBest
-        coreLocationManager.requestWhenInUseAuthorization()
-        coreLocationManager.requestLocation()
-        
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTableVC") as! LocationSearchTableVC
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController?.searchResultsUpdater = locationSearchTable
-        
-        resultSearchController?.hidesNavigationBarDuringPresentation = false
-        resultSearchController?.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
-        
-    }
- 
-    
-    
     /// Setup for user location
-    /*
+
     func userLocationHelper() {
         // Creating an instance of the Location Manager
         locationManager = LocationManager.sharedInstance
@@ -67,14 +33,13 @@ extension InvitePopoverVC: CLLocationManagerDelegate {
             coreLocationManager.requestWhenInUseAuthorization()
         } else {
             // Calls getLocation as the user has already authorized location to be used
-            // getLocation()
-            setupLocation()
+            getLocation()
         }
         
     }
     
+    
     func getLocation() {
-        
         locationManager.startUpdatingLocationWithCompletionHandler { [unowned self](latitude, longitude, status, verboseMessage, error) in
             // Creating an instance of CLLocation
             let location = CLLocation(latitude: latitude,
@@ -83,6 +48,7 @@ extension InvitePopoverVC: CLLocationManagerDelegate {
             self.display(location: location)
         }
     }
+    
     
     func display(location: CLLocation) {
         // Retreving latitude and longitude form the location parameter.
@@ -123,6 +89,12 @@ extension InvitePopoverVC: CLLocationManagerDelegate {
         }
         
     }
-    */
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Taking the first item from the locations array
+        self.currentLocation = locations.first
+    }
+    
     
 }

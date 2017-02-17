@@ -16,11 +16,11 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if section == 0{
+        // Upcoming coffee events
+        if section == 0 {
             return upComingCoffee.count
         }
-        
+        // Coffee requests that is pending
         else {
             return pendingCoffee.count
         }
@@ -41,7 +41,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         else                      {thisData = upComingCoffee[indexPath.row]}
         
         cell.nameOfInviter.text = thisData.user.name
-        cell.pictureOfInviter.image = thisData.user.portrait.toImage()
+        // cell.pictureOfInviter.image = thisData.user.portrait.toImage()
         if thisData.user.employer == "" {
             cell.roleOfOther.text = "Student at \(thisData.user.education)"
         }
@@ -58,7 +58,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
 extension CoffeeMeetupsVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.bounds.width, height: view.bounds.height - 150)
+        return CGSize(width: view.bounds.width, height: view.bounds.height * 0.2)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

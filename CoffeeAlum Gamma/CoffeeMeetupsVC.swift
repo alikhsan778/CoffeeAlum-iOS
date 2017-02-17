@@ -13,7 +13,6 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // TODO: These vars are too heavy, think of more elegant solution for next version
     
     // MARK: - IBOutlets
-    @IBOutlet weak var headlineLabel: UILabel!
     // TODO: Connect outlet
     @IBOutlet weak var collectionView: UICollectionView!
     

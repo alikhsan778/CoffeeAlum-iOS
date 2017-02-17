@@ -619,9 +619,6 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="dateTextField:" destination="5pv-4h-vdT" eventType="editingDidEnd" id="Adh-dI-cV5"/>
-                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIX-TS-zuk">
                                         <rect key="frame" x="0.0" y="63" width="41" height="25"/>
@@ -634,9 +631,6 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="timeTextField:" destination="5pv-4h-vdT" eventType="editingDidEnd" id="PdW-S2-7bo"/>
-                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -685,7 +679,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="450"/>
                     <connections>
+                        <outlet property="dateTextField" destination="Ez3-kD-zDB" id="Lby-wO-KDg"/>
                         <outlet property="mapView" destination="jpr-y2-0d8" id="8wb-GQ-Zgc"/>
+                        <outlet property="timeTextField" destination="Put-Eq-spD" id="QcM-0o-SBl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m8c-rb-XTw" userLabel="First Responder" sceneMemberID="firstResponder"/>

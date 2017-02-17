@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import MapKit
 
-protocol InviteDelegate{
+protocol InviteDelegate {
     func inviteSent()
 }
 
@@ -28,6 +28,8 @@ class InvitePopoverVC: UIViewController {
     
     var coreLocationManager = CLLocationManager()
     
+    var currentLocation: CLLocation!
+    
     var locationManager: LocationManager!
     
     var location: String?
@@ -42,14 +44,17 @@ class InvitePopoverVC: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var dateTextField: UITextField!
+    
+    @IBOutlet weak var timeTextField: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Assigning the delegate to self
         coreLocationManager.delegate = self
         // Setup the map view
-        // userLocationHelper()
-        setupLocation()
+        userLocationHelper()
     }
     
     /*
@@ -58,16 +63,21 @@ class InvitePopoverVC: UIViewController {
      */
     @IBAction func inviteButtonAction(_ sender: UIButton) {
         if inviteComplete() {
-            // Testing
-            coffee = Coffee(date: date!,
-                                time: time!,
+            // This is never called because the location is given
+            print("Complete")
+            coffee = Coffee(date: dateTextField.text!,
+                                time: timeTextField.text!,
                                 location: mapView.userLocation.title!,
                                 fromId: thisUser!.uid,
                                 toId: viewedUser!.uid,
                                 fromName: thisUser!.name,
                                 toName: viewedUser!.name)
             
-            self.coffee?.save(new: true) // Saves the meetup data
+            // Saves the meetup data
+            self.coffee?.save(new: true)
+            // Dismisses the Invite Popover
+            self.dismiss(animated: true, completion: nil)
+            
         } else {
             print("Incomplete") // Testing
             // TODO: Create warning for incomplete invite
@@ -78,25 +88,16 @@ class InvitePopoverVC: UIViewController {
         
     }
     
-    /// Sets the date data
-    @IBAction func dateTextField(_ sender: UITextField) {
-        date = sender.text
-    }
-    
-    /// Sets the time data
-    @IBAction func timeTextField(_ sender: UITextField) {
-        time = sender.text
-    }
-    
     /// Method to check if the invitation information is nil or not
     func inviteComplete() -> Bool {
-        if let date = self.date, let time = self.time, let location = self.location {
+        if let date = dateTextField.text, let time = timeTextField.text, let location = mapView.userLocation.title {
+            // TODO: Change the location because this is just a default value
             print(date, time, location)
             return true
         } else {
             return false
         }
     }
-    }
+}
 
 
