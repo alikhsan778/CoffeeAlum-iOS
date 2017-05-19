@@ -25,8 +25,8 @@ extension SearchVC {
         filteredDataSet = Set<User>()
         
         userRef.observe(.value, with: { snapshot in
-            if snapshot.hasChildren(){
-                for item in snapshot.children{
+            if snapshot.hasChildren() {
+                for item in snapshot.children {
                     guard let info = item as? FIRDataSnapshot else{
                         break
                     }
@@ -44,7 +44,6 @@ extension SearchVC {
                     if searchedUser.location.lowercased().range(of: text.lowercased()) != nil {
                         self.filteredDataSet.insert(searchedUser)
                     }
-                    
                     
                     if searchedUser.employer.lowercased().range(of: text.lowercased()) != nil {
                         self.filteredDataSet.insert(searchedUser)

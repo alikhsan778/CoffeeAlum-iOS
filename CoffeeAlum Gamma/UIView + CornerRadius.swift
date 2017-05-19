@@ -12,7 +12,7 @@ extension UIView {
     
     /// Adds a preset corner radius to a UIView.
     func addPresetCornerRadius() {
-        self.layer.cornerRadius = 39
+        self.layer.cornerRadius = 20
         self.layer.masksToBounds = true
     }
     

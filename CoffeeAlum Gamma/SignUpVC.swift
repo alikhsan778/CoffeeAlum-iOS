@@ -11,8 +11,6 @@ import Firebase
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
     
-    // TODO: Create already 
-    
     // Adaptive Keyboard Property
     var adaptiveKeyboard: AdaptiveKeyboard!
     
@@ -56,7 +54,12 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         // Placing the text fields as the Adaptive Keyboard initializer
-        adaptiveKeyboard = AdaptiveKeyboard(scrollView: scrollViewOutlet, textField: emailTextField, passwordTextField, confirmPasswordTextField, pushHeight: 80)
+        adaptiveKeyboard = AdaptiveKeyboard(
+            scrollView: scrollViewOutlet,
+            textField: emailTextField,
+            passwordTextField, confirmPasswordTextField,
+            pushHeight: 80
+        )
         
         scrollViewOutlet.isScrollEnabled = false
         
@@ -70,7 +73,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -127,12 +129,18 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         }
         
         else{
-            self.present(credentialAlert, animated: true, completion: nil)
+            present(
+                credentialAlert,
+                animated: true,
+                completion: nil
+            )
         }
         
     }
   
-    @IBAction private func googleLoginButtonAction(_ sender: UIButton) {
+    @IBAction func googleLoginButtonAction(_ sender: UIButton) {
+        
+        
         
     }
     
@@ -261,10 +269,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     // Method to allow the next view controller to be presented
     private func presentSearchViewController() {
+        
+        // Accessing the App Delegate
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
         // Present the next view controller
-        self.present(swRevealViewController, animated: true, completion: nil)
+        appDelegate?.window?.rootViewController = swRevealViewController
     }
     
     // Method to show useful error message

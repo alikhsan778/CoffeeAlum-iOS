@@ -17,14 +17,14 @@ extension UIView {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = 8
+        self.layer.shadowRadius = 15
         
-        // improve performance
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: 39).cgPath
+        // improves performance
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: 20).cgPath
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
         
-        // necessary
+        // sets to false to allow the shadow to go beyond the UIView
         self.layer.masksToBounds = false
     }
     

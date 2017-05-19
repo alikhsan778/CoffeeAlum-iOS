@@ -67,7 +67,12 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
             location = cityUserLivesTextField.text
             
             
-            self.thisUser = User(name: name, account: .alum, education: education, location: location)
+            self.thisUser = User(
+                name: name,
+                account: .alum,
+                education: education,
+                location: location
+            )
             thisUser!.save()
             
             
@@ -79,8 +84,7 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
         
     }
     
-    ///////////////////////////////////////////////////////////////////////////////////////
-    
+    ////////////////////////////////////////////
     
     // MARK: - Miscellaneous Properties
     // Creating an instance of Firebase Database reference 
@@ -103,7 +107,6 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
     var filteredDataSet = Set<User>()
     var filteredUsers: [User] = []
 
-
     // Filtered Users
     
     // MARK: - Lists of Data
@@ -116,7 +119,6 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
     var education: String!
     var location: String!
     var account: AccountType!
-    // TODO: -
     var uid: String = FIRAuth.auth()!.currentUser!.uid
     
     // MARK: - Overrided Methods
@@ -136,8 +138,6 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
     
     
     override func viewDidLoad() {
-        print(self.parent)
-        print(self.childViewControllers)
         let thisUserRef = userRef.child(FIRAuth.auth()!.currentUser!.uid)
        
         //Check if user has filled out intro form; Populate the local user object

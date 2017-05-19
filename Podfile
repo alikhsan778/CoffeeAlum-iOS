@@ -6,16 +6,16 @@ target 'CoffeeAlum Gamma' do
   use_frameworks!
 
   # Pods for CoffeeAlum Gamma
-  pod ‘Firebase/Core’
-  pod ‘FirebaseAuth’
-  pod ‘Firebase/Database’
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+  pod 'DatePickerDialog'
 
   target 'CoffeeAlum GammaTests' do
     inherit! :search_paths
     # Pods for testing
-    pod ‘Firebase/Core’
-    pod ‘FirebaseAuth’
-    pod ‘Firebase/Database’
   end
 
 end
