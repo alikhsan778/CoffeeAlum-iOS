@@ -8,8 +8,18 @@
 
 import Foundation
 
+protocol InvitationResponseDelegate {
+    func acceptInvitation()
+    func declineInvitation()
+}
+
+
 class InvitationVC: UIViewController {
     
+    // MARK: - Variables
+    var delegate: InvitationResponseDelegate?
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var profilePicture: UIImageView!
     
     @IBOutlet weak var personInvitingLabel: UILabel!
@@ -18,18 +28,29 @@ class InvitationVC: UIViewController {
     
     @IBOutlet weak var placeLabel: UILabel!
     
+    
+    override func viewDidLoad() {
+        
+    }
+    
+    
+    // MARK: - IBActions
     @IBAction func declineButtonAction(_ sender: UIButton) {
+        
+        delegate?.declineInvitation()
+        
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func acceptButtonAction(_ sender: UIButton) {
+        
+        delegate?.acceptInvitation()
+        
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        
-    }
+    
     
 }

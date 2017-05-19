@@ -16,6 +16,9 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // TODO: Connect outlet
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var noInvitationLabel: UILabel!
+    
+    
     var db = FIRDatabase.database().reference()
     
     var coffeeRef: FIRDatabaseReference { get { return db.child("coffees") } }
@@ -59,6 +62,7 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         super.viewDidLoad()
         // Retreives the invites
         retrieveCoffeeData()
+        
     }
 
     
@@ -84,25 +88,43 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                 let coffee = Coffee(snapshot: coffeeSnap!)
                 let otherUserRef = userRef.child(coffee.toId)
                 
-                otherUserRef.observe(.value, with: { snapshot in
+                otherUserRef.observe(.value, with: { (snapshot) in
+                    
                     let meetingUser = User(snapshot: snapshot)
-                    self.sentInviteCoffee.append((coffee,meetingUser))
+                    
+                    self.sentInviteCoffee.append((coffee, meetingUser))
                     self.collectionView.reloadData()
+                    
+                    // TODO: DRY
+                    if self.sentInviteCoffee.count > 0 {
+                        self.noInvitationLabel.isHidden = true
+                    } else {
+                        self.noInvitationLabel.isHidden = false
+                    }
+                    
                 })
             }
         })
         
         // You got the invite; looking for person I received it FROM
-        gotInviteCoffeeRef.observe(.value, with: { snapshot in
+        gotInviteCoffeeRef.observe(.value, with: { (snapshot) in
             for item in snapshot.children{
                 let coffeeSnap = item as? FIRDataSnapshot
                 let coffee = Coffee(snapshot: coffeeSnap!)
                 let otherUserRef = userRef.child(coffee.fromId)
                 
-                otherUserRef.observe(.value, with: { snapshot in
+                otherUserRef.observe(.value, with: { (snapshot) in
+                    
                     let meetingUser = User(snapshot: snapshot)
-                    self.sentInviteCoffee.append((coffee,meetingUser))
+                    self.sentInviteCoffee.append((coffee, meetingUser))
                     self.collectionView.reloadData()
+                    
+                    if self.sentInviteCoffee.count > 0 {
+                        self.noInvitationLabel.isHidden = true
+                    } else {
+                        self.noInvitationLabel.isHidden = false
+                    }
+                    
                 })
             }
         })

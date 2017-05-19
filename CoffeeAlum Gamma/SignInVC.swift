@@ -123,7 +123,7 @@ class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
             // Validates the email address
         } else if (validateEmailAddressIn(textField: emailAddressTextField) == true) {
             
-            normalizLabels(
+            normalizeLabels(
                 labelTitle: "Email address",
                 label: emailAddressLabel
             )
@@ -162,7 +162,7 @@ class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
             
         } else {
             // Changes the Password label back to its normal state
-            normalizLabels(labelTitle: "Password", label: passwordLabel)
+            normalizeLabels(labelTitle: "Password", label: passwordLabel)
         }
         
         return true
@@ -177,7 +177,7 @@ class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
     }
     
     // Method to change the sign up labels back to its original
-    func normalizLabels(labelTitle: String, label: UILabel) {
+    func normalizeLabels(labelTitle: String, label: UILabel) {
         // Changing the label into the useful error message
         label.text = labelTitle
         // Changing the color of the text to red

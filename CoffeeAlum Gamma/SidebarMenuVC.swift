@@ -8,6 +8,8 @@
 
 import Foundation
 import Firebase
+import GoogleSignIn
+
 
 class SidebarMenuVC: UIViewController {
     
@@ -23,7 +25,15 @@ class SidebarMenuVC: UIViewController {
     }
     
     @IBAction func logOutButtonAction(_ sender: UIButton) {
-        try! FIRAuth.auth()?.signOut()
+        
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         // Instantiate the login view controller
         // Accessing the storyboard
@@ -31,7 +41,7 @@ class SidebarMenuVC: UIViewController {
         // The next view controller
         let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
         // Present the next view controller
-        self.present(signInViewController, animated: true, completion: nil)
+        appDelegate.window?.rootViewController = signInViewController
         
     }
     
