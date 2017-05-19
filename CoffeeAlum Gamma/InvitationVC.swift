@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol InvitationResponseDelegate {
-    func acceptInvitation()
-    func declineInvitation()
-}
-
 
 class InvitationVC: UIViewController {
     
@@ -30,6 +25,8 @@ class InvitationVC: UIViewController {
     
     
     override func viewDidLoad() {
+        
+        
         
     }
     
@@ -50,7 +47,5 @@ class InvitationVC: UIViewController {
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
     
 }

@@ -30,16 +30,19 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var allCoffee: [(coffee: Coffee, user: User)] { get { return sentInviteCoffee + gotInviteCoffee }}
     
     var pendingCoffee: [(coffee: Coffee, user: User)] {
-        
         get {
-            
-        return allCoffee.filter({!$0.coffee.accepted})
-        
+            return allCoffee.filter {
+                !$0.coffee.accepted
+            }
         }
     }
     
-    var upComingCoffee: [(coffee: Coffee, user: User)] { get {
-        return allCoffee.filter({!$0.coffee.accepted})
+    var upComingCoffee: [(coffee: Coffee, user: User)] {
+        get {
+            return allCoffee.filter {
+                !$0.coffee.accepted
+            }
+            
         }
     }
     
@@ -54,15 +57,19 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // Sidebar button which reveals the side bar
     @IBAction func sidebarMenuButtonAction(_ sender: UIButton) {
         // Connects to the revealToggle method in the SWRevealViewController custom code
-        sender.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
+        sender.addTarget(
+            self.revealViewController(),
+            action: #selector(SWRevealViewController.revealToggle(_:)),
+            for: .touchUpInside
+        )
     }
     
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Retreives the invites
         retrieveCoffeeData()
-        
     }
 
     

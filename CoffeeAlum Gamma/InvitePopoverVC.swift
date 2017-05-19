@@ -14,6 +14,7 @@ protocol InviteDelegate {
     func inviteSent()
 }
 
+
 class InvitePopoverVC: UIViewController {
     
     var viewedUser: User?
