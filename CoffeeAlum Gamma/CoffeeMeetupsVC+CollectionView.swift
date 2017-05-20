@@ -26,7 +26,37 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var reusableView: UICollectionReusableView? = nil
+        // Checks if the view for supplementary element is the right type
+        if kind == UICollectionElementKindSectionHeader {
+            // Assigning reusable view
+            reusableView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionElementKindSectionHeader,
+                withReuseIdentifier:"Header",
+                for: indexPath
+            )
+            
+            // Accessing the labels
+            let label = reusableView?.subviews[0] as! UILabel
+            // Titles of the sections
+            let sectionNames = [
+                "Upcoming coffee meetups",
+                "Pending coffee invitations"
+            ]
+            // Assigning the title of the label
+            label.text = sectionNames[indexPath.section]
+            
+        }
+        
+        return reusableView!
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Invitation selected
+        
         // Setting up popover
         setupPopover()
     }
@@ -34,9 +64,11 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoffeeMeetupCell", for: indexPath) as! CoffeeMeetupCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "CoffeeMeetupCell",
+            for: indexPath) as! CoffeeMeetupCollectionViewCell
         
-        var thisData:(coffee:Coffee, user:User)
+        var thisData:(coffee: Coffee, user: User)
         
         if indexPath.section == 0 {
             thisData = upComingCoffee[indexPath.row]
@@ -46,6 +78,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         
         cell.nameOfInviter.text = thisData.user.name
         // cell.pictureOfInviter.image = thisData.user.portrait.toImage()
+        
         if thisData.user.employer == "" {
             cell.roleOfOther.text = "Student at \(thisData.user.education)"
         } else {

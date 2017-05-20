@@ -11,9 +11,6 @@ import Foundation
 
 class InvitationVC: UIViewController {
     
-    // MARK: - Variables
-    var delegate: InvitationResponseDelegate?
-    
     // MARK: - IBOutlets
     @IBOutlet weak var profilePicture: UIImageView!
     
@@ -34,7 +31,7 @@ class InvitationVC: UIViewController {
     // MARK: - IBActions
     @IBAction func declineButtonAction(_ sender: UIButton) {
         
-        delegate?.declineInvitation()
+        APIClient.declineInvitation()
         
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
@@ -42,7 +39,7 @@ class InvitationVC: UIViewController {
     
     @IBAction func acceptButtonAction(_ sender: UIButton) {
         
-        delegate?.acceptInvitation()
+        APIClient.acceptInvitation()
         
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)

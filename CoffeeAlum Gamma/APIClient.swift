@@ -8,70 +8,46 @@
 
 import Firebase
 
-// TIP: Use the delegates to access these network calls
-fileprivate class APIClient: InvitationResponseDelegate, CoffeeDataManagerDelegate, AppEntryAndExitDelegate, RetrieveUserInformationDelegate {
+class APIClient {
     
-    // MARK: - Invitation Response Delegate
-    func acceptInvitation() {
+    // MARK: - Invitation Response 
+    static func acceptInvitation() {
         
     }
     
-    func declineInvitation() {
+    static func declineInvitation() {
         
     }
     
-    // MARK: - CoffeeData Manager Delegate
-    func retrieveCoffeeData() {
+    // MARK: - CoffeeData Manager 
+    static func retrieveCoffeeData() {
         
     }
     
-    func getCoffeeInvitation() {
+    static func getCoffeeInvitation() {
         
     }
     
-    func sendCoffeeInvitation() {
+    static func sendCoffeeInvitation() {
         
     }
     
-    // MARK: - App Entry And Exit Delegate
-    func signIn() {
+    // MARK: - App Entry And Exit 
+    static func signIn() {
         
     }
     
-    func signOut() {
+    static func signOut() {
         
     }
     
-    func signUp() {
+    static func signUp() {
         
     }
     
-    // MARK: - Retrieve User Information Delegate
-    func retrieveUserInformation() {
+    // MARK: - Retrieve User Information 
+    static func retrieveUserInformation() {
         
     }
     
 }
-
-
-protocol InvitationResponseDelegate {
-    func acceptInvitation()
-    func declineInvitation()
-}
-
-protocol CoffeeDataManagerDelegate {
-    func retrieveCoffeeData()
-    func getCoffeeInvitation()
-    func sendCoffeeInvitation()
-}
-
-protocol AppEntryAndExitDelegate {
-    func signIn()
-    func signOut()
-    func signUp()
-}
-
-protocol RetrieveUserInformationDelegate {
-    func retrieveUserInformation()
-}
-
