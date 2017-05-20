@@ -55,10 +55,21 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Invitation selected
         
-        // Setting up popover
-        setupPopover()
+        var invitationSelected: (coffee: Coffee, user: User)?
+        
+        // Invitation selected
+        if indexPath.section == 0 {
+            invitationSelected = upComingCoffee[indexPath.row]
+        } else {
+            invitationSelected = pendingCoffee[indexPath.row]
+        }
+        
+        if let invitationSelected = invitationSelected {
+            // Setting up popover
+            setupPopover(with: invitationSelected)
+        }
+        
     }
     
     
@@ -68,7 +79,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             withReuseIdentifier: "CoffeeMeetupCell",
             for: indexPath) as! CoffeeMeetupCollectionViewCell
         
-        var thisData:(coffee: Coffee, user: User)
+        var thisData: (coffee: Coffee, user: User)
         
         if indexPath.section == 0 {
             thisData = upComingCoffee[indexPath.row]
@@ -76,14 +87,8 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             thisData = upComingCoffee[indexPath.row]
         }
         
-        cell.nameOfInviter.text = thisData.user.name
-        // cell.pictureOfInviter.image = thisData.user.portrait.toImage()
+        cell.configure(with: thisData)
         
-        if thisData.user.employer == "" {
-            cell.roleOfOther.text = "Student at \(thisData.user.education)"
-        } else {
-            cell.roleOfOther.text = "\(thisData.user.role) at \(thisData.user.employer)"
-        }
         return cell
     }
     

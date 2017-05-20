@@ -88,17 +88,13 @@ class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
         
         if (emailRequirements == true) && (passwordRequirements == true) {
             
-            FIRAuth.auth()?.signIn(withEmail: emailTextFieldOutlet.text!, password: passwordTextFieldOutlet.text!, completion: { (user, error) in
-                
-                if error == nil {
-                    // Presents the home view controller
-                    self.presentHomeViewController()
-                    
-                } else {
-                    // print(error)
-                }
-                
+            let email = emailTextFieldOutlet.text
+            let password = passwordTextFieldOutlet.text
+            
+            APIClient.signIn(with: email!, password: password!, completion: {
+                self.presentHomeViewController()
             })
+            
         }
         
     }

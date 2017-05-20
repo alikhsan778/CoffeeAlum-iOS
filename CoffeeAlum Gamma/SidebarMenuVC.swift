@@ -25,24 +25,8 @@ class SidebarMenuVC: UIViewController {
     }
     
     @IBAction func logOutButtonAction(_ sender: UIButton) {
-        
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        // Instantiate the login view controller
-        // Accessing the storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        // The next view controller
-        let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-        // Present the next view controller
-        appDelegate.window?.rootViewController = signInViewController
-        
+        APIClient.signOut()
+        transitionToSignInVC()
     }
     
     // TODO: putting the following func into button connecting to login
@@ -64,5 +48,17 @@ class SidebarMenuVC: UIViewController {
         return true
     }
     */
+    
+    fileprivate func transitionToSignInVC() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        // Instantiate the login view controller
+        // Accessing the storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        // The next view controller
+        let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
+        // Present the next view controller
+        appDelegate.window?.rootViewController = signInViewController
+    }
     
 }

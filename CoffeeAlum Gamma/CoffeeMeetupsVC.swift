@@ -13,21 +13,27 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // TODO: These vars are too heavy, think of more elegant solution for next version
     
     // MARK: - IBOutlets
-    // TODO: Connect outlet
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var noInvitationLabel: UILabel!
     
     
     var db = FIRDatabase.database().reference()
     
-    var coffeeRef: FIRDatabaseReference { get { return db.child("coffees") } }
+    var coffeeRef: FIRDatabaseReference {
+        get {
+            return db.child("coffees")
+        }
+    }
     
     var sentInviteCoffee: [(coffee: Coffee, user: User)] = []
     
     var gotInviteCoffee: [(coffee: Coffee, user: User)] = []
     
-    var allCoffee: [(coffee: Coffee, user: User)] { get { return sentInviteCoffee + gotInviteCoffee }}
+    var allCoffee: [(coffee: Coffee, user: User)] {
+        get {
+            return sentInviteCoffee + gotInviteCoffee
+        }
+    }
     
     var pendingCoffee: [(coffee: Coffee, user: User)] {
         get {
@@ -51,7 +57,6 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var data:[(Coffee, User)]?
     // MARK: - User Interaction Properties
     var tapGesture = UITapGestureRecognizer()
-    
     var panGesture = UIPanGestureRecognizer()
     
     // Sidebar button which reveals the side bar
@@ -115,7 +120,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         
         // You got the invite; looking for person I received it FROM
         gotInviteCoffeeRef.observe(.value, with: { (snapshot) in
-            for item in snapshot.children{
+            for item in snapshot.children {
+                
                 let coffeeSnap = item as? FIRDataSnapshot
                 let coffee = Coffee(snapshot: coffeeSnap!)
                 let otherUserRef = userRef.child(coffee.fromId)
