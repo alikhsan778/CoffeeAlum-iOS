@@ -11,20 +11,9 @@ import Firebase
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
     
-    // Adaptive Keyboard Property
-    var adaptiveKeyboard: AdaptiveKeyboard!
-    
     // MARK: - IBOutlets
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var scrollViewOutlet: UIScrollView!
-    
-    @IBOutlet weak var shadowView: UIView!
-    
     @IBOutlet weak var backingView: UIView!
     
     /* confirmPasswordTextField:
@@ -53,18 +42,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Placing the text fields as the Adaptive Keyboard initializer
-        adaptiveKeyboard = AdaptiveKeyboard(
-            scrollView: scrollViewOutlet,
-            textField: emailTextField,
-            passwordTextField, confirmPasswordTextField,
-            pushHeight: 80
-        )
-        
-        scrollViewOutlet.isScrollEnabled = false
-        
-        // Used for adjust the scroll view when text field is being editted to give room
-        adaptiveKeyboard.registerKeyboardNotifications()
     }
     
     override func viewDidLoad() {
@@ -79,14 +56,13 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         // Adding corner radius
         backingView.addPresetCornerRadius()
         // Adding shadow
-        shadowView.addPresetShadow()
+        // shadowView.addPresetShadow()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Removes the keyboad notification when the view has changed
-        adaptiveKeyboard.unregisterKeyboardNotifications()
+
     }
     
     
@@ -96,18 +72,15 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         let passwordCondition = hasFulfilledPasswordRequirementsIn(textField: passwordTextField)
         let confirmPasswordCondition = hasFulfilledConfirmPasswordRequirements(newPasswordTextField: passwordTextField, confirmTextField: confirmPasswordTextField)
         
-        
-        let credentialAlert = UIAlertController(title: "Invalid Credentials", message: "Credentials incorrect or poorly formatted", preferredStyle: .alert)
-        credentialAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        
         // Extracting the String for email and password
         guard let email = emailTextField.text, let password = passwordTextField.text else {
-            present(credentialAlert, animated: true, completion: nil)
             return
         }
         
         if (emailCondition) && (passwordCondition) && (confirmPasswordCondition) {
             // MARK: Firebase Auth
+            
+            // TODO: Move this to APIClient
             // Success in signing up, create user in Firebase
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 // There's no error
@@ -120,20 +93,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                     
             
                 } else {
-                    let alert = UIAlertController(title: "An Error Occurred", message: "Your Connection has timed out", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    
                 }
             })
             
         }
         
         else{
-            present(
-                credentialAlert,
-                animated: true,
-                completion: nil
-            )
+            
         }
         
     }

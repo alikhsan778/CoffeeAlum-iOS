@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol CoffeeMeetupsDelegate: class {
+    func deleteCoffeeMeetup()
+}
+
 
 class InvitationVC: UIViewController {
     
@@ -17,20 +21,20 @@ class InvitationVC: UIViewController {
     @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
     
+    weak var delegate: CoffeeMeetupsDelegate?
     var invitation: (coffee: Coffee, user: User)!
     var invitationID: String!
     
     override func viewDidLoad() {
         
         setupUIElements()
-        
         // Assigning the invitation ID
         invitationID = invitation?.coffee.id
         
     }
     
     func setupUIElements() {
-        personInvitingLabel.text = invitation?.coffee.fromName
+        personInvitingLabel.text = invitation?.user.name
         dateAndTimeLabel.text = invitation?.coffee.date
         placeLabel.text = invitation?.coffee.location
     }
@@ -38,7 +42,11 @@ class InvitationVC: UIViewController {
     // MARK: - IBActions
     @IBAction func declineButtonAction(_ sender: UIButton) {
         
+        // Sends a decline request
         APIClient.declineInvitation(with: invitationID)
+        
+        // Removes the item from the cell
+        delegate?.deleteCoffeeMeetup()
         
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)

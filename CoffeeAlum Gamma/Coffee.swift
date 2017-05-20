@@ -48,8 +48,8 @@ class Coffee {
         self.dateSent = Date().convertToString()
     }
     
-    init(snapshot:FIRDataSnapshot) {
-        let snapshotValue = snapshot.value as! [String: AnyObject]
+    init(snapshot: FIRDataSnapshot) {
+        let snapshotValue = snapshot.value as! [String : AnyObject]
         date = snapshotValue["date"] as! String
         time = snapshotValue["time"] as! String
         dateSent = snapshotValue["dateSent"] as! String
@@ -60,7 +60,7 @@ class Coffee {
         toName = snapshotValue["fromName"] as! String
         fromEventId = snapshotValue["fromEventId"] as? String ?? ""
         toEventId = snapshotValue["toEventId"] as? String ?? ""
-        accepted = snapshotValue["accepted"] as! Bool
+        accepted = snapshotValue["accepted"] as! Bool 
         viewed = snapshotValue["viewed"] as! Bool
         rescheduled = snapshotValue["rescheduled"] as! Bool
         id = snapshot.key

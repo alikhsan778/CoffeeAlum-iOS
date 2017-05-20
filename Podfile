@@ -12,6 +12,7 @@ target 'CoffeeAlum Gamma' do
   pod 'GoogleSignIn'
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
   pod 'DatePickerDialog'
+  pod ‘IQKeyboardManager’
 
   target 'CoffeeAlum GammaTests' do
     inherit! :search_paths

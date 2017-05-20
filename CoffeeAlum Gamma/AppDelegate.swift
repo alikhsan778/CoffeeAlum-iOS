@@ -11,6 +11,7 @@ import CoreData
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
+import IQKeyboardManager
 
 // Global Variable used to check if the view has already been instantiated once
 public var viewHasBeenInstantiated = false
@@ -57,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         // Configuring Firebase
         FIRApp.configure()
+        IQKeyboardManager.shared().isEnabled = true
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self

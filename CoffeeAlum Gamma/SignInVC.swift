@@ -14,7 +14,7 @@ import GoogleSignIn
 class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
     
     // Used to push the text field away from the keyboard to prevent keyboard overlapping
-    var adaptiveKeyboard: AdaptiveKeyboard!
+    // var adaptiveKeyboard: AdaptiveKeyboard!
     
     // MARK: - IBOutlets
     @IBOutlet weak var emailTextFieldOutlet: UITextField!
@@ -47,15 +47,6 @@ class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
         signUpButtonOutlet.titleLabel?.adjustsFontSizeToFitWidth = true
         signUpButtonOutlet.titleLabel?.lineBreakMode = .byClipping
         
-        // Creating an instance of the SignUpSignInKeboardAdaptiveness class
-        adaptiveKeyboard = AdaptiveKeyboard(scrollView: scrollViewOutlet, textField: emailTextFieldOutlet, passwordTextFieldOutlet, pushHeight: 80)
-        
-        // Prevents the user form being able to scroll the view
-        scrollViewOutlet.isScrollEnabled = false
-        
-        // Register keyboard notifications before the view appears
-        adaptiveKeyboard.registerKeyboardNotifications()
-        
     }
     
     override func viewDidLoad() {
@@ -71,12 +62,11 @@ class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-        shadowView.addPresetShadow()
+        // shadowView.addPresetShadow()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        // Removes the keyboad notification when the view has changed
-        adaptiveKeyboard.unregisterKeyboardNotifications()
+    
     }
     
     

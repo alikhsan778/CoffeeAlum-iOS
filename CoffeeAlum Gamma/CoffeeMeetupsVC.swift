@@ -9,13 +9,15 @@
 import UIKit
 import Firebase
 
-class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
+
     // TODO: These vars are too heavy, think of more elegant solution for next version
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noInvitationLabel: UILabel!
-    
+    var headerTitleLabel: UILabel?
+    var titleHidden = true
     
     var db = FIRDatabase.database().reference()
     
@@ -142,6 +144,11 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             }
         })
 
+    }
+    
+    
+    func deleteCoffeeMeetup() {
+        
     }
     
 }

@@ -10,17 +10,20 @@ import Firebase
 
 class APIClient {
     
-    let uid = FIRAuth.auth()!.currentUser!.uid
-    var db = FIRDatabase.database().reference()
-    
+    fileprivate static let uid = FIRAuth.auth()!.currentUser!.uid
+    fileprivate static var db = FIRDatabase.database().reference()
+    fileprivate static let firebaseAuth = FIRAuth.auth()
+    fileprivate static let coffeeReference = db.child("coffees")
     
     // MARK: - Invitation Response
     static func acceptInvitation(with id: String) {
-        
+        let invitationReference = coffeeReference.child(id)
+        invitationReference.child("accepted").setValue(true)
     }
     
     static func declineInvitation(with id: String) {
-        
+        let invitationReference = coffeeReference.child(id)
+        invitationReference.child("accepted").setValue(false)
     }
     
     // MARK: - CoffeeData Manager 
@@ -38,7 +41,7 @@ class APIClient {
     
     // MARK: - App Entry And Exit 
     static func signIn(with email: String, password: String, completion: (() -> Void)?) {
-        FIRAuth.auth()?.signIn(withEmail: email, password: password,
+        firebaseAuth?.signIn(withEmail: email, password: password,
             completion: { (user, error) in
             if error == nil {
                 // Presents the home view controller
@@ -46,6 +49,11 @@ class APIClient {
             } else {
                 // Throws error
                 // TODO: UIAlert
+                /*
+                let credentialAlert = UIAlertController(title: "Sign in error", message: "Password or email may be incorrect", preferredStyle: .alert)
+                credentialAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                present(credentialAlert, animated: true, completion: nil)
+                */
             }
 
         })
@@ -53,9 +61,6 @@ class APIClient {
     }
     
     static func signOut() {
-        // Firebase auth
-        let firebaseAuth = FIRAuth.auth()
-        
         do {
             try firebaseAuth?.signOut()
         } catch let signOutError as NSError {

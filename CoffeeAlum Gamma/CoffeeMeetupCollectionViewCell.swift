@@ -18,8 +18,10 @@ class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     func configure(with coffee: (coffee: Coffee, user: User)) {
         
         nameOfInviter.text = coffee.user.name
+        
         // cell.pictureOfInviter.image = coffee.user.portrait.toImage()
         
+        // Checks if the user has no employer
         if coffee.user.employer == "" {
             roleOfOther.text = "Student at \(coffee.user.education)"
         } else {
