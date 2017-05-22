@@ -67,8 +67,12 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         // Invitation selected
         if indexPath.section == 0 {
             invitationSelected = upComingCoffee[indexPath.row]
+            coffeeSelectedIndex = indexPath.row
+            collectionViewSection = indexPath.section
         } else {
             invitationSelected = pendingCoffee[indexPath.row]
+            coffeeSelectedIndex = indexPath.row
+            collectionViewSection = indexPath.section
         }
         
         if let invitationSelected = invitationSelected {

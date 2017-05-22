@@ -18,6 +18,7 @@ extension CoffeeMeetupsVC {
         
         // Popover content must have invitation data
         popoverContent.invitation = data
+        popoverContent.delegate = self
         
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
         
@@ -42,7 +43,11 @@ extension CoffeeMeetupsVC {
         
         popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         
-        self.present(popoverContent, animated: true, completion: nil)
+        self.present(
+            popoverContent,
+            animated: true,
+            completion: nil
+        )
     }
     
     /// Required for the Popover transition

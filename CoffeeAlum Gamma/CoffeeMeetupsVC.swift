@@ -18,6 +18,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     @IBOutlet weak var noInvitationLabel: UILabel!
     var headerTitleLabel: UILabel?
     var titleHidden = true
+    var coffeeSelectedIndex: Int?
+    var collectionViewSection: Int?
     
     var db = FIRDatabase.database().reference()
     
@@ -43,6 +45,10 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                 !$0.coffee.accepted
             }
         }
+        
+        set {
+            
+        }
     }
     
     var upComingCoffee: [(coffee: Coffee, user: User)] {
@@ -50,6 +56,10 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             return allCoffee.filter {
                 !$0.coffee.accepted
             }
+            
+        }
+        
+        set {
             
         }
     }
@@ -146,8 +156,20 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
 
     }
     
-    
+    // TODO: Delete the coffee meetup declined
     func deleteCoffeeMeetup() {
+        
+        if collectionViewSection == 0 {
+            print(upComingCoffee.count)
+            upComingCoffee.remove(at: coffeeSelectedIndex!)
+            print(upComingCoffee.count)
+        } else {
+            print(pendingCoffee.count)
+            pendingCoffee.remove(at: coffeeSelectedIndex!)
+            print(pendingCoffee.count)
+        }
+        
+        self.collectionView.reloadData()
         
     }
     
