@@ -11,16 +11,16 @@ import Firebase
 
 class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
 
-    // TODO: These vars are too heavy, think of more elegant solution for next version
-    
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noInvitationLabel: UILabel!
+    
+    // MARK: - Variables
     var headerTitleLabel: UILabel?
     var titleHidden = true
     var coffeeSelectedIndex: Int?
     var collectionViewSection: Int?
-    
+    var allCoffee = Set<Invitation>()
     var db = FIRDatabase.database().reference()
     
     var coffeeRef: FIRDatabaseReference {
@@ -28,8 +28,6 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             return db.child("coffees")
         }
     }
-
-    var allCoffee = Set<Invitation>()
     
     var pendingCoffee: [Invitation] {
         get {
@@ -56,16 +54,6 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var tapGesture = UITapGestureRecognizer()
     var panGesture = UIPanGestureRecognizer()
     
-    // Sidebar button which reveals the side bar
-    @IBAction func sidebarMenuButtonAction(_ sender: UIButton) {
-        // Connects to the revealToggle method in the SWRevealViewController custom code
-        sender.addTarget(
-            self.revealViewController(),
-            action: #selector(SWRevealViewController.revealToggle(_:)),
-            for: .touchUpInside
-        )
-    }
-    
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +68,17 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         // Adjusting the revealWidth so that it works fairly with all screen sizes
         self.revealViewController().rearViewRevealWidth = self.view.frame.width / 3.2
+    }
+    
+    
+    // Sidebar button which reveals the side bar
+    @IBAction func sidebarMenuButtonAction(_ sender: UIButton) {
+        // Connects to the revealToggle method in the SWRevealViewController custom code
+        sender.addTarget(
+            self.revealViewController(),
+            action: #selector(SWRevealViewController.revealToggle(_:)),
+            for: .touchUpInside
+        )
     }
     
     
@@ -162,6 +161,12 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // TODO: Delete the coffee meetup declined
     func deleteCoffeeMeetup() {
         
+        if self.collectionViewSection == 0 {
+            self.upcomingCoffee.remove(at: self.coffeeSelectedIndex!)
+        } else {
+            self.pendingCoffee.remove(at: self.coffeeSelectedIndex!)
+        }
+ 
         self.collectionView.performBatchUpdates({
             
             let indexPaths = [IndexPath(
@@ -169,18 +174,11 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                 section: self.collectionViewSection!
             )]
             
-            /*
-            if self.collectionViewSection == 0 {
-                self.upcomingCoffee.remove(at: self.coffeeSelectedIndex!)
-            } else {
-                self.pendingCoffee.remove(at: self.coffeeSelectedIndex!)
-            }
-            */
-            
             self.collectionView.deleteItems(at: indexPaths)
             
         }) { (finished) in
             
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
             
         }
         

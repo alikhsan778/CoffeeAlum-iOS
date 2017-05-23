@@ -122,7 +122,7 @@ extension CoffeeMeetupsVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(
-            width: view.bounds.width,
+            width: view.bounds.width * 0.9,
             height: view.bounds.height * 0.2
         )
     }
