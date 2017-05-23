@@ -23,7 +23,7 @@ class InvitationVC: UIViewController {
     @IBOutlet weak var placeLabel: UILabel!
     
     weak var delegate: CoffeeMeetupsDelegate?
-    var invitation: (coffee: Coffee, user: User)!
+    var invitation: Invitation!
     var invitationID: String!
     
     override func viewDidLoad() {

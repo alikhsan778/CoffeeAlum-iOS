@@ -20,8 +20,6 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var titleHidden = true
     var coffeeSelectedIndex: Int?
     var collectionViewSection: Int?
-    var pendingCoffeeCount = 0
-    var upcomingCoffeeCount = 0
     
     var db = FIRDatabase.database().reference()
     
@@ -30,39 +28,25 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             return db.child("coffees")
         }
     }
+
+    var allCoffee = Set<Invitation>()
     
-    var sentInviteCoffee: [(coffee: Coffee, user: User)] = []
-    
-    var gotInviteCoffee: [(coffee: Coffee, user: User)] = []
-    
-    var allCoffee: [(coffee: Coffee, user: User)] {
+    var pendingCoffee: [Invitation] {
         get {
-            return sentInviteCoffee + gotInviteCoffee
-        }
-    }
-    
-    var pendingCoffee: [(coffee: Coffee, user: User)] {
-        get {
-            return allCoffee.filter {
+            return Array(allCoffee).filter {
                 !$0.coffee.accepted
             }
         }
-        
-        set {
-            
-        }
+        set {}
     }
     
-    var upcomingCoffee: [(coffee: Coffee, user: User)] {
+    var upcomingCoffee: [Invitation] {
         get {
-            return allCoffee.filter {
+            return Array(allCoffee).filter {
                 $0.coffee.accepted
             }
         }
-        
-        set {
-            
-        }
+        set {}
     }
     
     var testData = ["Test"]
@@ -108,7 +92,9 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         
         // You sent invite; looking for the person to sent it TO
         sentInviteCoffeRef.observe(.value, with: { snapshot in
-            for item in snapshot.children{
+            for item in snapshot.children {
+                
+                // NOT DRY
                 let coffeeSnap = item as? FIRDataSnapshot
                 let coffee = Coffee(snapshot: coffeeSnap!)
                 let otherUserRef = userRef.child(coffee.toId)
@@ -116,12 +102,18 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                 otherUserRef.observe(.value, with: { (snapshot) in
                     
                     let meetingUser = User(snapshot: snapshot)
+    
+                    let invitation = Invitation(
+                        coffee: coffee,
+                        user: meetingUser
+                    )
                     
-                    self.sentInviteCoffee.append((coffee, meetingUser))
+                    // CHANGE THE BANG OPERATOR
+                    self.allCoffee.insert(invitation!)
                     self.collectionView.reloadData()
                     
                     // TODO: DRY
-                    if self.sentInviteCoffee.count > 0 {
+                    if self.allCoffee.count > 0 {
                         self.noInvitationLabel.isHidden = true
                     } else {
                         self.noInvitationLabel.isHidden = false
@@ -135,17 +127,27 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         gotInviteCoffeeRef.observe(.value, with: { (snapshot) in
             for item in snapshot.children {
                 
+                // NOT DRY
                 let coffeeSnap = item as? FIRDataSnapshot
                 let coffee = Coffee(snapshot: coffeeSnap!)
                 let otherUserRef = userRef.child(coffee.fromId)
                 
                 otherUserRef.observe(.value, with: { (snapshot) in
                     
+                    // NOT DRY
                     let meetingUser = User(snapshot: snapshot)
-                    self.sentInviteCoffee.append((coffee, meetingUser))
+                    
+                    let invitation = Invitation(
+                        coffee: coffee,
+                        user: meetingUser
+                    )
+                    
+                    // CHANGE THE BANG OPERATOR
+                    self.allCoffee.insert(invitation!)
                     self.collectionView.reloadData()
                     
-                    if self.sentInviteCoffee.count > 0 {
+                    // NOT DRY
+                    if self.allCoffee.count > 0 {
                         self.noInvitationLabel.isHidden = true
                     } else {
                         self.noInvitationLabel.isHidden = false
@@ -167,12 +169,14 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                 section: self.collectionViewSection!
             )]
             
+            /*
             if self.collectionViewSection == 0 {
-                self.upcomingCoffeeCount -= 1
+                self.upcomingCoffee.remove(at: self.coffeeSelectedIndex!)
             } else {
-                self.pendingCoffeeCount -= 1
+                self.pendingCoffee.remove(at: self.coffeeSelectedIndex!)
             }
-                
+            */
+            
             self.collectionView.deleteItems(at: indexPaths)
             
         }) { (finished) in

@@ -15,17 +15,17 @@ class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pictureOfInviter: UIImageView!
     @IBOutlet weak var roleOfOther: UILabel!
     
-    func configure(with coffee: (coffee: Coffee, user: User)) {
+    func configure(with invitation: Invitation) {
         
-        nameOfInviter.text = coffee.user.name
+        nameOfInviter.text = invitation.user.name
         
         // cell.pictureOfInviter.image = coffee.user.portrait.toImage()
         
         // Checks if the user has no employer
-        if coffee.user.employer == "" {
-            roleOfOther.text = "Student at \(coffee.user.education)"
+        if invitation.user.employer == "" {
+            roleOfOther.text = "Student at \(invitation.user.education)"
         } else {
-            nameOfInviter.text = "\(coffee.user.role) at \(coffee.user.employer)"
+            nameOfInviter.text = "\(invitation.user.role) at \(invitation.user.employer)"
         }
         
     }

@@ -62,7 +62,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        var invitationSelected: (coffee: Coffee, user: User)?
+        var invitationSelected: Invitation?
         
         // Invitation selected
         if indexPath.section == 0 {
@@ -96,7 +96,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             withReuseIdentifier: "CoffeeMeetupCell",
             for: indexPath) as! CoffeeMeetupCollectionViewCell
         
-        var thisData: (coffee: Coffee, user: User)
+        var thisData: Invitation
         
         if indexPath.section == 0 {
             thisData = upcomingCoffee[indexPath.row]

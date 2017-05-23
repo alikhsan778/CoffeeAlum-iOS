@@ -32,6 +32,7 @@
 		DD43A7D81E16D3CB005C31A7 /* AdaptiveKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D71E16D3CB005C31A7 /* AdaptiveKeyboard.swift */; };
 		DD43A80C1E17AD65005C31A7 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A80B1E17AD65005C31A7 /* SearchVC.swift */; };
 		DD43A80E1E181750005C31A7 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */; };
+		DD4C87841ED3EAE900C90856 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4C87831ED3EAE900C90856 /* Invitation.swift */; };
 		DD6251DC1E4B709C001E6FFC /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD6251DB1E4B709C001E6FFC /* TagCollectionViewCell.xib */; };
 		DD6251DE1E4B9C6A001E6FFC /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6251DD1E4B9C6A001E6FFC /* AccountType.swift */; };
 		DD6251E01E4BA96E001E6FFC /* FirebaseVCUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6251DF1E4BA96E001E6FFC /* FirebaseVCUnitTest.swift */; };
@@ -112,6 +113,7 @@
 		DD43A7D71E16D3CB005C31A7 /* AdaptiveKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveKeyboard.swift; sourceTree = "<group>"; };
 		DD43A80B1E17AD65005C31A7 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		DD43A80D1E181750005C31A7 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD4C87831ED3EAE900C90856 /* Invitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 		DD6251DB1E4B709C001E6FFC /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
 		DD6251DD1E4B9C6A001E6FFC /* AccountType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
 		DD6251DF1E4BA96E001E6FFC /* FirebaseVCUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseVCUnitTest.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 		DDBE230A1E0F10A100C0497E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				BD471DFE1E2D7DAF002CB142 /* Helper.swift */,
 				DD43A80A1E174499005C31A7 /* Keyboard Customization */,
 				DD43A8041E172440005C31A7 /* Custom UIElements */,
 			);
@@ -441,8 +444,8 @@
 			children = (
 				DD12E0FC1E25A561006A2663 /* User.swift */,
 				DD12E0FA1E25A55A006A2663 /* Coffee.swift */,
-				BD471DFE1E2D7DAF002CB142 /* Helper.swift */,
 				DD6251DD1E4B9C6A001E6FFC /* AccountType.swift */,
+				DD4C87831ED3EAE900C90856 /* Invitation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -735,6 +738,7 @@
 				DDBE23111E0F5DB600C0497E /* CustomBezierView.swift in Sources */,
 				DD6251F31E4D913F001E6FFC /* InvitePopoverVC+MapView.swift in Sources */,
 				DDBE230F1E0F546200C0497E /* CustomLabel.swift in Sources */,
+				DD4C87841ED3EAE900C90856 /* Invitation.swift in Sources */,
 				DDBE22EE1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld in Sources */,
 				DDBE23151E0F6B7600C0497E /* CustomButton.swift in Sources */,
 				DDBE23171E1059D100C0497E /* SignInVC.swift in Sources */,

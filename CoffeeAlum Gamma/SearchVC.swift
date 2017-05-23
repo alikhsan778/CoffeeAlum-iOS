@@ -13,25 +13,15 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var completeProfileScrollView: UIScrollView!
-
     @IBOutlet weak var searchTextView: UITextView!
-    
     @IBOutlet var completeProfileView: UIView!
-    
     @IBOutlet weak var nameTextField: UITextField!
-    
     @IBOutlet weak var studiedInTextField: UITextField!
-    
     @IBOutlet weak var cityUserLivesTextField: UITextField!
-    
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var studiedInLabel: UILabel!
-    
     @IBOutlet weak var cityLocationLabel: UILabel!
-    
     @IBOutlet weak var areYouAStudentLabel: UILabel!
     
     
@@ -74,10 +64,6 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
                 location: location
             )
             thisUser!.save()
-            
-            
-            // Deinitializes the observer
-            adaptiveKeyboard.unregisterKeyboardNotifications()
   
             dismissPopover(view: completeProfileView)
         }
@@ -91,14 +77,9 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
     var ref: FIRDatabaseReference!
     var userRef: FIRDatabaseReference = FIRDatabase.database().reference(withPath: "users")
     
-    
-    // Used to push the text field away from the keyboard to prevent keyboard overlapping
-    var adaptiveKeyboard: AdaptiveKeyboard!
-    
     // Creating an instance of each class
     var thisUser: User?
 
-    
     // Animation object
     var blurEffect: UIBlurEffect!
     var blurEffectView: UIVisualEffectView!
@@ -127,12 +108,6 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
         
         // Prevents the user form being able to scroll the view
         completeProfileScrollView.isScrollEnabled = false
-        
-        // Creating an instance of the SignUpSignInKeboardAdaptiveness class
-        adaptiveKeyboard = AdaptiveKeyboard(scrollView: completeProfileScrollView, textField: nameTextField, studiedInTextField, cityUserLivesTextField, pushHeight: 80)
-        
-        // Register keyboard notifications before the view appears
-        adaptiveKeyboard.registerKeyboardNotifications()
         
     }
     
