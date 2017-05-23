@@ -20,6 +20,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var titleHidden = true
     var coffeeSelectedIndex: Int?
     var collectionViewSection: Int?
+    var pendingCoffeeCount = 0
+    var upcomingCoffeeCount = 0
     
     var db = FIRDatabase.database().reference()
     
@@ -51,12 +53,11 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         }
     }
     
-    var upComingCoffee: [(coffee: Coffee, user: User)] {
+    var upcomingCoffee: [(coffee: Coffee, user: User)] {
         get {
             return allCoffee.filter {
-                !$0.coffee.accepted
+                $0.coffee.accepted
             }
-            
         }
         
         set {
@@ -159,17 +160,25 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // TODO: Delete the coffee meetup declined
     func deleteCoffeeMeetup() {
         
-        if collectionViewSection == 0 {
-            print(upComingCoffee.count)
-            upComingCoffee.remove(at: coffeeSelectedIndex!)
-            print(upComingCoffee.count)
-        } else {
-            print(pendingCoffee.count)
-            pendingCoffee.remove(at: coffeeSelectedIndex!)
-            print(pendingCoffee.count)
+        self.collectionView.performBatchUpdates({
+            
+            let indexPaths = [IndexPath(
+                row: self.coffeeSelectedIndex!,
+                section: self.collectionViewSection!
+            )]
+            
+            if self.collectionViewSection == 0 {
+                self.upcomingCoffeeCount -= 1
+            } else {
+                self.pendingCoffeeCount -= 1
+            }
+                
+            self.collectionView.deleteItems(at: indexPaths)
+            
+        }) { (finished) in
+            
+            
         }
-        
-        self.collectionView.reloadData()
         
     }
     

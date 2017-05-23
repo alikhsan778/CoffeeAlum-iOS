@@ -20,7 +20,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         
         // Upcoming coffee events
         if section == 0 {
-            return upComingCoffee.count
+            return upcomingCoffee.count
         } else {
             return pendingCoffee.count
         }
@@ -66,7 +66,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         
         // Invitation selected
         if indexPath.section == 0 {
-            invitationSelected = upComingCoffee[indexPath.row]
+            invitationSelected = upcomingCoffee[indexPath.row]
             coffeeSelectedIndex = indexPath.row
             collectionViewSection = indexPath.section
         } else {
@@ -99,14 +99,20 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         var thisData: (coffee: Coffee, user: User)
         
         if indexPath.section == 0 {
-            thisData = upComingCoffee[indexPath.row]
+            thisData = upcomingCoffee[indexPath.row]
         } else {
-            thisData = upComingCoffee[indexPath.row]
+            thisData = pendingCoffee[indexPath.row]
         }
         
         cell.configure(with: thisData)
         
         return cell
+    }
+    
+    
+    func refreshCollectionView() {
+        retrieveCoffeeData()
+        self.collectionView.reloadData()
     }
     
 }

@@ -13,7 +13,13 @@ class APIClient {
     fileprivate static let uid = FIRAuth.auth()!.currentUser!.uid
     fileprivate static var db = FIRDatabase.database().reference()
     fileprivate static let firebaseAuth = FIRAuth.auth()
-    fileprivate static let coffeeReference = db.child("coffees")
+    fileprivate static var coffeeReference: FIRDatabaseReference {
+        get {
+            return db.child("coffees")
+        }
+    }
+    fileprivate static let userReference = db.child("users")
+    
     
     // MARK: - Invitation Response
     static func acceptInvitation(with id: String) {
@@ -36,7 +42,8 @@ class APIClient {
     }
     
     static func sendCoffeeInvitation() {
-        
+        let sentInviteCoffeRef = coffeeReference.queryOrdered(byChild: "fromId").queryEqual(toValue: uid)
+        let gotInviteCoffeeRef = coffeeReference.queryOrdered(byChild: "toId").queryEqual(toValue: uid)
     }
     
     // MARK: - App Entry And Exit 
@@ -74,6 +81,7 @@ class APIClient {
     
     // MARK: - Retrieve User Information 
     static func retrieveUserInformation() {
+        
         
     }
     

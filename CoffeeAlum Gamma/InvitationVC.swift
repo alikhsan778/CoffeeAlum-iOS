@@ -10,6 +10,7 @@ import Foundation
 
 protocol CoffeeMeetupsDelegate: class {
     func deleteCoffeeMeetup()
+    func refreshCollectionView()
 }
 
 
@@ -48,6 +49,9 @@ class InvitationVC: UIViewController {
         // Removes the item from the cell
         delegate?.deleteCoffeeMeetup()
         
+        // Refreshes the collectionView
+        delegate?.refreshCollectionView()
+        
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
     }
@@ -55,6 +59,8 @@ class InvitationVC: UIViewController {
     @IBAction func acceptButtonAction(_ sender: UIButton) {
         
         APIClient.acceptInvitation(with: invitationID)
+        
+        delegate?.refreshCollectionView()
         
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
