@@ -35,7 +35,11 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                 !$0.coffee.accepted
             }
         }
-        set {}
+        
+        set {
+            let invitation = self.pendingCoffee[coffeeSelectedIndex!]
+            allCoffee.remove(invitation)
+        }
     }
     
     var upcomingCoffee: [Invitation] {
@@ -44,15 +48,13 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                 $0.coffee.accepted
             }
         }
-        set {}
+        
+        set {
+            let invitation = self.upcomingCoffee[coffeeSelectedIndex!]
+            allCoffee.remove(invitation)
+        }
     }
-    
-    var testData = ["Test"]
-    // TODO: Create a button that switches the data based on what the user wants
-    var data:[(Coffee, User)]?
-    // MARK: - User Interaction Properties
-    var tapGesture = UITapGestureRecognizer()
-    var panGesture = UIPanGestureRecognizer()
+
     
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
