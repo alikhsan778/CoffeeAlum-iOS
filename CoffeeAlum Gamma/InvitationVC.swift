@@ -14,6 +14,13 @@ protocol CoffeeMeetupsDelegate: class {
     func rescheduleCoffeeMeetup()
 }
 
+enum InvitationState: String {
+    case pending = "Pending"
+    case accepted = "Accept"
+    case rescheduled = "Reschedule"
+    case declined = "Decline"
+}
+
 
 class InvitationVC: UIViewController {
     
@@ -27,6 +34,7 @@ class InvitationVC: UIViewController {
     weak var delegate: CoffeeMeetupsDelegate?
     var invitation: Invitation!
     var invitationID: String!
+    var invitationState: InvitationState!
     
     override func viewDidLoad() {
         
@@ -36,6 +44,7 @@ class InvitationVC: UIViewController {
         
         if invitation.coffee.accepted == true {
             declineButtonOutlet.setTitle("Reschedule", for: .normal)
+            invitationState = .rescheduled
         }
     }
     
@@ -54,7 +63,10 @@ class InvitationVC: UIViewController {
         if declineButtonTitle == "Decline" {
             
             // Sends a decline request
-            APIClient.declineInvitation(with: invitationID)
+            APIClient.declineInvitation(
+                with: invitationID,
+                state: .declined
+            )
             
             // Removes the item from the cell
             delegate?.deleteCoffeeMeetupSelected()
@@ -66,12 +78,25 @@ class InvitationVC: UIViewController {
             
             // Sends a reschedule request
             APIClient.rescheduleInvitation(with: invitationID)
+            // Must decline invitation as well
+            APIClient.declineInvitation(
+                with: invitationID,
+                state: .rescheduled
+            )
             
             // Reschedule meetup
-            delegate?.rescheduleCoffeeMeetup()
+            // delegate?.rescheduleCoffeeMeetup()
+            
+            // Removes the item from the cell
+            delegate?.deleteCoffeeMeetupSelected()
             
             // Refresh
             delegate?.refreshCollectionView()
+            
+        } else {
+            
+            
+            
         }
     
         // Dismisses the popover
@@ -80,6 +105,7 @@ class InvitationVC: UIViewController {
     
     @IBAction func acceptButtonAction(_ sender: UIButton) {
         
+        // Accepts invitation
         APIClient.acceptInvitation(with: invitationID)
         
         // Removes the item from the cell

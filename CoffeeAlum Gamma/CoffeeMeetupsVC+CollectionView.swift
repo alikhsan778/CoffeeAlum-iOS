@@ -12,7 +12,7 @@ import Foundation
 extension CoffeeMeetupsVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     
@@ -106,11 +106,14 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             for: indexPath) as! CoffeeMeetupCollectionViewCell
         
         var thisData: Invitation
+        let section = indexPath.section
         
-        if indexPath.section == 0 {
+        if section == 0 {
             thisData = upcomingCoffee[indexPath.row]
-        } else {
+        } else if section == 1 {
             thisData = pendingCoffee[indexPath.row]
+        } else {
+            thisData = rescheduledCoffee[indexPath.row]
         }
         
         cell.configure(with: thisData)
@@ -119,10 +122,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
     }
     
     
-    func refreshCollectionView() {
-        retrieveCoffeeData()
-        self.collectionView.reloadData()
-    }
+    
     
 }
 

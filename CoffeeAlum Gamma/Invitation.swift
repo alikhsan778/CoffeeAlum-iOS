@@ -27,7 +27,11 @@ struct Invitation: Hashable, Equatable {
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
     static func ==(lhs: Invitation, rhs: Invitation) -> Bool {
-        return true
+        if lhs.coffee.id == rhs.coffee.id {
+            return true
+        }
+        
+        return false
     }
 
     var hashValue: Int {

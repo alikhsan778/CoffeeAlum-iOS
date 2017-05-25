@@ -25,11 +25,25 @@ class APIClient {
     static func acceptInvitation(with id: String) {
         let invitationReference = coffeeReference.child(id)
         invitationReference.child("accepted").setValue(true)
+        
+        // This is done to make sure it doesn't end up in the upcoming invitation array when it's being rescheduled
+        invitationReference.child("rescheduled").setValue(false)
     }
     
-    static func declineInvitation(with id: String) {
+    static func declineInvitation(with id: String, state: InvitationState) {
+        
         let invitationReference = coffeeReference.child(id)
-        invitationReference.child("accepted").setValue(false)
+        
+        switch state {
+        case .declined:
+            // Delete the value
+            invitationReference.removeValue()
+        case .rescheduled:
+            // Only update the value, doesn't delete in on Firebase
+            invitationReference.child("accepted").setValue(false)
+        default:
+            break
+        }
     }
     
     static func rescheduleInvitation(with id: String) {
@@ -59,8 +73,9 @@ class APIClient {
                 // Presents the home view controller
                 completion?()
             } else {
+                
                 // Throws error
-                // TODO: UIAlert
+                // TODO: TODO: Add UIAlert
                 /*
                 let credentialAlert = UIAlertController(title: "Sign in error", message: "Password or email may be incorrect", preferredStyle: .alert)
                 credentialAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))

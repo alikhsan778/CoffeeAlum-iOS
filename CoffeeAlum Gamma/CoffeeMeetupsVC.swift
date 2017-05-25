@@ -32,7 +32,7 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var pendingCoffee: [Invitation] {
         get {
             return Array(allCoffee).filter {
-                !$0.coffee.accepted
+                !$0.coffee.accepted && !$0.coffee.rescheduled
             }
         }
         
@@ -45,7 +45,7 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var upcomingCoffee: [Invitation] {
         get {
             return Array(allCoffee).filter {
-                $0.coffee.accepted
+                $0.coffee.accepted && !$0.coffee.rescheduled
             }
         }
         
@@ -58,12 +58,12 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     var rescheduledCoffee: [Invitation] {
         get {
             return Array(allCoffee).filter {
-                $0.coffee.rescheduled
+                $0.coffee.rescheduled && !$0.coffee.accepted
             }
         }
         
         set {
-            let invitationSelected = self.upcomingCoffee[coffeeSelectedIndex!]
+            let invitationSelected = self.rescheduledCoffee[coffeeSelectedIndex!]
             allCoffee.remove(invitationSelected)
         }
     }
@@ -98,6 +98,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     
     
     func retrieveCoffeeData() {
+        // Allows the collection view to refresh
+        self.allCoffee.removeAll()
         
         let uid = FIRAuth.auth()!.currentUser!.uid
         let sentInviteCoffeRef = coffeeRef.queryOrdered(byChild: "fromId").queryEqual(toValue: uid)
@@ -158,7 +160,6 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     
     fileprivate func insertCoffee(with invitation: Invitation) {
         
-        // CHANGE THE BANG OPERATOR
         self.allCoffee.insert(invitation)
         self.collectionView.reloadData()
         
@@ -201,14 +202,21 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             
         }) { (finished) in
             
-            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            self.retrieveCoffeeData()
+            self.collectionView.reloadData()
             
         }
         
     }
     
+    func refreshCollectionView() {
+        
+    }
+    
     func rescheduleCoffeeMeetup() {
         
+        // Remove it after the text has been sent
+        // deleteCoffeeMeetupSelected()
     }
     
 }
