@@ -32,6 +32,11 @@ class APIClient {
         invitationReference.child("accepted").setValue(false)
     }
     
+    static func rescheduleInvitation(with id: String) {
+        let invitationReference = coffeeReference.child(id)
+        invitationReference.child("rescheduled").setValue(true)
+    }
+    
     // MARK: - CoffeeData Manager 
     static func retrieveCoffeeData() {
         

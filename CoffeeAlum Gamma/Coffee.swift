@@ -23,8 +23,8 @@ class Coffee {
     var toEventId: String = ""
     
     var accepted: Bool = false
-    var viewed: Bool = false
     var rescheduled: Bool = false
+    var viewed: Bool = false
     var id: String = ""
     var ref: FIRDatabaseReference = FIRDatabase.database().reference().child("coffees")
     

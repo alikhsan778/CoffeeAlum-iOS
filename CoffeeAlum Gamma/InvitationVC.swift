@@ -9,8 +9,9 @@
 import Foundation
 
 protocol CoffeeMeetupsDelegate: class {
-    func deleteCoffeeMeetup()
+    func deleteCoffeeMeetupSelected()
     func refreshCollectionView()
+    func rescheduleCoffeeMeetup()
 }
 
 
@@ -34,9 +35,8 @@ class InvitationVC: UIViewController {
         invitationID = invitation?.coffee.id
         
         if invitation.coffee.accepted == true {
-            declineButtonOutlet.setTitle("Cancel", for: .normal)
+            declineButtonOutlet.setTitle("Reschedule", for: .normal)
         }
-        
     }
     
     func setupUIElements() {
@@ -45,18 +45,35 @@ class InvitationVC: UIViewController {
         placeLabel.text = invitation?.coffee.location
     }
     
+    
     // MARK: - IBActions
     @IBAction func declineButtonAction(_ sender: UIButton) {
         
-        // Sends a decline request
-        APIClient.declineInvitation(with: invitationID)
+        let declineButtonTitle = sender.titleLabel?.text
         
-        // Removes the item from the cell
-        delegate?.deleteCoffeeMeetup()
-        
-        // Refreshes the collection view
-        delegate?.refreshCollectionView()
-        
+        if declineButtonTitle == "Decline" {
+            
+            // Sends a decline request
+            APIClient.declineInvitation(with: invitationID)
+            
+            // Removes the item from the cell
+            delegate?.deleteCoffeeMeetupSelected()
+            
+            // Refreshes the collection view
+            delegate?.refreshCollectionView()
+            
+        } else if declineButtonTitle == "Reschedule" {
+            
+            // Sends a reschedule request
+            APIClient.rescheduleInvitation(with: invitationID)
+            
+            // Reschedule meetup
+            delegate?.rescheduleCoffeeMeetup()
+            
+            // Refresh
+            delegate?.refreshCollectionView()
+        }
+    
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
     }
@@ -66,7 +83,7 @@ class InvitationVC: UIViewController {
         APIClient.acceptInvitation(with: invitationID)
         
         // Removes the item from the cell
-        delegate?.deleteCoffeeMeetup()
+        delegate?.deleteCoffeeMeetupSelected()
         
         // Refreshes the collection view
         delegate?.refreshCollectionView()

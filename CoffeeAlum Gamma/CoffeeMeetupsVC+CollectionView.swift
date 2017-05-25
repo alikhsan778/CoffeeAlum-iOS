@@ -21,8 +21,10 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         // Upcoming coffee events
         if section == 0 {
             return upcomingCoffee.count
-        } else {
+        } else if section == 1 {
             return pendingCoffee.count
+        } else {
+            return rescheduledCoffee.count
         }
     }
     
@@ -49,7 +51,8 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             // Titles of the sections
             let sectionNames = [
                 "Upcoming coffee meetups",
-                "Pending coffee invitations"
+                "Pending coffee invitations",
+                "Pending to be rescheduled"
             ]
             // Assigning the title of the label
             headerTitleLabel?.text = sectionNames[indexPath.section]
@@ -64,15 +67,21 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         
         var invitationSelected: Invitation?
         
+        let section = indexPath.section
+        
+        func setupInvitationSelected(with array: [Invitation]) {
+            invitationSelected = array[indexPath.row]
+            coffeeSelectedIndex = indexPath.row
+            collectionViewSection = indexPath.section
+        }
+        
         // Invitation selected
-        if indexPath.section == 0 {
-            invitationSelected = upcomingCoffee[indexPath.row]
-            coffeeSelectedIndex = indexPath.row
-            collectionViewSection = indexPath.section
+        if section == 0 {
+            setupInvitationSelected(with: upcomingCoffee)
+        } else if section == 1 {
+            setupInvitationSelected(with: pendingCoffee)
         } else {
-            invitationSelected = pendingCoffee[indexPath.row]
-            coffeeSelectedIndex = indexPath.row
-            collectionViewSection = indexPath.section
+            setupInvitationSelected(with: rescheduledCoffee)
         }
         
         if let invitationSelected = invitationSelected {

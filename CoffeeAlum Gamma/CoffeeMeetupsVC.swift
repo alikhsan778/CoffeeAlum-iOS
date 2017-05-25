@@ -54,6 +54,19 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             allCoffee.remove(invitationSelected)
         }
     }
+    
+    var rescheduledCoffee: [Invitation] {
+        get {
+            return Array(allCoffee).filter {
+                $0.coffee.rescheduled
+            }
+        }
+        
+        set {
+            let invitationSelected = self.upcomingCoffee[coffeeSelectedIndex!]
+            allCoffee.remove(invitationSelected)
+        }
+    }
 
     
     // MARK: - Mandatory Methods
@@ -159,13 +172,23 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     }
     
     // TODO: Delete the coffee meetup declined
-    func deleteCoffeeMeetup() {
+    func deleteCoffeeMeetupSelected() {
+        
         // Check which section the user has selected
         if self.collectionViewSection == 0 {
-            self.upcomingCoffee.remove(at: self.coffeeSelectedIndex!)
+            self.upcomingCoffee.remove(
+                at: self.coffeeSelectedIndex!
+            )
+        } else if self.collectionViewSection == 1 {
+            self.pendingCoffee.remove(
+                at: self.coffeeSelectedIndex!
+            )
         } else {
-            self.pendingCoffee.remove(at: self.coffeeSelectedIndex!)
+            self.rescheduledCoffee.remove(
+                at: self.coffeeSelectedIndex!
+            )
         }
+        
         // Update the collectionView
         self.collectionView.performBatchUpdates({
             
@@ -181,6 +204,10 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
             
         }
+        
+    }
+    
+    func rescheduleCoffeeMeetup() {
         
     }
     
