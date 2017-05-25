@@ -21,6 +21,7 @@ class InvitationVC: UIViewController {
     @IBOutlet weak var personInvitingLabel: UILabel!
     @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
+    @IBOutlet weak var declineButtonOutlet: UIButton!
     
     weak var delegate: CoffeeMeetupsDelegate?
     var invitation: Invitation!
@@ -31,6 +32,10 @@ class InvitationVC: UIViewController {
         setupUIElements()
         // Assigning the invitation ID
         invitationID = invitation?.coffee.id
+        
+        if invitation.coffee.accepted == true {
+            declineButtonOutlet.setTitle("Cancel", for: .normal)
+        }
         
     }
     
@@ -49,7 +54,7 @@ class InvitationVC: UIViewController {
         // Removes the item from the cell
         delegate?.deleteCoffeeMeetup()
         
-        // Refreshes the collectionView
+        // Refreshes the collection view
         delegate?.refreshCollectionView()
         
         // Dismisses the popover
@@ -60,6 +65,10 @@ class InvitationVC: UIViewController {
         
         APIClient.acceptInvitation(with: invitationID)
         
+        // Removes the item from the cell
+        delegate?.deleteCoffeeMeetup()
+        
+        // Refreshes the collection view
         delegate?.refreshCollectionView()
         
         // Dismisses the popover

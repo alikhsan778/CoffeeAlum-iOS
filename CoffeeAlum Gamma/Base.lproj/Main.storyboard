@@ -273,6 +273,7 @@
                     <size key="freeformSize" width="414" height="500"/>
                     <connections>
                         <outlet property="dateAndTimeLabel" destination="WII-fX-DS4" id="7mp-Fx-kCi"/>
+                        <outlet property="declineButtonOutlet" destination="e6X-A8-4vb" id="DXr-jk-5iE"/>
                         <outlet property="personInvitingLabel" destination="gfy-UP-hAK" id="O5z-Co-zes"/>
                         <outlet property="placeLabel" destination="CwH-co-kaa" id="a3w-Wk-eaC"/>
                         <outlet property="profilePicture" destination="eGz-sL-Mw0" id="bb2-0C-Z3t"/>

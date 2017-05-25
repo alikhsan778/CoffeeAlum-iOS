@@ -37,8 +37,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         }
         
         set {
-            let invitation = self.pendingCoffee[coffeeSelectedIndex!]
-            allCoffee.remove(invitation)
+            let invitationSelected = self.pendingCoffee[coffeeSelectedIndex!]
+            allCoffee.remove(invitationSelected)
         }
     }
     
@@ -50,8 +50,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
         }
         
         set {
-            let invitation = self.upcomingCoffee[coffeeSelectedIndex!]
-            allCoffee.remove(invitation)
+            let invitationSelected = self.upcomingCoffee[coffeeSelectedIndex!]
+            allCoffee.remove(invitationSelected)
         }
     }
 
@@ -109,16 +109,7 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                         user: meetingUser
                     )
                     
-                    // CHANGE THE BANG OPERATOR
-                    self.allCoffee.insert(invitation!)
-                    self.collectionView.reloadData()
-                    
-                    // TODO: DRY
-                    if self.allCoffee.count > 0 {
-                        self.noInvitationLabel.isHidden = true
-                    } else {
-                        self.noInvitationLabel.isHidden = false
-                    }
+                    self.insertCoffee(with: invitation!)
                     
                 })
             }
@@ -143,16 +134,7 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
                         user: meetingUser
                     )
                     
-                    // CHANGE THE BANG OPERATOR
-                    self.allCoffee.insert(invitation!)
-                    self.collectionView.reloadData()
-                    
-                    // NOT DRY
-                    if self.allCoffee.count > 0 {
-                        self.noInvitationLabel.isHidden = true
-                    } else {
-                        self.noInvitationLabel.isHidden = false
-                    }
+                    self.insertCoffee(with: invitation!)
                     
                 })
             }
@@ -160,15 +142,31 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
 
     }
     
+    
+    fileprivate func insertCoffee(with invitation: Invitation) {
+        
+        // CHANGE THE BANG OPERATOR
+        self.allCoffee.insert(invitation)
+        self.collectionView.reloadData()
+        
+        // NOT DRY
+        if self.allCoffee.count > 0 {
+            self.noInvitationLabel.isHidden = true
+        } else {
+            self.noInvitationLabel.isHidden = false
+        }
+        
+    }
+    
     // TODO: Delete the coffee meetup declined
     func deleteCoffeeMeetup() {
-        
+        // Check which section the user has selected
         if self.collectionViewSection == 0 {
             self.upcomingCoffee.remove(at: self.coffeeSelectedIndex!)
         } else {
             self.pendingCoffee.remove(at: self.coffeeSelectedIndex!)
         }
- 
+        // Update the collectionView
         self.collectionView.performBatchUpdates({
             
             let indexPaths = [IndexPath(
