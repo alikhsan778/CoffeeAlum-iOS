@@ -10,7 +10,6 @@ import Foundation
 
 protocol CoffeeMeetupsDelegate: class {
     func deleteCoffeeMeetupSelected()
-    func refreshCollectionView()
     func rescheduleCoffeeMeetup()
 }
 
@@ -71,9 +70,6 @@ class InvitationVC: UIViewController {
             // Removes the item from the cell
             delegate?.deleteCoffeeMeetupSelected()
             
-            // Refreshes the collection view
-            delegate?.refreshCollectionView()
-            
         } else if declineButtonTitle == "Reschedule" {
             
             // Sends a reschedule request
@@ -84,18 +80,8 @@ class InvitationVC: UIViewController {
                 state: .rescheduled
             )
             
-            // Reschedule meetup
-            // delegate?.rescheduleCoffeeMeetup()
-            
             // Removes the item from the cell
             delegate?.deleteCoffeeMeetupSelected()
-            
-            // Refresh
-            delegate?.refreshCollectionView()
-            
-        } else {
-            
-            
             
         }
     
@@ -110,9 +96,6 @@ class InvitationVC: UIViewController {
         
         // Removes the item from the cell
         delegate?.deleteCoffeeMeetupSelected()
-        
-        // Refreshes the collection view
-        delegate?.refreshCollectionView()
         
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)

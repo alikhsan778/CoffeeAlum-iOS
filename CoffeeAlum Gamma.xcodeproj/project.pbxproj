@@ -69,6 +69,7 @@
 		DDEC13291E199AB6002C7CCF /* UIView + CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13281E199AB6002C7CCF /* UIView + CornerRadius.swift */; };
 		DDEC132F1E19E13C002C7CCF /* PersonalProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC132E1E19E13C002C7CCF /* PersonalProfileVC.swift */; };
 		DDEC13311E19FEC8002C7CCF /* UIView + Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC13301E19FEC8002C7CCF /* UIView + Shadow.swift */; };
+		DDF46F411ED7272B00CD10E4 /* UIButton + SidebarMenuPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF46F401ED7272B00CD10E4 /* UIButton + SidebarMenuPan.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +156,7 @@
 		DDEC132A1E19AF1B002C7CCF /* CoffeeAlum Gamma.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoffeeAlum Gamma.entitlements"; sourceTree = "<group>"; };
 		DDEC132E1E19E13C002C7CCF /* PersonalProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalProfileVC.swift; sourceTree = "<group>"; };
 		DDEC13301E19FEC8002C7CCF /* UIView + Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView + Shadow.swift"; sourceTree = "<group>"; };
+		DDF46F401ED7272B00CD10E4 /* UIButton + SidebarMenuPan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton + SidebarMenuPan.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +319,7 @@
 				DDEC13281E199AB6002C7CCF /* UIView + CornerRadius.swift */,
 				DDEC13301E19FEC8002C7CCF /* UIView + Shadow.swift */,
 				DD12E0E31E24501D006A2663 /* UIViewController + SidebarMenuPan.swift */,
+				DDF46F401ED7272B00CD10E4 /* UIButton + SidebarMenuPan.swift */,
 			);
 			name = "UIElement Extensions";
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDDDBB571E2D278B0084D5A5 /* SearchVC+ProfilePopover.swift in Sources */,
+				DDF46F411ED7272B00CD10E4 /* UIButton + SidebarMenuPan.swift in Sources */,
 				DD6251DE1E4B9C6A001E6FFC /* AccountType.swift in Sources */,
 				DD361B881E51706700C5979F /* LocationManager.swift in Sources */,
 				DD2328591ECEFB6C001E2419 /* APIClient.swift in Sources */,

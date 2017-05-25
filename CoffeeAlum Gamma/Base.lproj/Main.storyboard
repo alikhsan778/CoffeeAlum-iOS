@@ -160,6 +160,7 @@
                     <connections>
                         <outlet property="collectionView" destination="6no-8C-Ba5" id="39J-0Z-CkJ"/>
                         <outlet property="noInvitationLabel" destination="K27-9z-wT6" id="cCx-tY-sFs"/>
+                        <outlet property="sidebarMenuButton" destination="7i0-8G-mSw" id="lxU-72-Jmr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Siw-rV-Nh6" sceneMemberID="firstResponder"/>
@@ -287,7 +288,7 @@
         <scene sceneID="eQN-si-OUX">
             <objects>
                 <navigationController navigationBarHidden="YES" id="9TN-6w-SEL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m7e-nL-k8w">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m7e-nL-k8w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -491,6 +492,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="profilePicture" destination="ISh-G8-zhB" id="oUI-G6-xqp"/>
+                        <outlet property="sidebarMenuButton" destination="qXg-j5-3Vh" id="nOW-Bs-ObM"/>
                         <outlet property="tableView" destination="cBz-RY-e2j" id="b6w-NZ-SBD"/>
                     </connections>
                 </viewController>

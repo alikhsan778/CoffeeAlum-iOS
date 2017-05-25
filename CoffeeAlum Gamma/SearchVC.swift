@@ -23,52 +23,9 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
     @IBOutlet weak var studiedInLabel: UILabel!
     @IBOutlet weak var cityLocationLabel: UILabel!
     @IBOutlet weak var areYouAStudentLabel: UILabel!
+    @IBOutlet weak var sidebarMenuButtonOutlet: UIButton!
     
-    
-    // MARK: - IBAction
-    @IBAction func revealSidebarMenuButtonAction(_ sender: UIButton) {
-        // Reveals the sidebar menu
-        sender.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
-    }
-    
-    @IBAction func yesButtonAction(_ sender: UIButton) {
-        // Assigns the user as a student
-        self.account = .student
-    }
-    
-    @IBAction func noButtonAction(_ sender: UIButton) {
-        // Assigns the user as an alumnus
-        self.account = .alum
-    }
-    
-    @IBAction func closePopover(with segue: UIStoryboardSegue) {}
-    
-    @IBAction func getStartedButtonAction(_ sender: UIButton) {
-        
-        let nameCondition = checkIfTextFieldHasBeenFilled(for: nameTextField, showStatusIn: usernameLabel)
-        let studyInCondition = checkIfTextFieldHasBeenFilled(for: studiedInTextField, showStatusIn: studiedInLabel)
-        let locationCondition = checkIfTextFieldHasBeenFilled(for: cityUserLivesTextField, showStatusIn: cityLocationLabel)
-        
-        if (nameCondition == true) && (studyInCondition == true) && (locationCondition == true) {
-            
-            //Build a user object
-            name = nameTextField.text
-            education = studiedInTextField.text
-            location = cityUserLivesTextField.text
-            
-            
-            self.thisUser = User(
-                name: name,
-                account: .alum,
-                education: education,
-                location: location
-            )
-            thisUser!.save()
-  
-            dismissPopover(view: completeProfileView)
-        }
-        
-    }
+
     
     ////////////////////////////////////////////
     
@@ -113,6 +70,7 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
     
     
     override func viewDidLoad() {
+        
         let thisUserRef = userRef.child(FIRAuth.auth()!.currentUser!.uid)
        
         //Check if user has filled out intro form; Populate the local user object
@@ -124,10 +82,8 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
             self.thisUser = User(snapshot: snapshot)
         })
      
-        
-        
         // Sets up the reveal view controller for sidebar menu
-        revealViewControllerSetup()
+        self.setupRevealViewController()
         
         // Making the text field recognize the edit
         nameTextField.delegate = self
@@ -136,9 +92,6 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
         
         // Making the text view recongize the edit
         searchTextView.delegate = self
-        
-        // Setting up the delegate to work with the button
-        self.revealViewController().delegate = self
         
         // Creating a placeholder manually in text view
         searchTextView.text = "Tap here to search"
@@ -150,19 +103,52 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        // Setup for popover
-//        setupPopover(view: completeProfileView)
+        sidebarMenuButtonOutlet.setupSidebarMenuButton(to: self)
     }
     
-    // MARK: RevealViewController Setup
-    func revealViewControllerSetup() {
-        // Using the Pan Gesture Recognizer to reveal the "SWRevealViewController"
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        // Adjusting the revealWidth so that it works fairly with all screen sizes
-        self.revealViewController().rearViewRevealWidth = self.view.frame.width / 3.2
+    // MARK: - IBAction
+    @IBAction func revealSidebarMenuButtonAction(_ sender: UIButton) {
         
-        // Initializing the screen menu position
-        self.revealViewController().frontViewPosition = FrontViewPosition.left
+        
+    }
+    
+    @IBAction func yesButtonAction(_ sender: UIButton) {
+        // Assigns the user as a student
+        self.account = .student
+    }
+    
+    @IBAction func noButtonAction(_ sender: UIButton) {
+        // Assigns the user as an alumnus
+        self.account = .alum
+    }
+    
+    @IBAction func closePopover(with segue: UIStoryboardSegue) {}
+    
+    @IBAction func getStartedButtonAction(_ sender: UIButton) {
+        
+        let nameCondition = checkIfTextFieldHasBeenFilled(for: nameTextField, showStatusIn: usernameLabel)
+        let studyInCondition = checkIfTextFieldHasBeenFilled(for: studiedInTextField, showStatusIn: studiedInLabel)
+        let locationCondition = checkIfTextFieldHasBeenFilled(for: cityUserLivesTextField, showStatusIn: cityLocationLabel)
+        
+        if (nameCondition == true) && (studyInCondition == true) && (locationCondition == true) {
+            
+            //Build a user object
+            name = nameTextField.text
+            education = studiedInTextField.text
+            location = cityUserLivesTextField.text
+            
+            
+            self.thisUser = User(
+                name: name,
+                account: .alum,
+                education: education,
+                location: location
+            )
+            thisUser!.save()
+            
+            dismissPopover(view: completeProfileView)
+        }
+        
     }
     
     // Required for the Popover transition

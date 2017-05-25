@@ -33,9 +33,7 @@ class InvitePopoverVC: UIViewController {
     var delegate: InviteDelegate?
     
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var dateTextField: UITextField!
-    
     @IBOutlet weak var timeTextField: UITextField!
     
     

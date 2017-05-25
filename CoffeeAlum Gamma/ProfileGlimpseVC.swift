@@ -39,7 +39,7 @@ class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegat
         self.locationLabel.text = viewedUser!.location
         self.usernameLabel.text = viewedUser!.name
         
-        setupSidebarMenuPanGesture()
+        self.setupRevealViewController()
         
         if self.viewedUser!.uid == FIRAuth.auth()?.currentUser!.uid{
             self.meetupButton.isHidden = true

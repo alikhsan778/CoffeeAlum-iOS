@@ -63,7 +63,7 @@ extension SearchVC {
     func setupPopover(view: UIView) {
         if userHasCompletedProfileRequirements == true {
             // Sets up the reveal view controller for sidebar menu
-            revealViewControllerSetup()
+            self.setupRevealViewController()
             return
         }
         

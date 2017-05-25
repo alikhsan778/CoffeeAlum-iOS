@@ -14,33 +14,36 @@ class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     // User object
     var thisUser: User!
     // var tags: [Tag] TODO: Implement tag tracking feature; Add tags to search
-    
     var userList = [User]()
     
     // MARK: - IBOutlet
     @IBOutlet weak var profilePicture: UIImageView!
-    
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBAction func sideBarMenuButton(_ sender: UIButton) {
-        // Connects to the revealToggle method in the SWRevealViewController custom code
-        sender.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
-    }
-    
-    @IBAction func saveButtonAction(_ sender: UIButton) {
-        // TODO: - Save the user edits
-    }
+    @IBOutlet weak var sidebarMenuButton: UIButton!
+
 
     override func viewDidLoad() {
         // Retreiving the user information
         retrieveUserInfo()
-        
+        // Setup sidebar button
+        sidebarMenuButton.setupSidebarMenuButton(to: self)
     }
 
     // TODO: Select Tags View
     override func viewDidLayoutSubviews() {
         // Using the Pan Gesture Recognizer to reveal the "SWRevealViewController"
-        setupSidebarMenuPanGesture()
+        self.setupRevealViewController()
+    }
+    
+    
+    @IBAction func sideBarMenuButton(_ sender: UIButton) {
+        
+        
+    }
+    
+    @IBAction func saveButtonAction(_ sender: UIButton) {
+        // TODO: - Save the user edits
+        
     }
     
     /// Method to retrieve user information.

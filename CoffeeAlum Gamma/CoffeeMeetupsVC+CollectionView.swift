@@ -121,9 +121,6 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         return cell
     }
     
-    
-    
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout extension

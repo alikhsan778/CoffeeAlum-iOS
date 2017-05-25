@@ -14,6 +14,7 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noInvitationLabel: UILabel!
+    @IBOutlet weak var sidebarMenuButton: UIButton!
     
     // MARK: - Variables
     var headerTitleLabel: UILabel?
@@ -72,6 +73,10 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Setup sidebar view controller
+        self.setupRevealViewController()
+        // Setup sidebar button
+        sidebarMenuButton.setupSidebarMenuButton(to: self)
         
         // Retreives the invites
         retrieveCoffeeData()
@@ -88,12 +93,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     
     // Sidebar button which reveals the side bar
     @IBAction func sidebarMenuButtonAction(_ sender: UIButton) {
-        // Connects to the revealToggle method in the SWRevealViewController custom code
-        sender.addTarget(
-            self.revealViewController(),
-            action: #selector(SWRevealViewController.revealToggle(_:)),
-            for: .touchUpInside
-        )
+        
+        
     }
     
     
@@ -206,10 +207,6 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
             self.collectionView.reloadData()
             
         }
-        
-    }
-    
-    func refreshCollectionView() {
         
     }
     
