@@ -16,7 +16,7 @@ class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     // var tags: [Tag] TODO: Implement tag tracking feature; Add tags to search
     var userList = [User]()
     
-    // MARK: - IBOutlet
+    // MARK: - IBOutlets
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sidebarMenuButton: UIButton!

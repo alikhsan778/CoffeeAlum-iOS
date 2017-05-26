@@ -17,36 +17,50 @@ class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegat
     @IBOutlet weak var occupationLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var closeButtonOutlet: UIButton!
     
     
     // MARK: - Variables
-    let mainCells: [String] = ["About", "Education", "LinkedIn", "Website"]
+    let mainCells: [String] = [
+        "About",
+        "Education",
+        "LinkedIn",
+        "Website"
+    ]
     var filteredCells: [String] = []
     var data: [(header: String, expanded: Bool)] = []
     var viewedUser: User?
     var thisUser: User?
     
     override func viewDidLoad() {
-        filteredCells = mainCells.filter({ header -> Bool in
+        
+        filteredCells = mainCells.filter { header -> Bool in
             return includeData(header: header)
-        })
-        data = filteredCells.map{($0, false)}
+        }
+        
+        data = filteredCells.map{
+            ($0, false)
+        }
+        
+        setupCloseButton()
     }
     
     override func viewDidLayoutSubviews() {
         
-        self.occupationLabel.text = viewedUser!.employer
-        self.locationLabel.text = viewedUser!.location
-        self.usernameLabel.text = viewedUser!.name
+        occupationLabel.text = viewedUser!.employer
+        locationLabel.text = viewedUser!.location
+        usernameLabel.text = viewedUser!.name
         
-        self.setupRevealViewController()
-        
-        if self.viewedUser!.uid == FIRAuth.auth()?.currentUser!.uid{
-            self.meetupButton.isHidden = true
+        if viewedUser!.uid == FIRAuth.auth()?.currentUser!.uid{
+            meetupButton.isHidden = true
         } else{
             meetupButton.isHidden = false
         }
         
+    }
+    
+    @IBAction func closeButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func meetupButtonAction(_ sender: UIButton) {
@@ -69,6 +83,10 @@ class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegat
             selected = viewedUser!.linkedIn
         }
         return selected != ""
+    }
+    
+    fileprivate func setupCloseButton() {
+        closeButtonOutlet.layer.cornerRadius = closeButtonOutlet.frame.width / 2
     }
     
 }

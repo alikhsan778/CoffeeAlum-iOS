@@ -65,7 +65,6 @@ class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDele
         
         // Prevents the user form being able to scroll the view
         completeProfileScrollView.isScrollEnabled = false
-        
     }
     
     

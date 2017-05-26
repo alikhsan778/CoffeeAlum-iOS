@@ -12,25 +12,16 @@ import Foundation
 
 extension SearchVC {
     
-    func setupProfileGlimpsePopover(viewedUser:User) {
-        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ProfileGlimpse") as! ProfileGlimpseVC
-        
+    func setupProfileGlimpsePopover(viewedUser: User) {
+        let popoverContent = self.storyboard?.instantiateViewController(
+            withIdentifier: "ProfileGlimpse") as! ProfileGlimpseVC
         
         // pass the user data
         popoverContent.viewedUser = viewedUser
         popoverContent.thisUser = self.thisUser
         
         // popover view mechanics
-        popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
-        let popover = popoverContent.popoverPresentationController
-        popoverContent.preferredContentSize = CGSize(width: self.view.frame.width * 0.9, height: self.view.frame.height * 0.9)
-        
-        popover?.delegate = self
-        
-        popoverContent.popoverPresentationController?.sourceView = self.view
-        popoverContent.popoverPresentationController?.sourceRect = CGRect(x: self.view.center.x, y: self.view.center.y, width: 0, height: 0)
-        
-        popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        popoverContent.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         
         self.present(popoverContent, animated: true, completion: nil)
     }

@@ -22,7 +22,7 @@ extension SearchVC {
             return false
             
         } else {
-            normalizLabels(labelTitle: label.text!, label: label)
+            normalizeLabels(labelTitle: label.text!, label: label)
             // Passes the check
             return true
         }
@@ -38,7 +38,7 @@ extension SearchVC {
     }
     
     // Method to change the sign up labels back to its original
-    func normalizLabels(labelTitle: String, label: UILabel) {
+    func normalizeLabels(labelTitle: String, label: UILabel) {
         // Changing the label into the useful error message
         label.text = labelTitle
         // Changing the color of the text to red
@@ -50,9 +50,6 @@ extension SearchVC {
     // Method to hide the keyboard when editting the text
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
-        
-        // Get the keyboard size
-        
         
         return true
     }

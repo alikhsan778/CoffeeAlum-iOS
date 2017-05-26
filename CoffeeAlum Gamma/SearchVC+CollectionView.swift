@@ -19,7 +19,7 @@ extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Setup to enable profile glimpse popover
         let user = filteredUsers[indexPath.row]
-        setupProfileGlimpsePopover(viewedUser:user)
+        setupProfileGlimpsePopover(viewedUser: user)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -36,13 +36,10 @@ extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         if userForCell.employer != "" {
             if userForCell.role != "" {
             cell.userSchoolNameLabel.text! = "\(userForCell.role) at \(userForCell.employer)"
-            }
-            else{
+            } else {
                 cell.userSchoolNameLabel.text! = "\(userForCell.employer)"
             }
-        }
-        
-        else{
+        } else {
             cell.userSchoolNameLabel.text! = userForCell.employer
         }
         
