@@ -10,7 +10,6 @@ import Foundation
 
 protocol CoffeeMeetupsDelegate: class {
     func deleteCoffeeMeetupSelected()
-    func rescheduleCoffeeMeetup()
 }
 
 enum InvitationState: String {

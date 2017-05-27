@@ -177,6 +177,7 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     func deleteCoffeeMeetupSelected() {
         
         // Check which section the user has selected
+        // Remove the coffee based the section selected
         if self.collectionViewSection == 0 {
             self.upcomingCoffee.remove(
                 at: self.coffeeSelectedIndex!
@@ -212,8 +213,8 @@ class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopov
     
     func rescheduleCoffeeMeetup() {
         
-        // Remove it after the text has been sent
-        // deleteCoffeeMeetupSelected()
+        
+        
     }
     
 }
