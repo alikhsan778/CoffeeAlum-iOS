@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 
+
 final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
     
     // MARK: - IBOutlets
@@ -26,13 +27,13 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     @IBOutlet weak var sidebarMenuButtonOutlet: UIButton!
     
 
-    
     ////////////////////////////////////////////
     
     // MARK: - Miscellaneous Properties
     // Creating an instance of Firebase Database reference 
     var ref: FIRDatabaseReference!
     var userRef: FIRDatabaseReference = FIRDatabase.database().reference(withPath: "users")
+    
     
     // Creating an instance of each class
     var thisUser: User?
@@ -54,6 +55,8 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     
     // Testing for Firebase
     var name: String!
+    var email: String!
+    var registeredUserReference: FIRDatabaseReference!
     var education: String!
     var location: String!
     var account: AccountType!
@@ -70,7 +73,8 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     
     override func viewDidLoad() {
         
-        let thisUserRef = userRef.child(FIRAuth.auth()!.currentUser!.uid)
+        let thisUserRef = userRef.child(uid)
+        email = FIRAuth.auth()?.currentUser?.email
        
         //Check if user has filled out intro form; Populate the local user object
 
@@ -136,12 +140,12 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
             education = studiedInTextField.text
             location = cityUserLivesTextField.text
             
-            
             self.thisUser = User(
                 name: name,
                 account: .alum,
                 education: education,
-                location: location
+                location: location,
+                email: email
             )
             thisUser!.save()
             

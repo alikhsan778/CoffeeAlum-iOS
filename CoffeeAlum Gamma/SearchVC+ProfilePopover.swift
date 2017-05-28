@@ -12,12 +12,12 @@ import Foundation
 
 extension SearchVC {
     
-    func setupProfileGlimpsePopover(viewedUser: User) {
+    func setupProfileGlimpsePopover(userViewed: User) {
         let popoverContent = self.storyboard?.instantiateViewController(
             withIdentifier: "ProfileGlimpse") as! ProfileGlimpseVC
         
         // pass the user data
-        popoverContent.viewedUser = viewedUser
+        popoverContent.userViewed = userViewed
         popoverContent.thisUser = self.thisUser
         
         // popover view mechanics

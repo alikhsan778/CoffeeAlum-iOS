@@ -80,9 +80,13 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
             guard let name = userData["name"] as? String else {
                 fatalError("Failed to retrieve user 'name' data")
             }
+            
+            guard let email = userData["email"] as? String else {
+                return
+            }
            
             // Assigning thisUser to not be nil
-            self.thisUser = User(name: "\(name)", account: AccountType(rawValue: accountType)!, education: "\(education)", location: "\(location)")
+            self.thisUser = User(name: "\(name)", account: AccountType(rawValue: accountType)!, education: "\(education)", location: "\(location)", email: "\(email)")
             
             self.userList.append(self.thisUser)
             

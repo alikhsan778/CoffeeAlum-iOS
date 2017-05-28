@@ -221,9 +221,9 @@
 			isa = PBXGroup;
 			children = (
 				DD43A80B1E17AD65005C31A7 /* SearchVC.swift */,
+				DD12E0EF1E245D37006A2663 /* SearchVC+SearchBar.swift */,
 				DD12E0ED1E2456C2006A2663 /* SearchVC+CustomPopover.swift */,
 				DD12E0DF1E244FED006A2663 /* SearchVC+CollectionView.swift */,
-				DD12E0EF1E245D37006A2663 /* SearchVC+SearchBar.swift */,
 				DDDDBB561E2D278B0084D5A5 /* SearchVC+ProfilePopover.swift */,
 			);
 			name = SearchVC;

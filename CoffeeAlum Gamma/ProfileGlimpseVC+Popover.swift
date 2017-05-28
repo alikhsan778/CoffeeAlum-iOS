@@ -10,7 +10,7 @@ import Foundation
 
 extension ProfileGlimpseVC {
     
-    func setupPopover(viewedUser: User) {
+    func setupPopover(userViewed: User) {
         let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "InviteViewController") as! InvitePopoverVC
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
         let popover = popoverContent.popoverPresentationController
@@ -23,7 +23,7 @@ extension ProfileGlimpseVC {
         
         popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         
-        popoverContent.viewedUser = viewedUser
+        popoverContent.viewedUser = userViewed
         popoverContent.thisUser = self.thisUser
         popoverContent.delegate = self
         

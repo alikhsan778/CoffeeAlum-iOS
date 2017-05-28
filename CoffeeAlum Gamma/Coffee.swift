@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class Coffee {
+final class Coffee {
     
     var date: String = "TBD"
     var time: String = "TBD"
@@ -92,16 +92,16 @@ class Coffee {
     
     func toAnyObject() -> Any {
         return [
-            "date":date,
-            "time":time,
+            "date": date,
+            "time": time,
             "dateSent": dateSent,
             "location":location,
-            "fromId":fromId,
+            "fromId": fromId,
             "toId": toId,
             "fromName": fromName,
             "toName": toName,
             "fromEvenId": fromEventId,
-            "toEvenId":toEventId,
+            "toEvenId": toEventId,
             "accepted": accepted,
             "viewed": viewed,
             "rescheduled": rescheduled

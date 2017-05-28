@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+
 final class SignUpVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBOutlets
@@ -33,7 +34,6 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var confirmPasswordLabel: UILabel!
 
-    
     var userRef:FIRDatabaseReference = FIRDatabase.database().reference().child("users")
     
     // MARK: - Overrided Methods
@@ -78,13 +78,13 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
         
         if (emailCondition) && (passwordCondition) && (confirmPasswordCondition) {
             
-            APIClient.signUp(with: email, password: password, completion: { (user) in
+            APIClient.signUp(with: email, password: password, completion: { [weak self] (user) in
                 
-                // Create Firebase path for this user and save email
-                let userReference = self.userRef.child(user.uid)
-                userReference.setValue(["email":email]) {
-                    self.presentSearchViewController()
+                guard let userReference = self?.userRef.child(user.uid) else {
+                    return
                 }
+                
+                self?.presentSearchViewController(with: userReference, email: email)
                 
             })
             
@@ -100,12 +100,11 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
         
     }
     
-    
     // MARK: - Firebase Methods
     func firabaseDatabaseReference() {
         let ref = FIRDatabase.database().reference(fromURL: "https://coffeealum-beta-c723a.firebaseio.com/")
         // TODO: Save the name of user
-        let values = ["name" : emailTextField.text, "email" : emailTextField.text]
+        let values = ["name" : emailTextField.text, "email": emailTextField.text]
         
         ref.updateChildValues(values) { (errorValue, ref) in
             // If there's no error, this means the user has been saved successfully
@@ -125,19 +124,17 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
         // Checks if the text field is empty to give an appropriate warning
         if textField.text?.isEmpty == true {
             // TODO: Popup "Please enter your new password" alert
-            displayUsefulErrorMessage(errorMessage: "Please enter your new password",
-                                      label: passwordLabel)
+            displayUsefulErrorMessage(errorMessage: "Please enter your new password", label: passwordLabel)
             print("Please enter your new password")
             
         // Checks if the password text field is has enough characters
         } else if hasEnoughCharactersIn(textField: textField) == true {
-            normalizLabels(labelTitle: "Password", label: passwordLabel)
+            normalizeLabels(labelTitle: "Password", label: passwordLabel)
             return true
             
         } else {
             // TODO: Popup "You need to have at least 6 characters" alert
-            displayUsefulErrorMessage(errorMessage: "Password needs at least 6 characters",
-                                      label: passwordLabel)
+            displayUsefulErrorMessage(errorMessage: "Password needs at least 6 characters", label: passwordLabel)
             print("You need to have at least 6 characters")
         }
         
@@ -148,20 +145,19 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
     private func hasFulfilledConfirmPasswordRequirements(newPasswordTextField: UITextField, confirmTextField: UITextField) -> Bool {
         // Checks fi the confirm password text field is empty
         if confirmTextField.text?.isEmpty == true {
-            displayUsefulErrorMessage(errorMessage: "Please re-enter your new password",
-                                      label: confirmPasswordLabel)
+            displayUsefulErrorMessage(errorMessage: "Please re-enter your new password", label: confirmPasswordLabel)
             print("Please re-enter your new password to confirm")
             
         // If the new password matches with the confirm password
         } else if (passwordMatchesIn(passwordTextField: newPasswordTextField, confirmPasswordTextField: confirmTextField) == true) && (confirmTextField.text?.isEmpty == false) {
-            normalizLabels(labelTitle: "Confirm password", label: confirmPasswordLabel)
+            
+            normalizeLabels(labelTitle: "Confirm password", label: confirmPasswordLabel)
+            
             return true
         
         } else {
             // TODO: Popup "Your password does not match" alert
-            displayUsefulErrorMessage(errorMessage: "Your password does not match",
-                                      label: confirmPasswordLabel)
-            print("Your password does not match")
+            displayUsefulErrorMessage(errorMessage: "Your password does not match", label: confirmPasswordLabel)
         }
         
         return false
@@ -172,19 +168,17 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
         // Checks if the email address text field is empty
         if emailAddressTextField.text?.isEmpty == true {
             // TODO: Popup "Please enter your email address" alert
-            displayUsefulErrorMessage(errorMessage: "Please enter your email address",
-                                      label: emailAddressLabel)
+            displayUsefulErrorMessage(errorMessage: "Please enter your email address", label: emailAddressLabel)
             print("Please enter your email address")
         
         // Validates the email address
         } else if (validateEmailAddressIn(textField: emailAddressTextField) == true) {
-            normalizLabels(labelTitle: "Email address", label: emailAddressLabel)
+            normalizeLabels(labelTitle: "Email address", label: emailAddressLabel)
             return true
             
         } else {
             // TODO: Popup "Please enter a valid email address" alert
-            displayUsefulErrorMessage(errorMessage: "Please enter a valid email address",
-                                      label: emailAddressLabel)
+            displayUsefulErrorMessage(errorMessage: "Please enter a valid email address", label: emailAddressLabel)
             print("Please enter a valid email address")
         }
         
@@ -224,15 +218,26 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
     }
     
     // Method to allow the next view controller to be presented
-    private func presentSearchViewController() {
+    private func presentSearchViewController(with reference: FIRDatabaseReference, email: String) {
         
         // Accessing the App Delegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
+        let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        
         // Present the next view controller
         appDelegate?.window?.rootViewController = swRevealViewController
+        
+        // Create Firebase path for this user and save email
+        let emailDictionary = ["email": "\(email)"]
+        
+        // Format of the completion block must be correct
+        // because there is a bug in Firebase
+        reference.setValue(emailDictionary) { (_, _) in
+            
+        }
+ 
     }
     
     // Method to show useful error message
@@ -242,7 +247,7 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
     }
     
     // Method to change the sign up labels back to its original
-    func normalizLabels(labelTitle: String, label: UILabel) {
+    func normalizeLabels(labelTitle: String, label: UILabel) {
         // Changing the label into the useful error message
         label.text = labelTitle
         // Changing the color of the text to red

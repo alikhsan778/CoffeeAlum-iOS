@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import Firebase
 
-class User: Hashable {
+final class User: Hashable {
     
-    var name: String
+    var name: String = ""
     var email: String = ""
     var account: AccountType = .alum
     var bio: String = ""
@@ -33,11 +33,12 @@ class User: Hashable {
         return self.uid.hashValue
     }
     
-    init(name:String, account:AccountType, education: String, location: String){
+    init(name: String, account: AccountType, education: String, location: String, email: String) {
         self.name = name
         self.account = account
         self.education = education
         self.location = location
+        self.email = email
     }
     
     
@@ -55,7 +56,6 @@ class User: Hashable {
         
         self.account = AccountType(rawValue: accountString)!
         
-        
         bio = snapshotValue["bio"] as? String ?? ""
         education = snapshotValue["education"] as? String ?? ""
         employer = snapshotValue["employer"] as? String ?? ""
@@ -66,12 +66,13 @@ class User: Hashable {
         // Protects from crashing
         guard let locationData = snapshotValue["location"],
               let coffeeIdsData = snapshotValue["coffees"],
-              let portraitsData = snapshotValue["portrait"],
               let emailData = snapshotValue["email"],
               let uidata = snapshotValue["uid"]
               else {
                 return
         }
+        
+        let portraitsData = snapshotValue["portrait"]
         
         location = locationData as! String
         portrait = portraitsData as! String
@@ -83,10 +84,10 @@ class User: Hashable {
             let thisCoffee = Coffee(snapshot: value)
             coffees.append(thisCoffee)
         }
-    
         
         uid = snapshot.key
         ref = snapshot.ref
+    
     }
     
     func toAnyObject() -> NSDictionary {
