@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
+final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var backingView: UIView!
     @IBOutlet weak var nameOfInviter: UILabel!

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
+final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
 
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!

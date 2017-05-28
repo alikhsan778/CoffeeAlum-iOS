@@ -20,7 +20,7 @@ enum InvitationState: String {
 }
 
 
-class InvitationVC: UIViewController {
+final class InvitationVC: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var profilePicture: UIImageView!

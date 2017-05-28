@@ -61,8 +61,8 @@ class APIClient {
     }
     
     static func sendCoffeeInvitation() {
-        let sentInviteCoffeRef = coffeeReference.queryOrdered(byChild: "fromId").queryEqual(toValue: uid)
-        let gotInviteCoffeeRef = coffeeReference.queryOrdered(byChild: "toId").queryEqual(toValue: uid)
+       
+        
     }
     
     // MARK: - App Entry And Exit 
@@ -95,11 +95,23 @@ class APIClient {
         }
     }
     
-    static func signUp() {
-        
+    static func signUp(with email: String, password: String, completion: ((FIRUser) -> Void)?) {
+        // TODO: Move this to APIClient
+        // Success in signing up, create user in Firebase
+        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+            // There's no error
+            if error == nil {
+                
+                completion?(user!)
+                
+            } else {
+                
+            }
+        })
+
     }
     
-    // MARK: - Retrieve User Information 
+    // MARK: - Retrieve User Information
     static func retrieveUserInformation() {
         
         

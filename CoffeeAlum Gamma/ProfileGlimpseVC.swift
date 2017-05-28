@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
+final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
     
     @IBOutlet weak var meetupButton: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!

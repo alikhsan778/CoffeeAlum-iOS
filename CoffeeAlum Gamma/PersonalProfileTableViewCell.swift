@@ -12,7 +12,7 @@ protocol PersonalProfileDelegate {
     func updateUserInformation()
 }
 
-class PersonalProfileTableViewCell: UITableViewCell {
+final class PersonalProfileTableViewCell: UITableViewCell {
     
     // Delegate object
     var delegate: PersonalProfileDelegate!

@@ -15,7 +15,7 @@ protocol InviteDelegate {
 }
 
 
-class InvitePopoverVC: UIViewController {
+final class InvitePopoverVC: UIViewController {
     
     var viewedUser: User?
     var thisUser: User?

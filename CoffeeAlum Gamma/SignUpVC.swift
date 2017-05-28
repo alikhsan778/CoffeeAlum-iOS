@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignUpVC: UIViewController, UITextFieldDelegate {
+final class SignUpVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBOutlets
     @IBOutlet weak var emailTextField: UITextField!
@@ -30,9 +30,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     */
     
     @IBOutlet weak var emailAddressLabel: UILabel!
-    
     @IBOutlet weak var passwordLabel: UILabel!
-    
     @IBOutlet weak var confirmPasswordLabel: UILabel!
 
     
@@ -68,6 +66,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBActions
     @IBAction private func signUpButtonAction(_ sender: UIButton) {
+        
         let emailCondition = hasFullfilledEmailRequirementsIn(emailAddressTextField: emailTextField)
         let passwordCondition = hasFulfilledPasswordRequirementsIn(textField: passwordTextField)
         let confirmPasswordCondition = hasFulfilledConfirmPasswordRequirements(newPasswordTextField: passwordTextField, confirmTextField: confirmPasswordTextField)
@@ -78,28 +77,18 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         }
         
         if (emailCondition) && (passwordCondition) && (confirmPasswordCondition) {
-            // MARK: Firebase Auth
             
-            // TODO: Move this to APIClient
-            // Success in signing up, create user in Firebase
-            FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
-                // There's no error
-                if error == nil {
-                    // Create Firebase path for this user and save email
-                    let thisUserRef = self.userRef.child(user!.uid)
-                    thisUserRef.setValue(["email":email]){ ( error, ref) -> Void in
-                        self.presentSearchViewController()
-                    }
-                    
-            
-                } else {
-                    
+            APIClient.signUp(with: email, password: password, completion: { (user) in
+                
+                // Create Firebase path for this user and save email
+                let userReference = self.userRef.child(user.uid)
+                userReference.setValue(["email":email]) {
+                    self.presentSearchViewController()
                 }
+                
             })
             
-        }
-        
-        else{
+        } else {
             
         }
         

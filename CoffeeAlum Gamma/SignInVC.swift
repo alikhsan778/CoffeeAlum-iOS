@@ -11,7 +11,7 @@ import FirebaseAuth
 import GoogleSignIn
 
 
-class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
+final class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
     
     // Used to push the text field away from the keyboard to prevent keyboard overlapping
     // var adaptiveKeyboard: AdaptiveKeyboard!

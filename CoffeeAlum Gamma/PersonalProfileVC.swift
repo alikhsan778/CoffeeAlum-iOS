@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
+final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     
     // User object
     var thisUser: User!
