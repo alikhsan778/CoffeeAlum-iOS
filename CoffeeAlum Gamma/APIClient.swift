@@ -8,7 +8,7 @@
 
 import Firebase
 
-class APIClient {
+final class APIClient {
     
     fileprivate static let uid = FIRAuth.auth()!.currentUser!.uid
     fileprivate static var db = FIRDatabase.database().reference()
@@ -115,6 +115,24 @@ class APIClient {
     static func retrieveUserInformation() {
         
         
+    }
+    
+    // MARK: - Update User Information
+    static func saveUserInformation(with user: User) {
+        
+        let toJSON = [
+            "name": user.name,
+            "account": user.account.rawValue,
+            "role": user.role,
+            "employer" : user.employer,
+            "education": user.education,
+            "location": user.location,
+            "portrait": user.portrait,
+            "email": user.email,
+            "uid": user.uid
+        ]
+        
+        userReference.child(uid).setValue(toJSON)
     }
     
 }

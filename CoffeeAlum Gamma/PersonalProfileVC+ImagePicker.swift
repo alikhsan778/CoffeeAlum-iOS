@@ -10,6 +10,7 @@ import UIKit
 
 // Responsible for Image picker when the user wants to edit the profile picture
 extension PersonalProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imageTapped() {
         let cameraAlert = UIAlertController(title: "Select a source", message: "Where would you like to get your photos from?", preferredStyle: .actionSheet)
         

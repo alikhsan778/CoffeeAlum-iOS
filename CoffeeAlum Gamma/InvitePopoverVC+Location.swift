@@ -11,8 +11,9 @@ import MapKit
 
 extension InvitePopoverVC: CLLocationManagerDelegate {
     
+    // TODO: Add map for the next update
     /// Setup for user location
-
+    /*
     func userLocationHelper() {
         // Creating an instance of the Location Manager
         locationManager = LocationManager.sharedInstance
@@ -95,6 +96,6 @@ extension InvitePopoverVC: CLLocationManagerDelegate {
         // Taking the first item from the locations array
         self.currentLocation = locations.first
     }
-    
+    */
     
 }

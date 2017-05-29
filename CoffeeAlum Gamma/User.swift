@@ -5,7 +5,8 @@
 ////  Created by Nabil K on 2017-01-09.
 ////  Copyright © 2017 Trevin Wisaksana. All rights reserved.
 ////
-//
+////
+
 import Foundation
 import UIKit
 import Firebase
@@ -33,18 +34,17 @@ final class User: Hashable {
         return self.uid.hashValue
     }
     
-    init(name: String, account: AccountType, education: String, location: String, email: String) {
+    init(name: String, account: AccountType, education: String, location: String, email: String, uid: String) {
         self.name = name
         self.account = account
         self.education = education
         self.location = location
         self.email = email
+        self.uid = uid
     }
     
     
     init(snapshot: FIRDataSnapshot) {
-        
-        uid = snapshot.key
         
         let snapshotValue = snapshot.value as! [String : AnyObject]
         
@@ -62,14 +62,19 @@ final class User: Hashable {
         role = snapshotValue["role"] as? String ?? ""
         linkedIn = snapshotValue["linkedIn"] as? String ?? ""
         website = snapshotValue["website"] as? String ?? ""
+        ref = snapshot.ref
         
         // Protects from crashing
-        guard let locationData = snapshotValue["location"],
-              let coffeeIdsData = snapshotValue["coffees"],
-              let emailData = snapshotValue["email"],
-              let uidata = snapshotValue["uid"]
-              else {
-                return
+        guard let uidata = snapshotValue["uid"] else {
+            return
+        }
+        
+        guard let emailData = snapshotValue["email"] else {
+            return
+        }
+        
+        guard let locationData = snapshotValue["location"] else {
+            return
         }
         
         let portraitsData = snapshotValue["portrait"]
@@ -78,20 +83,11 @@ final class User: Hashable {
         portrait = portraitsData as! String
         email = emailData as! String
         uid = uidata as! String
-        
-        for item in coffeeIdsData.children {
-            let value = item as! FIRDataSnapshot
-            let thisCoffee = Coffee(snapshot: value)
-            coffees.append(thisCoffee)
-        }
-        
-        uid = snapshot.key
-        ref = snapshot.ref
     
     }
     
     func toAnyObject() -> NSDictionary {
-        let coffeeIdDict : [String:String] = [:]
+   
         // TODO: Eliminate the redundancy below time permitting
         // Each Id is its own key for ease of access
         // coffeeIds.map({coffeeIdDict[$0] = $0})
@@ -103,16 +99,16 @@ final class User: Hashable {
             "employer" : employer,
             "education": education,
             "location": location,
-            "coffeeIds": coffeeIdDict,
             "portrait": portrait,
             "email": email,
             "uid": uid
         ]
     }
     
+    // TODO: Move this to the API client
     func save() {
         let id = FIRAuth.auth()!.currentUser!.uid
-        if self.ref == nil{
+        if self.ref == nil {
             self.ref = db.child(id)
         }
         self.ref!.setValue(self.toAnyObject())

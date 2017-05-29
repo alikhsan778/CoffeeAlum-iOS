@@ -28,18 +28,23 @@ extension ProfileGlimpseVC: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func infoForCell(info: String) -> String{
+    func infoForCell(info: String) -> String {
+        
+        guard let userViewed = userViewed else {
+            return ""
+        }
+        
         switch info{
         case "About":
-            return userViewed!.bio
+            return userViewed.bio
         case "Education":
-            return userViewed!.education
+            return userViewed.education
         case "LinkedIn":
-            return userViewed!.linkedIn
+            return userViewed.linkedIn
         case "Website":
-            return userViewed!.website
+            return userViewed.website
         default:
-            return userViewed!.linkedIn
+            return userViewed.linkedIn
         }
         
     }
@@ -55,14 +60,12 @@ extension ProfileGlimpseVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if data[indexPath.row].expanded{
-            if indexPath.row == 1{
+            if indexPath.row == 1 {
                 return UITableViewAutomaticDimension
             } else {
                 return UITableViewAutomaticDimension
             }
-//            return UITableViewAutomaticDimension // Or some other set height
-        }
-        else{
+        } else {
             return 100
         }
         

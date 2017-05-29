@@ -47,11 +47,15 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
     
     override func viewDidLayoutSubviews() {
         
-        occupationLabel.text = userViewed!.employer
-        locationLabel.text = userViewed!.location
-        usernameLabel.text = userViewed!.name
+        guard let userViewed = userViewed else {
+            return
+        }
         
-        if userViewed!.uid == FIRAuth.auth()?.currentUser!.uid{
+        occupationLabel.text = userViewed.employer
+        locationLabel.text = userViewed.location
+        usernameLabel.text = userViewed.name
+        
+        if userViewed.uid == FIRAuth.auth()?.currentUser!.uid{
             meetupButton.isHidden = true
         } else{
             meetupButton.isHidden = false

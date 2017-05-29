@@ -135,7 +135,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         
         if (nameCondition == true) && (studyInCondition == true) && (locationCondition == true) {
             
-            //Build a user object
+            // Build a user object
             name = nameTextField.text
             education = studiedInTextField.text
             location = cityUserLivesTextField.text
@@ -145,10 +145,11 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
                 account: .alum,
                 education: education,
                 location: location,
-                email: email
+                email: email,
+                uid: uid
             )
-            thisUser!.save()
             
+            thisUser!.save()
             dismissPopover(view: completeProfileView)
         }
         

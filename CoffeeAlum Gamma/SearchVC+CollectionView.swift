@@ -17,9 +17,11 @@ extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         // Setup to enable profile glimpse popover
         let user = filteredUsers[indexPath.row]
         setupProfileGlimpsePopover(userViewed: user)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -28,26 +30,8 @@ extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         
         let userForCell = filteredUsers[indexPath.row]
         
-        cell.userNameLabelOutlet.text = userForCell.name
-        cell.studentOrAlumLabel.text! = userForCell.account.rawValue
-        cell.userCityLocationLabel.text! = userForCell.location
+        cell.configure(with: userForCell)
         
-        //If has job, label = job, else school name
-        if userForCell.employer != "" {
-            if userForCell.role != "" {
-            cell.userSchoolNameLabel.text! = "\(userForCell.role) at \(userForCell.employer)"
-            } else {
-                cell.userSchoolNameLabel.text! = "\(userForCell.employer)"
-            }
-        } else {
-            cell.userSchoolNameLabel.text! = userForCell.employer
-        }
-        
-        if userForCell.portrait != "" {
-            cell.userProfilePicture.image = userForCell.portrait.toImage()
-        }
-        
-        cell.userSchoolNameLabel.text! = userForCell.education
         return cell
     }
     

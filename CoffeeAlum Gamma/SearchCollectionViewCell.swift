@@ -23,5 +23,28 @@ final class SearchCollectionViewCell: UICollectionViewCell {
         self.layer.masksToBounds = true
     }
     
+    func configure(with user: User) {
+        userNameLabelOutlet.text = user.name
+        studentOrAlumLabel.text = user.account.rawValue
+        userCityLocationLabel.text = user.location
+        
+        // If has job, label = job, else school name
+        if user.employer != "" {
+            if user.role != "" {
+                userSchoolNameLabel.text = "\(user.role) at \(user.employer)"
+            } else {
+                userSchoolNameLabel.text = "\(user.employer)"
+            }
+        } else {
+            userSchoolNameLabel.text = user.employer
+        }
+        
+        if user.portrait != "" {
+            userProfilePicture.image = user.portrait.toImage()
+        }
+        
+        userSchoolNameLabel.text = user.education
+    }
+    
 }
 

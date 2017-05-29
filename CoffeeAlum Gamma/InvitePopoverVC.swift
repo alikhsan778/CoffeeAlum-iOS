@@ -32,17 +32,21 @@ final class InvitePopoverVC: UIViewController {
 
     var delegate: InviteDelegate?
     
-    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var timeTextField: UITextField!
-    
+    @IBOutlet weak var placeTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
+        
         // Assigning the delegate to self
-        coreLocationManager.delegate = self
+        // coreLocationManager.delegate = self
         // Setup the map view
-        userLocationHelper()
+        // userLocationHelper()
     }
     
     /*
@@ -79,7 +83,7 @@ final class InvitePopoverVC: UIViewController {
     /// Method to check if the invitation information is nil or not
     func inviteComplete() -> Bool {
         
-        if let date = dateTextField.text, let time = timeTextField.text, let location = mapView.userLocation.title {
+        if let date = dateTextField.text, let time = timeTextField.text, let location = placeTextField.text {
             // TODO: Change the location because this is just a default value
             print(date, time, location)
             return true

@@ -21,21 +21,11 @@ extension PersonalProfileVC: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PersonalProfileCell") as! PersonalProfileTableViewCell
         
-        let elementFromIndex = userList[indexPath.row]
+        let user = userList[indexPath.row]
         
-        
-        // TODO: thisUser is nil
-        cell.nameTextField.text = elementFromIndex.name
-        cell.emailTextField.text = elementFromIndex.email
-        cell.occupationTextField.text = elementFromIndex.role
-        
-        cell.employerTextField.text  = elementFromIndex.employer
-        cell.educationalBackgroundTextField.text = elementFromIndex.education
-        // cell.personalWebsiteTextField.text = website
-        // cell.bioTextField.text = bio
-        cell.linkedInProfileTextField.text = elementFromIndex.linkedIn
-        // cell.profilePicture.image = image.toImage()
-        
+        cell.configure(with: user)
+        cell.delegate = self
+    
         return cell
     }
     

@@ -14,7 +14,7 @@ import GoogleSignIn
 import IQKeyboardManager
 
 // Global Variable used to check if the view has already been instantiated once
-public var viewHasBeenInstantiated = false
+// public var viewHasBeenInstantiated = false
 // Global variable used to check if the user has already edited their profile picture
 public var userHasCompletedProfileRequirements = false
 
