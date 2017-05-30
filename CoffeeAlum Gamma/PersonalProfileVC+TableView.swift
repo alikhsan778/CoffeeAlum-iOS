@@ -15,11 +15,8 @@ extension PersonalProfileVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-        let nibFile = UINib(nibName: "PersonalProfileTableViewCell", bundle: nil)
-        tableView.register(nibFile, forCellReuseIdentifier: "PersonalProfileCell")
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PersonalProfileCell") as! PersonalProfileTableViewCell
+        let cell: PersonalProfileTableViewCell = tableView.dequeueReusableCell(withIdentifier: "PersonalProfileCell") as! PersonalProfileTableViewCell
         
         let user = userList[indexPath.row]
         

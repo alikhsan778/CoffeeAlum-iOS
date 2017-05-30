@@ -34,7 +34,7 @@ extension ProfileGlimpseVC: UITableViewDataSource, UITableViewDelegate {
             return ""
         }
         
-        switch info{
+        switch info {
         case "About":
             return userViewed.bio
         case "Education":

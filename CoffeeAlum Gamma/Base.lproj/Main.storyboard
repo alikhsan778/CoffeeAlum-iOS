@@ -448,16 +448,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.27556409399999998" green="0.79357709320000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cBz-RY-e2j">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="587.5"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="JYT-2m-3ND" id="pIM-P4-2Jw"/>
-                                        <outlet property="delegate" destination="JYT-2m-3ND" id="T2y-7K-r1c"/>
-                                    </connections>
-                                </tableView>
                                 <connections>
                                     <outlet property="dataSource" destination="JYT-2m-3ND" id="xe4-mX-OeS"/>
                                     <outlet property="delegate" destination="JYT-2m-3ND" id="OUR-EC-4Gt"/>
@@ -487,7 +477,7 @@
                     <connections>
                         <outlet property="profilePicture" destination="ISh-G8-zhB" id="oUI-G6-xqp"/>
                         <outlet property="sidebarMenuButton" destination="qXg-j5-3Vh" id="nOW-Bs-ObM"/>
-                        <outlet property="tableView" destination="cBz-RY-e2j" id="b6w-NZ-SBD"/>
+                        <outlet property="tableView" destination="0Sw-dh-fA0" id="Zha-Lq-uin"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRa-sn-val" sceneMemberID="firstResponder"/>

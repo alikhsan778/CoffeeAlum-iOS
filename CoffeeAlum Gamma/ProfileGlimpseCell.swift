@@ -13,7 +13,7 @@ class ProfileGlimplseCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel! 
     
-    static func configure(with user: User) {
+    func configure(with user: User) {
         
     }
     

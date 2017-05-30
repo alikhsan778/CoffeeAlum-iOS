@@ -236,7 +236,6 @@
 				DD12E0F21E2595D9006A2663 /* ProfileGlimpseVC+TableView.swift */,
 				DD12E0FE1E25B174006A2663 /* ProfileGlimpseVC+CollectionView.swift */,
 				DDDDBB5B1E2D52CD0084D5A5 /* ProfileGlimpseVC+Popover.swift */,
-				DD12E0F41E25963C006A2663 /* ProfileGlimpseCell.swift */,
 			);
 			name = ProfileGlimpseVC;
 			sourceTree = "<group>";
@@ -355,6 +354,7 @@
 		DD6251E81E4BC2E6001E6FFC /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				DD12E0F41E25963C006A2663 /* ProfileGlimpseCell.swift */,
 				DD0A30C71E4E6971009D619F /* PersonalProfileTableViewCell */,
 			);
 			name = TableViewCells;

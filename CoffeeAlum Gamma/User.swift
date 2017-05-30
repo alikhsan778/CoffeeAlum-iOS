@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import Firebase
 
-final class User: Hashable {
+final class User: Hashable, Equatable {
     
     var name: String = ""
     var email: String = ""
@@ -101,6 +101,9 @@ final class User: Hashable {
             "location": location,
             "portrait": portrait,
             "email": email,
+            "linkedIn": linkedIn,
+            "bio": bio,
+            "website": website,
             "uid": uid
         ]
     }

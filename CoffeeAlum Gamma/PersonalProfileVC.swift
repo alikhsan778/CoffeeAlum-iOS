@@ -29,6 +29,15 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
         retrieveUserInfo()
         // Setup sidebar button
         sidebarMenuButton.setupSidebarMenuButton(to: self)
+        
+        let nibFile = UINib(
+            nibName: "PersonalProfileTableViewCell",
+            bundle: nil
+        )
+        tableView.register(
+            nibFile,
+            forCellReuseIdentifier: "PersonalProfileCell"
+        )
     }
 
     // TODO: Select Tags View
@@ -51,15 +60,16 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     /// Method to retrieve user information.
     func retrieveUserInfo() {
         
-        // Removing current objects to prevent replication
+        // Removing current objects to prevent duplication
         userList.removeAll()
+        fileteredUserSet.removeAll()
         
         // Firebase objects
         let uid = FIRAuth.auth()!.currentUser!.uid
         let reference = FIRDatabase.database().reference()
         let user = reference.child("users").child(uid)
         
-        user.queryOrderedByKey().observeSingleEvent(of: .value, with: { [unowned self](snapshot) in
+        user.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             
             self.thisUser = User(snapshot: snapshot)
             
@@ -86,7 +96,10 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     }
     
     func addGestures(){
-        let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageTapped)
+        )
         self.profilePicture.addGestureRecognizer(tap)
     }
 

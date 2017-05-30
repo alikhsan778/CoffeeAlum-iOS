@@ -18,6 +18,7 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeButtonOutlet: UIButton!
+    @IBOutlet weak var meetupButtonContainer: UIView!
     
     
     // MARK: - Variables
@@ -38,7 +39,7 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
             return includeData(header: header)
         }
         
-        data = filteredCells.map{
+        data = filteredCells.map {
             ($0, false)
         }
         
@@ -57,10 +58,8 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
         
         if userViewed.uid == FIRAuth.auth()?.currentUser!.uid{
             meetupButton.isHidden = true
-        } else{
-            meetupButton.isHidden = false
+            meetupButtonContainer.isHidden = true
         }
-        
     }
     
     @IBAction func closeButtonAction(_ sender: UIButton) {
@@ -72,20 +71,27 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
         setupPopover(userViewed: self.userViewed!)
     }
     
-    func includeData(header: String) -> Bool{
+    func includeData(header: String) -> Bool {
+        
+        guard let userViewed = userViewed else {
+            return false
+        }
+        
         var selected: String
+        
         switch header {
         case "About":
-            selected = userViewed!.bio
+            selected = userViewed.bio
         case "Education":
-            selected = userViewed!.education
+            selected = userViewed.education
         case "LinkedIn":
-            selected = userViewed!.linkedIn
+            selected = userViewed.linkedIn
         case "Website":
-            selected = userViewed!.website
+            selected = userViewed.website
         default:
-            selected = userViewed!.linkedIn
+            selected = userViewed.linkedIn
         }
+        
         return selected != ""
     }
     
