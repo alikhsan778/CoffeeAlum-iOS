@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Spring.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>184A1650DC0B648BD756068E60BF2C59</key>
+		<key>10C9FDB7EC84F4F621ABD795AEF57749</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2A72B5365C08115B3A6660AD015743F2</key>
+		<key>184A1650DC0B648BD756068E60BF2C59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF93D6D9F30F79EB43CDE7CC594FFB21</key>
+		<key>DCA57187A653056914F254FF93B67609</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E5F10528D31956704C3251AA354196A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

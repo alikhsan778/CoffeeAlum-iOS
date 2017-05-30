@@ -21,9 +21,12 @@ final class SearchCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         self.layer.cornerRadius = 12
         self.layer.masksToBounds = true
+        
+        userProfilePicture.circularize()
     }
     
     func configure(with user: User) {
+        
         userNameLabelOutlet.text = user.name
         studentOrAlumLabel.text = user.account.rawValue
         userCityLocationLabel.text = user.location
@@ -40,7 +43,9 @@ final class SearchCollectionViewCell: UICollectionViewCell {
         }
         
         if user.portrait != "" {
-            userProfilePicture.image = user.portrait.toImage()
+            let url = URL(string: user.portrait)
+            userProfilePicture.sd_setImage(with: url)
+            userProfilePicture.circularize()
         }
         
         userSchoolNameLabel.text = user.education

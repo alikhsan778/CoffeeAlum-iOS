@@ -8,7 +8,7 @@
 
 import Foundation
 import Firebase
-
+import SDWebImage
 
 final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     
@@ -38,6 +38,8 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
             nibFile,
             forCellReuseIdentifier: "PersonalProfileCell"
         )
+        
+        setupProfilePictureTapGesture()
     }
 
     // TODO: Select Tags View
@@ -80,6 +82,13 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
                 contentsOf: Array(self.fileteredUserSet)
             )
             
+            let profilePictureURL = URL(string: self.thisUser.portrait)
+            
+            if profilePictureURL?.absoluteString != nil {
+                self.profilePicture.sd_setImage(with: profilePictureURL)
+                self.profilePicture.circularize()
+            }
+            
             // Refreshes the table view
             // Must be called in the asynchronous process
             // Will not be effective if called in the main thread
@@ -95,12 +104,15 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
         retrieveUserInfo()
     }
     
-    func addGestures(){
-        let tap = UITapGestureRecognizer(
+    fileprivate func setupProfilePictureTapGesture() {
+        profilePicture.isUserInteractionEnabled = true
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(imageTapped)
         )
-        self.profilePicture.addGestureRecognizer(tap)
+        
+        self.profilePicture.addGestureRecognizer(tapGestureRecognizer)
     }
 
 }

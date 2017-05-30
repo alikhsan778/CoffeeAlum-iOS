@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import FirebaseStorage
 
 final class APIClient {
     
@@ -19,6 +20,7 @@ final class APIClient {
         }
     }
     fileprivate static let userReference = db.child("users")
+    fileprivate static let storageReference = FIRStorage.storage().reference()
     
     
     // MARK: - Invitation Response
@@ -133,6 +135,31 @@ final class APIClient {
         ]
         
         userReference.child(uid).setValue(toJSON)
+    }
+    
+    
+    static func saveUserProfilePicture(with image: UIImage) {
+        
+        guard let dataToUpload = UIImagePNGRepresentation(image) else {
+            return
+        }
+        
+        let profileImageReference = storageReference.child("profileImage.png")
+    
+        profileImageReference.put(dataToUpload, metadata: nil) { (metadata, error) in
+            
+            if error != nil {
+                print(error.debugDescription)
+                return
+            }
+            
+            let downloadURL = metadata?.downloadURL()?.absoluteString
+            
+            // TODO: Update the user profile link
+            userReference.child(uid).child("portrait").setValue(downloadURL)
+            
+        }
+        
     }
     
 }

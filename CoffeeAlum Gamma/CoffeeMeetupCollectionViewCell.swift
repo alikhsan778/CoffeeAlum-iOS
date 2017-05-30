@@ -28,6 +28,9 @@ final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
             nameOfInviter.text = "\(invitation.user.role) at \(invitation.user.employer)"
         }
         
+        let url = URL(string: invitation.user.portrait)
+        pictureOfInviter.sd_setImage(with: url)
+        pictureOfInviter.circularize()
     }
     
     override func awakeFromNib() {

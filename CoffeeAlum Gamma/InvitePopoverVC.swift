@@ -40,9 +40,6 @@ final class InvitePopoverVC: UIViewController {
         super.viewDidLoad()
         
         
-        
-        
-        
         // Assigning the delegate to self
         // coreLocationManager.delegate = self
         // Setup the map view

@@ -8,11 +8,13 @@ target 'CoffeeAlum Gamma' do
   # Pods for CoffeeAlum Gamma
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
   pod 'DatePickerDialog'
-  pod ‘IQKeyboardManager’
+  pod 'IQKeyboardManager'
+  pod ‘SDWebImage'
 
   target 'CoffeeAlum GammaTests' do
     inherit! :search_paths

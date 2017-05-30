@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 
+
 final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
     
     @IBOutlet weak var meetupButton: UIButton!
@@ -32,6 +33,7 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
     var data: [(header: String, expanded: Bool)] = []
     var userViewed: User?
     var thisUser: User?
+    fileprivate var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         
@@ -56,6 +58,10 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
         locationLabel.text = userViewed.location
         usernameLabel.text = userViewed.name
         
+        let url = URL(string: userViewed.portrait)
+        profilePicture.sd_setImage(with: url)
+        profilePicture.circularize()
+        
         if userViewed.uid == FIRAuth.auth()?.currentUser!.uid{
             meetupButton.isHidden = true
             meetupButtonContainer.isHidden = true
@@ -71,7 +77,8 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
         setupPopover(userViewed: self.userViewed!)
     }
     
-    func includeData(header: String) -> Bool {
+        
+    fileprivate func includeData(header: String) -> Bool {
         
         guard let userViewed = userViewed else {
             return false

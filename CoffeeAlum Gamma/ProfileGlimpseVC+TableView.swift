@@ -28,7 +28,7 @@ extension ProfileGlimpseVC: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func infoForCell(info: String) -> String {
+    fileprivate func infoForCell(info: String) -> String {
         
         guard let userViewed = userViewed else {
             return ""

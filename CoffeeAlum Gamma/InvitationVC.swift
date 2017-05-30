@@ -44,12 +44,18 @@ final class InvitationVC: UIViewController {
             declineButtonOutlet.setTitle("Reschedule", for: .normal)
             invitationState = .rescheduled
         }
+        
+        // TODO: DRY, this can be added in an extension
+        let profileURL = invitation.user.portrait
+        let url = URL(string: profileURL)
+        profilePicture.sd_setImage(with: url)
     }
     
     func setupUIElements() {
         personInvitingLabel.text = invitation?.user.name
         dateAndTimeLabel.text = invitation?.coffee.date
         placeLabel.text = invitation?.coffee.location
+        profilePicture.circularize()
     }
     
     
