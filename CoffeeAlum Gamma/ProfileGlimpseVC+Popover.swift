@@ -12,14 +12,24 @@ extension ProfileGlimpseVC {
     
     func setupPopover(userViewed: User) {
         let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "InviteViewController") as! InvitePopoverVC
+        
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
+        
         let popover = popoverContent.popoverPresentationController
-        popoverContent.preferredContentSize = CGSize(width: self.view.frame.width * 0.85, height: self.view.frame.height * 0.85)
+        
+        popoverContent.preferredContentSize = CGSize(
+            width: self.view.frame.width * 0.85,
+            height: self.view.frame.height * 0.45
+        )
         
         popover?.delegate = self
         
         popoverContent.popoverPresentationController?.sourceView = self.view
-        popoverContent.popoverPresentationController?.sourceRect = CGRect(x: self.view.center.x, y: self.view.center.y, width: 0, height: 0)
+        popoverContent.popoverPresentationController?.sourceRect = CGRect(
+            x: self.view.center.x,
+            y: self.view.center.y,
+            width: 0, height: 0
+        )
         
         popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         

@@ -624,14 +624,14 @@
                         <viewControllerLayoutGuide type="bottom" id="QXk-O2-yZk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aq6-0G-9iu">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="M0y-Fd-06c">
-                                <rect key="frame" x="24" y="40" width="250" height="180"/>
+                                <rect key="frame" x="24" y="37" width="250" height="180"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klu-8a-Vng">
-                                        <rect key="frame" x="0.0" y="0.0" width="39.666666666666664" height="24.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="39.666666666666664" height="24.666666666666664"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.210690707" blue="0.63936203719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -676,13 +676,14 @@
                                     <constraint firstAttribute="trailing" secondItem="Put-Eq-spD" secondAttribute="trailing" id="lTh-th-Fkw"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egX-eL-qsj">
-                                <rect key="frame" x="0.0" y="387" width="300" height="63"/>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" translatesAutoresizingMaskIntoConstraints="NO" id="egX-eL-qsj">
+                                <rect key="frame" x="0.0" y="257" width="300" height="63"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4X-99-0Q0">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4X-99-0Q0">
                                         <rect key="frame" x="130" y="11" width="40" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="JjP-JL-4wQ"/>
                                             <constraint firstAttribute="width" secondItem="B4X-99-0Q0" secondAttribute="height" multiplier="1:1" id="RFd-zC-juT"/>
                                         </constraints>
                                         <state key="normal" image="send_icon">
@@ -695,28 +696,29 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.27556409399999998" green="0.79357709320000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="B4X-99-0Q0" firstAttribute="leading" secondItem="egX-eL-qsj" secondAttribute="leading" constant="130" id="9z9-Fr-DyX"/>
+                                    <constraint firstAttribute="height" constant="63" id="G7U-ye-kkW"/>
                                     <constraint firstAttribute="bottom" secondItem="B4X-99-0Q0" secondAttribute="bottom" constant="12" id="Okl-QM-H1Y"/>
                                     <constraint firstItem="B4X-99-0Q0" firstAttribute="top" secondItem="egX-eL-qsj" secondAttribute="top" constant="11" id="UL2-37-2f5"/>
-                                    <constraint firstAttribute="trailing" secondItem="B4X-99-0Q0" secondAttribute="trailing" constant="130" id="ybG-GP-cbt"/>
+                                    <constraint firstItem="B4X-99-0Q0" firstAttribute="centerX" secondItem="egX-eL-qsj" secondAttribute="centerX" id="plJ-tW-68p"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="egX-eL-qsj" secondAttribute="trailing" id="0zJ-ih-zDo"/>
-                            <constraint firstItem="M0y-Fd-06c" firstAttribute="top" secondItem="6pd-vL-qL8" secondAttribute="bottom" constant="40" id="2cn-rf-ctL"/>
                             <constraint firstItem="QXk-O2-yZk" firstAttribute="top" secondItem="egX-eL-qsj" secondAttribute="bottom" id="df1-kQ-2pn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="M0y-Fd-06c" secondAttribute="trailing" constant="10" id="jl0-Fs-oAN"/>
                             <constraint firstItem="egX-eL-qsj" firstAttribute="leading" secondItem="aq6-0G-9iu" secondAttribute="leading" id="knL-0J-sJ3"/>
                             <constraint firstItem="M0y-Fd-06c" firstAttribute="leading" secondItem="aq6-0G-9iu" secondAttribute="leadingMargin" constant="8" id="p5d-I0-UAR"/>
+                            <constraint firstItem="M0y-Fd-06c" firstAttribute="top" secondItem="6pd-vL-qL8" secondAttribute="bottom" constant="37" id="uh1-oR-UO6"/>
+                            <constraint firstItem="egX-eL-qsj" firstAttribute="top" secondItem="M0y-Fd-06c" secondAttribute="bottom" constant="40" id="zky-pz-XXP"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="450"/>
+                    <size key="freeformSize" width="300" height="320"/>
                     <connections>
                         <outlet property="dateTextField" destination="Ez3-kD-zDB" id="Lby-wO-KDg"/>
                         <outlet property="placeTextField" destination="sgM-kp-PTL" id="LPq-Ne-i2s"/>

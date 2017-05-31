@@ -27,8 +27,8 @@ final class InvitePopoverVC: UIViewController {
     var locationManager: LocationManager!
     var location: String?
     var locationSet: Bool = false
-    var resultSearchController: UISearchController? = nil
-    var selectedPin: MKPlacemark? = nil
+    var resultSearchController: UISearchController?
+    var selectedPin: MKPlacemark?
 
     var delegate: InviteDelegate?
     
@@ -78,7 +78,7 @@ final class InvitePopoverVC: UIViewController {
     }
     
     /// Method to check if the invitation information is nil or not
-    func inviteComplete() -> Bool {
+    fileprivate func inviteComplete() -> Bool {
         
         if let date = dateTextField.text, let time = timeTextField.text, let location = placeTextField.text {
             // TODO: Change the location because this is just a default value

@@ -37,6 +37,7 @@ extension SearchVC {
         label.textColor = UIColor.red
     }
     
+    // TODO: Make this an extension
     // Method to change the sign up labels back to its original
     func normalizeLabels(labelTitle: String, label: UILabel) {
         // Changing the label into the useful error message
@@ -64,7 +65,9 @@ extension SearchVC {
             return
         }
         
-        view.frame.size = CGSize(width: self.view.frame.width * 0.90, height: self.view.frame.height * 0.95)
+        view.frame.size = CGSize(
+            width: self.view.frame.width * 0.90,
+            height: self.view.frame.height * 0.95)
         view.center = self.view.center
         view.layer.cornerRadius = 12
         view.layer.masksToBounds = true

@@ -43,7 +43,7 @@ final class User: Hashable, Equatable {
         self.uid = uid
     }
     
-    
+    // MARK: TODO: Use initializer delegation
     init(snapshot: FIRDataSnapshot) {
         
         let snapshotValue = snapshot.value as! [String : AnyObject]
@@ -83,7 +83,7 @@ final class User: Hashable, Equatable {
         portrait = portraitsData as! String
         email = emailData as! String
         uid = uidata as! String
-    
+        
     }
     
     func toAnyObject() -> NSDictionary {

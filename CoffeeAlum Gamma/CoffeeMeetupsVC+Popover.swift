@@ -27,7 +27,7 @@ extension CoffeeMeetupsVC {
         
         popoverContent.preferredContentSize = CGSize(
             width: self.view.frame.width * 0.85,
-            height: self.view.frame.height * 0.85
+            height: self.view.frame.height * 0.3
         )
         
         popover?.delegate = self
@@ -36,7 +36,7 @@ extension CoffeeMeetupsVC {
         
         popoverContent.popoverPresentationController?.sourceRect = CGRect(
             x: self.view.center.x,
-            y: self.view.center.y,
+            y: self.view.center.y * 1.8,
             width: 0,
             height: 0
         )
