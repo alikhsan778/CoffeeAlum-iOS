@@ -28,15 +28,18 @@ final class InvitationVC: UIViewController {
     @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var declineButtonOutlet: UIButton!
+    @IBOutlet var rescheduleView: UIView!
+    @IBOutlet weak var rescheduleTextView: UITextView!
+    
     
     weak var delegate: CoffeeMeetupsDelegate?
     var invitation: Invitation!
     var invitationID: String!
     var invitationState: InvitationState!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
-        
-        setupUIElements()
+    
         // Assigning the invitation ID
         invitationID = invitation?.coffee.id
         
@@ -45,16 +48,29 @@ final class InvitationVC: UIViewController {
             invitationState = .rescheduled
         }
         
+        
         // TODO: DRY, this can be added in an extension
         let profileURL = invitation.user.portrait
         let url = URL(string: profileURL)
         profilePicture.sd_setImage(with: url)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupUIElements()
+        
+    }
+    
     func setupUIElements() {
         personInvitingLabel.text = invitation?.user.name
         dateAndTimeLabel.text = invitation?.coffee.date
         placeLabel.text = invitation?.coffee.location
+        
+        setupRescheduleView(view: rescheduleView)
+    }
+    
+    override func viewDidLayoutSubviews() {
         profilePicture.circularize()
     }
     
@@ -75,23 +91,16 @@ final class InvitationVC: UIViewController {
             // Removes the item from the cell
             delegate?.deleteCoffeeMeetupSelected()
             
+            // Dismisses the popover
+            self.dismiss(animated: true, completion: nil)
+            
         } else if declineButtonTitle == "Reschedule" {
             
-            // Sends a reschedule request
-            APIClient.rescheduleInvitation(with: invitationID)
-            // Must decline invitation as well
-            APIClient.declineInvitation(
-                with: invitationID,
-                state: .rescheduled
-            )
-            
-            // Removes the item from the cell
-            delegate?.deleteCoffeeMeetupSelected()
+            // TODO: Display the reschedule message
+            setupPopover(view: rescheduleView)
             
         }
     
-        // Dismisses the popover
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func acceptButtonAction(_ sender: UIButton) {
@@ -105,5 +114,90 @@ final class InvitationVC: UIViewController {
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func sendRescheduleMessageAction(_ sender: UIButton) {
+        
+        guard let rescheduleMessage = rescheduleTextView.text else {
+            // TODO: Throw an error
+            return
+        }
+        
+        // Sends a reschedule request
+        APIClient.rescheduleInvitation(
+            with: invitationID,
+            message: rescheduleMessage
+        )
+        // Must decline invitation as well
+        APIClient.declineInvitation(
+            with: invitationID,
+            state: .rescheduled
+        )
+        
+        // Removes the item from the cell
+        delegate?.deleteCoffeeMeetupSelected()
+        
+        dismissPopover(view: rescheduleView)
+        
+        // Dismisses the popover
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    
+    
+    @IBAction func cancelRescheduleButtonAction(_ sender: UIButton) {
+        
+        dismissPopover(view: rescheduleView)
+        
+    }
+    
+    func setupRescheduleView(view: UIView) {
+        
+        view.isHidden = true
+        
+        view.frame.size = CGSize(
+            width: self.view.frame.width,
+            height: self.view.frame.height
+        )
+        view.center = self.view.center
+        self.view!.addSubview(view)
+    
+    }
+    
+    
+    func setupPopover(view: UIView) {
+        
+        view.isHidden = false
+        
+        view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        
+        // Bringing the popover view to front
+        self.view!.bringSubview(toFront: view)
+        
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: { () -> Void in
+            
+            view.transform = CGAffineTransform.identity
+            view.alpha = 1
+            
+        }, completion: nil)
+        
+    }
+    
+    // Method to dimiss the popover
+    func dismissPopover(view: UIView) {
+        
+        // Animation to dismiss the popover
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {() -> Void in
+            
+            // Animation to scale before disappearing
+            view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            view.alpha = 0
+        
+        }, completion: { (success: Bool) in
+            view.isHidden = true
+        })
+        
+    }
+
     
 }

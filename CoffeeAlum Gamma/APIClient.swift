@@ -48,9 +48,11 @@ final class APIClient {
         }
     }
     
-    static func rescheduleInvitation(with id: String) {
+    static func rescheduleInvitation(with id: String, message: String) {
+        
         let invitationReference = coffeeReference.child(id)
         invitationReference.child("rescheduled").setValue(true)
+        invitationReference.child("message").setValue(message)
     }
     
     // MARK: - CoffeeData Manager 

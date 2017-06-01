@@ -43,7 +43,7 @@
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-S8-pJC" customClass="DesignableView" customModule="Spring">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="119"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gmail logo " translatesAutoresizingMaskIntoConstraints="NO" id="W3o-Ds-dGF">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Gmail logo " translatesAutoresizingMaskIntoConstraints="NO" id="W3o-Ds-dGF">
                                                             <rect key="frame" x="15" y="23" width="73" height="73"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="W3o-Ds-dGF" secondAttribute="height" multiplier="1:1" id="Upy-ya-SPh"/>
@@ -270,9 +270,60 @@
                         <outlet property="personInvitingLabel" destination="gfy-UP-hAK" id="O5z-Co-zes"/>
                         <outlet property="placeLabel" destination="CwH-co-kaa" id="a3w-Wk-eaC"/>
                         <outlet property="profilePicture" destination="eGz-sL-Mw0" id="bb2-0C-Z3t"/>
+                        <outlet property="rescheduleTextView" destination="Oy1-31-fsV" id="pUa-vc-DeJ"/>
+                        <outlet property="rescheduleView" destination="w3B-nM-mXN" id="p3O-ku-QcU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ex3-9l-HDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="w3B-nM-mXN">
+                    <rect key="frame" x="0.0" y="0.0" width="323" height="174"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oy1-31-fsV">
+                            <rect key="frame" x="16" y="51.333333333333329" width="291" height="122.66666666666667"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add your message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tkw-FG-JIi">
+                            <rect key="frame" x="90.333333333333343" y="11" width="142.66666666666669" height="32.333333333333336"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GrW-GH-zgz">
+                            <rect key="frame" x="271" y="12" width="36" height="30"/>
+                            <state key="normal" title="Send"/>
+                            <connections>
+                                <action selector="sendRescheduleMessageAction:" destination="qlu-nJ-Odz" eventType="touchUpInside" id="SCu-af-Shz"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkS-ZY-Mao">
+                            <rect key="frame" x="16" y="12" width="48" height="30"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="1" green="0.38701968395860908" blue="0.2414976509209964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelRescheduleButtonAction:" destination="qlu-nJ-Odz" eventType="touchUpInside" id="4Xg-4q-yAb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="DkS-ZY-Mao" firstAttribute="leading" secondItem="w3B-nM-mXN" secondAttribute="leading" constant="16" id="0tQ-Rt-IBf"/>
+                        <constraint firstAttribute="trailing" secondItem="Oy1-31-fsV" secondAttribute="trailing" constant="16" id="7b0-If-Tg8"/>
+                        <constraint firstItem="Oy1-31-fsV" firstAttribute="leading" secondItem="w3B-nM-mXN" secondAttribute="leading" constant="16" id="J3g-gk-iWh"/>
+                        <constraint firstItem="Oy1-31-fsV" firstAttribute="top" secondItem="DkS-ZY-Mao" secondAttribute="bottom" constant="9.3300000000000001" id="JLv-Bt-JTT"/>
+                        <constraint firstItem="GrW-GH-zgz" firstAttribute="top" secondItem="w3B-nM-mXN" secondAttribute="top" constant="12" id="LqT-s3-Tw0"/>
+                        <constraint firstItem="Oy1-31-fsV" firstAttribute="top" secondItem="Tkw-FG-JIi" secondAttribute="bottom" constant="8" id="Lz4-d3-iyb"/>
+                        <constraint firstAttribute="trailing" secondItem="GrW-GH-zgz" secondAttribute="trailing" constant="16" id="dfL-qy-Joq"/>
+                        <constraint firstItem="Tkw-FG-JIi" firstAttribute="centerX" secondItem="w3B-nM-mXN" secondAttribute="centerX" id="iXn-gl-WJr"/>
+                        <constraint firstItem="DkS-ZY-Mao" firstAttribute="top" secondItem="w3B-nM-mXN" secondAttribute="top" constant="12" id="ibN-Ce-6WC"/>
+                        <constraint firstItem="Oy1-31-fsV" firstAttribute="top" secondItem="GrW-GH-zgz" secondAttribute="bottom" constant="9.3300000000000001" id="tvf-Nb-Gvb"/>
+                        <constraint firstItem="Tkw-FG-JIi" firstAttribute="top" secondItem="w3B-nM-mXN" secondAttribute="top" constant="11" id="xBx-Om-BEV"/>
+                        <constraint firstAttribute="bottom" secondItem="Oy1-31-fsV" secondAttribute="bottom" id="xz6-Wb-w2k"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="3402.898550724638" y="191.57608695652175"/>
         </scene>
@@ -280,7 +331,7 @@
         <scene sceneID="eQN-si-OUX">
             <objects>
                 <navigationController navigationBarHidden="YES" id="9TN-6w-SEL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m7e-nL-k8w">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m7e-nL-k8w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
