@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 
 final class SignUpVC: UIViewController, UITextFieldDelegate {
@@ -95,9 +96,10 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
     }
   
     @IBAction func googleLoginButtonAction(_ sender: UIButton) {
-        
-        
-        
+        // Sign in using Google account
+        APIClient.googleSignIn()
+        // Present SearchVC
+        presentSearchViewController()
     }
     
     // MARK: - Firebase Methods
@@ -218,16 +220,9 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
     }
     
     // Method to allow the next view controller to be presented
-    private func presentSearchViewController(with reference: FIRDatabaseReference, email: String) {
+    fileprivate func presentSearchViewController(with reference: FIRDatabaseReference, email: String) {
         
-        // Accessing the App Delegate
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-        
-        // Present the next view controller
-        appDelegate?.window?.rootViewController = swRevealViewController
+        presentSearchViewController()
         
         // Create Firebase path for this user and save email
         let emailDictionary = ["email": "\(email)"]
@@ -238,6 +233,17 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
             
         }
  
+    }
+    
+    fileprivate func presentSearchViewController() {
+        // Accessing the App Delegate
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        
+        // Present the next view controller
+        appDelegate?.window?.rootViewController = swRevealViewController
     }
     
     // Method to show useful error message

@@ -11,7 +11,6 @@ import Firebase
 import GoogleSignIn
 
 
-
 final class SidebarMenuVC: UIViewController {
     
     
@@ -28,6 +27,7 @@ final class SidebarMenuVC: UIViewController {
     
     @IBAction func logOutButtonAction(_ sender: UIButton) {
         APIClient.signOut()
+        APIClient.googleSignOut()
         transitionToSignInVC()
     }
     

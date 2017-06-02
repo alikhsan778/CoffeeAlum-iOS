@@ -89,10 +89,11 @@ final class SignInVC: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate
         
     }
     
-    
+    // TODO: Integrate Google Sign In
     @IBAction func googleSignInButton(_ sender: UIButton) {
         // Sign in using Google account
-        GIDSignIn.sharedInstance().signIn()
+        APIClient.googleSignIn()
+        presentHomeViewController()
     }
     
     

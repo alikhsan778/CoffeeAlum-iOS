@@ -59,6 +59,7 @@ final class InvitationVC: UIViewController {
         super.viewDidAppear(animated)
         
         setupUIElements()
+        profilePicture.circularize()
         
     }
     
@@ -71,7 +72,7 @@ final class InvitationVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        profilePicture.circularize()
+        
     }
     
     
@@ -151,6 +152,8 @@ final class InvitationVC: UIViewController {
         
     }
     
+    
+    // MARK: - Methods
     func setupRescheduleView(view: UIView) {
         
         view.isHidden = true

@@ -8,6 +8,8 @@
 
 import Firebase
 import FirebaseStorage
+import GoogleSignIn
+
 
 final class APIClient {
     
@@ -114,6 +116,15 @@ final class APIClient {
         })
 
     }
+    
+    static func googleSignIn() {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    static func googleSignOut() {
+        GIDSignIn.sharedInstance().signOut()
+    }
+    
     
     // MARK: - Retrieve User Information
     static func retrieveUserInformation() {

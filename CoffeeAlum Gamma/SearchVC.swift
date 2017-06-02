@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import GoogleSignIn
 
 
 final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
@@ -61,6 +62,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     var location: String!
     var account: AccountType!
     var uid: String = FIRAuth.auth()!.currentUser!.uid
+    
     
     // MARK: - Overrided Methods
     override func viewWillAppear(_ animated: Bool) {

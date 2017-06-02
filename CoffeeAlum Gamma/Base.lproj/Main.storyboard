@@ -285,7 +285,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add your message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tkw-FG-JIi">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add your message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tkw-FG-JIi">
                             <rect key="frame" x="90.333333333333343" y="11" width="142.66666666666669" height="32.333333333333336"/>
                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                             <nil key="textColor"/>
@@ -316,9 +316,11 @@
                         <constraint firstItem="Oy1-31-fsV" firstAttribute="top" secondItem="DkS-ZY-Mao" secondAttribute="bottom" constant="9.3300000000000001" id="JLv-Bt-JTT"/>
                         <constraint firstItem="GrW-GH-zgz" firstAttribute="top" secondItem="w3B-nM-mXN" secondAttribute="top" constant="12" id="LqT-s3-Tw0"/>
                         <constraint firstItem="Oy1-31-fsV" firstAttribute="top" secondItem="Tkw-FG-JIi" secondAttribute="bottom" constant="8" id="Lz4-d3-iyb"/>
+                        <constraint firstItem="Tkw-FG-JIi" firstAttribute="leading" secondItem="DkS-ZY-Mao" secondAttribute="trailing" constant="26.333333333333343" id="V71-Pw-kft"/>
                         <constraint firstAttribute="trailing" secondItem="GrW-GH-zgz" secondAttribute="trailing" constant="16" id="dfL-qy-Joq"/>
                         <constraint firstItem="Tkw-FG-JIi" firstAttribute="centerX" secondItem="w3B-nM-mXN" secondAttribute="centerX" id="iXn-gl-WJr"/>
                         <constraint firstItem="DkS-ZY-Mao" firstAttribute="top" secondItem="w3B-nM-mXN" secondAttribute="top" constant="12" id="ibN-Ce-6WC"/>
+                        <constraint firstItem="GrW-GH-zgz" firstAttribute="leading" secondItem="Tkw-FG-JIi" secondAttribute="trailing" constant="37.999999999999972" id="nxZ-aj-Nrg"/>
                         <constraint firstItem="Oy1-31-fsV" firstAttribute="top" secondItem="GrW-GH-zgz" secondAttribute="bottom" constant="9.3300000000000001" id="tvf-Nb-Gvb"/>
                         <constraint firstItem="Tkw-FG-JIi" firstAttribute="top" secondItem="w3B-nM-mXN" secondAttribute="top" constant="11" id="xBx-Om-BEV"/>
                         <constraint firstAttribute="bottom" secondItem="Oy1-31-fsV" secondAttribute="bottom" id="xz6-Wb-w2k"/>
