@@ -63,6 +63,27 @@ final class InvitationVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        guard let window = UIApplication.shared.keyWindow?.frame else {
+            return
+        }
+        
+        self.preferredContentSize = CGSize(
+            width: window.width * 0.9,
+            height: window.height * 0.35
+        )
+        
+        self.popoverPresentationController?.sourceRect = CGRect(
+            x: window.midX,
+            y: window.midY * 1.8,
+            width: 0,
+            height: 0
+        )
+        
+        self.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+    }
+    
     func setupUIElements() {
         personInvitingLabel.text = invitation?.user.name
         dateAndTimeLabel.text = invitation?.coffee.date

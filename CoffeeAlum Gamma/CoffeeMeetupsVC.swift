@@ -23,6 +23,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     var collectionViewSection: Int?
     var allCoffee = Set<Invitation>()
     var db = FIRDatabase.database().reference()
+    var refreshController = UIRefreshControl()
     
     var coffeeRef: FIRDatabaseReference {
         get {
@@ -80,6 +81,8 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         
         // Retreives the invites
         retrieveCoffeeData()
+        // Setup refresh controller
+        setupRefreshController()
     }
 
     
@@ -95,6 +98,20 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     @IBAction func sidebarMenuButtonAction(_ sender: UIButton) {
         
         
+    }
+    
+    fileprivate func setupRefreshController() {
+        refreshController.addTarget(self,
+                                    action: #selector(refreshStream),
+                                    for: .valueChanged)
+        collectionView.addSubview(refreshController)
+        collectionView.alwaysBounceVertical = true
+    }
+    
+    
+    @objc fileprivate func refreshStream() {
+        collectionView.reloadData()
+        refreshController.endRefreshing()
     }
     
     

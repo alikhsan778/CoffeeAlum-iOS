@@ -22,26 +22,11 @@ extension CoffeeMeetupsVC {
         
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
         
-        // Popover presentation controller
-        let popover = popoverContent.popoverPresentationController
-        
-        popoverContent.preferredContentSize = CGSize(
-            width: self.view.frame.width * 0.85,
-            height: self.view.frame.height * 0.3
-        )
-        
-        popover?.delegate = self
-        
         popoverContent.popoverPresentationController?.sourceView = self.view
         
-        popoverContent.popoverPresentationController?.sourceRect = CGRect(
-            x: self.view.center.x,
-            y: self.view.center.y * 1.8,
-            width: 0,
-            height: 0
-        )
-        
-        popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        // Popover presentation controller
+        let popover = popoverContent.popoverPresentationController
+        popover?.delegate = self
         
         self.present(
             popoverContent,

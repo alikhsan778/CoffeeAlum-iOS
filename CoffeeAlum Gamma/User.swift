@@ -101,9 +101,9 @@ final class User: Hashable, Equatable {
             "location": location,
             "portrait": portrait,
             "email": email,
-            "linkedIn": linkedIn,
-            "bio": bio,
-            "website": website,
+            "linkedIn": "",
+            "bio": "",
+            "website": "",
             "uid": uid
         ]
     }

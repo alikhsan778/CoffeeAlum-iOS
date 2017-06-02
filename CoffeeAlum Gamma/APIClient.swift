@@ -144,7 +144,10 @@ final class APIClient {
             "location": user.location,
             "portrait": user.portrait,
             "email": user.email,
-            "uid": user.uid
+            "uid": user.uid,
+            "linkedIn": user.linkedIn,
+            "website": user.website,
+            "bio": user.bio
         ]
         
         userReference.child(uid).setValue(toJSON)
