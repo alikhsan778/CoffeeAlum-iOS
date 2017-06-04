@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 
+/// Change to struct
 final class Coffee {
     
     var date: String = "TBD"
@@ -25,6 +26,7 @@ final class Coffee {
     var accepted: Bool = false
     var rescheduled: Bool = false
     var viewed: Bool = false
+    // TODO: Change this to a constant
     var id: String = ""
     var ref: FIRDatabaseReference = FIRDatabase.database().reference().child("coffees")
     

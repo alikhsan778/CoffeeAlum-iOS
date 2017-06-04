@@ -11,6 +11,7 @@ import Foundation
 import UIKit
 import Firebase
 
+/// TODO: Change to struct
 final class User: Hashable, Equatable {
     
     var name: String = ""
@@ -28,10 +29,10 @@ final class User: Hashable, Equatable {
     var portrait: String = ""
     var uid: String = ""
     var ref: FIRDatabaseReference?
-    var db = FIRDatabase.database().reference().child("users")
+    static let db = FIRDatabase.database().reference().child("users")
     
     var hashValue: Int {
-        return self.uid.hashValue
+        return uid.hashValue
     }
     
     init(name: String, account: AccountType, education: String, location: String, email: String, uid: String) {
@@ -87,7 +88,7 @@ final class User: Hashable, Equatable {
     }
     
     func toAnyObject() -> NSDictionary {
-   
+        
         // TODO: Eliminate the redundancy below time permitting
         // Each Id is its own key for ease of access
         // coffeeIds.map({coffeeIdDict[$0] = $0})
@@ -112,7 +113,7 @@ final class User: Hashable, Equatable {
     func save() {
         let id = FIRAuth.auth()!.currentUser!.uid
         if self.ref == nil {
-            self.ref = db.child(id)
+            self.ref = User.db.child(id)
         }
         self.ref!.setValue(self.toAnyObject())
     }

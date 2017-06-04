@@ -9,7 +9,20 @@
 import UIKit
 import MapKit
 
+//extension MKPlacemark {
+//    
+//    ///
+//    var parsedAddress: String {
+//        return ""
+//    }
+//    
+//}
+
 final class LocationSearchTableVC: UITableViewController {
+    
+//    var mainView:  {
+//        return view as! MainView
+//    }
     
     var matchingItems: [MKMapItem] = []
     var mapView: MKMapView? = nil
@@ -25,6 +38,7 @@ final class LocationSearchTableVC: UITableViewController {
     }
     
     
+    // TODO: Extend MKPlacemark
     func parseAddress(selectedItem:MKPlacemark) -> String {
         // put a space between "4" and "Melrose Place"
         let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""

@@ -31,6 +31,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         }
     }
     
+    // TODO: Getters and setters change it to fitler coffee
     var pendingCoffee: [Invitation] {
         get {
             return Array(allCoffee).filter {
@@ -142,7 +143,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
                         user: meetingUser
                     )
                     
-                    self.insertCoffee(with: invitation!)
+                    self.insertCoffee(with: invitation)
                     
                 })
             }
@@ -167,7 +168,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
                         user: meetingUser
                     )
                     
-                    self.insertCoffee(with: invitation!)
+                    self.insertCoffee(with: invitation)
                     
                 })
             }

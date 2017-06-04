@@ -135,6 +135,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         let studyInCondition = checkIfTextFieldHasBeenFilled(for: studiedInTextField, showStatusIn: studiedInLabel)
         let locationCondition = checkIfTextFieldHasBeenFilled(for: cityUserLivesTextField, showStatusIn: cityLocationLabel)
         
+        // TODO: Change name convention to "is.."
         if (nameCondition == true) && (studyInCondition == true) && (locationCondition == true) {
             
             // Build a user object
@@ -142,7 +143,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
             education = studiedInTextField.text
             location = cityUserLivesTextField.text
             
-            self.thisUser = User(
+            thisUser = User(
                 name: name,
                 account: .alum,
                 education: education,

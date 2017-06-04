@@ -17,6 +17,7 @@ protocol InviteDelegate {
 
 final class InvitePopoverVC: UIViewController {
     
+    // TODO: MAKE FILEPRIVATE
     var viewedUser: User?
     var thisUser: User?
     var date: String?

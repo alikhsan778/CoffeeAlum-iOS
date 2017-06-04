@@ -13,7 +13,11 @@ struct Invitation: Hashable, Equatable {
     var coffee: Coffee
     var user: User
     
-    init?(coffee: Coffee, user: User) {
+    var hashValue: Int {
+        return "\(user.uid)/\(coffee.id)".hashValue
+    }
+
+    init(coffee: Coffee, user: User) {
         self.coffee = coffee
         self.user = user
     }
@@ -27,15 +31,7 @@ struct Invitation: Hashable, Equatable {
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
     static func ==(lhs: Invitation, rhs: Invitation) -> Bool {
-        if lhs.coffee.id == rhs.coffee.id {
-            return true
-        }
-        
-        return false
-    }
-
-    var hashValue: Int {
-        return 0
+        return lhs.coffee.id == rhs.coffee.id
     }
     
 }

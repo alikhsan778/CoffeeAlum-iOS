@@ -27,7 +27,7 @@ extension PersonalProfileVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(self.view.frame.height * 0.8)
+        return CGFloat(view.frame.height * 0.8)
     }
     
 }

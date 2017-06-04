@@ -43,7 +43,7 @@ final class InvitationVC: UIViewController {
         // Assigning the invitation ID
         invitationID = invitation?.coffee.id
         
-        if invitation.coffee.accepted == true {
+        if invitation.coffee.accepted {
             declineButtonOutlet.setTitle("Reschedule", for: .normal)
             invitationState = .rescheduled
         }
@@ -63,12 +63,14 @@ final class InvitationVC: UIViewController {
         
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         
         guard let window = UIApplication.shared.keyWindow?.frame else {
             return
         }
         
+        // TODO: Move this to viewDidAppear
         self.preferredContentSize = CGSize(
             width: window.width * 0.9,
             height: window.height * 0.35
