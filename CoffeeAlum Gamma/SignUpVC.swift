@@ -14,6 +14,9 @@ import GoogleSignIn
 final class SignUpVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBOutlets
+    @IBOutlet var mainView: SignUpVCMainView!
+    
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var backingView: UIView!
@@ -56,12 +59,6 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
         backingView.addPresetCornerRadius()
         // Adding shadow
         // shadowView.addPresetShadow()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-
     }
     
     
@@ -265,6 +262,7 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return true
     }
+    
     
     
 }

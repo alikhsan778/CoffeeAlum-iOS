@@ -10,7 +10,7 @@ import Firebase
 import FirebaseStorage
 import GoogleSignIn
 
-
+// TODO: Potentially make the APIClient not Firebase specific
 final class APIClient {
     
     fileprivate static let uid = FIRAuth.auth()!.currentUser!.uid
