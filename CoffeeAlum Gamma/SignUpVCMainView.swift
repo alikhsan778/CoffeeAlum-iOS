@@ -25,9 +25,13 @@ class SignUpVCMainView: UIView {
     
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         
-        let emailCondition = hasFullfilledEmailRequirementsIn(emailAddressTextField: emailAddressTextField)
-        let passwordCondition = hasFulfilledPasswordRequirementsIn(textField: passwordTextField)
+        /*
+        let emailCondition = hasFullfilledEmailRequirements()
+        let passwordCondition = hasFulfilledPasswordRequirements()
         let confirmPasswordCondition = hasFulfilledConfirmPasswordRequirements()
+        */
+        
+        
         
     }
     
@@ -58,7 +62,7 @@ class SignUpVCMainView: UIView {
     }
     
     // Method to check if email address entered fulfills the requirements
-    private func hasFullfilledEmailRequirementsIn(emailAddressTextField: UITextField) -> Bool {
+    private func hasFullfilledEmailRequirements() -> Bool {
         // Checks if the email address text field is empty
         if emailAddressTextField.text?.isEmpty == true {
             
@@ -156,21 +160,29 @@ class SignUpVCMainView: UIView {
     }
     
     // Method that returns a Bool if the new password requirement is fulfilled
-    private func hasFulfilledPasswordRequirementsIn(textField: UITextField) -> Bool {
+    private func hasFulfilledPasswordRequirements() -> Bool {
         // Checks if the text field is empty to give an appropriate warning
-        if textField.text?.isEmpty == true {
+        if passwordTextField.text?.isEmpty == true {
             // TODO: TODO: Popup "Please enter your new password" alert
             displayUsefulErrorMessage(errorMessage: "Please enter your new password", label: passwordTitleLabel)
             print("Please enter your new password")
             
             // Checks if the password text field is has enough characters
-        } else if hasEnoughCharactersIn(textField: textField) == true {
-            normalizeLabels(labelTitle: "Password", label: passwordTitleLabel)
+        } else if hasEnoughCharactersIn(textField: passwordTextField) {
+            
+            normalizeLabels(
+                labelTitle: "Password",
+                label: passwordTitleLabel
+            )
+            
             return true
             
         } else {
             // TODO: TODO: Popup "You need to have at least 6 characters" alert
-            displayUsefulErrorMessage(errorMessage: "Password needs at least 6 characters", label: passwordTitleLabel)
+            displayUsefulErrorMessage(
+                errorMessage: "Password needs at least 6 characters",
+                label: passwordTitleLabel
+            )
             print("You need to have at least 6 characters")
         }
         

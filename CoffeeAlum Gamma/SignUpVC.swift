@@ -40,18 +40,13 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
 
     var userRef:FIRDatabaseReference = FIRDatabase.database().reference().child("users")
     
-    // MARK: - Overrided Methods
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Checks if the text field is being editted or not
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        confirmPasswordTextField.delegate = self
+        
+        
+        setupTextFieldDelegates()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,7 +95,7 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Firebase Methods
-    func firabaseDatabaseReference() {
+    fileprivate func firabaseDatabaseReference() {
         let ref = FIRDatabase.database().reference(fromURL: "https://coffeealum-beta-c723a.firebaseio.com/")
         // TODO: Save the name of user
         let values = ["name" : emailTextField.text, "email": emailTextField.text]
@@ -113,6 +108,14 @@ final class SignUpVC: UIViewController, UITextFieldDelegate {
                 print(errorValue!)
             }
         }
+    }
+    
+    fileprivate func setupTextFieldDelegates() {
+        
+        mainView.emailAddressTextField.delegate = self
+        mainView.passwordTextField.delegate = self
+        mainView.confirmPasswordTextField.delegate = self
+        
     }
     
     
