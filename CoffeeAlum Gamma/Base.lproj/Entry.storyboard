@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dDu-87-vJj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dDu-87-vJj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -141,7 +141,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="signUpButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T7i-hK-q3d"/>
                                             <action selector="signUpButtonAction:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="dTe-2W-gL4"/>
                                         </connections>
                                     </button>
@@ -163,7 +162,6 @@
                                                 </constraints>
                                                 <state key="normal" image="Gmail logo "/>
                                                 <connections>
-                                                    <action selector="googleLoginButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vA6-qA-rPc"/>
                                                     <action selector="googleSignUpButtonAction:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="Qnp-3S-4t0"/>
                                                 </connections>
                                             </button>
@@ -274,6 +272,7 @@
                             <constraint firstItem="VLB-bh-LtX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j8p-Wc-s6h"/>
                         </constraints>
                         <connections>
+                            <outlet property="backingView" destination="VLB-bh-LtX" id="2Yp-Cd-PmN"/>
                             <outlet property="confirmPasswordTextField" destination="uXH-kn-Mko" id="Fu5-eN-rvv"/>
                             <outlet property="confirmPasswordTitleLabel" destination="fHN-4n-cJP" id="JuF-9J-nHc"/>
                             <outlet property="emailAddressLabel" destination="KIB-R0-BJB" id="cYZ-gL-joK"/>
@@ -285,14 +284,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="backingView" destination="VLB-bh-LtX" id="lW3-af-zx9"/>
-                        <outlet property="confirmPasswordLabel" destination="fHN-4n-cJP" id="VAT-Om-Ofv"/>
-                        <outlet property="confirmPasswordTextField" destination="uXH-kn-Mko" id="7Jl-JX-I81"/>
-                        <outlet property="emailAddressLabel" destination="KIB-R0-BJB" id="PPP-V0-xVb"/>
-                        <outlet property="emailTextField" destination="yEO-4W-aT1" id="k4e-BJ-NSZ"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="eoW-sQ-FZs"/>
-                        <outlet property="passwordLabel" destination="o3q-pA-OVM" id="JGr-YL-kkm"/>
-                        <outlet property="passwordTextField" destination="Mx2-lP-aYf" id="UYG-qj-ZX0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

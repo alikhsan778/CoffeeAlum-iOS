@@ -7,75 +7,97 @@
 //
 
 import UIKit
+import Firebase
 
 
-class SignUpVCMainView: UIView {
+final class SignUpVCMainView: UIView {
     
     @IBOutlet weak var emailAddressLabel: UILabel!
-    
     @IBOutlet weak var passwordTitleLabel: UILabel!
-    
     @IBOutlet weak var confirmPasswordTitleLabel: UILabel!
-    
     @IBOutlet weak var emailAddressTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var backingView: UIView!
+    
     
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         
-        /*
-        let emailCondition = hasFullfilledEmailRequirements()
-        let passwordCondition = hasFulfilledPasswordRequirements()
-        let confirmPasswordCondition = hasFulfilledConfirmPasswordRequirements()
-        */
+        guard let email = emailAddressTextField.text, let password = passwordTextField.text else {
+            return
+        }
         
-        
+        if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
+            
+            APIClient.signUp(with: email, password: password) { [weak self] (user, reference) in
+                
+                let userReference = reference.child(user.uid)
+                
+                // Create Firebase path for this user and save email
+                let emailDictionary = ["email": "\(email)"]
+                
+                // BUG: Format of the completion block must be correct
+                // because there is a bug in Firebase
+                userReference.setValue(emailDictionary) { (_, _) in
+                    
+                }
+                
+                self?.presentSearchViewController()
+                
+            }
+            
+        }
         
     }
     
     @IBAction func googleSignUpButtonAction(_ sender: UIButton) {
         
-        
+        // Sign in using Google account
+        APIClient.googleSignIn()
+        // Present SearchVC
+        presentSearchViewController()
         
     }
     
     // Method to change the sign up labels back to its original
-    func normalizeLabels(labelTitle: String, label: UILabel) {
+    fileprivate func normalizeLabels(labelTitle: String, label: UILabel) {
         // Changing the label into the useful error message
         label.text = labelTitle
         // Changing the color of the text to red
-        label.textColor = UIColor(colorLiteralRed: 116/255, green: 116/255, blue: 116/255, alpha: 1.0)
+        label.textColor = UIColor(
+            colorLiteralRed: 116/255,
+            green: 116/255,
+            blue: 116/255,
+            alpha: 1.0
+        )
     }
     
     // Method to show useful error message
-    func displayUsefulErrorMessage(errorMessage message: String, label: UILabel) {
+    fileprivate func displayUsefulErrorMessage(with message: String, label: UILabel) {
+        
         label.text = message
         label.textColor = UIColor.red
     }
     
-    // Method to hide the keyboard when the return button is pressed
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.endEditing(true)
-        return true
-    }
-    
     // Method to check if email address entered fulfills the requirements
-    private func hasFullfilledEmailRequirements() -> Bool {
-        // Checks if the email address text field is empty
-        if emailAddressTextField.text?.isEmpty == true {
+    fileprivate func emailRequirementsIsFulfilled() -> Bool {
+        
+        guard let _ = emailAddressTextField.text else {
             
-            // TODO: TODO: Popup "Please enter your email address" alert
             displayUsefulErrorMessage(
-                errorMessage: "Please enter your email address",
+                with: "Please enter your email address",
                 label: emailAddressLabel
             )
             
+            // TODO: TODO: Popup "Please enter your email address" alert
+            
             print("Please enter your email address")
             
-            // Validates the email address
-        } else if (validateEmailAddressIn(textField: emailAddressTextField) == true) {
+            return false
+        }
+            
+        // Validates the email address
+        if emailAddressIsValidated() {
             
             normalizeLabels(
                 labelTitle: "Email address",
@@ -85,9 +107,11 @@ class SignUpVCMainView: UIView {
             return true
             
         } else {
+            
             // TODO: TODO: Popup "Please enter a valid email address" alert
+            
             displayUsefulErrorMessage(
-                errorMessage: "Please enter a valid email address",
+                with: "Please enter a valid email address",
                 label: emailAddressLabel
             )
             
@@ -98,9 +122,9 @@ class SignUpVCMainView: UIView {
     }
     
     // Method to check if the password contains enough characters
-    private func hasEnoughCharactersIn(textField: UITextField) -> Bool {
+    fileprivate func passwordHasEnoughCharacters() -> Bool {
         // Number of characters in the text field
-        let characterCountInTextField = textField.text?.characters.count
+        let characterCountInTextField = passwordTextField.text?.characters.count
         // At least 6 characters is needed for the text field
         if characterCountInTextField! >= 6 {
             return true
@@ -110,42 +134,45 @@ class SignUpVCMainView: UIView {
     }
     
     // Method to check if the email address entered is valid
-    private func validateEmailAddressIn(textField: UITextField) -> Bool {
-        let emailAddress = textField.text
+    fileprivate func emailAddressIsValidated() -> Bool {
+        
+        let emailAddress = emailAddressTextField.text
         let emailRegularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         // Uses NSPredicate to filter through the email address string using the Regular Expression
         let emailCheck = NSPredicate(format:"SELF MATCHES %@", emailRegularExpression)
+        
         // Returns a Bool to check if the condition passes
         return emailCheck.evaluate(with: emailAddress)
     }
     
     // Method to check if the password entered matches the confirm password
-    private func passwordMatchesIn() -> Bool {
+    fileprivate func passwordMatches() -> Bool {
         
         let password = passwordTextField.text
-        let confirmPassword = confirmPasswordTextField.text
-        if password == confirmPassword {
+        let passwordConfirmation = confirmPasswordTextField.text
+        if password == passwordConfirmation {
             return true
         }
+        
         return false
     }
     
     // TODO: Refactor
     // Method that returns a Bool if the new password matches the confirmed password
-    private func hasFulfilledConfirmPasswordRequirements() -> Bool {
+    fileprivate func confirmPasswordRequirementsIsFulfilled() -> Bool {
         
         guard let _ = confirmPasswordTextField.text else {
             
             // TODO: TODO: Throw error
             
-            displayUsefulErrorMessage(errorMessage: "Please re-enter your new password", label: confirmPasswordTitleLabel)
+            displayUsefulErrorMessage(with: "Please re-enter your new password", label: confirmPasswordTitleLabel)
             print("Please re-enter your new password to confirm")
             
             return false
         }
         
-       if passwordMatchesIn() == true {
+       if passwordMatches() {
             
             normalizeLabels(labelTitle: "Confirm password", label: confirmPasswordTitleLabel)
             
@@ -153,22 +180,31 @@ class SignUpVCMainView: UIView {
             
         } else {
             // TODO: TODO: Popup "Your password does not match" alert
-            displayUsefulErrorMessage(errorMessage: "Your password does not match", label: confirmPasswordTitleLabel)
+            displayUsefulErrorMessage(with: "Your password does not match", label: confirmPasswordTitleLabel)
         }
         
         return false
     }
     
     // Method that returns a Bool if the new password requirement is fulfilled
-    private func hasFulfilledPasswordRequirements() -> Bool {
+    fileprivate func passwordRequirementsIsFulfilled() -> Bool {
         // Checks if the text field is empty to give an appropriate warning
-        if passwordTextField.text?.isEmpty == true {
+        
+        guard let _ = passwordTextField.text else {
+            
             // TODO: TODO: Popup "Please enter your new password" alert
-            displayUsefulErrorMessage(errorMessage: "Please enter your new password", label: passwordTitleLabel)
+            displayUsefulErrorMessage(
+                with: "Please enter your new password",
+                label: passwordTitleLabel
+            )
+            
             print("Please enter your new password")
             
-            // Checks if the password text field is has enough characters
-        } else if hasEnoughCharactersIn(textField: passwordTextField) {
+            return false
+        }
+        
+        // Checks if the password text field is has enough characters
+        if passwordHasEnoughCharacters() {
             
             normalizeLabels(
                 labelTitle: "Password",
@@ -178,16 +214,31 @@ class SignUpVCMainView: UIView {
             return true
             
         } else {
+            
             // TODO: TODO: Popup "You need to have at least 6 characters" alert
             displayUsefulErrorMessage(
-                errorMessage: "Password needs at least 6 characters",
+                with: "Password needs at least 6 characters",
                 label: passwordTitleLabel
             )
+            
             print("You need to have at least 6 characters")
         }
         
         return false
     }
     
+    
+    fileprivate func presentSearchViewController() {
+        
+        // Accessing the App Delegate
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let swRevealViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        
+        // Present the next view controller
+        appDelegate?.window?.rootViewController = swRevealViewController
+        
+    }
     
 }

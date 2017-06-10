@@ -73,11 +73,14 @@ final class APIClient {
     
     // MARK: - App Entry And Exit 
     static func signIn(with email: String, password: String, completion: (() -> Void)?) {
+        
         firebaseAuth?.signIn(withEmail: email, password: password,
             completion: { (user, error) in
+                
             if error == nil {
                 // Presents the home view controller
                 completion?()
+                
             } else {
                 
                 // Throws error
@@ -101,14 +104,21 @@ final class APIClient {
         }
     }
     
-    static func signUp(with email: String, password: String, completion: ((FIRUser) -> Void)?) {
+    static func signUp(with email: String, password: String, completion: ((FIRUser, FIRDatabaseReference) -> Void)?) {
         // TODO: Move this to APIClient
         // Success in signing up, create user in Firebase
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             // There's no error
             if error == nil {
                 
-                completion?(user!)
+                guard let user = user else {
+                    return
+                }
+                
+                completion?(
+                    user,
+                    db.child("users")
+                )
                 
             } else {
                 
