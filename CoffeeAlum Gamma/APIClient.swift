@@ -104,7 +104,7 @@ final class APIClient {
         }
     }
     
-    static func signUp(with email: String, password: String, completion: ((FIRUser, FIRDatabaseReference) -> Void)?) {
+    static func signUp(with email: String, password: String, completion: (() -> Void)?) {
         // TODO: Move this to APIClient
         // Success in signing up, create user in Firebase
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -115,10 +115,18 @@ final class APIClient {
                     return
                 }
                 
-                completion?(
-                    user,
-                    db.child("users")
-                )
+                let userReference = db.child("users").child(user.uid)
+                
+                // Create Firebase path for this user and save email
+                let emailDictionary = ["email": "\(email)"]
+                
+                // BUG: Format of the completion block must be correct
+                // because there is a bug in Firebase
+                userReference.setValue(emailDictionary) { (_, _) in
+                    
+                }
+                
+                completion?()
                 
             } else {
                 

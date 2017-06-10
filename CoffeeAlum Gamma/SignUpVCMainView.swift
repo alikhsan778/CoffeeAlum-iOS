@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 
 final class SignUpVCMainView: UIView {
@@ -29,19 +28,8 @@ final class SignUpVCMainView: UIView {
         
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
             
-            APIClient.signUp(with: email, password: password) { [weak self] (user, reference) in
-                
-                let userReference = reference.child(user.uid)
-                
-                // Create Firebase path for this user and save email
-                let emailDictionary = ["email": "\(email)"]
-                
-                // BUG: Format of the completion block must be correct
-                // because there is a bug in Firebase
-                userReference.setValue(emailDictionary) { (_, _) in
-                    
-                }
-                
+            APIClient.signUp(with: email, password: password) { [weak self] () in
+        
                 self?.presentSearchViewController()
                 
             }

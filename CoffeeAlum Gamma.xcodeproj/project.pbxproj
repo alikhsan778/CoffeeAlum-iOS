@@ -45,6 +45,7 @@
 		DD6251F01E4C2D56001E6FFC /* PersonalProfileVC+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6251EF1E4C2D56001E6FFC /* PersonalProfileVC+ImagePicker.swift */; };
 		DD6251F31E4D913F001E6FFC /* InvitePopoverVC+MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6251F21E4D913F001E6FFC /* InvitePopoverVC+MapView.swift */; };
 		DD6251F51E4D9191001E6FFC /* InvitePopoverVC+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6251F41E4D9191001E6FFC /* InvitePopoverVC+Location.swift */; };
+		DD6917CB1EEBD25400426A90 /* SignInVCMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6917CA1EEBD25400426A90 /* SignInVCMainView.swift */; };
 		DDBE22E61E0EED7D00C0497E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */; };
 		DDBE22E81E0EED7D00C0497E /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E71E0EED7D00C0497E /* SignUpVC.swift */; };
 		DDBE22EB1E0EED7D00C0497E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDBE22E91E0EED7D00C0497E /* Main.storyboard */; };
@@ -129,6 +130,7 @@
 		DD6251EF1E4C2D56001E6FFC /* PersonalProfileVC+ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalProfileVC+ImagePicker.swift"; sourceTree = "<group>"; };
 		DD6251F21E4D913F001E6FFC /* InvitePopoverVC+MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InvitePopoverVC+MapView.swift"; sourceTree = "<group>"; };
 		DD6251F41E4D9191001E6FFC /* InvitePopoverVC+Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InvitePopoverVC+Location.swift"; sourceTree = "<group>"; };
+		DD6917CA1EEBD25400426A90 /* SignInVCMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVCMainView.swift; sourceTree = "<group>"; };
 		DDBE22E21E0EED7D00C0497E /* CoffeeAlum Gamma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeeAlum Gamma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDBE22E71E0EED7D00C0497E /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -375,6 +377,15 @@
 			name = InvitePopoverVC;
 			sourceTree = "<group>";
 		};
+		DD6917C91EEBD22600426A90 /* SignInVC */ = {
+			isa = PBXGroup;
+			children = (
+				DDBE23161E1059D100C0497E /* SignInVC.swift */,
+				DD6917CA1EEBD25400426A90 /* SignInVCMainView.swift */,
+			);
+			name = SignInVC;
+			sourceTree = "<group>";
+		};
 		DDBE22D91E0EED7D00C0497E = {
 			isa = PBXGroup;
 			children = (
@@ -471,7 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				DDC6CB461EE6504B000C51BB /* SignUpVC */,
-				DDBE23161E1059D100C0497E /* SignInVC.swift */,
+				DD6917C91EEBD22600426A90 /* SignInVC */,
 			);
 			name = "Sign Up or Sign In";
 			sourceTree = "<group>";
@@ -762,6 +773,7 @@
 				DDBE230F1E0F546200C0497E /* CustomLabel.swift in Sources */,
 				DD4C87841ED3EAE900C90856 /* Invitation.swift in Sources */,
 				DDBE22EE1E0EED7D00C0497E /* CoffeeAlum_Gamma.xcdatamodeld in Sources */,
+				DD6917CB1EEBD25400426A90 /* SignInVCMainView.swift in Sources */,
 				DDBE23151E0F6B7600C0497E /* CustomButton.swift in Sources */,
 				DDBE23171E1059D100C0497E /* SignInVC.swift in Sources */,
 				DD6251EC1E4BC403001E6FFC /* PersonalProfileTableViewCell.swift in Sources */,
