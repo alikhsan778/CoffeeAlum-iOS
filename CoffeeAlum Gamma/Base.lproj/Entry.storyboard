@@ -299,7 +299,7 @@
                         <viewControllerLayoutGuide type="top" id="38Q-5i-GMn"/>
                         <viewControllerLayoutGuide type="bottom" id="t9E-dh-gl8"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8iZ-va-85E">
+                    <view key="view" contentMode="scaleToFill" id="8iZ-va-85E" customClass="SignInVCMainView" customModule="CoffeeAlum_Gamma" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -418,7 +418,7 @@
                                                 </constraints>
                                                 <state key="normal" image="Gmail logo "/>
                                                 <connections>
-                                                    <action selector="googleSignInButton:" destination="dDu-87-vJj" eventType="touchUpInside" id="ycr-ol-Tpw"/>
+                                                    <action selector="googleSignInButtonAction:" destination="8iZ-va-85E" eventType="touchUpInside" id="AHd-8R-JXG"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -446,7 +446,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="signInButtonAction:" destination="dDu-87-vJj" eventType="touchUpInside" id="gck-Br-KGL"/>
+                                            <action selector="signInButtonAction:" destination="8iZ-va-85E" eventType="touchUpInside" id="pFa-jd-X4L"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-cZ-Lab">
@@ -532,16 +532,18 @@
                             <constraint firstItem="6fx-fs-jSe" firstAttribute="width" secondItem="8iZ-va-85E" secondAttribute="height" multiplier="332:667" id="XaC-6s-G3r"/>
                             <constraint firstItem="6fx-fs-jSe" firstAttribute="centerY" secondItem="8iZ-va-85E" secondAttribute="centerY" id="kgl-s9-AaY"/>
                         </constraints>
+                        <connections>
+                            <outlet property="backingView" destination="6fx-fs-jSe" id="Bta-md-HOu"/>
+                            <outlet property="emailAddressTextField" destination="Zdv-Gq-rVZ" id="cJm-lR-1ME"/>
+                            <outlet property="emailAddressTitleLabel" destination="JkP-vF-Xy2" id="X4G-lN-tXS"/>
+                            <outlet property="passwordTextField" destination="YXO-XS-V0q" id="gbF-qv-J5Q"/>
+                            <outlet property="passwordTitleLabel" destination="0GV-hE-ks3" id="Uin-DV-eY1"/>
+                        </connections>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="backingView" destination="6fx-fs-jSe" id="ipo-Rh-nY8"/>
-                        <outlet property="emailAddressLabel" destination="JkP-vF-Xy2" id="4GT-5Z-TN3"/>
-                        <outlet property="emailTextFieldOutlet" destination="Zdv-Gq-rVZ" id="OQt-6W-LDV"/>
-                        <outlet property="passwordLabel" destination="0GV-hE-ks3" id="XPy-24-T5c"/>
-                        <outlet property="passwordTextFieldOutlet" destination="YXO-XS-V0q" id="3Kr-8H-0HU"/>
-                        <outlet property="signUpButtonOutlet" destination="o0A-zN-NwX" id="hEO-dY-4AP"/>
+                        <outlet property="mainView" destination="8iZ-va-85E" id="fne-LC-5YB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rB3-Yc-cgm" sceneMemberID="firstResponder"/>
