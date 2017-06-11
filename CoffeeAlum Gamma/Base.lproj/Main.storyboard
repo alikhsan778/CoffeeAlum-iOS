@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="top" id="5N2-Yz-sju"/>
                         <viewControllerLayoutGuide type="bottom" id="TaU-Zq-u0F"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="DK3-JU-r8v">
+                    <view key="view" contentMode="scaleToFill" id="DK3-JU-r8v" customClass="CoffeeMeetupsVCMainView" customModule="CoffeeAlum_Gamma" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -159,6 +159,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="6no-8C-Ba5" id="39J-0Z-CkJ"/>
+                        <outlet property="mainView" destination="DK3-JU-r8v" id="7Fj-rM-yqg"/>
                         <outlet property="noInvitationLabel" destination="K27-9z-wT6" id="cCx-tY-sFs"/>
                         <outlet property="sidebarMenuButton" destination="7i0-8G-mSw" id="lxU-72-Jmr"/>
                     </connections>
@@ -328,7 +329,7 @@
         <scene sceneID="eQN-si-OUX">
             <objects>
                 <navigationController navigationBarHidden="YES" id="9TN-6w-SEL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m7e-nL-k8w">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m7e-nL-k8w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -44,7 +44,11 @@ final class InvitationVC: UIViewController {
         invitationID = invitation?.coffee.id
         
         if invitation.coffee.accepted {
-            declineButtonOutlet.setTitle("Reschedule", for: .normal)
+            declineButtonOutlet.setTitle(
+                "Reschedule",
+                for: .normal
+            )
+            
             invitationState = .rescheduled
         }
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+// VIEW IS JUST A CANVAS, IT SHOULDN'T CONTAIN CODE ABOUT STATE
 final class SignUpVCMainView: UIView {
     
     @IBOutlet weak var emailAddressLabel: UILabel!
@@ -20,6 +20,13 @@ final class SignUpVCMainView: UIView {
     @IBOutlet weak var backingView: UIView!
     
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        backingView.addPresetCornerRadius()
+    }
+    
+    
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         
         guard let email = emailAddressTextField.text, let password = passwordTextField.text else {
@@ -27,7 +34,7 @@ final class SignUpVCMainView: UIView {
         }
         
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
-            
+            // DO NOT HAVE A NETWORK CALL IN THE VIEW
             APIClient.signUp(with: email, password: password) { [weak self] () in
         
                 self?.presentSearchViewController()

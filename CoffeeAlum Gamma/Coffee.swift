@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 /// Change to struct
-final class Coffee {
+struct Coffee {
     
     var date: String = "TBD"
     var time: String = "TBD"

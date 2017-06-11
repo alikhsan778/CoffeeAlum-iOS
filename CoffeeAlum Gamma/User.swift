@@ -12,7 +12,7 @@ import UIKit
 import Firebase
 
 /// TODO: Change to struct
-final class User: Hashable, Equatable {
+struct User: Hashable, Equatable {
     
     var name: String = ""
     var email: String = ""
@@ -29,6 +29,7 @@ final class User: Hashable, Equatable {
     var portrait: String = ""
     var uid: String = ""
     var ref: FIRDatabaseReference?
+    
     static let db = FIRDatabase.database().reference().child("users")
     
     var hashValue: Int {
@@ -110,7 +111,7 @@ final class User: Hashable, Equatable {
     }
     
     // TODO: Move this to the API client
-    func save() {
+    mutating func save() {
         let id = FIRAuth.auth()!.currentUser!.uid
         if self.ref == nil {
             self.ref = User.db.child(id)

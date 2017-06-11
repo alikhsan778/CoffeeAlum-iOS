@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import MapKit
 
-protocol InviteDelegate {
+protocol InviteDelegate: class {
     func inviteSent()
 }
 
@@ -20,18 +20,18 @@ final class InvitePopoverVC: UIViewController {
     // TODO: MAKE FILEPRIVATE
     var viewedUser: User?
     var thisUser: User?
-    var date: String?
-    var time: String?
-    var coffee: Coffee?
-    var coreLocationManager = CLLocationManager()
-    var currentLocation: CLLocation!
-    var locationManager: LocationManager!
-    var location: String?
-    var locationSet: Bool = false
-    var resultSearchController: UISearchController?
-    var selectedPin: MKPlacemark?
+    fileprivate var date: String?
+    fileprivate var time: String?
+    fileprivate var coffee: Coffee?
+    fileprivate var coreLocationManager = CLLocationManager()
+    fileprivate var currentLocation: CLLocation!
+    fileprivate var locationManager: LocationManager!
+    fileprivate var location: String?
+    fileprivate var locationSet: Bool = false
+    fileprivate var resultSearchController: UISearchController?
+    fileprivate var selectedPin: MKPlacemark?
 
-    var delegate: InviteDelegate?
+    weak var delegate: InviteDelegate?
     
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var timeTextField: UITextField!

@@ -105,7 +105,7 @@ final class APIClient {
     }
     
     static func signUp(with email: String, password: String, completion: (() -> Void)?) {
-        // TODO: Move this to APIClient
+        // TODO: Check if this is an asynchronous call
         // Success in signing up, create user in Firebase
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             // There's no error

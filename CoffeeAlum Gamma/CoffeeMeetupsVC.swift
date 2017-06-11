@@ -12,6 +12,9 @@ import Firebase
 final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
 
     // MARK: - IBOutlets
+    @IBOutlet var mainView: CoffeeMeetupsVCMainView!
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noInvitationLabel: UILabel!
     @IBOutlet weak var sidebarMenuButton: UIButton!

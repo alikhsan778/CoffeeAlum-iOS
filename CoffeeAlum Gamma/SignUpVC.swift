@@ -8,7 +8,26 @@
 
 import UIKit
 
+
 final class SignUpVC: UIViewController {
+    
+    // VIEW CONTROLLERS KNOW ABOUT ACTIONS
+    // VIEW CONTROLLERS KNOW ABOUT STATE CHANGES
+    
+    /// States of the view controller.
+    fileprivate enum State {
+        case `default`
+        case incorrectPassword
+        case signUpFailure(error: Error)
+        case signUpSuccess
+        case loading
+    }
+    
+    fileprivate var state: State = .default {
+        didSet {
+            didChangeState(state)
+        }
+    }
     
     // MARK: - IBOutlets
     @IBOutlet var mainView: SignUpVCMainView!
@@ -19,9 +38,11 @@ final class SignUpVC: UIViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        // Adding corner radius
-        mainView.backingView.addPresetCornerRadius()
+    fileprivate func didChangeState(_ state: State) {
+        switch state {
+        default:
+            break
+        }
     }
   
 }
