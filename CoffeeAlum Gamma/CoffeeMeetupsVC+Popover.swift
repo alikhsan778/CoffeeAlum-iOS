@@ -40,5 +40,4 @@ extension CoffeeMeetupsVC {
         return .none
     }
 
-    
 }

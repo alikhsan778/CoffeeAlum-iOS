@@ -28,7 +28,7 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
         // Retreiving the user information
         retrieveUserInfo()
         // Setup sidebar button
-        sidebarMenuButton.setupSidebarMenuButton(to: self)
+        sidebarMenuButton.setupSidebarButtonAction(to: self)
         
         let nibFile = UINib(
             nibName: "PersonalProfileTableViewCell",

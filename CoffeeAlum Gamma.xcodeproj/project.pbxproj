@@ -50,6 +50,7 @@
 		DD6917CF1EEBE58100426A90 /* SidebarMenuVCMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6917CE1EEBE58100426A90 /* SidebarMenuVCMainView.swift */; };
 		DD6917D21EEC260B00426A90 /* CoffeeMeetupsVCMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6917D11EEC260B00426A90 /* CoffeeMeetupsVCMainView.swift */; };
 		DD6917D41EEC26E200426A90 /* CoffeeMeetupsVCCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6917D31EEC26E200426A90 /* CoffeeMeetupsVCCollectionView.swift */; };
+		DD6917D61EEE9EBA00426A90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6917D51EEE9EBA00426A90 /* Constants.swift */; };
 		DDBE22E61E0EED7D00C0497E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */; };
 		DDBE22E81E0EED7D00C0497E /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE22E71E0EED7D00C0497E /* SignUpVC.swift */; };
 		DDBE22EB1E0EED7D00C0497E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDBE22E91E0EED7D00C0497E /* Main.storyboard */; };
@@ -139,6 +140,7 @@
 		DD6917CE1EEBE58100426A90 /* SidebarMenuVCMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarMenuVCMainView.swift; sourceTree = "<group>"; };
 		DD6917D11EEC260B00426A90 /* CoffeeMeetupsVCMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeMeetupsVCMainView.swift; sourceTree = "<group>"; };
 		DD6917D31EEC26E200426A90 /* CoffeeMeetupsVCCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeMeetupsVCCollectionView.swift; sourceTree = "<group>"; };
+		DD6917D51EEE9EBA00426A90 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DDBE22E21E0EED7D00C0497E /* CoffeeAlum Gamma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeeAlum Gamma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBE22E51E0EED7D00C0497E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDBE22E71E0EED7D00C0497E /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				DD43A8071E174063005C31A7 /* UIElement Extensions */,
 				DD3593731E560419003A57CF /* Storyboards */,
 				DDBE230A1E0F10A100C0497E /* Custom */,
+				DD6917D51EEE9EBA00426A90 /* Constants.swift */,
 			);
 			path = "CoffeeAlum Gamma";
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				DD12E0EC1E245531006A2663 /* MessageCollectionViewCell.swift in Sources */,
 				DDDDBB5A1E2D3AC70084D5A5 /* InvitationVC.swift in Sources */,
 				DD12E0E41E24501D006A2663 /* UIViewController + SidebarMenuPan.swift in Sources */,
+				DD6917D61EEE9EBA00426A90 /* Constants.swift in Sources */,
 				DDEC13291E199AB6002C7CCF /* UIView + CornerRadius.swift in Sources */,
 				DD12E0F01E245D37006A2663 /* SearchVC+SearchBar.swift in Sources */,
 				DDC6CB451EE65046000C51BB /* SignUpVCMainView.swift in Sources */,

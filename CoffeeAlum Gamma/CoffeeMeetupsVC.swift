@@ -10,11 +10,21 @@ import UIKit
 import Firebase
 
 final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
+    
+    fileprivate enum State {
+        case `default`
+        case `loading`
+        case refresh
+    }
+    
+    fileprivate var state: State = .default {
+        didSet {
+            didChangeState(state)
+        }
+    }
 
     // MARK: - IBOutlets
     @IBOutlet var mainView: CoffeeMeetupsVCMainView!
-    
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noInvitationLabel: UILabel!
     @IBOutlet weak var sidebarMenuButton: UIButton!
@@ -27,6 +37,19 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     var allCoffee = Set<Invitation>()
     var db = FIRDatabase.database().reference()
     var refreshController = UIRefreshControl()
+    
+    
+    fileprivate func didChangeState(_ state: State) {
+        switch state {
+        case .loading:
+            retrieveCoffeeData()
+            setupRefreshController()
+            setupRevealViewController()
+            sidebarMenuButton.setupSidebarButtonAction(to: self)
+        default:
+            break
+        }
+    }
     
     var coffeeRef: FIRDatabaseReference {
         get {
@@ -78,18 +101,10 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Setup sidebar view controller
-        self.setupRevealViewController()
-        // Setup sidebar button
-        sidebarMenuButton.setupSidebarMenuButton(to: self)
         
-        // Retreives the invites
-        retrieveCoffeeData()
-        // Setup refresh controller
-        setupRefreshController()
+        state = .loading
     }
 
-    
     override func viewDidLayoutSubviews() {
         // Using the Pan Gesture Recognizer to reveal the "SWRevealViewController"
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())

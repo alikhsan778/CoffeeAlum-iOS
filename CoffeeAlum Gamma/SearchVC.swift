@@ -108,7 +108,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        sidebarMenuButtonOutlet.setupSidebarMenuButton(to: self)
+        sidebarMenuButtonOutlet.setupSidebarButtonAction(to: self)
     }
     
     // MARK: - IBAction

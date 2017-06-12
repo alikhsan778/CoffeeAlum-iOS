@@ -10,7 +10,7 @@ import Foundation
 
 extension UIButton {
     
-    func setupSidebarMenuButton(to viewController: UIViewController) {
+    func setupSidebarButtonAction(to viewController: UIViewController) {
         // Connects to the revealToggle method in the SWRevealViewController custom code
         self.addTarget(
             viewController.revealViewController(),
