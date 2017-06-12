@@ -90,13 +90,13 @@ final class SignUpVC: UIViewController {
         APIClient.googleSignIn { [weak self] in
             self?.state = .signUpSuccess
         }
-        
     }
     
     fileprivate func errorHandler(_ error: Error) {
         
         var message: String
-        let alertView = UIAlertView()
+        let title = "Sign up error"
+        let alertController = UIAlertController()
         
         switch error {
         case .emailAddressIsEmpty:
@@ -115,9 +115,25 @@ final class SignUpVC: UIViewController {
             message = "Your password confirmation does not match."
         }
         
-        alertView.title = message
-        present(alertView, animated: true, completion: nil)
+        func setupAlertControllerTapGesture() {
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(alertControllerTapGestureHandler)
+            )
+            alertController.view.superview?.subviews[1].isUserInteractionEnabled = true
+            alertController.view.superview?.subviews[1].addGestureRecognizer(tapGesture)
+        }
         
+        alertController.title = title
+        alertController.message = message
+        present(alertController, animated: true) {
+            setupAlertControllerTapGesture()
+        }
+        
+    }
+    
+    @objc fileprivate func alertControllerTapGestureHandler() {
+        dismiss(animated: true, completion: nil)
     }
     
     // Method to check if email address entered fulfills the requirements
