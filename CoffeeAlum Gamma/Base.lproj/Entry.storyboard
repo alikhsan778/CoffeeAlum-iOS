@@ -141,7 +141,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="signUpButtonAction:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="dTe-2W-gL4"/>
+                                            <action selector="signUpButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M1F-tF-xt2"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkW-7f-hqb">
@@ -162,7 +162,7 @@
                                                 </constraints>
                                                 <state key="normal" image="Gmail logo "/>
                                                 <connections>
-                                                    <action selector="googleSignUpButtonAction:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="Qnp-3S-4t0"/>
+                                                    <action selector="googleSignInButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n81-GY-NPe"/>
                                                 </connections>
                                             </button>
                                         </subviews>

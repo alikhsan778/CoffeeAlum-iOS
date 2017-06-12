@@ -135,8 +135,9 @@ final class APIClient {
 
     }
     
-    static func googleSignIn() {
+    static func googleSignIn(completion: (() -> Void)?) {
         GIDSignIn.sharedInstance().signIn()
+        completion?()
     }
     
     static func googleSignOut() {

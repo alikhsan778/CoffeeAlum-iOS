@@ -29,28 +29,13 @@ final class SignUpVCMainView: UIView {
     
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         
-        guard let email = emailAddressTextField.text, let password = passwordTextField.text else {
-            return
-        }
         
-        if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
-            // DO NOT HAVE A NETWORK CALL IN THE VIEW
-            APIClient.signUp(with: email, password: password) { [weak self] () in
-        
-                self?.presentSearchViewController()
-                
-            }
-            
-        }
         
     }
     
     @IBAction func googleSignUpButtonAction(_ sender: UIButton) {
         
-        // Sign in using Google account
-        APIClient.googleSignIn()
-        // Present SearchVC
-        presentSearchViewController()
+        
         
     }
     
@@ -75,7 +60,7 @@ final class SignUpVCMainView: UIView {
     }
     
     // Method to check if email address entered fulfills the requirements
-    fileprivate func emailRequirementsIsFulfilled() -> Bool {
+    func emailRequirementsIsFulfilled() -> Bool {
         
         guard let _ = emailAddressTextField.text else {
             
@@ -155,7 +140,7 @@ final class SignUpVCMainView: UIView {
     
     // TODO: Refactor
     // Method that returns a Bool if the new password matches the confirmed password
-    fileprivate func confirmPasswordRequirementsIsFulfilled() -> Bool {
+    func confirmPasswordRequirementsIsFulfilled() -> Bool {
         
         guard let _ = confirmPasswordTextField.text else {
             
@@ -182,7 +167,7 @@ final class SignUpVCMainView: UIView {
     }
     
     // Method that returns a Bool if the new password requirement is fulfilled
-    fileprivate func passwordRequirementsIsFulfilled() -> Bool {
+    func passwordRequirementsIsFulfilled() -> Bool {
         // Checks if the text field is empty to give an appropriate warning
         
         guard let _ = passwordTextField.text else {
@@ -223,7 +208,7 @@ final class SignUpVCMainView: UIView {
     }
     
     
-    fileprivate func presentSearchViewController() {
+    func presentSearchViewController() {
         
         // Accessing the App Delegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate

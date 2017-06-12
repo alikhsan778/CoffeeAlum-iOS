@@ -37,8 +37,6 @@ final class SignInVCMainView: UIView {
     
     @IBAction func googleSignInButtonAction(_ sender: UIButton) {
         
-        APIClient.googleSignIn()
-        presentSearchViewController()
     }
     
     // Method to change the sign up labels back to its original
