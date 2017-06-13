@@ -6,15 +6,12 @@
 //  Copyright © 2017 Trevin Wisaksana. All rights reserved.
 //
 
-import Foundation
-
-enum Constant {
-    
-    
-}
-
 enum Storyboard: String {
     case main = "Main"
     case entry = "Entry"
     case search = "Search"
+}
+
+enum ViewController: String {
+    case SWRevealViewController = "SWRevealViewController"
 }

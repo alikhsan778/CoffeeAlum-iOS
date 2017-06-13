@@ -418,7 +418,7 @@
                                                 </constraints>
                                                 <state key="normal" image="Gmail logo "/>
                                                 <connections>
-                                                    <action selector="googleSignInButtonAction:" destination="8iZ-va-85E" eventType="touchUpInside" id="AHd-8R-JXG"/>
+                                                    <action selector="googleSignInButtonAction:" destination="dDu-87-vJj" eventType="touchUpInside" id="XuB-1Q-WDq"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -446,7 +446,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="signInButtonAction:" destination="8iZ-va-85E" eventType="touchUpInside" id="pFa-jd-X4L"/>
+                                            <action selector="signInButtonAction:" destination="dDu-87-vJj" eventType="touchUpInside" id="Hps-nk-hXr"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-cZ-Lab">

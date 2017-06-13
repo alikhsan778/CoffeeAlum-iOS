@@ -11,20 +11,18 @@ import UIKit
 
 final class SignUpVC: UIViewController {
     
-    // VIEW CONTROLLERS KNOW ABOUT ACTIONS
-    // VIEW CONTROLLERS KNOW ABOUT STATE CHANGES
-    
     /// States of the view controller.
-    fileprivate enum State {
+    // MARK: - States
+    private enum State {
         case `default`
         case signUpFailure(error: Error)
         case signUpSuccess
-        case googleSigningUp
+        case googleSignUp
         case signingUp
         case loading
     }
     
-    fileprivate enum `Error` {
+    private enum `Error` {
         case emailAddressIsEmpty
         case emailAddressIsInvalid
         case emailAddressAlreadyUsed
@@ -34,7 +32,7 @@ final class SignUpVC: UIViewController {
         case unmatchingPasswordConfirmation
     }
     
-    fileprivate var state: State = .default {
+    private var state: State = .default {
         didSet {
             didChangeState(state)
         }
@@ -49,30 +47,33 @@ final class SignUpVC: UIViewController {
         state = .loading
     }
     
+    // MARK: - IBActions
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         state = .signingUp
     }
     
     @IBAction func googleSignInButtonAction(_ sender: UIButton) {
-        state = .googleSigningUp
+        state = .googleSignUp
     }
     
-    fileprivate func didChangeState(_ state: State) {
+    // MARK: - State Machine
+    private func didChangeState(_ state: State) {
         switch state {
         case .signingUp:
             signUp()
         case .signUpSuccess:
             presentSearchViewController()
         case .signUpFailure(let error):
-            errorHandler(error)
-        case .googleSigningUp:
+            didChangeErrorState(error)
+        case .googleSignUp:
             googleSignUp()
         default:
             break
         }
     }
     
-    fileprivate func signUp() {
+    // MARK: - Sign Up Success
+    private func signUp() {
         
         guard let email = mainView.emailAddressTextField.text, let password = mainView.passwordTextField.text else {
             return
@@ -86,13 +87,14 @@ final class SignUpVC: UIViewController {
         }
     }
     
-    fileprivate func googleSignUp() {
+    private func googleSignUp() {
         APIClient.googleSignIn { [weak self] in
             self?.state = .signUpSuccess
         }
     }
     
-    fileprivate func errorHandler(_ error: Error) {
+    // MARK: - Error Handler
+    private func didChangeErrorState(_ error: Error) {
         
         var message: String
         let title = "Sign up error"
@@ -120,8 +122,11 @@ final class SignUpVC: UIViewController {
                 target: self,
                 action: #selector(alertControllerTapGestureHandler)
             )
-            alertController.view.superview?.subviews[1].isUserInteractionEnabled = true
-            alertController.view.superview?.subviews[1].addGestureRecognizer(tapGesture)
+            
+            let alertControllerSubview = alertController.view.superview?.subviews[1]
+            
+            alertControllerSubview?.isUserInteractionEnabled = true
+            alertControllerSubview?.addGestureRecognizer(tapGesture)
         }
         
         alertController.title = title
@@ -132,14 +137,15 @@ final class SignUpVC: UIViewController {
         
     }
     
-    @objc fileprivate func alertControllerTapGestureHandler() {
+    @objc private func alertControllerTapGestureHandler() {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Sign Up Failure
     // Method to check if email address entered fulfills the requirements
-    fileprivate func emailRequirementsIsFulfilled() -> Bool {
+    private func emailRequirementsIsFulfilled() -> Bool {
         
-        if mainView.emailAddressTextField.text == nil {
+        if mainView.emailAddressTextField.text == "" {
             state = .signUpFailure(error: .emailAddressIsEmpty)
             return false
         }
@@ -154,8 +160,42 @@ final class SignUpVC: UIViewController {
         return true
     }
     
+    // Method that returns a Bool if the new password matches the confirmed password
+    private func confirmPasswordRequirementsIsFulfilled() -> Bool {
+        
+        if mainView.confirmPasswordTextField.text == "" {
+            state = .signUpFailure(error: .passwordConfirmationIsEmpty)
+            return false
+        }
+        
+        if passwordMatches() {
+            return true
+        } else {
+            state = .signUpFailure(error: .unmatchingPasswordConfirmation)
+        }
+        
+        return false
+    }
+    
+    private func passwordRequirementsIsFulfilled() -> Bool {
+        
+        if mainView.passwordTextField.text == "" {
+            state = .signUpFailure(error: .passwordIsEmpty)
+            return false
+        }
+        
+        // Checks if the password text field is has enough characters
+        if passwordHasEnoughCharacters() {
+            return true
+        } else {
+            state = .signUpFailure(error: .passwordIsInvalid)
+        }
+        
+        return false
+    }
+    
     // Method to check if the password contains enough characters
-    fileprivate func passwordHasEnoughCharacters() -> Bool {
+    private func passwordHasEnoughCharacters() -> Bool {
         // Number of characters in the text field
         let passwordCharacterCount = mainView.passwordTextField.text?.characters.count
         // At least 6 characters is needed for the text field
@@ -168,7 +208,7 @@ final class SignUpVC: UIViewController {
     }
     
     // Method to check if the email address entered is valid
-    fileprivate func emailAddressIsValidated() -> Bool {
+    private func emailAddressIsValidated() -> Bool {
         let emailAddress = mainView.emailAddressTextField.text
         let regularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         // Uses NSPredicate to filter through the email address string using the Regular Expression
@@ -188,7 +228,7 @@ final class SignUpVC: UIViewController {
     }
     
     // Method to check if the password entered matches the confirm password
-    fileprivate func passwordMatches() -> Bool {
+    private func passwordMatches() -> Bool {
         let password = mainView.passwordTextField.text
         let passwordConfirmation = mainView.confirmPasswordTextField.text
         
@@ -196,49 +236,12 @@ final class SignUpVC: UIViewController {
             return true
         } else {
             state = .signUpFailure(error: .unmatchingPasswordConfirmation)
-            
             return false
         }
     }
     
-    // Method that returns a Bool if the new password matches the confirmed password
-    fileprivate func confirmPasswordRequirementsIsFulfilled() -> Bool {
-        
-        if mainView.confirmPasswordTextField.text == nil {
-            state = .signUpFailure(error: .passwordConfirmationIsEmpty)
-            return false
-        }
-        
-        if passwordMatches() {
-            return true
-        } else {
-            state = .signUpFailure(error: .unmatchingPasswordConfirmation)
-        }
-        
-        return false
-    }
-    
-    fileprivate func passwordRequirementsIsFulfilled() -> Bool {
-        // Checks if the text field is empty to give an appropriate warning
-        
-        if mainView.passwordTextField.text == nil {
-            state = .signUpFailure(error: .passwordIsEmpty)
-            return false
-        }
-        
-        // Checks if the password text field is has enough characters
-        if passwordHasEnoughCharacters() {
-            return true
-        } else {
-            state = .signUpFailure(error: .passwordIsInvalid)
-        }
-        
-        return false
-    }
-    
-    
-    fileprivate func presentSearchViewController() {
-        
+    // MARK: - Sign Up Successful
+    private func presentSearchViewController() {
         // Accessing the App Delegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         
@@ -247,7 +250,7 @@ final class SignUpVC: UIViewController {
             bundle: nil
         )
         let swRevealViewController = storyboard.instantiateViewController(
-            withIdentifier: "SWRevealViewController") as! SWRevealViewController
+            withIdentifier: ViewController.SWRevealViewController.rawValue) as! SWRevealViewController
         
         // Present the next view controller
         appDelegate?.window?.rootViewController = swRevealViewController
