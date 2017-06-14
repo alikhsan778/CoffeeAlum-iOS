@@ -28,43 +28,17 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
 
     // MARK: - IBOutlets
     @IBOutlet var mainView: CoffeeMeetupsVCMainView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: CoffeeMeetupsVCCollectionView!
     @IBOutlet weak var noInvitationLabel: UILabel!
     @IBOutlet weak var sidebarMenuButton: UIButton!
     
     // MARK: - Variables
     var headerTitleLabel: UILabel?
-    var titleHidden = true
-    var coffeeSelectedIndex: Int?
-    var collectionViewSection: Int?
-    var allCoffee = Set<Invitation>()
-    var db = FIRDatabase.database().reference()
-    var refreshController = UIRefreshControl()
-    
-    
-    private func didChangeState(_ state: State) {
-        switch state {
-        case .loading:
-            retrieveCoffeeData()
-            setupRefreshController()
-            setupRevealViewController()
-            sidebarMenuButton.setupSidebarButtonAction(to: self)
-        case .refreshData:
-            refreshStream()
-        case .removeCoffee:
-            break
-        case .rescheduleCoffee:
-            break
-        default:
-            break
-        }
-    }
-    
-    var coffeeRef: FIRDatabaseReference {
-        get {
-            return db.child("coffees")
-        }
-    }
+    private var titleHidden = true
+    public var coffeeSelectedIndex: Int?
+    public var collectionViewSection: Int?
+    public var allCoffee = Set<Invitation>()
+    private var refreshController = UIRefreshControl()
     
     // TODO: Getters and setters change it to fitler coffee
     var pendingCoffee: [Invitation] {
@@ -107,6 +81,26 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     }
 
     
+    private func didChangeState(_ state: State) {
+        switch state {
+        case .loading:
+            retrieveCoffeeData()
+            setupRefreshController()
+            setupRevealViewController()
+            sidebarMenuButton.setupSidebarButtonAction(to: self)
+        case .refreshData:
+            retrieveCoffeeData()
+            collectionView.reloadData()
+            refreshController.endRefreshing()
+        case .removeCoffee:
+            break
+        case .rescheduleCoffee:
+            break
+        default:
+            break
+        }
+    }
+    
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,13 +114,6 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         revealViewController().rearViewRevealWidth = self.view.frame.width / 3.2
     }
     
-    
-    // Sidebar button which reveals the side bar
-    @IBAction func sidebarMenuButtonAction(_ sender: UIButton) {
-        
-        
-    }
-    
     private func setupRefreshController() {
         refreshController.addTarget(
             self,
@@ -137,85 +124,34 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         collectionView.alwaysBounceVertical = true
     }
     
-    
     @objc fileprivate func refreshStream() {
-        retrieveCoffeeData()
-        collectionView.reloadData()
-        refreshController.endRefreshing()
+        state = .refreshData
     }
-    
     
     func retrieveCoffeeData() {
         // Allows the collection view to refresh
-        self.allCoffee.removeAll()
+        allCoffee.removeAll()
         
-        let uid = FIRAuth.auth()!.currentUser!.uid
-        let sentInviteCoffeRef = coffeeRef.queryOrdered(byChild: "fromId").queryEqual(toValue: uid)
-        let gotInviteCoffeeRef = coffeeRef.queryOrdered(byChild: "toId").queryEqual(toValue: uid)
-        let userRef = db.child("users")
+        APIClient.getCoffeeInvitationReceived { [weak self] (invitationReceived) in
+            self?.insertCoffee(with: invitationReceived)
+        }
         
-        // You sent invite; looking for the person to sent it TO
-        sentInviteCoffeRef.observe(.value, with: { snapshot in
-            for item in snapshot.children {
-                
-                // NOT DRY
-                let coffeeSnap = item as? FIRDataSnapshot
-                let coffee = Coffee(snapshot: coffeeSnap!)
-                let otherUserRef = userRef.child(coffee.toId)
-                
-                otherUserRef.observe(.value, with: { (snapshot) in
-                    
-                    let meetingUser = User(snapshot: snapshot)
-    
-                    let invitation = Invitation(
-                        coffee: coffee,
-                        user: meetingUser
-                    )
-                    
-                    self.insertCoffee(with: invitation)
-                    
-                })
-            }
-        })
-        
-        // You got the invite; looking for person I received it FROM
-        gotInviteCoffeeRef.observe(.value, with: { (snapshot) in
-            for item in snapshot.children {
-                
-                // NOT DRY
-                let coffeeSnap = item as? FIRDataSnapshot
-                let coffee = Coffee(snapshot: coffeeSnap!)
-                let otherUserRef = userRef.child(coffee.fromId)
-                
-                otherUserRef.observe(.value, with: { (snapshot) in
-                    
-                    // NOT DRY
-                    let meetingUser = User(snapshot: snapshot)
-                    
-                    let invitation = Invitation(
-                        coffee: coffee,
-                        user: meetingUser
-                    )
-                    
-                    self.insertCoffee(with: invitation)
-                    
-                })
-            }
-        })
-
+        APIClient.getCoffeeInvitationSent { [weak self] (invitationSent) in
+            self?.insertCoffee(with: invitationSent)
+        }
     }
     
     
     fileprivate func insertCoffee(with invitation: Invitation) {
         
-        self.allCoffee.insert(invitation)
-        self.collectionView.reloadData()
+        allCoffee.insert(invitation)
+        collectionView.reloadData()
         
         // NOT DRY
-        if self.allCoffee.count > 0 {
-            self.noInvitationLabel.isHidden = true
+        if allCoffee.count > 0 {
+            noInvitationLabel.isHidden = true
         } else {
-            self.noInvitationLabel.isHidden = false
+            noInvitationLabel.isHidden = false
         }
         
     }
@@ -225,22 +161,16 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         
         // Check which section the user has selected
         // Remove the coffee based the section selected
-        if self.collectionViewSection == 0 {
-            self.upcomingCoffee.remove(
-                at: self.coffeeSelectedIndex!
-            )
-        } else if self.collectionViewSection == 1 {
-            self.pendingCoffee.remove(
-                at: self.coffeeSelectedIndex!
-            )
+        if collectionViewSection == 0 {
+            upcomingCoffee.remove(at: coffeeSelectedIndex!)
+        } else if collectionViewSection == 1 {
+            pendingCoffee.remove(at: coffeeSelectedIndex!)
         } else {
-            self.rescheduledCoffee.remove(
-                at: self.coffeeSelectedIndex!
-            )
+            rescheduledCoffee.remove(at: coffeeSelectedIndex!)
         }
         
         // Update the collectionView
-        self.collectionView.performBatchUpdates({
+        collectionView.performBatchUpdates({
             
             let indexPaths = [IndexPath(
                 row: self.coffeeSelectedIndex!,

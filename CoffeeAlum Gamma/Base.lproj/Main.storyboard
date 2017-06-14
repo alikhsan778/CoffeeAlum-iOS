@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6no-8C-Ba5">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6no-8C-Ba5" customClass="CoffeeMeetupsVCCollectionView" customModule="CoffeeAlum_Gamma" customModuleProvider="target">
                                 <rect key="frame" x="10" y="131" width="394" height="605"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="100" minimumInteritemSpacing="100" id="rXh-QP-wW5">
@@ -158,7 +158,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="collectionView" destination="6no-8C-Ba5" id="39J-0Z-CkJ"/>
+                        <outlet property="collectionView" destination="6no-8C-Ba5" id="ngk-gO-qgR"/>
                         <outlet property="mainView" destination="DK3-JU-r8v" id="7Fj-rM-yqg"/>
                         <outlet property="noInvitationLabel" destination="K27-9z-wT6" id="cCx-tY-sFs"/>
                         <outlet property="sidebarMenuButton" destination="7i0-8G-mSw" id="lxU-72-Jmr"/>

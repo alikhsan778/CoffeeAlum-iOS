@@ -55,19 +55,73 @@ final class APIClient {
     }
     
     static func rescheduleInvitation(with id: String, message: String) {
-        
         let invitationReference = coffeeReference.child(id)
         invitationReference.child("rescheduled").setValue(true)
         invitationReference.child("message").setValue(message)
     }
     
     // MARK: - CoffeeData Manager 
-    static func retrieveCoffeeData() {
+    static func retrieveCoffeeInvitationData() {
+        
+        
         
     }
     
-    static func getCoffeeInvitation() {
+    static func getCoffeeInvitationSent(completion: ((Invitation) -> Void)?) {
+        let invitationSent = coffeeReference.queryOrdered(byChild: "fromId").queryEqual(toValue: uid)
+        // You sent invite; looking for the person to sent it TO
+        invitationSent.observe(.value, with: { snapshot in
+            for item in snapshot.children {
+                
+                // NOT DRY
+                let coffeeSnap = item as? FIRDataSnapshot
+                let coffee = Coffee(snapshot: coffeeSnap!)
+                let otherUserRef = userReference.child(coffee.toId)
+                
+                otherUserRef.observe(.value, with: { (snapshot) in
+                    
+                    let meetingUser = User(snapshot: snapshot)
+                    
+                    let invitation = Invitation(
+                        coffee: coffee,
+                        user: meetingUser
+                    )
+                    
+                    completion?(invitation)
+                    
+                })
+            }
+        })
+    }
+    
+    static func getCoffeeInvitationReceived(completion: ((Invitation) -> Void)?) {
         
+        let invitationReceived = coffeeReference.queryOrdered(byChild: "toId").queryEqual(toValue: uid)
+        // You got the invite; looking for person I received it FROM
+        invitationReceived.observe(.value, with: { (snapshot) in
+            for item in snapshot.children {
+                
+                // NOT DRY
+                let coffeeSnap = item as? FIRDataSnapshot
+                let coffee = Coffee(snapshot: coffeeSnap!)
+                let otherUserRef = userReference.child(coffee.fromId)
+                
+                otherUserRef.observe(.value, with: { (snapshot) in
+                    
+                    // NOT DRY
+                    let meetingUser = User(snapshot: snapshot)
+                    
+                    let invitation = Invitation(
+                        coffee: coffee,
+                        user: meetingUser
+                    )
+                    
+                    completion?(invitation)
+                    
+                })
+            }
+        })
+
     }
     
     static func sendCoffeeInvitation() {

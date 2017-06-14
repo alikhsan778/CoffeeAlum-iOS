@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 // MARK: - UICollectionView extension
 extension CoffeeMeetupsVC: UICollectionViewDataSource {
     
@@ -147,3 +148,4 @@ extension CoffeeMeetupsVC: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
