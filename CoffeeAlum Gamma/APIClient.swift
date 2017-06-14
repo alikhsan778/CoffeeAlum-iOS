@@ -10,6 +10,10 @@ import Firebase
 import FirebaseStorage
 import GoogleSignIn
 
+enum InvitationState {
+    case `default`, declined, rescheduled
+}
+
 // TODO: Potentially make the APIClient not Firebase specific
 final class APIClient {
     

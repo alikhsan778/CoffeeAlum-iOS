@@ -25,7 +25,7 @@
 		DD12E1011E25B316006A2663 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */; };
 		DD1BB1771EDD5998004F881F /* UIImageView + Circularize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1BB1761EDD5998004F881F /* UIImageView + Circularize.swift */; };
 		DD2328591ECEFB6C001E2419 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2328581ECEFB6C001E2419 /* APIClient.swift */; };
-		DD35937D1E5755D4003A57CF /* InvitationVC+MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD35937C1E5755D4003A57CF /* InvitationVC+MapView.swift */; };
+		DD35937D1E5755D4003A57CF /* InvitationVCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD35937C1E5755D4003A57CF /* InvitationVCMapView.swift */; };
 		DD361B861E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B851E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift */; };
 		DD361B881E51706700C5979F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD361B871E51706700C5979F /* LocationManager.swift */; };
 		DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD43A7D01E15BCFE005C31A7 /* SWRevealViewController.m */; };
@@ -113,7 +113,7 @@
 		DD12E1001E25B316006A2663 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD1BB1761EDD5998004F881F /* UIImageView + Circularize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView + Circularize.swift"; sourceTree = "<group>"; };
 		DD2328581ECEFB6C001E2419 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		DD35937C1E5755D4003A57CF /* InvitationVC+MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InvitationVC+MapView.swift"; sourceTree = "<group>"; };
+		DD35937C1E5755D4003A57CF /* InvitationVCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationVCMapView.swift; sourceTree = "<group>"; };
 		DD361B851E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationSearchTableVC+TableView.swift"; sourceTree = "<group>"; };
 		DD361B871E51706700C5979F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DD43A7CE1E15BCFD005C31A7 /* CoffeeAlum Gamma-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoffeeAlum Gamma-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -521,7 +521,7 @@
 			children = (
 				DDDDBB591E2D3AC70084D5A5 /* InvitationVC.swift */,
 				DD6917CC1EEBE45E00426A90 /* InvitationVCMainView.swift */,
-				DD35937C1E5755D4003A57CF /* InvitationVC+MapView.swift */,
+				DD35937C1E5755D4003A57CF /* InvitationVCMapView.swift */,
 			);
 			name = InvitationViewController;
 			sourceTree = "<group>";
@@ -783,7 +783,7 @@
 				DD43A7D61E16CE46005C31A7 /* SidebarMenuVC.swift in Sources */,
 				DDEC13311E19FEC8002C7CCF /* UIView + Shadow.swift in Sources */,
 				DDDDBB5C1E2D52CD0084D5A5 /* ProfileGlimpseVC+Popover.swift in Sources */,
-				DD35937D1E5755D4003A57CF /* InvitationVC+MapView.swift in Sources */,
+				DD35937D1E5755D4003A57CF /* InvitationVCMapView.swift in Sources */,
 				DD361B861E4F5F5E00C5979F /* LocationSearchTableVC+TableView.swift in Sources */,
 				DD43A7D11E15BCFE005C31A7 /* SWRevealViewController.m in Sources */,
 				DD6917D41EEC26E200426A90 /* CoffeeMeetupsVCCollectionView.swift in Sources */,

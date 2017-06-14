@@ -19,8 +19,6 @@ final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
         
         nameOfInviter.text = invitation.user.name
         
-        // cell.pictureOfInviter.image = coffee.user.portrait.toImage()
-        
         // Checks if the user has no employer
         if invitation.user.employer == "" {
             roleOfOther.text = "Student at \(invitation.user.education)"
@@ -30,11 +28,11 @@ final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
         
         let url = URL(string: invitation.user.portrait)
         pictureOfInviter.sd_setImage(with: url)
+    }
+    
+    override func layoutSubviews() {
         pictureOfInviter.circularize()
     }
     
-    override func awakeFromNib() {
-        // backingView.addPresetCornerRadius()
-    }
 }
 

@@ -14,7 +14,7 @@ final class SignInVC: UIViewController {
     private enum State {
         case `default`
         case signInFailure(error: Error)
-        case signInSuccess
+        case signInSuccessful
         case googleSignIn
         case signingIn
         case loading
@@ -52,7 +52,7 @@ final class SignInVC: UIViewController {
         switch state {
         case .signingIn:
             signIn()
-        case .signInSuccess:
+        case .signInSuccessful:
             presentSearchViewController()
         case .signInFailure(let error):
             didChangeErrorState(error)
@@ -109,7 +109,7 @@ final class SignInVC: UIViewController {
             let password = mainView.passwordTextField.text
             
             APIClient.signIn(with: email!, password: password!) { [weak self] () in
-                self?.state = .signInSuccess
+                self?.state = .signInSuccessful
             }
         }
     }

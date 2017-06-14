@@ -13,8 +13,8 @@ import GoogleSignIn
 
 final class SidebarMenuVC: UIViewController {
     
-    
     var thisUser: User?
+    
     // MARK: - IBOutlets
     @IBOutlet var sidebarMenuView: UIView!
     @IBOutlet weak var profileButton: UIButton!
@@ -34,6 +34,10 @@ final class SidebarMenuVC: UIViewController {
     // TODO: putting the following func into button connecting to login
     override func viewDidLoad() {
         
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
         let thisUserRef = FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid)
         
         thisUserRef.observe(.value, with: { [unowned self](snapshot) in
@@ -47,17 +51,6 @@ final class SidebarMenuVC: UIViewController {
             
         })
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        // Adding shadows to the profileHeader in the slide menu
-        
-    }
-    
-    /*
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    */
     
     fileprivate func transitionToSignInVC() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

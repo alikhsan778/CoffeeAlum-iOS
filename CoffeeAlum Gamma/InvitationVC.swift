@@ -12,15 +12,25 @@ protocol CoffeeMeetupsDelegate: class {
     func deleteCoffeeMeetupSelected()
 }
 
-enum InvitationState: String {
-    case pending = "Pending"
-    case accepted = "Accept"
-    case rescheduled = "Reschedule"
-    case declined = "Decline"
-}
+
 
 
 final class InvitationVC: UIViewController {
+    
+    private enum State {
+        case `default`
+        case loading
+        case pending
+        case accepted
+        case rescheduled
+        case declined
+    }
+    
+    private var state: State = .default {
+        didSet {
+            
+        }
+    }
     
     // MARK: - IBOutlets
     @IBOutlet weak var profilePicture: UIImageView!
@@ -35,11 +45,13 @@ final class InvitationVC: UIViewController {
     weak var delegate: CoffeeMeetupsDelegate?
     var invitation: Invitation!
     var invitationID: String!
-    var invitationState: InvitationState!
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
-    
+        
+        state = .loading
+        
         // Assigning the invitation ID
         invitationID = invitation?.coffee.id
         
@@ -49,7 +61,8 @@ final class InvitationVC: UIViewController {
                 for: .normal
             )
             
-            invitationState = .rescheduled
+            state = .rescheduled
+            
         }
         
         

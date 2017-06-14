@@ -14,7 +14,7 @@ extension CoffeeMeetupsVC {
     func setupPopover(with data: Invitation) {
         
         let popoverContent = self.storyboard?.instantiateViewController(
-            withIdentifier: "InvitationVC") as! InvitationVC
+            withIdentifier: ViewController.InvitationVC.rawValue) as! InvitationVC
         
         // Popover content must have invitation data
         popoverContent.invitation = data

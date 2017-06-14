@@ -78,7 +78,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         let thisUserRef = userRef.child(uid)
         email = FIRAuth.auth()?.currentUser?.email
        
-        //Check if user has filled out intro form; Populate the local user object
+        // Check if user has filled out intro form; Populate the local user object
 
         thisUserRef.observe(.value, with: { snapshot in
             if !snapshot.hasChild("name"){

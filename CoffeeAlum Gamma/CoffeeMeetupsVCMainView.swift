@@ -11,7 +11,9 @@ import UIKit
 final class CoffeeMeetupsVCMainView: UIView {
     
     
-    
+    override func layoutSubviews() {
+        
+    }
     
     
 }

@@ -14,4 +14,9 @@ enum Storyboard: String {
 
 enum ViewController: String {
     case SWRevealViewController = "SWRevealViewController"
+    case InvitationVC = "InvitationVC"
+}
+
+enum Cell: String {
+    case CoffeeMeetupCell = "CoffeeMeetupCell"
 }

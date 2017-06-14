@@ -16,7 +16,7 @@ final class SignUpVC: UIViewController {
     private enum State {
         case `default`
         case signUpFailure(error: Error)
-        case signUpSuccess
+        case signUpSuccessful
         case googleSignUp
         case signingUp
         case loading
@@ -61,7 +61,7 @@ final class SignUpVC: UIViewController {
         switch state {
         case .signingUp:
             signUp()
-        case .signUpSuccess:
+        case .signUpSuccessful:
             presentSearchViewController()
         case .signUpFailure(let error):
             didChangeErrorState(error)
@@ -75,21 +75,20 @@ final class SignUpVC: UIViewController {
     // MARK: - Sign Up Success
     private func signUp() {
         
-        guard let email = mainView.emailAddressTextField.text, let password = mainView.passwordTextField.text else {
-            return
-        }
+        let email = mainView.emailAddressTextField.text
+        let password = mainView.passwordTextField.text
         
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
             
-            APIClient.signUp(with: email, password: password) { [weak self] in
-                self?.state = .signUpSuccess
+            APIClient.signUp(with: email!, password: password!) { [weak self] in
+                self?.state = .signUpSuccessful
             }
         }
     }
     
     private func googleSignUp() {
         APIClient.googleSignIn { [weak self] in
-            self?.state = .signUpSuccess
+            self?.state = .signUpSuccessful
         }
     }
     
@@ -249,11 +248,11 @@ final class SignUpVC: UIViewController {
             name: Storyboard.main.rawValue,
             bundle: nil
         )
-        let swRevealViewController = storyboard.instantiateViewController(
+        let targetController = storyboard.instantiateViewController(
             withIdentifier: ViewController.SWRevealViewController.rawValue) as! SWRevealViewController
         
         // Present the next view controller
-        appDelegate?.window?.rootViewController = swRevealViewController
+        appDelegate?.window?.rootViewController = targetController
         
     }
   

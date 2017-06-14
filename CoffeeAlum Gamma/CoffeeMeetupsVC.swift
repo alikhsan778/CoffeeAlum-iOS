@@ -11,13 +11,16 @@ import Firebase
 
 final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
     
-    fileprivate enum State {
+    private enum State {
         case `default`
-        case `loading`
-        case refresh
+        case loading
+        case refreshData
+        case retrieveCoffee
+        case removeCoffee
+        case rescheduleCoffee
     }
     
-    fileprivate var state: State = .default {
+    private var state: State = .default {
         didSet {
             didChangeState(state)
         }
@@ -39,13 +42,19 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     var refreshController = UIRefreshControl()
     
     
-    fileprivate func didChangeState(_ state: State) {
+    private func didChangeState(_ state: State) {
         switch state {
         case .loading:
             retrieveCoffeeData()
             setupRefreshController()
             setupRevealViewController()
             sidebarMenuButton.setupSidebarButtonAction(to: self)
+        case .refreshData:
+            refreshStream()
+        case .removeCoffee:
+            break
+        case .rescheduleCoffee:
+            break
         default:
             break
         }
@@ -101,15 +110,14 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     // MARK: - Mandatory Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         state = .loading
     }
 
     override func viewDidLayoutSubviews() {
         // Using the Pan Gesture Recognizer to reveal the "SWRevealViewController"
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         // Adjusting the revealWidth so that it works fairly with all screen sizes
-        self.revealViewController().rearViewRevealWidth = self.view.frame.width / 3.2
+        revealViewController().rearViewRevealWidth = self.view.frame.width / 3.2
     }
     
     
@@ -119,16 +127,19 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         
     }
     
-    fileprivate func setupRefreshController() {
-        refreshController.addTarget(self,
-                                    action: #selector(refreshStream),
-                                    for: .valueChanged)
+    private func setupRefreshController() {
+        refreshController.addTarget(
+            self,
+            action: #selector(refreshStream),
+            for: .valueChanged
+        )
         collectionView.addSubview(refreshController)
         collectionView.alwaysBounceVertical = true
     }
     
     
     @objc fileprivate func refreshStream() {
+        retrieveCoffeeData()
         collectionView.reloadData()
         refreshController.endRefreshing()
     }
@@ -238,18 +249,9 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
             
             self.collectionView.deleteItems(at: indexPaths)
             
-        }) { (finished) in
-            
-            self.retrieveCoffeeData()
-            self.collectionView.reloadData()
-            
+        }) { (_) in
+            self.state = .refreshData
         }
-        
-    }
-    
-    func rescheduleCoffeeMeetup() {
-        
-        
         
     }
     
