@@ -40,10 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print(error.localizedDescription)
             }
             
-            
-            
         }
-        
     }
     
     

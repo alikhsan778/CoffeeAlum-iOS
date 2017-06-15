@@ -16,9 +16,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         return 3
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         // Upcoming coffee events
         if section == 0 {
             return upcomingCoffee.count
@@ -28,7 +26,6 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             return rescheduledCoffee.count
         }
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -122,30 +119,22 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         return cell
     }
     
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout extension
-extension CoffeeMeetupsVC: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = self.view.frame.size.width
+        let height = self.view.frame.size.height
+        
         return CGSize(
-            width: view.bounds.width * 0.9,
-            height: view.bounds.height * 0.2
+            width: width,
+            height: height / 4
         )
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        /*
-        if !collectionView.visibleCells.isEmpty {
-            let height = collectionView.visibleCells[0].frame.height
-            return height / 2
-        }
-        */
-        
         return 10
     }
     
 }
+
+
 

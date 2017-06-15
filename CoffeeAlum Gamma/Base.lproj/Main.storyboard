@@ -27,39 +27,39 @@
                                 <rect key="frame" x="10" y="131" width="394" height="605"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="100" minimumInteritemSpacing="100" id="rXh-QP-wW5">
-                                    <size key="itemSize" width="374" height="119"/>
+                                    <size key="itemSize" width="280" height="100"/>
                                     <size key="headerReferenceSize" width="40" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CoffeeMeetupCell" id="lND-po-UQy" customClass="CoffeeMeetupCollectionViewCell" customModule="CoffeeAlum_Gamma" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="50" width="374" height="119"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="57" y="50" width="280" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-S8-pJC" customClass="DesignableView" customModule="Spring">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="119"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-S8-pJC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="100"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Gmail logo " translatesAutoresizingMaskIntoConstraints="NO" id="W3o-Ds-dGF">
-                                                            <rect key="frame" x="15" y="23" width="73" height="73"/>
+                                                            <rect key="frame" x="15" y="23" width="54" height="54"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="W3o-Ds-dGF" secondAttribute="height" multiplier="1:1" id="Upy-ya-SPh"/>
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="xmd-y1-TcF">
-                                                            <rect key="frame" x="103" y="25" width="261" height="52"/>
+                                                            <rect key="frame" x="84" y="25" width="186" height="46"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Meetee" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxS-Lu-Rbe">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="261" height="28.333333333333336"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="186" height="25"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role of Meetee" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3JW-VX-TZc">
-                                                                    <rect key="frame" x="0.0" y="28.333333333333339" width="261" height="23.666666666666661"/>
+                                                                    <rect key="frame" x="0.0" y="25" width="186" height="21"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -77,14 +77,6 @@
                                                         <constraint firstItem="W3o-Ds-dGF" firstAttribute="leading" secondItem="q6W-S8-pJC" secondAttribute="leading" constant="15" id="vJ3-vQ-BPF"/>
                                                         <constraint firstAttribute="bottom" secondItem="W3o-Ds-dGF" secondAttribute="bottom" constant="23" id="xmy-gp-1py"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="15"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="20"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                         </view>
@@ -95,6 +87,7 @@
                                             <constraint firstItem="q6W-S8-pJC" firstAttribute="top" secondItem="lND-po-UQy" secondAttribute="top" id="gpG-BH-bX0"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="backingView" destination="q6W-S8-pJC" id="lTK-fW-k5G"/>
                                             <outlet property="nameOfInviter" destination="UxS-Lu-Rbe" id="IKH-Ze-ufI"/>
                                             <outlet property="pictureOfInviter" destination="W3o-Ds-dGF" id="0Fg-FJ-Lxe"/>
                                             <outlet property="roleOfOther" destination="3JW-VX-TZc" id="UeO-ym-sXg"/>
@@ -130,11 +123,8 @@
                                     <constraint firstAttribute="width" constant="35" id="FTz-6h-c9e"/>
                                 </constraints>
                                 <state key="normal" image="sidebarMenuButton"/>
-                                <connections>
-                                    <action selector="sidebarMenuButtonAction:" destination="wtU-yX-Tjg" eventType="touchUpInside" id="rxz-ha-42e"/>
-                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no invitations." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K27-9z-wT6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no invitations." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K27-9z-wT6">
                                 <rect key="frame" x="60" y="86" width="294" height="35"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

@@ -15,7 +15,7 @@ final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pictureOfInviter: UIImageView!
     @IBOutlet weak var roleOfOther: UILabel!
     
-    func configure(with invitation: Invitation) {
+    public func configure(with invitation: Invitation) {
         
         nameOfInviter.text = invitation.user.name
         
@@ -31,6 +31,7 @@ final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        backingView.addPresetCornerRadius()
         pictureOfInviter.circularize()
     }
     

@@ -128,7 +128,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         state = .refreshData
     }
     
-    func retrieveCoffeeData() {
+    private func retrieveCoffeeData() {
         // Allows the collection view to refresh
         allCoffee.removeAll()
         
@@ -142,7 +142,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     
-    fileprivate func insertCoffee(with invitation: Invitation) {
+    private func insertCoffee(with invitation: Invitation) {
         
         allCoffee.insert(invitation)
         collectionView.reloadData()
@@ -157,7 +157,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     // TODO: Delete the coffee meetup declined
-    func deleteCoffeeMeetupSelected() {
+    internal func deleteCoffeeMeetupSelected() {
         
         // Check which section the user has selected
         // Remove the coffee based the section selected
