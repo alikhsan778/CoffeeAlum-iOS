@@ -105,14 +105,16 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
             // Refreshes the table view
             // Must be called in the asynchronous process
             // Will not be effective if called in the main thread
-            tableView.reloadData()
+            self.tableView.reloadData()
         })
 
     }
     
     // Delegate method to save the updated user information
     func updateUserInformation(with user: User) {
-        APIClient.saveUserInformation(with: user)
+        APIClient.save(user) { (error) in
+            
+        }
         retrieveUserInfo()
     }
     

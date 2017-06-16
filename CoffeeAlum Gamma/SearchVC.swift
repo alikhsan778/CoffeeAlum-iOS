@@ -18,14 +18,17 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         case loading
         case userIsAStudent
         case userIsAnAlum
-        case getStarted
-        case failedToGetStarted
+        case createUser
+        case getStartedSuccessful
+        case getStartedFailed(as: Error)
     }
     
-    private var state: State = .default {
-        didSet {
-            didChange(state)
-        }
+    private enum `Error` {
+        case userNameIsEmpty
+        case fieldOfStudyIsEmpty
+        case cityAndRegionIsEmpty
+        case firebase(Error)
+        case userFailsToBeCreated
     }
     
     // MARK: - IBOutlets
@@ -42,12 +45,16 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     @IBOutlet weak var areYouAStudentLabel: UILabel!
     @IBOutlet weak var sidebarMenuButtonOutlet: UIButton!
     
+    private var state: State = .default {
+        didSet {
+            didChange(state)
+        }
+    }
     
     // MARK: - Miscellaneous Properties
     // Creating an instance of Firebase Database reference 
     var ref: FIRDatabaseReference!
     var userRef: FIRDatabaseReference = FIRDatabase.database().reference(withPath: "users")
-    
     // Creating an instance of each class
     var thisUser: User?
     // Animation object
@@ -60,10 +67,6 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     // Filtered Users
     
     // MARK: - Lists of Data
-    // Search data list for te Collection View
-    
-    // User profile list for the cell
-    
     // Testing for Firebase
     var name: String!
     var email: String!
@@ -73,7 +76,6 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     var account: AccountType!
     var uid: String = FIRAuth.auth()!.currentUser!.uid
     
-    
     // MARK: - Overrided Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -81,8 +83,8 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         completeProfileScrollView.isScrollEnabled = false
     }
     
-    
     override func viewDidLoad() {
+        state = .loading
         
         let thisUserRef = userRef.child(uid)
         email = FIRAuth.auth()?.currentUser?.email
@@ -91,13 +93,10 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
 
         thisUserRef.observe(.value, with: { snapshot in
             if !snapshot.hasChild("name"){
-                self.setupPopover(view: self.completeProfileView)
+                self.setupPopover(view: completeProfileView)
             }
             self.thisUser = User(snapshot: snapshot)
         })
-     
-        // Sets up the reveal view controller for sidebar menu
-        
         
         // Making the text field recognize the edit
         nameTextField.delegate = self
@@ -123,55 +122,110 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     // MARK: - IBAction    
     @IBAction func yesButtonAction(_ sender: UIButton) {
         state = .userIsAStudent
-        // Assigns the user as a student
-        self.account = .student
     }
     
     @IBAction func noButtonAction(_ sender: UIButton) {
         state = .userIsAnAlum
-        // Assigns the user as an alumnus
-        self.account = .alum
     }
     
     @IBAction func closePopover(with segue: UIStoryboardSegue) {}
     
     @IBAction func getStartedButtonAction(_ sender: UIButton) {
-        
-        let nameCondition = checkIfTextFieldHasBeenFilled(for: nameTextField, showStatusIn: usernameLabel)
-        let studyInCondition = checkIfTextFieldHasBeenFilled(for: studiedInTextField, showStatusIn: studiedInLabel)
-        let locationCondition = checkIfTextFieldHasBeenFilled(for: cityUserLivesTextField, showStatusIn: cityLocationLabel)
-        
-        // TODO: Change name convention to "is.."
-        if (nameCondition == true) && (studyInCondition == true) && (locationCondition == true) {
-            
-            // Build a user object
-            name = nameTextField.text
-            education = studiedInTextField.text
-            location = cityUserLivesTextField.text
-            
-            thisUser = User(
-                name: name,
-                account: .alum,
-                education: education,
-                location: location,
-                email: email,
-                uid: uid
-            )
-            
-            thisUser!.save()
-            dismissPopover(view: completeProfileView)
-        }
-        
+        state = .createUser
     }
     
     private func didChange(_ state: State) {
         switch state {
         case .loading:
             setupRevealViewController()
-        case .getStarted:
-            break
+        case .userIsAnAlum:
+            account = .alum
+        case .userIsAStudent:
+            account = .student
+        case .createUser:
+            createUser()
+        case .getStartedSuccessful:
+            dismissPopover(view: completeProfileView)
+        case .getStartedFailed(let error):
+            throwWarning(for: error)
         default:
             break
+        }
+    }
+    
+    // MARK: - Error Handler
+    private func throwWarning(for error: Error) {
+        
+        var message: String
+        let title = "Whoops! Something went wrong."
+        let alertController = UIAlertController()
+        
+        switch error {
+        case .userNameIsEmpty:
+            message = "Please enter your full name."
+        case .fieldOfStudyIsEmpty:
+            message = "Please enter your field of study."
+        case .cityAndRegionIsEmpty:
+            message = "Please enter the city and region you live in."
+        }
+        
+        func addAlertControllerTapGesture() {
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(alertControllerTapGestureHandler)
+            )
+            let alertControllerSubview = alertController.view.superview?.subviews[1]
+            alertControllerSubview?.isUserInteractionEnabled = true
+            alertControllerSubview?.addGestureRecognizer(tapGesture)
+        }
+        
+        alertController.title = title
+        alertController.message = message
+        
+        present(alertController, animated: true) {
+            addAlertControllerTapGesture()
+        }
+    }
+    
+    @objc private func alertControllerTapGestureHandler() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func createUser() {
+        
+        guard let name = nameTextField.text else {
+            state = .getStartedFailed(as: .userNameIsEmpty)
+            return
+        }
+        
+        guard let education = studiedInTextField.text else {
+            state = .getStartedFailed(as: .fieldOfStudyIsEmpty)
+            return
+        }
+        
+        guard let location = cityUserLivesTextField.text else {
+            state = .getStartedFailed(as: .cityAndRegionIsEmpty)
+            return
+        }
+        
+        thisUser = User(name: name,
+                        account: .alum,
+                        education: education,
+                        location: location,
+                        email: email,
+                        uid: uid)
+        
+        guard let user = thisUser else {
+            state = .getStartedFailed(as: .userFailsToBeCreated)
+            return
+        }
+        
+        APIClient.save(user) { (error) in
+            if error != nil {
+                state = .getStartedFailed(as: .firebase(error))
+            } else {
+                state = .getStartedSuccessful
+            }
         }
     }
     
@@ -182,7 +236,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         
     // Makes the status bar hide if the Complete Profile is not complete yet
     override var prefersStatusBarHidden: Bool {
-        if userHasCompletedProfileRequirements == true {
+        if userHasCompletedProfileRequirements {
             return false
         } else {
             return true
@@ -193,6 +247,5 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
     }
-    
 }
 

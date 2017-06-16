@@ -180,14 +180,9 @@ final class APIClient {
                 
                 // BUG: Format of the completion block must be correct
                 // because there is a bug in Firebase
-                userReference.setValue(emailDictionary) { (_, _) in
-                    
+                userReference.setValue(emailDictionary) { (error, _) in
+                    completion?()
                 }
-                
-                completion?()
-                
-            } else {
-                
             }
         })
 
@@ -210,7 +205,7 @@ final class APIClient {
     }
     
     // MARK: - Update User Information
-    static func saveUserInformation(with user: User) {
+    static func save(_ user: User, completion: ((Error?) -> Void)?) {
         
         let toJSON = [
             "name": user.name,
@@ -227,7 +222,9 @@ final class APIClient {
             "bio": user.bio
         ]
         
-        userReference.child(uid).setValue(toJSON)
+        userReference.child(uid).setValue(toJSON) { (error, _) in
+            completion?(error)
+        }
     }
     
     

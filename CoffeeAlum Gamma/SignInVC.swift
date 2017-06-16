@@ -13,7 +13,7 @@ final class SignInVC: UIViewController {
     /// States of the view controller.
     private enum State {
         case `default`
-        case signInFailure(error: Error)
+        case signInFailed(as: Error)
         case signInSuccessful
         case googleSignIn
         case signingIn
@@ -54,8 +54,8 @@ final class SignInVC: UIViewController {
             signIn()
         case .signInSuccessful:
             presentSearchViewController()
-        case .signInFailure(let error):
-            didChangeErrorState(error)
+        case .signInFailed(let error):
+            throwWarning(for: error)
         case .googleSignIn:
             break
         default:
@@ -63,7 +63,7 @@ final class SignInVC: UIViewController {
         }
     }
     
-    private func didChangeErrorState(_ error: Error) {
+    private func throwWarning(for error: Error) {
         
         var message: String
         let title = "Sign in error"
@@ -117,7 +117,7 @@ final class SignInVC: UIViewController {
     // Method to check if email address entered fulfills the requirements
     private func emailRequirementsIsFulfilled() -> Bool {
         if mainView.emailAddressTextField.text == "" {
-            state = .signInFailure(error: .emailAddressIsEmpty)
+            state = .signInFailed(as: .emailAddressIsEmpty)
             return false
         }
         return true
@@ -126,7 +126,7 @@ final class SignInVC: UIViewController {
     // Method that returns a Bool if the new password requirement is fulfilled
     private func passwordRequirementsIsFulfilled() -> Bool {
         if mainView.passwordTextField.text == "" {
-            state = .signInFailure(error: .passwordIsEmpty)
+            state = .signInFailed(as: .passwordIsEmpty)
             return false
         }
         return true

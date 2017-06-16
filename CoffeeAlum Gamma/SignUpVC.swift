@@ -15,7 +15,7 @@ final class SignUpVC: UIViewController {
     // MARK: - States
     private enum State {
         case `default`
-        case signUpFailure(error: Error)
+        case signUpFailed(as: Error)
         case signUpSuccessful
         case googleSignUp
         case signingUp
@@ -25,11 +25,11 @@ final class SignUpVC: UIViewController {
     private enum `Error` {
         case emailAddressIsEmpty
         case emailAddressIsInvalid
-        case emailAddressAlreadyUsed
+        case emailAddressAlreadyInUse
         case passwordIsEmpty
-        case passwordConfirmationIsEmpty
         case passwordIsInvalid
-        case unmatchingPasswordConfirmation
+        case passwordConfirmationIsEmpty
+        case passwordConfirmationDoesNotMatch
     }
     
     private var state: State = .default {
@@ -63,8 +63,8 @@ final class SignUpVC: UIViewController {
             signUp()
         case .signUpSuccessful:
             presentSearchViewController()
-        case .signUpFailure(let error):
-            didChangeErrorState(error)
+        case .signUpFailed(let error):
+            throwWarning(for: error)
         case .googleSignUp:
             googleSignUp()
         default:
@@ -93,7 +93,7 @@ final class SignUpVC: UIViewController {
     }
     
     // MARK: - Error Handler
-    private func didChangeErrorState(_ error: Error) {
+    private func throwWarning(for error: Error) {
         
         var message: String
         let title = "Sign up error"
@@ -104,7 +104,7 @@ final class SignUpVC: UIViewController {
             message = "Please enter your email address."
         case .emailAddressIsInvalid:
             message = "Your email address is invalid."
-        case .emailAddressAlreadyUsed:
+        case .emailAddressAlreadyInUse:
             message = "Your email address is already used."
         case .passwordIsEmpty:
             message = "Please enter your password."
@@ -112,26 +112,25 @@ final class SignUpVC: UIViewController {
             message = "Please re-enter your password."
         case .passwordIsInvalid:
             message = "Your password requires at least 6 characters."
-        case .unmatchingPasswordConfirmation:
+        case .passwordConfirmationDoesNotMatch:
             message = "Your password confirmation does not match."
         }
         
-        func setupAlertControllerTapGesture() {
+        func addAlertControllerTapGesture() {
             let tapGesture = UITapGestureRecognizer(
                 target: self,
                 action: #selector(alertControllerTapGestureHandler)
             )
-            
             let alertControllerSubview = alertController.view.superview?.subviews[1]
-            
             alertControllerSubview?.isUserInteractionEnabled = true
             alertControllerSubview?.addGestureRecognizer(tapGesture)
         }
         
         alertController.title = title
         alertController.message = message
+        
         present(alertController, animated: true) {
-            setupAlertControllerTapGesture()
+            addAlertControllerTapGesture()
         }
         
     }
@@ -145,7 +144,7 @@ final class SignUpVC: UIViewController {
     private func emailRequirementsIsFulfilled() -> Bool {
         
         if mainView.emailAddressTextField.text == "" {
-            state = .signUpFailure(error: .emailAddressIsEmpty)
+            state = .signUpFailed(as: .emailAddressIsEmpty)
             return false
         }
         
@@ -153,7 +152,7 @@ final class SignUpVC: UIViewController {
         if emailAddressIsValidated() {
             return true
         } else {
-            state = .signUpFailure(error: .emailAddressIsInvalid)
+            state = .signUpFailed(as: .emailAddressIsInvalid)
         }
         
         return true
@@ -163,14 +162,14 @@ final class SignUpVC: UIViewController {
     private func confirmPasswordRequirementsIsFulfilled() -> Bool {
         
         if mainView.confirmPasswordTextField.text == "" {
-            state = .signUpFailure(error: .passwordConfirmationIsEmpty)
+            state = .signUpFailed(as: .passwordConfirmationIsEmpty)
             return false
         }
         
         if passwordMatches() {
             return true
         } else {
-            state = .signUpFailure(error: .unmatchingPasswordConfirmation)
+            state = .signUpFailed(as: .passwordConfirmationDoesNotMatch)
         }
         
         return false
@@ -179,7 +178,7 @@ final class SignUpVC: UIViewController {
     private func passwordRequirementsIsFulfilled() -> Bool {
         
         if mainView.passwordTextField.text == "" {
-            state = .signUpFailure(error: .passwordIsEmpty)
+            state = .signUpFailed(as: .passwordIsEmpty)
             return false
         }
         
@@ -187,7 +186,7 @@ final class SignUpVC: UIViewController {
         if passwordHasEnoughCharacters() {
             return true
         } else {
-            state = .signUpFailure(error: .passwordIsInvalid)
+            state = .signUpFailed(as: .passwordIsInvalid)
         }
         
         return false
@@ -202,7 +201,7 @@ final class SignUpVC: UIViewController {
             return true
         }
         
-        state = .signUpFailure(error: .passwordIsInvalid)
+        state = .signUpFailed(as: .passwordIsInvalid)
         return false
     }
     
@@ -221,7 +220,7 @@ final class SignUpVC: UIViewController {
         if emailIsValidated {
             return true
         } else {
-            state = .signUpFailure(error: .emailAddressIsInvalid)
+            state = .signUpFailed(as: .emailAddressIsInvalid)
             return false
         }
     }
@@ -234,7 +233,7 @@ final class SignUpVC: UIViewController {
         if password == passwordConfirmation {
             return true
         } else {
-            state = .signUpFailure(error: .unmatchingPasswordConfirmation)
+            state = .signUpFailed(as: .passwordConfirmationDoesNotMatch)
             return false
         }
     }
