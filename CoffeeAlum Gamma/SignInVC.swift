@@ -30,7 +30,7 @@ final class SignInVC: UIViewController {
     
     private var state: State = .default {
         didSet {
-            didChangeState(state)
+            didChange(state)
         }
     }
 
@@ -48,7 +48,7 @@ final class SignInVC: UIViewController {
         state = .googleSignIn
     }
     
-    private func didChangeState(_ state: State) {
+    private func didChange(_ state: State) {
         switch state {
         case .signingIn:
             signIn()

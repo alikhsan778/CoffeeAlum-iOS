@@ -34,7 +34,7 @@ final class SignUpVC: UIViewController {
     
     private var state: State = .default {
         didSet {
-            didChangeState(state)
+            didChange(state)
         }
     }
     
@@ -57,7 +57,7 @@ final class SignUpVC: UIViewController {
     }
     
     // MARK: - State Machine
-    private func didChangeState(_ state: State) {
+    private func didChange(_ state: State) {
         switch state {
         case .signingUp:
             signUp()
@@ -253,7 +253,6 @@ final class SignUpVC: UIViewController {
         
         // Present the next view controller
         appDelegate?.window?.rootViewController = targetController
-        
     }
   
 }

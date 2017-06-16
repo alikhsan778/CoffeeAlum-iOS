@@ -13,6 +13,29 @@ import GoogleSignIn
 
 final class SidebarMenuVC: UIViewController {
     
+    enum State {
+        case `default`
+        case loading
+        case signOut
+    }
+    
+    var state: State = .default {
+        didSet {
+            didChange(state)
+        }
+    }
+    
+    func didChange(_ state: State) {
+        switch state {
+        case .signOut:
+            APIClient.signOut()
+            APIClient.googleSignOut()
+            presentSignInViewController()
+        default:
+            break
+        }
+    }
+    
     var thisUser: User?
     
     // MARK: - IBOutlets
@@ -22,19 +45,16 @@ final class SidebarMenuVC: UIViewController {
     
     // MARK: - IBActions
     @IBAction func profileButtonAction(_ sender: UIButton) {
-      
+        
     }
     
     @IBAction func logOutButtonAction(_ sender: UIButton) {
-        APIClient.signOut()
-        APIClient.googleSignOut()
-        transitionToSignInVC()
+        state = .signOut
     }
     
     // TODO: putting the following func into button connecting to login
     override func viewDidLoad() {
-        
-        
+        state = .loading
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,16 +72,15 @@ final class SidebarMenuVC: UIViewController {
         })
     }
     
-    fileprivate func transitionToSignInVC() {
+    private func presentSignInViewController() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        // Instantiate the login view controller
-        // Accessing the storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        // The next view controller
-        let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
+        let storyboard = UIStoryboard(
+            name: Storyboard.main.rawValue,
+            bundle: nil
+        )
+        let targetViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
         // Present the next view controller
-        appDelegate.window?.rootViewController = signInViewController
+        appDelegate.window?.rootViewController = targetViewController
     }
     
 }

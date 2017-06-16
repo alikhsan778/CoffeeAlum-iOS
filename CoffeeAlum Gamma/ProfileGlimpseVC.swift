@@ -12,6 +12,20 @@ import Firebase
 
 final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerDelegate, InviteDelegate {
     
+    enum State {
+        case `default`
+    }
+    
+    var state: State = .default {
+        didSet {
+            didChange(state)
+        }
+    }
+    
+    func didChange(_ state: State) {
+        
+    }
+    
     @IBOutlet weak var meetupButton: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!

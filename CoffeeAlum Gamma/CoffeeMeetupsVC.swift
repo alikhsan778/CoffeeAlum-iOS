@@ -11,18 +11,19 @@ import Firebase
 
 final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
     
-    private enum State {
+    fileprivate enum State {
         case `default`
         case loading
         case refreshData
         case retrieveCoffee
         case removeCoffee
         case rescheduleCoffee
+        case invitationSelected(Invitation)
     }
     
-    private var state: State = .default {
+    fileprivate var state: State = .default {
         didSet {
-            didChangeState(state)
+            didChange(state)
         }
     }
 
@@ -41,7 +42,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     private var refreshController = UIRefreshControl()
     
     // TODO: Getters and setters change it to fitler coffee
-    var pendingCoffee: [Invitation] {
+    fileprivate var pendingCoffee: [Invitation] {
         get {
             return Array(allCoffee).filter {
                 !$0.coffee.accepted && !$0.coffee.rescheduled
@@ -54,7 +55,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         }
     }
     
-    var upcomingCoffee: [Invitation] {
+    fileprivate var upcomingCoffee: [Invitation] {
         get {
             return Array(allCoffee).filter {
                 $0.coffee.accepted && !$0.coffee.rescheduled
@@ -67,7 +68,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         }
     }
     
-    var rescheduledCoffee: [Invitation] {
+    fileprivate var rescheduledCoffee: [Invitation] {
         get {
             return Array(allCoffee).filter {
                 $0.coffee.rescheduled && !$0.coffee.accepted
@@ -81,7 +82,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     }
 
     
-    private func didChangeState(_ state: State) {
+    private func didChange(_ state: State) {
         switch state {
         case .loading:
             retrieveCoffeeData()
@@ -96,6 +97,8 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
             break
         case .rescheduleCoffee:
             break
+        case .invitationSelected(let invitationSelected):
+            setupPopover(with: invitationSelected)
         default:
             break
         }
@@ -147,7 +150,6 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         allCoffee.insert(invitation)
         collectionView.reloadData()
         
-        // NOT DRY
         if allCoffee.count > 0 {
             noInvitationLabel.isHidden = true
         } else {
@@ -187,3 +189,125 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     
 }
 
+
+// MARK: - UICollectionView extension
+extension CoffeeMeetupsVC: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // Upcoming coffee events
+        if section == 0 {
+            return upcomingCoffee.count
+        } else if section == 1 {
+            return pendingCoffee.count
+        } else {
+            return rescheduledCoffee.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var reusableView: UICollectionReusableView!
+        // Checks if the view for supplementary element is the right type
+        if kind == UICollectionElementKindSectionHeader {
+            // Assigning reusable view
+            reusableView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionElementKindSectionHeader,
+                withReuseIdentifier: "Header",
+                for: indexPath
+            )
+            
+            // Accessing the labels
+            let label = reusableView?.subviews[0] as! UILabel
+            headerTitleLabel = label
+            
+            // Titles of the sections
+            let sectionNames = [
+                "Upcoming coffee meetups",
+                "Pending coffee invitations",
+                "Pending to be rescheduled"
+            ]
+            // Assigning the title of the label
+            headerTitleLabel?.text = sectionNames[indexPath.section]
+            
+        }
+        
+        return reusableView
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        var invitationSelected: Invitation?
+        
+        let section = indexPath.section
+        
+        func setupInvitationSelected(with array: [Invitation]) {
+            invitationSelected = array[indexPath.row]
+            coffeeSelectedIndex = indexPath.row
+            collectionViewSection = indexPath.section
+        }
+        
+        // Invitation selected
+        if section == 0 {
+            setupInvitationSelected(with: upcomingCoffee)
+        } else if section == 1 {
+            setupInvitationSelected(with: pendingCoffee)
+        } else {
+            setupInvitationSelected(with: rescheduledCoffee)
+        }
+        
+        if let invitationSelected = invitationSelected {
+            state = .invitationSelected(invitationSelected)
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        /*
+         if titleHidden == true {
+         headerTitleLabel?.isHidden = false
+         titleHidden = false
+         }
+         */
+        
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "CoffeeMeetupCell",
+            for: indexPath) as! CoffeeMeetupCollectionViewCell
+        
+        var thisData: Invitation
+        let section = indexPath.section
+        
+        if section == 0 {
+            thisData = upcomingCoffee[indexPath.row]
+        } else if section == 1 {
+            thisData = pendingCoffee[indexPath.row]
+        } else {
+            thisData = rescheduledCoffee[indexPath.row]
+        }
+        
+        cell.configure(with: thisData)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = self.view.frame.size.width
+        let height = self.view.frame.size.height
+        
+        return CGSize(
+            width: width,
+            height: height / 4
+        )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+}

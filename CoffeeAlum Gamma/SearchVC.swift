@@ -13,6 +13,21 @@ import GoogleSignIn
 
 final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
     
+    private enum State {
+        case `default`
+        case loading
+        case userIsAStudent
+        case userIsAnAlum
+        case getStarted
+        case failedToGetStarted
+    }
+    
+    private var state: State = .default {
+        didSet {
+            didChange(state)
+        }
+    }
+    
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var completeProfileScrollView: UIScrollView!
@@ -27,22 +42,17 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     @IBOutlet weak var areYouAStudentLabel: UILabel!
     @IBOutlet weak var sidebarMenuButtonOutlet: UIButton!
     
-
-    ////////////////////////////////////////////
     
     // MARK: - Miscellaneous Properties
     // Creating an instance of Firebase Database reference 
     var ref: FIRDatabaseReference!
     var userRef: FIRDatabaseReference = FIRDatabase.database().reference(withPath: "users")
     
-    
     // Creating an instance of each class
     var thisUser: User?
-
     // Animation object
     var blurEffect: UIBlurEffect!
     var blurEffectView: UIVisualEffectView!
-    
     // MARK: - Search Objects
     var filteredDataSet = Set<User>()
     var filteredUsers: [User] = []
@@ -67,7 +77,6 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     // MARK: - Overrided Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         // Prevents the user form being able to scroll the view
         completeProfileScrollView.isScrollEnabled = false
     }
@@ -88,7 +97,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         })
      
         // Sets up the reveal view controller for sidebar menu
-        self.setupRevealViewController()
+        
         
         // Making the text field recognize the edit
         nameTextField.delegate = self
@@ -111,18 +120,15 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         sidebarMenuButtonOutlet.setupSidebarButtonAction(to: self)
     }
     
-    // MARK: - IBAction
-    @IBAction func revealSidebarMenuButtonAction(_ sender: UIButton) {
-        
-        
-    }
-    
+    // MARK: - IBAction    
     @IBAction func yesButtonAction(_ sender: UIButton) {
+        state = .userIsAStudent
         // Assigns the user as a student
         self.account = .student
     }
     
     @IBAction func noButtonAction(_ sender: UIButton) {
+        state = .userIsAnAlum
         // Assigns the user as an alumnus
         self.account = .alum
     }
@@ -156,6 +162,17 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
             dismissPopover(view: completeProfileView)
         }
         
+    }
+    
+    private func didChange(_ state: State) {
+        switch state {
+        case .loading:
+            setupRevealViewController()
+        case .getStarted:
+            break
+        default:
+            break
+        }
     }
     
     // Required for the Popover transition

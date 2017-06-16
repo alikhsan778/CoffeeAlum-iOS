@@ -19,12 +19,8 @@ final class InvitationVCMainView: UIView {
     @IBOutlet var rescheduleView: UIView!
     @IBOutlet weak var rescheduleTextView: UITextView!
     
-    
-    // MARK: - Variables
-    weak var delegate: CoffeeMeetupsDelegate?
-    var invitation: Invitation!
-    var invitationID: String!
-    var invitationState: InvitationState!
-    
+    override func layoutSubviews() {
+        
+    }
     
 }

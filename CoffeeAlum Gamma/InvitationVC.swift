@@ -12,24 +12,26 @@ protocol CoffeeMeetupsDelegate: class {
     func deleteCoffeeMeetupSelected()
 }
 
-
-
-
 final class InvitationVC: UIViewController {
     
     private enum State {
         case `default`
         case loading
-        case pending
-        case accepted
-        case rescheduled
-        case declined
+        case acceptInvitation
+        case rescheduleInvitation
+        case declineInvitation(using: UIButton)
+        case failedToReschedule(error: Error)
+        case popover
     }
     
     private var state: State = .default {
         didSet {
-            
+            didChange(state)
         }
+    }
+    
+    private enum `Error` {
+        case rescheduleMessageIsEmpty
     }
     
     // MARK: - IBOutlets
@@ -60,11 +62,7 @@ final class InvitationVC: UIViewController {
                 "Reschedule",
                 for: .normal
             )
-            
-            state = .rescheduled
-            
         }
-        
         
         // TODO: DRY, this can be added in an extension
         let profileURL = invitation.user.portrait
@@ -74,10 +72,9 @@ final class InvitationVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        state = .loading
         setupUIElements()
         profilePicture.circularize()
-        
     }
     
     
@@ -103,12 +100,28 @@ final class InvitationVC: UIViewController {
         self.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
     }
     
+    private func didChange(_ state: State) {
+        switch state {
+        case .loading:
+            break
+        case .acceptInvitation:
+            acceptInvitation()
+        case .declineInvitation(let button):
+            declineInvitation(from: button)
+        case .rescheduleInvitation:
+            sendRescheduleMessage()
+        default:
+            break
+        }
+    }
+    
+    
     func setupUIElements() {
         personInvitingLabel.text = invitation?.user.name
         dateAndTimeLabel.text = invitation?.coffee.date
         placeLabel.text = invitation?.coffee.location
         
-        setupRescheduleView(view: rescheduleView)
+        setupRescheduleView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -118,52 +131,67 @@ final class InvitationVC: UIViewController {
     
     // MARK: - IBActions
     @IBAction func declineButtonAction(_ sender: UIButton) {
+        state = .declineInvitation(using: sender)
+    }
+    
+    @IBAction func acceptButtonAction(_ sender: UIButton) {
+        state = .acceptInvitation
+    }
+    
+    @IBAction func sendRescheduleMessageAction(_ sender: UIButton) {
+        state = .rescheduleInvitation
+    }
+    
+    @IBAction func cancelRescheduleButtonAction(_ sender: UIButton) {
+        dismissPopover(view: rescheduleView)
+    }
+    
+    // MARK: - Methods
+    func setupRescheduleView() {
         
-        let declineButtonTitle = sender.titleLabel?.text
+        rescheduleView.isHidden = true
         
+        rescheduleView.frame.size = CGSize(
+            width: self.view.frame.width,
+            height: self.view.frame.height
+        )
+        rescheduleView.center = self.view.center
+        self.view.addSubview(view)
+    
+    }
+    
+    fileprivate func acceptInvitation() {
+        // Accepts invitation
+        APIClient.acceptInvitation(with: invitationID)
+        // Removes the item from the cell
+        delegate?.deleteCoffeeMeetupSelected()
+        // Dismisses the popover
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func declineInvitation(from button: UIButton) {
+        let declineButtonTitle = button.titleLabel?.text
         if declineButtonTitle == "Decline" {
-            
             // Sends a decline request
             APIClient.declineInvitation(
                 with: invitationID,
                 state: .declined
             )
-            
             // Removes the item from the cell
             delegate?.deleteCoffeeMeetupSelected()
-            
             // Dismisses the popover
             self.dismiss(animated: true, completion: nil)
-            
         } else if declineButtonTitle == "Reschedule" {
-            
             // TODO: Display the reschedule message
             setupPopover(view: rescheduleView)
-            
         }
-    
     }
     
-    @IBAction func acceptButtonAction(_ sender: UIButton) {
-        
-        // Accepts invitation
-        APIClient.acceptInvitation(with: invitationID)
-        
-        // Removes the item from the cell
-        delegate?.deleteCoffeeMeetupSelected()
-        
-        // Dismisses the popover
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func sendRescheduleMessageAction(_ sender: UIButton) {
-        
+    fileprivate func sendRescheduleMessage() {
         guard let rescheduleMessage = rescheduleTextView.text else {
             // TODO: Throw an error
             return
         }
-        
         // Sends a reschedule request
         APIClient.rescheduleInvitation(
             with: invitationID,
@@ -174,37 +202,11 @@ final class InvitationVC: UIViewController {
             with: invitationID,
             state: .rescheduled
         )
-        
         // Removes the item from the cell
         delegate?.deleteCoffeeMeetupSelected()
-        
         dismissPopover(view: rescheduleView)
-        
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
-
-    }
-    
-    
-    @IBAction func cancelRescheduleButtonAction(_ sender: UIButton) {
-        
-        dismissPopover(view: rescheduleView)
-        
-    }
-    
-    
-    // MARK: - Methods
-    func setupRescheduleView(view: UIView) {
-        
-        view.isHidden = true
-        
-        view.frame.size = CGSize(
-            width: self.view.frame.width,
-            height: self.view.frame.height
-        )
-        view.center = self.view.center
-        self.view!.addSubview(view)
-    
     }
     
     

@@ -10,7 +10,31 @@ import Foundation
 import Firebase
 import SDWebImage
 
+
 final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
+
+    enum State {
+        case `default`
+        case loading
+    }
+    
+    var state: State = .default {
+        didSet {
+            didChange(state)
+        }
+    }
+    
+    func didChange(_ state: State) {
+        switch state {
+        case .loading:
+            retrieveUserInfo()
+            sidebarMenuButton.setupSidebarButtonAction(to: self)
+            setupRevealViewController()
+            addProfilePictureTapGesture()
+        default:
+            break
+        }
+    }
     
     // User object
     var thisUser: User!
@@ -25,11 +49,9 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
 
 
     override func viewDidLoad() {
-        // Retreiving the user information
-        retrieveUserInfo()
-        // Setup sidebar button
-        sidebarMenuButton.setupSidebarButtonAction(to: self)
+        state = .loading
         
+
         let nibFile = UINib(
             nibName: "PersonalProfileTableViewCell",
             bundle: nil
@@ -39,23 +61,14 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
             forCellReuseIdentifier: "PersonalProfileCell"
         )
         
-        setupProfilePictureTapGesture()
+        
     }
-
-    // TODO: Select Tags View
-    override func viewDidLayoutSubviews() {
-        // Using the Pan Gesture Recognizer to reveal the "SWRevealViewController"
-        self.setupRevealViewController()
-    }
-    
     
     @IBAction func sideBarMenuButton(_ sender: UIButton) {
-        
         
     }
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        
         
     }
     
@@ -92,8 +105,7 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
             // Refreshes the table view
             // Must be called in the asynchronous process
             // Will not be effective if called in the main thread
-            self.tableView.reloadData()
-            
+            tableView.reloadData()
         })
 
     }
@@ -104,15 +116,14 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
         retrieveUserInfo()
     }
     
-    fileprivate func setupProfilePictureTapGesture() {
+    fileprivate func addProfilePictureTapGesture() {
         profilePicture.isUserInteractionEnabled = true
         
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(imageTapped)
         )
-        
-        self.profilePicture.addGestureRecognizer(tapGestureRecognizer)
+        profilePicture.addGestureRecognizer(tapGestureRecognizer)
     }
 
 }
