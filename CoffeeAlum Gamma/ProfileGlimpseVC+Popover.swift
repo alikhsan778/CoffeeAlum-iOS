@@ -45,9 +45,8 @@ extension ProfileGlimpseVC {
         return .none
     }
     
-    func inviteSent(){
-        // TODO: Change the meetup button icon
+    func sendInvitation() {
         
-    }
     
+    }
 }

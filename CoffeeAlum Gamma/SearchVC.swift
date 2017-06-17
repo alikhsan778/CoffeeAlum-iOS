@@ -27,8 +27,8 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         case userNameIsEmpty
         case fieldOfStudyIsEmpty
         case cityAndRegionIsEmpty
-        case firebase(Error)
-        case userFailsToBeCreated
+        case firebase(Swift.Error)
+        case userFailedToBeCreated
     }
     
     // MARK: - IBOutlets
@@ -93,7 +93,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
 
         thisUserRef.observe(.value, with: { snapshot in
             if !snapshot.hasChild("name"){
-                self.setupPopover(view: completeProfileView)
+                self.setupPopover(view: self.completeProfileView)
             }
             self.thisUser = User(snapshot: snapshot)
         })
@@ -167,6 +167,10 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
             message = "Please enter your field of study."
         case .cityAndRegionIsEmpty:
             message = "Please enter the city and region you live in."
+        case .userFailedToBeCreated:
+            message = "User failed to be created. Check your network connection and try again."
+        case .firebase(let error):
+            message = "\(error.localizedDescription)"
         }
         
         func addAlertControllerTapGesture() {
@@ -216,15 +220,15 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
                         uid: uid)
         
         guard let user = thisUser else {
-            state = .getStartedFailed(as: .userFailsToBeCreated)
+            state = .getStartedFailed(as: .userFailedToBeCreated)
             return
         }
         
         APIClient.save(user) { (error) in
             if error != nil {
-                state = .getStartedFailed(as: .firebase(error))
+                self.state = .getStartedFailed(as: .firebase(error!))
             } else {
-                state = .getStartedSuccessful
+                self.state = .getStartedSuccessful
             }
         }
     }

@@ -11,11 +11,46 @@ import Firebase
 import MapKit
 
 protocol InviteDelegate: class {
-    func inviteSent()
+    func sendInvitation()
 }
 
 
 final class InvitePopoverVC: UIViewController {
+    
+    private enum State {
+        case `default`
+        case loading
+        case attemptToSendInvite
+        case failedToSendInvitation(as: Error)
+        case inviteSentSuccessfully
+    }
+    
+    private enum `Error` {
+        case dateIsEmpty
+        case locationIsEmpty
+        case timeIsEmpty
+    }
+    
+    private var state: State = .default {
+        didSet {
+            didChange(state)
+        }
+    }
+    
+    private func didChange(_ state: State) {
+        switch state {
+        case .loading:
+            break
+        case .failedToSendInvitation(let error):
+            throwWarning(for: error)
+        case .attemptToSendInvite:
+            delegate?.sendInvitation()
+        default:
+            break
+        }
+    }
+    
+    
     
     // TODO: MAKE FILEPRIVATE
     var viewedUser: User?
@@ -39,7 +74,7 @@ final class InvitePopoverVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        state = .loading
         
         // Assigning the delegate to self
         // coreLocationManager.delegate = self
@@ -52,6 +87,7 @@ final class InvitePopoverVC: UIViewController {
      – Sends the information to Firebase
      */
     @IBAction func inviteButtonAction(_ sender: UIButton) {
+        state = .attemptToSendInvite
         
         if inviteComplete() {
             // Create coffee
@@ -70,7 +106,7 @@ final class InvitePopoverVC: UIViewController {
             
             // TODO: Create warning for incomplete invite
             self.dismiss(animated: true, completion: {
-                self.delegate!.inviteSent()
+                
             })
             
         } else {
@@ -78,17 +114,40 @@ final class InvitePopoverVC: UIViewController {
         }
     }
     
+    private func throwWarning(for error: Error) {
+        switch error {
+        case .dateIsEmpty:
+            break
+        case .timeIsEmpty:
+            break
+        case .locationIsEmpty:
+            break
+        default:
+            break
+        }
+    }
+    
     /// Method to check if the invitation information is nil or not
     fileprivate func inviteComplete() -> Bool {
         
-        if let date = dateTextField.text, let time = timeTextField.text, let location = placeTextField.text {
-            // TODO: Change the location because this is just a default value
-            print(date, time, location)
-            return true
-        } else {
+        guard let date = dateTextField.text else {
+            state = .failedToSendInvitation(as: .dateIsEmpty)
             return false
         }
         
+        guard let time = timeTextField.text else {
+            state = .failedToSendInvitation(as: .timeIsEmpty)
+            return false
+        }
+        
+        guard let location = placeTextField.text else {
+            state = .failedToSendInvitation(as: .locationIsEmpty)
+            return false
+        }
+        
+        // TODO: Change the location because this is just a default value
+        print(date, time, location)
+        return true
     }
 }
 
