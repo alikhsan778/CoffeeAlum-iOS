@@ -7,26 +7,29 @@
 //
 
 import Foundation
-import Firebase
-import GoogleSignIn
 
 
 final class SidebarMenuVC: UIViewController {
     
-    enum State {
+    private enum State {
         case `default`
         case loading
+        case didLayoutSubviews
         case signOut
     }
     
-    var state: State = .default {
+    private var state: State = .default {
         didSet {
             didChange(state)
         }
     }
     
-    func didChange(_ state: State) {
+    private func didChange(_ state: State) {
         switch state {
+        case .loading:
+            downloadUserData()
+        case .didLayoutSubviews:
+            addUserProfilePicture()
         case .signOut:
             APIClient.signOut()
             APIClient.googleSignOut()
@@ -36,7 +39,7 @@ final class SidebarMenuVC: UIViewController {
         }
     }
     
-    var thisUser: User?
+    private var currentUser: User?
     
     // MARK: - IBOutlets
     @IBOutlet var sidebarMenuView: UIView!
@@ -58,26 +61,28 @@ final class SidebarMenuVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        let thisUserRef = FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid)
+        state = .didLayoutSubviews
+    }
+    
+    private func addUserProfilePicture() {
+        guard let profilePictureURL = currentUser?.portrait else {
+            return
+        }
         
-        thisUserRef.observe(.value, with: { [unowned self](snapshot) in
-            self.thisUser = User(snapshot: snapshot)
-            
-            if let portraitURL = self.thisUser?.portrait {
-                let url = URL(string: portraitURL)
-                self.profilePicture.sd_setImage(with: url)
-                self.profilePicture.addCircularFrame()
-            }
-            
-        })
+        profilePicture.sd_setImage(with: URL(string: profilePictureURL))
+        profilePicture.addCircularFrame()
+    }
+    
+    private func downloadUserData() {
+        APIClient.retrieveCurrentUserInformation { (user) in
+            self.currentUser = user
+        }
     }
     
     private func presentSignInViewController() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let storyboard = UIStoryboard(
-            name: Storyboard.main.rawValue,
-            bundle: nil
-        )
+        let storyboard = UIStoryboard(name: Storyboard.main.rawValue,
+                                      bundle: nil)
         let targetViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
         // Present the next view controller
         appDelegate.window?.rootViewController = targetViewController

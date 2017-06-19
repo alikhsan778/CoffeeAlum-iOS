@@ -41,6 +41,8 @@ final class SignUpVC: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet var mainView: SignUpVCMainView!
     
+    private let alertController = UIAlertController()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +98,6 @@ final class SignUpVC: UIViewController {
         
         var message: String
         let title = "Sign up error"
-        let alertController = UIAlertController()
         
         switch error {
         case .emailAddressIsEmpty:
@@ -142,9 +143,9 @@ final class SignUpVC: UIViewController {
     // Method to check if email address entered fulfills the requirements
     private func emailRequirementsIsFulfilled() -> Bool {
         
-        let emailText = mainView.emailAddressTextField.text ?? ""
+        let email = mainView.emailAddressTextField.text ?? ""
         
-        if emailText.isEmpty {
+        if email.isEmpty {
             state = .signUpFailed(as: .emailAddressIsEmpty)
             return false
         }
@@ -180,7 +181,9 @@ final class SignUpVC: UIViewController {
     
     private func passwordRequirementsIsFulfilled() -> Bool {
         
-        if mainView.passwordTextField.text == "" {
+        let password = mainView.passwordTextField.text ?? ""
+        
+        if password.isEmpty {
             state = .signUpFailed(as: .passwordIsEmpty)
             return false
         }
@@ -230,6 +233,7 @@ final class SignUpVC: UIViewController {
     
     // Method to check if the password entered matches the confirm password
     private func passwordConfirmationMatches() -> Bool {
+        
         let password = mainView.passwordTextField.text
         let passwordConfirmation = mainView.confirmPasswordTextField.text
         

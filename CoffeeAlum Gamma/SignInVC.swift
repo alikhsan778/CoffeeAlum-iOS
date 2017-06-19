@@ -124,7 +124,10 @@ final class SignInVC: UIViewController {
     
     // Method to check if email address entered fulfills the requirements
     private func emailRequirementsIsFulfilled() -> Bool {
-        if mainView.emailAddressTextField.text == "" {
+        
+        let email = mainView.emailAddressTextField.text ?? ""
+        
+        if email.isEmpty {
             state = .signInFailed(as: .emailAddressIsEmpty)
             return false
         }
@@ -133,7 +136,10 @@ final class SignInVC: UIViewController {
     
     // Method that returns a Bool if the new password requirement is fulfilled
     private func passwordRequirementsIsFulfilled() -> Bool {
-        if mainView.passwordTextField.text == "" {
+        
+        let password = mainView.passwordTextField.text ?? ""
+        
+        if password.isEmpty {
             state = .signInFailed(as: .passwordIsEmpty)
             return false
         }

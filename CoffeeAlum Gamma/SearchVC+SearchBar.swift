@@ -22,13 +22,14 @@ extension SearchVC {
             return false
         }
         
+        // TODO: Cache the value
+        
         if text.isEmpty {
-            
             filteredUsers.removeAll()
             filteredDataSet.removeAll()
             collectionView.reloadData()
-            
         } else {
+            
             let lowercaseText = text.lowercased()
             
             let query = userRef.queryOrdered(byChild: "searchName").queryStarting(atValue: lowercaseText).queryEnding(atValue: lowercaseText+"\u{f8ff}").queryLimited(toFirst: 5)

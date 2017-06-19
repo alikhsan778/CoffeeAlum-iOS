@@ -63,8 +63,6 @@ final class APIClient {
     // MARK: - CoffeeData Manager 
     static func retrieveCoffeeInvitationData() {
         
-        
-        
     }
     
     static func getCoffeeInvitationSent(completion: ((Invitation) -> Void)?) {
@@ -182,9 +180,13 @@ final class APIClient {
     
     
     // MARK: - Retrieve User Information
-    static func retrieveUserInformation() {
-        
-        
+    static func retrieveCurrentUserInformation(completion: ((User) -> Void)?) {
+        userReference.observe(.value, with: { (snapshot) in
+            
+            let user = User(snapshot: snapshot)
+
+            completion?(user)
+        })
     }
     
     // MARK: - Update User Information

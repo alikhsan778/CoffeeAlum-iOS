@@ -13,18 +13,18 @@ import SDWebImage
 
 final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
 
-    enum State {
+    private enum State {
         case `default`
         case loading
     }
     
-    var state: State = .default {
+    private var state: State = .default {
         didSet {
             didChange(state)
         }
     }
     
-    func didChange(_ state: State) {
+    private func didChange(_ state: State) {
         switch state {
         case .loading:
             retrieveUserInfo()
