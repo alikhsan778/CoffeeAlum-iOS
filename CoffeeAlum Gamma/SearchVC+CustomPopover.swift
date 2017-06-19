@@ -6,7 +6,6 @@
 //  Copyright © 2017 Trevin Wisaksana. All rights reserved.
 //
 
-import Firebase
 
 extension SearchVC {
     

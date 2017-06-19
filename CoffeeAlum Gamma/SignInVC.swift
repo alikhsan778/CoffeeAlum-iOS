@@ -15,8 +15,8 @@ final class SignInVC: UIViewController {
         case `default`
         case signInFailed(as: Error)
         case signInSuccessful
-        case googleSignIn
-        case signingIn
+        case signInWithGoogleAccount
+        case signInUsingFirebase
         case loading
     }
     
@@ -24,9 +24,12 @@ final class SignInVC: UIViewController {
         case emailAddressIsEmpty
         case passwordIsEmpty
         case passwordOrEmailIsIncorrect
+        case firebase(Swift.Error)
     }
     
     @IBOutlet var mainView: SignInVCMainView!
+    
+    private let alertController = UIAlertController()
     
     private var state: State = .default {
         didSet {
@@ -41,22 +44,22 @@ final class SignInVC: UIViewController {
     }
     
     @IBAction func signInButtonAction(_ sender: UIButton) {
-        state = .signingIn
+        state = .signInUsingFirebase
     }
     
     @IBAction func googleSignInButtonAction(_ sender: UIButton) {
-        state = .googleSignIn
+        state = .signInWithGoogleAccount
     }
     
     private func didChange(_ state: State) {
         switch state {
-        case .signingIn:
-            signIn()
+        case .signInUsingFirebase:
+            signInUsingFirebase()
         case .signInSuccessful:
             presentSearchViewController()
         case .signInFailed(let error):
             throwWarning(for: error)
-        case .googleSignIn:
+        case .signInWithGoogleAccount:
             break
         default:
             break
@@ -67,7 +70,6 @@ final class SignInVC: UIViewController {
         
         var message: String
         let title = "Sign in error"
-        let alertController = UIAlertController()
         
         switch error {
         case .emailAddressIsEmpty:
@@ -76,6 +78,8 @@ final class SignInVC: UIViewController {
             message = "Please enter your password."
         case .passwordOrEmailIsIncorrect:
             message = "Your password or email is incorrect."
+        case .firebase(let error):
+            message = "\(error.localizedDescription)"
         }
         
         func setupAlertControllerTapGesture() {
@@ -102,14 +106,18 @@ final class SignInVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    private func signIn() {
+    private func signInUsingFirebase() {
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() {
             
             let email = mainView.emailAddressTextField.text
             let password = mainView.passwordTextField.text
             
-            APIClient.signIn(with: email!, password: password!) { [weak self] () in
-                self?.state = .signInSuccessful
+            APIClient.signIn(with: email!, password: password!) { [weak self] (error) in
+                if error == nil {
+                    self?.state = .signInSuccessful
+                } else {
+                    self?.state = .signInFailed(as: .firebase(error!))
+                }
             }
         }
     }

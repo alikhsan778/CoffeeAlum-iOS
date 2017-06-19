@@ -6,8 +6,6 @@
 //  Copyright © 2017 Trevin Wisaksana. All rights reserved.
 //
 
-import Foundation
-
 protocol CoffeeMeetupsDelegate: class {
     func deleteCoffeeMeetupSelected()
 }
@@ -17,10 +15,12 @@ final class InvitationVC: UIViewController {
     private enum State {
         case `default`
         case loading
+        case viewDidLayoutSubviews
         case acceptInvitation
         case rescheduleInvitation
         case declineInvitation(using: UIButton)
-        case failedToReschedule(error: Error)
+        case failedToReschedule(as: Error)
+        case cancelReschedule
         case popover
     }
     
@@ -35,48 +35,35 @@ final class InvitationVC: UIViewController {
     }
     
     // MARK: - IBOutlets
-    @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var personInvitingLabel: UILabel!
-    @IBOutlet weak var dateAndTimeLabel: UILabel!
-    @IBOutlet weak var placeLabel: UILabel!
-    @IBOutlet weak var declineButtonOutlet: UIButton!
-    @IBOutlet var rescheduleView: UIView!
-    @IBOutlet weak var rescheduleTextView: UITextView!
-    
+    @IBOutlet var mainView: InvitationVCMainView!
     
     weak var delegate: CoffeeMeetupsDelegate?
     var invitation: Invitation!
     var invitationID: String!
     
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
         state = .loading
         
         // Assigning the invitation ID
         invitationID = invitation?.coffee.id
         
         if invitation.coffee.accepted {
-            declineButtonOutlet.setTitle(
+            mainView.declineButtonOutlet.setTitle(
                 "Reschedule",
                 for: .normal
             )
         }
-        
         // TODO: DRY, this can be added in an extension
         let profileURL = invitation.user.portrait
         let url = URL(string: profileURL)
-        profilePicture.sd_setImage(with: url)
+        mainView.profilePicture.sd_setImage(with: url)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        state = .loading
-        setupUIElements()
-        profilePicture.circularize()
+    override func viewDidLayoutSubviews() {
+        state = .viewDidLayoutSubviews
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -100,6 +87,7 @@ final class InvitationVC: UIViewController {
         self.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
     }
     
+    // MARK: - State Machine
     private func didChange(_ state: State) {
         switch state {
         case .loading:
@@ -110,24 +98,14 @@ final class InvitationVC: UIViewController {
             declineInvitation(from: button)
         case .rescheduleInvitation:
             sendRescheduleMessage()
+        case .cancelReschedule:
+            dismissRescheduleView()
+        case .viewDidLayoutSubviews:
+            mainView.prepareLabelTexts(with: invitation)
         default:
             break
         }
     }
-    
-    
-    func setupUIElements() {
-        personInvitingLabel.text = invitation?.user.name
-        dateAndTimeLabel.text = invitation?.coffee.date
-        placeLabel.text = invitation?.coffee.location
-        
-        setupRescheduleView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        
-    }
-    
     
     // MARK: - IBActions
     @IBAction func declineButtonAction(_ sender: UIButton) {
@@ -143,24 +121,21 @@ final class InvitationVC: UIViewController {
     }
     
     @IBAction func cancelRescheduleButtonAction(_ sender: UIButton) {
-        dismissPopover(view: rescheduleView)
+        state = .cancelReschedule
     }
     
     // MARK: - Methods
-    func setupRescheduleView() {
-        
-        rescheduleView.isHidden = true
-        
-        rescheduleView.frame.size = CGSize(
+    func addRescheduleView() {
+        mainView.rescheduleView.isHidden = true
+        mainView.rescheduleView.frame.size = CGSize(
             width: self.view.frame.width,
             height: self.view.frame.height
         )
-        rescheduleView.center = self.view.center
+        mainView.rescheduleView.center = self.view.center
         self.view.addSubview(view)
-    
     }
     
-    fileprivate func acceptInvitation() {
+    private func acceptInvitation() {
         // Accepts invitation
         APIClient.acceptInvitation(with: invitationID)
         // Removes the item from the cell
@@ -169,7 +144,7 @@ final class InvitationVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    fileprivate func declineInvitation(from button: UIButton) {
+    private func declineInvitation(from button: UIButton) {
         let declineButtonTitle = button.titleLabel?.text
         if declineButtonTitle == "Decline" {
             // Sends a decline request
@@ -183,66 +158,58 @@ final class InvitationVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
         } else if declineButtonTitle == "Reschedule" {
             // TODO: Display the reschedule message
-            setupPopover(view: rescheduleView)
+            displayRescheduleView()
         }
     }
     
-    fileprivate func sendRescheduleMessage() {
-        guard let rescheduleMessage = rescheduleTextView.text else {
-            // TODO: Throw an error
+    private func sendRescheduleMessage() {
+        guard let rescheduleMessage = mainView.rescheduleTextView.text else {
+            state = .failedToReschedule(as: .rescheduleMessageIsEmpty)
             return
         }
         // Sends a reschedule request
-        APIClient.rescheduleInvitation(
-            with: invitationID,
-            message: rescheduleMessage
-        )
+        APIClient.rescheduleInvitation(with: invitationID,
+                                       message: rescheduleMessage)
         // Must decline invitation as well
-        APIClient.declineInvitation(
-            with: invitationID,
-            state: .rescheduled
-        )
+        APIClient.declineInvitation(with: invitationID,
+                                    state: .rescheduled)
         // Removes the item from the cell
         delegate?.deleteCoffeeMeetupSelected()
-        dismissPopover(view: rescheduleView)
+        dismissRescheduleView()
         // Dismisses the popover
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    func setupPopover(view: UIView) {
+    private func displayRescheduleView() {
         
-        view.isHidden = false
+        guard let rescheduleView = mainView.rescheduleView else {
+            return
+        }
         
-        view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        rescheduleView.isHidden = false
+        
+        rescheduleView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         
         // Bringing the popover view to front
-        self.view!.bringSubview(toFront: view)
+        self.view.bringSubview(toFront: rescheduleView)
         
         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: { () -> Void in
-            
-            view.transform = CGAffineTransform.identity
-            view.alpha = 1
-            
+            rescheduleView.transform = CGAffineTransform.identity
+            rescheduleView.alpha = 1
         }, completion: nil)
-        
     }
     
     // Method to dimiss the popover
-    func dismissPopover(view: UIView) {
-        
+    func dismissRescheduleView() {
         // Animation to dismiss the popover
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {() -> Void in
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: { () -> Void in
             
             // Animation to scale before disappearing
-            view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            view.alpha = 0
+            self.mainView.rescheduleView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            self.mainView.rescheduleView.alpha = 0
         
         }, completion: { (success: Bool) in
-            view.isHidden = true
+            self.mainView.rescheduleView.isHidden = true
         })
-        
     }
-
-    
 }

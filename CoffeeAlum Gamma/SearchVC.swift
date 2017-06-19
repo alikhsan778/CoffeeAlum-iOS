@@ -77,12 +77,6 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     var uid: String = FIRAuth.auth()!.currentUser!.uid
     
     // MARK: - Overrided Methods
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Prevents the user form being able to scroll the view
-        completeProfileScrollView.isScrollEnabled = false
-    }
-    
     override func viewDidLoad() {
         state = .loading
         
@@ -105,16 +99,6 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         
         // Making the text view recongize the edit
         searchTextView.delegate = self
-        
-        // Creating a placeholder manually in text view
-        searchTextView.text = "Tap here to search"
-        searchTextView.textColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
-        
-        // Assigning effect to store the blur effect
-        self.blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        self.blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         sidebarMenuButtonOutlet.setupSidebarButtonAction(to: self)
     }
@@ -174,10 +158,8 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         }
         
         func addAlertControllerTapGesture() {
-            let tapGesture = UITapGestureRecognizer(
-                target: self,
-                action: #selector(alertControllerTapGestureHandler)
-            )
+            let tapGesture = UITapGestureRecognizer(target: self,
+                action: #selector(alertControllerTapGestureHandler))
             let alertControllerSubview = alertController.view.superview?.subviews[1]
             alertControllerSubview?.isUserInteractionEnabled = true
             alertControllerSubview?.addGestureRecognizer(tapGesture)

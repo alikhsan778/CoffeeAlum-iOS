@@ -66,7 +66,7 @@ final class SidebarMenuVC: UIViewController {
             if let portraitURL = self.thisUser?.portrait {
                 let url = URL(string: portraitURL)
                 self.profilePicture.sd_setImage(with: url)
-                self.profilePicture.circularize()
+                self.profilePicture.addCircularFrame()
             }
             
         })

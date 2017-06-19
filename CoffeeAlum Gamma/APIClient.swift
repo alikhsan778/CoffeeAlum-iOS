@@ -130,28 +130,11 @@ final class APIClient {
     }
     
     // MARK: - App Entry And Exit 
-    static func signIn(with email: String, password: String, completion: (() -> Void)?) {
-        
+    static func signIn(with email: String, password: String, completion: ((Error?) -> Void)?) {
         firebaseAuth?.signIn(withEmail: email, password: password,
             completion: { (user, error) in
-                
-            if error == nil {
-                // Presents the home view controller
-                completion?()
-                
-            } else {
-                
-                // Throws error
-                // TODO: TODO: Add UIAlert
-                /*
-                let credentialAlert = UIAlertController(title: "Sign in error", message: "Password or email may be incorrect", preferredStyle: .alert)
-                credentialAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                present(credentialAlert, animated: true, completion: nil)
-                */
-            }
-
+            completion?(error)
         })
-        
     }
     
     static func signOut() {
@@ -188,7 +171,7 @@ final class APIClient {
 
     }
     
-    static func googleSignIn(completion: (() -> Void)?) {
+    static func signInWithGoogleAccount(completion: (() -> Void)?) {
         GIDSignIn.sharedInstance().signIn()
         completion?()
     }

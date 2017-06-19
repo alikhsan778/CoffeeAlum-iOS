@@ -20,7 +20,16 @@ final class InvitationVCMainView: UIView {
     @IBOutlet weak var rescheduleTextView: UITextView!
     
     override func layoutSubviews() {
-        
+        super.layoutSubviews()
+    
+        profilePicture.addCircularFrame()
     }
+    
+    func prepareLabelTexts(with data: Invitation) {
+        personInvitingLabel.text = data.user.name
+        dateAndTimeLabel.text = data.coffee.date
+        placeLabel.text = data.coffee.location
+    }
+
     
 }

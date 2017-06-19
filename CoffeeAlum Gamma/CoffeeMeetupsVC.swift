@@ -98,7 +98,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         case .rescheduleCoffee:
             break
         case .invitationSelected(let invitationSelected):
-            setupPopover(with: invitationSelected)
+            presentPopover(with: invitationSelected)
         default:
             break
         }
@@ -232,7 +232,6 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             ]
             // Assigning the title of the label
             headerTitleLabel?.text = sectionNames[indexPath.section]
-            
         }
         
         return reusableView

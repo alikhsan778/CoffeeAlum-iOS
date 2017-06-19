@@ -11,7 +11,7 @@ import Foundation
 extension CoffeeMeetupsVC {
     
     /// Setup for popver to make it fit the size of the screen
-    func setupPopover(with data: Invitation) {
+    func presentPopover(with data: Invitation) {
         
         let popoverContent = self.storyboard?.instantiateViewController(
             withIdentifier: ViewController.InvitationVC.rawValue) as! InvitationVC

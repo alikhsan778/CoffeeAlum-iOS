@@ -8,13 +8,13 @@
 
 import Foundation
 import Firebase
+
 // Extension that handles the search bar
 extension SearchVC {
     
-    
     // MARK: - Text View Methods
     // Method to filter text as a search bar
-    //MARK - Search functions
+    // MARK - Search functions
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if text == "\n" {
@@ -22,40 +22,41 @@ extension SearchVC {
             return false
         }
         
-        filteredDataSet = Set<User>()
-        
-        userRef.observe(.value, with: { snapshot in
-            if snapshot.hasChildren() {
-                for item in snapshot.children {
-                    guard let info = item as? FIRDataSnapshot else{
-                        break
-                    }
+        if text.isEmpty {
+            
+            filteredUsers.removeAll()
+            filteredDataSet.removeAll()
+            collectionView.reloadData()
+            
+        } else {
+            let lowercaseText = text.lowercased()
+            
+            let query = userRef.queryOrdered(byChild: "searchName").queryStarting(atValue: lowercaseText).queryEnding(atValue: lowercaseText+"\u{f8ff}").queryLimited(toFirst: 5)
+            
+            query.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if snapshot.hasChildren() {
                     
-                    let searchedUser = User(snapshot: info)
-                    
-                    if searchedUser.name.lowercased().range(of: text.lowercased()) != nil {
+                    for item in snapshot.children {
+                        
+                        guard let info = item as? FIRDataSnapshot else {
+                            break
+                        }
+                        
+                        let searchedUser = User(snapshot: info)
+                        
                         self.filteredDataSet.insert(searchedUser)
+                        
                     }
                     
-                    if searchedUser.education.lowercased().range(of: text.lowercased()) != nil {
-                        self.filteredDataSet.insert(searchedUser)
-                    }
+                    self.filteredUsers = Array(self.filteredDataSet)
+                    self.collectionView.reloadData()
                     
-                    if searchedUser.location.lowercased().range(of: text.lowercased()) != nil {
-                        self.filteredDataSet.insert(searchedUser)
-                    }
-                    
-                    if searchedUser.employer.lowercased().range(of: text.lowercased()) != nil {
-                        self.filteredDataSet.insert(searchedUser)
-                    }
                 }
-            }
-            
-            self.filteredUsers = Array(self.filteredDataSet)
-            self.collectionView.reloadData()
-            
-        })
-        
+                
+            })
+
+        }
         
         
         return true

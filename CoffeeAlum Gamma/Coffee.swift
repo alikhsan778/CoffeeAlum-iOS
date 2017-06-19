@@ -6,7 +6,6 @@
 //  Copyright © 2016 CoffeeAlum. All rights reserved.
 //
 
-import Foundation
 import Firebase
 
 /// Change to struct
@@ -31,7 +30,7 @@ struct Coffee {
     var ref: FIRDatabaseReference = FIRDatabase.database().reference().child("coffees")
     
     
-    init(fromId: String, fromName: String, toId: String, toName: String){
+    init(fromId: String, fromName: String, toId: String, toName: String) {
         self.fromId = fromId
         self.toId = toId
         self.fromName = fromName

@@ -12,6 +12,7 @@ final class CoffeeMeetupsVCMainView: UIView {
     
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         
     }
     

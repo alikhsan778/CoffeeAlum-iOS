@@ -60,8 +60,6 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
             nibFile,
             forCellReuseIdentifier: "PersonalProfileCell"
         )
-        
-        
     }
     
     @IBAction func sideBarMenuButton(_ sender: UIButton) {
@@ -99,7 +97,7 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
             
             if profilePictureURL?.absoluteString != nil {
                 self.profilePicture.sd_setImage(with: profilePictureURL)
-                self.profilePicture.circularize()
+                self.profilePicture.addCircularFrame()
             }
             
             // Refreshes the table view
@@ -111,8 +109,8 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     }
     
     // Delegate method to save the updated user information
-    func updateUserInformation(with user: User) {
-        APIClient.save(user) { (error) in
+    func save(user update: User) {
+        APIClient.save(update) { (error) in
             
         }
         retrieveUserInfo()
@@ -120,11 +118,8 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     
     fileprivate func addProfilePictureTapGesture() {
         profilePicture.isUserInteractionEnabled = true
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(imageTapped)
-        )
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self,
+            action: #selector(imageTapped))
         profilePicture.addGestureRecognizer(tapGestureRecognizer)
     }
 

@@ -74,7 +74,7 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
         
         let url = URL(string: userViewed.portrait)
         profilePicture.sd_setImage(with: url)
-        profilePicture.circularize()
+        profilePicture.addCircularFrame()
         
         if userViewed.uid == FIRAuth.auth()?.currentUser!.uid{
             meetupButton.isHidden = true

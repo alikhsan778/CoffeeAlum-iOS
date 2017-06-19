@@ -22,7 +22,7 @@ final class SearchCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 12
         self.layer.masksToBounds = true
         
-        userProfilePicture.circularize()
+        userProfilePicture.addCircularFrame()
     }
     
     func configure(with user: User) {
@@ -45,7 +45,7 @@ final class SearchCollectionViewCell: UICollectionViewCell {
         if user.portrait != "" {
             let url = URL(string: user.portrait)
             userProfilePicture.sd_setImage(with: url)
-            userProfilePicture.circularize()
+            userProfilePicture.addCircularFrame()
         }
         
         userSchoolNameLabel.text = user.education

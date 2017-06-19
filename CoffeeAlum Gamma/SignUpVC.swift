@@ -17,8 +17,8 @@ final class SignUpVC: UIViewController {
         case `default`
         case signUpFailed(as: Error)
         case signUpSuccessful
-        case googleSignUp
-        case signingUp
+        case signInWithGoogle
+        case signUpWithFirebase
         case loading
     }
     
@@ -49,24 +49,24 @@ final class SignUpVC: UIViewController {
     
     // MARK: - IBActions
     @IBAction func signUpButtonAction(_ sender: UIButton) {
-        state = .signingUp
+        state = .signUpWithFirebase
     }
     
     @IBAction func googleSignInButtonAction(_ sender: UIButton) {
-        state = .googleSignUp
+        state = .signInWithGoogle
     }
     
     // MARK: - State Machine
     private func didChange(_ state: State) {
         switch state {
-        case .signingUp:
+        case .signUpWithFirebase:
             signUp()
         case .signUpSuccessful:
             presentSearchViewController()
         case .signUpFailed(let error):
             throwWarning(for: error)
-        case .googleSignUp:
-            googleSignUp()
+        case .signInWithGoogle:
+            signInWithGoogleAccount()
         default:
             break
         }
@@ -79,15 +79,14 @@ final class SignUpVC: UIViewController {
         let password = mainView.passwordTextField.text
         
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
-            
             APIClient.signUp(with: email!, password: password!) { [weak self] in
                 self?.state = .signUpSuccessful
             }
         }
     }
     
-    private func googleSignUp() {
-        APIClient.googleSignIn { [weak self] in
+    private func signInWithGoogleAccount() {
+        APIClient.signInWithGoogleAccount { [weak self] in
             self?.state = .signUpSuccessful
         }
     }
@@ -143,7 +142,9 @@ final class SignUpVC: UIViewController {
     // Method to check if email address entered fulfills the requirements
     private func emailRequirementsIsFulfilled() -> Bool {
         
-        if mainView.emailAddressTextField.text == "" {
+        let emailText = mainView.emailAddressTextField.text ?? ""
+        
+        if emailText.isEmpty {
             state = .signUpFailed(as: .emailAddressIsEmpty)
             return false
         }
@@ -161,12 +162,14 @@ final class SignUpVC: UIViewController {
     // Method that returns a Bool if the new password matches the confirmed password
     private func confirmPasswordRequirementsIsFulfilled() -> Bool {
         
-        if mainView.confirmPasswordTextField.text == "" {
+        let confirmationPassword = mainView.confirmPasswordTextField.text ?? ""
+        
+        if confirmationPassword.isEmpty {
             state = .signUpFailed(as: .passwordConfirmationIsEmpty)
             return false
         }
         
-        if passwordMatches() {
+        if passwordConfirmationMatches() {
             return true
         } else {
             state = .signUpFailed(as: .passwordConfirmationDoesNotMatch)
@@ -226,7 +229,7 @@ final class SignUpVC: UIViewController {
     }
     
     // Method to check if the password entered matches the confirm password
-    private func passwordMatches() -> Bool {
+    private func passwordConfirmationMatches() -> Bool {
         let password = mainView.passwordTextField.text
         let passwordConfirmation = mainView.confirmPasswordTextField.text
         
@@ -253,6 +256,5 @@ final class SignUpVC: UIViewController {
         // Present the next view controller
         appDelegate?.window?.rootViewController = targetController
     }
-  
 }
 

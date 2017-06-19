@@ -32,7 +32,7 @@ final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         backingView.addPresetCornerRadius()
-        pictureOfInviter.circularize()
+        pictureOfInviter.addCircularFrame()
     }
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PersonalProfileDelegate: class {
-    func updateUserInformation(with user: User)
+    func save(user update: User)
 }
 
 final class PersonalProfileTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -54,7 +54,7 @@ final class PersonalProfileTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         addTextToUserData()
-        delegate.updateUserInformation(with: user)
+        delegate.save(user: user)
     }
     
     fileprivate func addTextToUserData() {

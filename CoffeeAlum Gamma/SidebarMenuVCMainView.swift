@@ -10,6 +10,9 @@ import Foundation
 
 final class SidebarMenuVCMainView: UIView {
     
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
     
 }
