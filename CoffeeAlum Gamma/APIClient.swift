@@ -189,6 +189,21 @@ final class APIClient {
         })
     }
     
+    static func downloadAllUserData(completion: (([User]) -> Void)?) {
+        
+        var filter = Set<User>()
+        
+        db.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let user = User(snapshot: snapshot)
+            filter.insert(user)
+            let filteredListOfUsers = Array(filter)
+            
+            completion?(filteredListOfUsers)
+            
+        })
+    }
+    
     // MARK: - Update User Information
     static func save(_ user: User, completion: ((Error?) -> Void)?) {
         

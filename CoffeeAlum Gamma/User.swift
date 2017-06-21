@@ -11,8 +11,7 @@ import Foundation
 import UIKit
 import Firebase
 
-/// TODO: Change to struct
-struct User: Hashable, Equatable {
+class User: Hashable, Equatable {
     
     var name: String = ""
     var email: String = ""
@@ -88,7 +87,7 @@ struct User: Hashable, Equatable {
         
     }
     
-    func toAnyObject() -> NSDictionary {
+    func toJSON() -> NSDictionary {
         
         // TODO: Eliminate the redundancy below time permitting
         // Each Id is its own key for ease of access
@@ -111,12 +110,12 @@ struct User: Hashable, Equatable {
     }
     
     // TODO: Move this to the API client
-    mutating func save() {
+    func save() {
         let id = FIRAuth.auth()!.currentUser!.uid
         if self.ref == nil {
             self.ref = User.db.child(id)
         }
-        self.ref!.setValue(self.toAnyObject())
+        self.ref!.setValue(self.toJSON())
     }
     
     

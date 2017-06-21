@@ -9,7 +9,7 @@
 import Firebase
 
 /// Change to struct
-struct Coffee {
+class Coffee {
     
     var date: String = "TBD"
     var time: String = "TBD"
@@ -74,13 +74,13 @@ struct Coffee {
         let toUserRef = ref.child(toId).child("coffeeIds")
         if new {
             let newRef = self.ref.childByAutoId()
-            newRef.setValue(self.toAnyObject()){ (error, ref) -> Void in
+            newRef.setValue(self.toJSON()){ (error, ref) -> Void in
                 fromUserRef.setValue([ref.key : ref.key])
                 toUserRef.setValue([ref.key : ref.key])
             }
         } else {
             let currentRef = self.ref.child(id)
-            currentRef.setValue(self.toAnyObject()){ (error, ref) -> Void in
+            currentRef.setValue(self.toJSON()){ (error, ref) -> Void in
                 fromUserRef.setValue([ref.key : ref.key])
                 toUserRef.setValue([ref.key : ref.key])
                 // the above lines are redundant, but trigger listeners for the right coffee Date
@@ -91,7 +91,7 @@ struct Coffee {
     }
     
     
-    func toAnyObject() -> Any {
+    func toJSON() -> Any {
         return [
             "date": date,
             "time": time,

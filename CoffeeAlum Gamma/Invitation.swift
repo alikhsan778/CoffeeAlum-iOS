@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Invitation: Hashable, Equatable {
+class Invitation: Hashable, Equatable {
     
     var coffee: Coffee
     var user: User

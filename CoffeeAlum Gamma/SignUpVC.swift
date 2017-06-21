@@ -62,7 +62,7 @@ final class SignUpVC: UIViewController {
     private func didChange(_ state: State) {
         switch state {
         case .signUpWithFirebase:
-            signUp()
+            signUpWithFirebase()
         case .signUpSuccessful:
             presentSearchViewController()
         case .signUpFailed(let error):
@@ -75,13 +75,13 @@ final class SignUpVC: UIViewController {
     }
     
     // MARK: - Sign Up Success
-    private func signUp() {
+    private func signUpWithFirebase() {
         
-        let email = mainView.emailAddressTextField.text
-        let password = mainView.passwordTextField.text
+        let email = mainView.emailAddressTextField.text ?? ""
+        let password = mainView.passwordTextField.text ?? ""
         
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
-            APIClient.signUp(with: email!, password: password!) { [weak self] in
+            APIClient.signUp(with: email, password: password) { [weak self] in
                 self?.state = .signUpSuccessful
             }
         }
@@ -216,10 +216,8 @@ final class SignUpVC: UIViewController {
         let emailAddress = mainView.emailAddressTextField.text
         let regularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         // Uses NSPredicate to filter through the email address string using the Regular Expression
-        let emailFilter = NSPredicate(
-            format:"SELF MATCHES %@",
-            regularExpression
-        )
+        let emailFilter = NSPredicate(format:"SELF MATCHES %@",
+                                      regularExpression)
         
         let emailIsValidated = emailFilter.evaluate(with: emailAddress)
         
