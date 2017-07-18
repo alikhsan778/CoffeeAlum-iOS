@@ -42,6 +42,7 @@ final class SignUpVC: UIViewController {
     @IBOutlet var mainView: SignUpVCMainView!
     
     private let alertController = UIAlertController()
+    public var apiClient = APIClient()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -81,14 +82,14 @@ final class SignUpVC: UIViewController {
         let password = mainView.passwordTextField.text ?? ""
         
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
-            APIClient.signUp(with: email, password: password) { [weak self] in
+            apiClient.signUp(with: email, password: password) { [weak self] in
                 self?.state = .signUpSuccessful
             }
         }
     }
     
     private func signInWithGoogleAccount() {
-        APIClient.signInWithGoogleAccount { [weak self] in
+        apiClient.signInWithGoogleAccount { [weak self] in
             self?.state = .signUpSuccessful
         }
     }

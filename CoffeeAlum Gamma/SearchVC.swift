@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 
 
-final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
+final class SearchVC: UIViewController, UITextFieldDelegate,  SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     private enum State {
         case `default`
@@ -33,17 +33,9 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var completeProfileScrollView: UIScrollView!
-    @IBOutlet weak var searchTextView: UITextView!
     @IBOutlet var completeProfileView: UIView!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var studiedInTextField: UITextField!
-    @IBOutlet weak var cityUserLivesTextField: UITextField!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var studiedInLabel: UILabel!
-    @IBOutlet weak var cityLocationLabel: UILabel!
-    @IBOutlet weak var areYouAStudentLabel: UILabel!
-    @IBOutlet weak var sidebarMenuButtonOutlet: UIButton!
+    
+    @IBOutlet var searchVCMainView: SearchVCMainView!
     
     private var state: State = .default {
         didSet {
@@ -65,7 +57,6 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     var filteredUsers: [User] = []
 
     // Filtered Users
-    
     // MARK: - Lists of Data
     // Testing for Firebase
     var name: String!
@@ -75,6 +66,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     var location: String!
     var account: AccountType!
     var uid: String = FIRAuth.auth()!.currentUser!.uid
+    public var apiClient = APIClient()
     
     // MARK: - Overrided Methods
     override func viewDidLoad() {
@@ -83,7 +75,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         let thisUserRef = userRef.child(uid)
         email = FIRAuth.auth()?.currentUser?.email
        
-        // Check if user has filled out intro form; Populate the local user object
+        // Check if user has filled out intro form; populate the local user object
 
         thisUserRef.observe(.value, with: { snapshot in
             if !snapshot.hasChild("name"){
@@ -91,16 +83,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
             }
             self.thisUser = User(snapshot: snapshot)
         })
-        
-        // Making the text field recognize the edit
-        nameTextField.delegate = self
-        studiedInTextField.delegate = self
-        cityUserLivesTextField.delegate = self
-        
-        // Making the text view recongize the edit
-        searchTextView.delegate = self
-        
-        sidebarMenuButtonOutlet.setupSidebarButtonAction(to: self)
+    
     }
     
     // MARK: - IBAction    
@@ -122,6 +105,8 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
         switch state {
         case .loading:
             setupRevealViewController()
+            prepareDelegates()
+            searchVCMainView.sidebarMenuButtonOutlet.setupSidebarButtonAction(to: self)
         case .userIsAnAlum:
             account = .alum
         case .userIsAStudent:
@@ -179,17 +164,17 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     
     private func createUser() {
         
-        guard let name = nameTextField.text else {
+        guard let name = searchVCMainView.nameTextField.text else {
             state = .getStartedFailed(as: .userNameIsEmpty)
             return
         }
         
-        guard let education = studiedInTextField.text else {
+        guard let education = searchVCMainView.studiedInTextField.text else {
             state = .getStartedFailed(as: .fieldOfStudyIsEmpty)
             return
         }
         
-        guard let location = cityUserLivesTextField.text else {
+        guard let location = searchVCMainView.cityUserLivesTextField.text else {
             state = .getStartedFailed(as: .cityAndRegionIsEmpty)
             return
         }
@@ -206,7 +191,7 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
             return
         }
         
-        APIClient.save(user) { (error) in
+        apiClient.save(user) { (error) in
             if error != nil {
                 self.state = .getStartedFailed(as: .firebase(error!))
             } else {
@@ -233,5 +218,16 @@ final class SearchVC: UIViewController, UITextViewDelegate, SWRevealViewControll
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
     }
+    
+    private func prepareDelegates() {
+        // Making the text field recognize the edit
+        searchVCMainView.nameTextField.delegate = self
+        searchVCMainView.studiedInTextField.delegate = self
+        searchVCMainView.cityUserLivesTextField.delegate = self
+        
+        // Making the text view recongize the edit
+        searchVCMainView.searchTextView.delegate = self
+    }
+
 }
 

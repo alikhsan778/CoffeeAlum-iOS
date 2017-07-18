@@ -31,8 +31,8 @@ final class SidebarMenuVC: UIViewController {
         case .didLayoutSubviews:
             addUserProfilePicture()
         case .signOut:
-            APIClient.signOut()
-            APIClient.googleSignOut()
+            apiClient.signOut()
+            apiClient.googleSignOut()
             presentSignInViewController()
         default:
             break
@@ -40,6 +40,7 @@ final class SidebarMenuVC: UIViewController {
     }
     
     private var currentUser: User?
+    public var apiClient = APIClient()
     
     // MARK: - IBOutlets
     @IBOutlet var sidebarMenuView: UIView!
@@ -74,7 +75,7 @@ final class SidebarMenuVC: UIViewController {
     }
     
     private func downloadUserData() {
-        APIClient.retrieveCurrentUserInformation { (user) in
+        apiClient.retrieveCurrentUserInformation { (user) in
             self.currentUser = user
         }
     }

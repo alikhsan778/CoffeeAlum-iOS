@@ -30,6 +30,7 @@ final class SignInVC: UIViewController {
     @IBOutlet var mainView: SignInVCMainView!
     
     private let alertController = UIAlertController()
+    public lazy var apiClient = APIClient()
     
     private var state: State = .default {
         didSet {
@@ -112,7 +113,7 @@ final class SignInVC: UIViewController {
             let email = mainView.emailAddressTextField.text
             let password = mainView.passwordTextField.text
             
-            APIClient.signIn(with: email!, password: password!) { [weak self] (error) in
+            apiClient.signIn(with: email!, password: password!) { [weak self] (error) in
                 if error == nil {
                     self?.state = .signInSuccessful
                 } else {

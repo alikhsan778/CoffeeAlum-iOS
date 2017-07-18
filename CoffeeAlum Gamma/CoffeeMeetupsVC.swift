@@ -40,6 +40,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     public var collectionViewSection: Int?
     public var allCoffee = Set<Invitation>()
     private var refreshController = UIRefreshControl()
+    public var apiClient = APIClient()
     
     // TODO: Getters and setters change it to fitler coffee
     fileprivate var pendingCoffee: [Invitation] {
@@ -135,11 +136,11 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         // Allows the collection view to refresh
         allCoffee.removeAll()
         
-        APIClient.getCoffeeInvitationReceived { [weak self] (invitationReceived) in
+        apiClient.getCoffeeInvitationReceived { [weak self] (invitationReceived) in
             self?.insertCoffee(with: invitationReceived)
         }
         
-        APIClient.getCoffeeInvitationSent { [weak self] (invitationSent) in
+        apiClient.getCoffeeInvitationSent { [weak self] (invitationSent) in
             self?.insertCoffee(with: invitationSent)
         }
     }

@@ -55,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         // Configuring Firebase
         FIRApp.configure()
+        
+        // Configuring Keyboard Manager
         IQKeyboardManager.shared().isEnabled = true
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
@@ -81,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
+            
             return GIDSignIn.sharedInstance().handle(
                 url,
                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,

@@ -17,20 +17,20 @@ enum InvitationState {
 // TODO: Potentially make the APIClient not Firebase specific
 final class APIClient {
     
-    fileprivate static let uid = FIRAuth.auth()!.currentUser!.uid
-    fileprivate static var db = FIRDatabase.database().reference()
-    fileprivate static let firebaseAuth = FIRAuth.auth()
-    fileprivate static var coffeeReference: FIRDatabaseReference {
+    fileprivate lazy var uid = FIRAuth.auth()!.currentUser!.uid
+    fileprivate var db = FIRDatabase.database().reference()
+    fileprivate let firebaseAuth = FIRAuth.auth()
+    fileprivate var coffeeReference: FIRDatabaseReference {
         get {
             return db.child("coffees")
         }
     }
-    fileprivate static let userReference = db.child("users")
-    fileprivate static let storageReference = FIRStorage.storage().reference()
+    fileprivate let userReference = FIRDatabase.database().reference().child("users")
+    fileprivate let storageReference = FIRStorage.storage().reference()
     
     
     // MARK: - Invitation Response
-    static func acceptInvitation(with id: String) {
+    func acceptInvitation(with id: String) {
         let invitationReference = coffeeReference.child(id)
         invitationReference.child("accepted").setValue(true)
         
@@ -38,7 +38,7 @@ final class APIClient {
         invitationReference.child("rescheduled").setValue(false)
     }
     
-    static func declineInvitation(with id: String, state: InvitationState) {
+    func declineInvitation(with id: String, state: InvitationState) {
         
         let invitationReference = coffeeReference.child(id)
         
@@ -54,18 +54,18 @@ final class APIClient {
         }
     }
     
-    static func rescheduleInvitation(with id: String, message: String) {
+    func rescheduleInvitation(with id: String, message: String) {
         let invitationReference = coffeeReference.child(id)
         invitationReference.child("rescheduled").setValue(true)
         invitationReference.child("message").setValue(message)
     }
     
     // MARK: - CoffeeData Manager 
-    static func retrieveCoffeeInvitationData() {
+    func retrieveCoffeeInvitationData() {
         
     }
     
-    static func getCoffeeInvitationSent(completion: ((Invitation) -> Void)?) {
+    func getCoffeeInvitationSent(completion: ((Invitation) -> Void)?) {
         let invitationSent = coffeeReference.queryOrdered(byChild: "fromId").queryEqual(toValue: uid)
         // You sent invite; looking for the person to sent it TO
         invitationSent.observe(.value, with: { snapshot in
@@ -74,7 +74,7 @@ final class APIClient {
                 // NOT DRY
                 let coffeeSnap = item as? FIRDataSnapshot
                 let coffee = Coffee(snapshot: coffeeSnap!)
-                let otherUserRef = userReference.child(coffee.toId)
+                let otherUserRef = self.userReference.child(coffee.toId)
                 
                 otherUserRef.observe(.value, with: { (snapshot) in
                     
@@ -92,7 +92,7 @@ final class APIClient {
         })
     }
     
-    static func getCoffeeInvitationReceived(completion: ((Invitation) -> Void)?) {
+    func getCoffeeInvitationReceived(completion: ((Invitation) -> Void)?) {
         
         let invitationReceived = coffeeReference.queryOrdered(byChild: "toId").queryEqual(toValue: uid)
         // You got the invite; looking for person I received it FROM
@@ -102,7 +102,7 @@ final class APIClient {
                 // NOT DRY
                 let coffeeSnap = item as? FIRDataSnapshot
                 let coffee = Coffee(snapshot: coffeeSnap!)
-                let otherUserRef = userReference.child(coffee.fromId)
+                let otherUserRef = self.userReference.child(coffee.fromId)
                 
                 otherUserRef.observe(.value, with: { (snapshot) in
                     
@@ -122,20 +122,20 @@ final class APIClient {
 
     }
     
-    static func sendCoffeeInvitation() {
+    func sendCoffeeInvitation() {
        
         
     }
     
     // MARK: - App Entry And Exit 
-    static func signIn(with email: String, password: String, completion: ((Error?) -> Void)?) {
+    func signIn(with email: String, password: String, completion: ((Error?) -> Void)?) {
         firebaseAuth?.signIn(withEmail: email, password: password,
             completion: { (user, error) in
             completion?(error)
         })
     }
     
-    static func signOut() {
+    func signOut() {
         do {
             try firebaseAuth?.signOut()
         } catch let signOutError as NSError {
@@ -143,7 +143,7 @@ final class APIClient {
         }
     }
     
-    static func signUp(with email: String, password: String, completion: (() -> Void)?) {
+    func signUp(with email: String, password: String, completion: (() -> Void)?) {
         // TODO: Check if this is an asynchronous call
         // Success in signing up, create user in Firebase
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -154,7 +154,7 @@ final class APIClient {
                     return
                 }
                 
-                let userReference = db.child("users").child(user.uid)
+                let userReference = self.db.child("users").child(user.uid)
                 
                 // Create Firebase path for this user and save email
                 let emailDictionary = ["email": "\(email)"]
@@ -169,18 +169,18 @@ final class APIClient {
 
     }
     
-    static func signInWithGoogleAccount(completion: (() -> Void)?) {
+    func signInWithGoogleAccount(completion: (() -> Void)?) {
         GIDSignIn.sharedInstance().signIn()
         completion?()
     }
     
-    static func googleSignOut() {
+    func googleSignOut() {
         GIDSignIn.sharedInstance().signOut()
     }
     
     
     // MARK: - Retrieve User Information
-    static func retrieveCurrentUserInformation(completion: ((User) -> Void)?) {
+    func retrieveCurrentUserInformation(completion: ((User) -> Void)?) {
         userReference.observe(.value, with: { (snapshot) in
             
             let user = User(snapshot: snapshot)
@@ -189,7 +189,7 @@ final class APIClient {
         })
     }
     
-    static func downloadAllUserData(completion: (([User]) -> Void)?) {
+    func downloadAllUserData(completion: (([User]) -> Void)?) {
         
         var filter = Set<User>()
         
@@ -205,7 +205,7 @@ final class APIClient {
     }
     
     // MARK: - Update User Information
-    static func save(_ user: User, completion: ((Error?) -> Void)?) {
+    func save(_ user: User, completion: ((Error?) -> Void)?) {
         
         let toJSON = [
             "name": user.name,
@@ -228,7 +228,7 @@ final class APIClient {
     }
     
     
-    static func saveUserProfilePicture(with image: UIImage) {
+    func saveUserProfilePicture(with image: UIImage) {
         
         guard let dataToUpload = UIImagePNGRepresentation(image) else {
             return
@@ -246,7 +246,7 @@ final class APIClient {
             let downloadURL = metadata?.downloadURL()?.absoluteString
             
             // TODO: Update the user profile link
-            userReference.child(uid).child("portrait").setValue(downloadURL)
+            self.userReference.child(self.uid).child("portrait").setValue(downloadURL)
             
         }
         

@@ -38,8 +38,9 @@ final class InvitationVC: UIViewController {
     @IBOutlet var mainView: InvitationVCMainView!
     
     weak var delegate: CoffeeMeetupsDelegate?
-    var invitation: Invitation!
-    var invitationID: String!
+    var invitation: Invitation?
+    var invitationID: String?
+    public var apiClient = APIClient()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -49,14 +50,22 @@ final class InvitationVC: UIViewController {
         // Assigning the invitation ID
         invitationID = invitation?.coffee.id
         
-        if invitation.coffee.accepted {
+        guard let invitationIsAccepted = invitation?.coffee.accepted else {
+            return
+        }
+        
+        if invitationIsAccepted {
             mainView.declineButtonOutlet.setTitle(
                 "Reschedule",
                 for: .normal
             )
         }
+        
         // TODO: DRY, this can be added in an extension
-        let profileURL = invitation.user.portrait
+        guard let profileURL = invitation?.user.portrait else {
+            return
+        }
+        
         let url = URL(string: profileURL)
         mainView.profilePicture.sd_setImage(with: url)
     }
@@ -101,7 +110,8 @@ final class InvitationVC: UIViewController {
         case .cancelReschedule:
             dismissRescheduleView()
         case .viewDidLayoutSubviews:
-            mainView.prepareLabelTexts(with: invitation)
+            // TODO: Remove the Bang Operator
+            mainView.prepareLabelTexts(with: invitation!)
         default:
             break
         }
@@ -136,8 +146,13 @@ final class InvitationVC: UIViewController {
     }
     
     private func acceptInvitation() {
+        
+        guard let invitationID = self.invitationID else {
+            return
+        }
+        
         // Accepts invitation
-        APIClient.acceptInvitation(with: invitationID)
+        apiClient.acceptInvitation(with: invitationID)
         // Removes the item from the cell
         delegate?.deleteCoffeeMeetupSelected()
         // Dismisses the popover
@@ -146,9 +161,14 @@ final class InvitationVC: UIViewController {
     
     private func declineInvitation(from button: UIButton) {
         let declineButtonTitle = button.titleLabel?.text
+        
+        guard let invitationID = self.invitationID else {
+            return
+        }
+        
         if declineButtonTitle == "Decline" {
             // Sends a decline request
-            APIClient.declineInvitation(
+            apiClient.declineInvitation(
                 with: invitationID,
                 state: .declined
             )
@@ -167,11 +187,16 @@ final class InvitationVC: UIViewController {
             state = .failedToReschedule(as: .rescheduleMessageIsEmpty)
             return
         }
+        
+        guard let invitationID = self.invitationID else {
+            return
+        }
+        
         // Sends a reschedule request
-        APIClient.rescheduleInvitation(with: invitationID,
+        apiClient.rescheduleInvitation(with: invitationID,
                                        message: rescheduleMessage)
         // Must decline invitation as well
-        APIClient.declineInvitation(with: invitationID,
+        apiClient.declineInvitation(with: invitationID,
                                     state: .rescheduled)
         // Removes the item from the cell
         delegate?.deleteCoffeeMeetupSelected()

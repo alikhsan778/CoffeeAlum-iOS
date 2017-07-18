@@ -58,7 +58,7 @@ extension PersonalProfileVC: UIImagePickerControllerDelegate, UINavigationContro
                 self.profilePicture.layer.cornerRadius = self.profilePicture.frame.width / 2
                 
                 // TODO: Firebase request
-                APIClient.saveUserProfilePicture(with: image)
+                self.apiClient.saveUserProfilePicture(with: image)
                 
             }
         }

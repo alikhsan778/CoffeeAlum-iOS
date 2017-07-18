@@ -28,22 +28,19 @@ final class SearchVCMainView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         addBlurEffect()
         addSearchTextViewPlaceholder()
-        disableScrolling()
     }
     
-    private func addBlurEffect() {
+    func addBlurEffect() {
         blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
-    private func addSearchTextViewPlaceholder() {
+    func addSearchTextViewPlaceholder() {
         // Creating a placeholder manually in text view
-        searchTextView.text = "Tap here to search"
         searchTextView.textColor = UIColor(
             colorLiteralRed: 255/255,
             green: 255/255,
@@ -52,7 +49,7 @@ final class SearchVCMainView: UIView {
         )
     }
     
-    private func disableScrolling() {
+    func disableScrolling() {
         // Prevents the user from being able to scroll the view
         completeProfileScrollView.isScrollEnabled = false
     }

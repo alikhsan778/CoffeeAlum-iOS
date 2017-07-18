@@ -36,7 +36,9 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
         }
     }
     
-    var userList = [User]()
+    // TODO: Change this to private
+    public var userList = [User]()
+    public var apiClient = APIClient()
     
     // MARK: - IBOutlets
     @IBOutlet weak var profilePicture: UIImageView!
@@ -71,7 +73,7 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
         // Removing current objects to prevent duplication
         userList.removeAll()
         
-        APIClient.downloadAllUserData { (listOfUsers) in
+        apiClient.downloadAllUserData { (listOfUsers) in
             self.userList = listOfUsers
             self.tableView.reloadData()
         }
@@ -79,7 +81,7 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     
     // Delegate method to save the updated user information
     func save(user update: User) {
-        APIClient.save(update) { (error) in
+        apiClient.save(update) { (error) in
             self.retrieveAllUserData()
         }
     }
