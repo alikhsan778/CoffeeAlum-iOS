@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
+final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate, UICollectionViewDelegate {
     
     fileprivate enum State {
         case `default`
@@ -160,7 +160,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     // TODO: Delete the coffee meetup declined
-    internal func deleteCoffeeMeetupSelected() {
+    func deleteCoffeeMeetupSelected() {
         
         // Check which section the user has selected
         // Remove the coffee based the section selected
@@ -295,16 +295,15 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = self.view.frame.size.width
-        let height = self.view.frame.size.height
-        
         return CGSize(
-            width: width,
-            height: height / 4
+            width: collectionView.frame.width * 0.9,
+            height: collectionView.frame.height / 4
         )
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10

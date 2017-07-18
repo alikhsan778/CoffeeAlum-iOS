@@ -78,12 +78,11 @@ final class SearchVC: UIViewController, UITextFieldDelegate,  SWRevealViewContro
         // Check if user has filled out intro form; populate the local user object
 
         thisUserRef.observe(.value, with: { snapshot in
-            if !snapshot.hasChild("name"){
+            if !snapshot.hasChild("name") {
                 self.setupPopover(view: self.completeProfileView)
             }
             self.thisUser = User(snapshot: snapshot)
         })
-    
     }
     
     // MARK: - IBAction    
@@ -219,6 +218,7 @@ final class SearchVC: UIViewController, UITextFieldDelegate,  SWRevealViewContro
         return .fade
     }
     
+    // MARK: - Methods
     private func prepareDelegates() {
         // Making the text field recognize the edit
         searchVCMainView.nameTextField.delegate = self

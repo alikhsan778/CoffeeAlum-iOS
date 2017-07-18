@@ -27,21 +27,21 @@
                                 <rect key="frame" x="10" y="131" width="394" height="605"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="100" minimumInteritemSpacing="100" id="rXh-QP-wW5">
-                                    <size key="itemSize" width="280" height="100"/>
+                                    <size key="itemSize" width="386" height="100"/>
                                     <size key="headerReferenceSize" width="40" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CoffeeMeetupCell" id="lND-po-UQy" customClass="CoffeeMeetupCollectionViewCell" customModule="CoffeeAlum_Gamma" customModuleProvider="target">
-                                        <rect key="frame" x="57" y="50" width="280" height="100"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <rect key="frame" x="4" y="50" width="386" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="386" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-S8-pJC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="386" height="100"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Gmail logo " translatesAutoresizingMaskIntoConstraints="NO" id="W3o-Ds-dGF">
                                                             <rect key="frame" x="15" y="23" width="54" height="54"/>
@@ -50,16 +50,16 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="xmd-y1-TcF">
-                                                            <rect key="frame" x="84" y="25" width="186" height="45.333333333333329"/>
+                                                            <rect key="frame" x="84" y="25" width="292" height="45.333333333333329"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Meetee" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxS-Lu-Rbe">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="186" height="24.666666666666664"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="24.666666666666664"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role of Meetee" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3JW-VX-TZc">
-                                                                    <rect key="frame" x="0.0" y="24.666666666666668" width="186" height="20.666666666666661"/>
+                                                                    <rect key="frame" x="0.0" y="24.666666666666668" width="292" height="20.666666666666661"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -200,7 +200,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ayp-XP-5cm">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ayp-XP-5cm">
                                 <rect key="frame" x="30" y="45" width="354" height="90"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="255" image="Gmail logo " translatesAutoresizingMaskIntoConstraints="NO" id="eGz-sL-Mw0">
@@ -210,22 +210,22 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="260" horizontalCompressionResistancePriority="740" verticalCompressionResistancePriority="740" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Pty-Jh-ol8">
-                                        <rect key="frame" x="100" y="0.0" width="254" height="90"/>
+                                        <rect key="frame" x="110" y="0.0" width="244" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Person inviting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfy-UP-hAK">
-                                                <rect key="frame" x="0.0" y="0.0" width="254" height="23.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="244" height="23.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WII-fX-DS4">
-                                                <rect key="frame" x="0.0" y="33.333333333333329" width="254" height="23.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="33.333333333333329" width="244" height="23.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwH-co-kaa">
-                                                <rect key="frame" x="0.0" y="66.666666666666686" width="254" height="23.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="66.666666666666686" width="244" height="23.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -260,14 +260,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="250"/>
                     <connections>
-                        <outlet property="dateAndTimeLabel" destination="WII-fX-DS4" id="7mp-Fx-kCi"/>
-                        <outlet property="declineButtonOutlet" destination="e6X-A8-4vb" id="DXr-jk-5iE"/>
                         <outlet property="mainView" destination="6uq-bg-Jqr" id="Wz9-28-KbY"/>
-                        <outlet property="personInvitingLabel" destination="gfy-UP-hAK" id="O5z-Co-zes"/>
-                        <outlet property="placeLabel" destination="CwH-co-kaa" id="a3w-Wk-eaC"/>
-                        <outlet property="profilePicture" destination="eGz-sL-Mw0" id="bb2-0C-Z3t"/>
-                        <outlet property="rescheduleTextView" destination="Oy1-31-fsV" id="pUa-vc-DeJ"/>
-                        <outlet property="rescheduleView" destination="w3B-nM-mXN" id="p3O-ku-QcU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ex3-9l-HDo" userLabel="First Responder" sceneMemberID="firstResponder"/>

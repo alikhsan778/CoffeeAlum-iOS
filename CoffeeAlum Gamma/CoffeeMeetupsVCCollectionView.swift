@@ -8,9 +8,11 @@
 
 import UIKit
 
+
 final class CoffeeMeetupsVCCollectionView: UICollectionView {
     
     
     
     
 }
+

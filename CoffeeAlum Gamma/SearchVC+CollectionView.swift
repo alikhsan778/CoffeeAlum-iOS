@@ -17,21 +17,15 @@ extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         // Setup to enable profile glimpse popover
         let user = filteredUsers[indexPath.row]
         setupProfileGlimpsePopover(userViewed: user)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCell", for: indexPath) as! SearchCollectionViewCell
-        
         let userForCell = filteredUsers[indexPath.row]
-        
         cell.configure(with: userForCell)
-        
         return cell
     }
     
@@ -39,6 +33,6 @@ extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 150)
     }
-    
+
     
 }
