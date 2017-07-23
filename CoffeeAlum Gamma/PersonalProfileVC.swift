@@ -27,7 +27,7 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     private func didChange(_ state: State) {
         switch state {
         case .loading:
-            retrieveAllUserData()
+            retrieveUserData()
             sidebarMenuButton.setupSidebarButtonAction(to: self)
             setupRevealViewController()
             addProfilePictureTapGesture()
@@ -63,11 +63,11 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     }
     
     /// Method to retrieve user information.
-    func retrieveAllUserData() {
+    func retrieveUserData() {
         // Removing current objects to prevent duplication
         userList.removeAll()
-        apiClient.downloadAllUserData { (listOfUsers) in
-            self.userList = listOfUsers
+        apiClient.retrieveCurrentUserInformation { (userData) in
+            self.userList.append(userData)
             self.tableView.reloadData()
         }
     }
@@ -75,7 +75,7 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     // Delegate method to save the updated user information
     func save(user update: User) {
         apiClient.save(update) { (error) in
-            self.retrieveAllUserData()
+            self.retrieveUserData()
         }
     }
     

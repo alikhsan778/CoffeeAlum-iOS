@@ -184,7 +184,7 @@ final class APIClient {
     
     // MARK: - Retrieve User Information
     func retrieveCurrentUserInformation(completion: ((User) -> Void)?) {
-        userReference.observe(.value, with: { (snapshot) in
+        userReference.child(uid).observe(.value, with: { (snapshot) in
             
             let user = User(snapshot: snapshot)
 
