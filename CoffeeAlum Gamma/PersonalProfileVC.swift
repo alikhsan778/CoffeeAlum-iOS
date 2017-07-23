@@ -45,19 +45,13 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sidebarMenuButton: UIButton!
 
-
     override func viewDidLoad() {
         state = .loading
-        
 
-        let nibFile = UINib(
-            nibName: "PersonalProfileTableViewCell",
-            bundle: nil
-        )
-        tableView.register(
-            nibFile,
-            forCellReuseIdentifier: "PersonalProfileCell"
-        )
+        let nibFile = UINib(nibName: "PersonalProfileTableViewCell",
+                            bundle: nil)
+        tableView.register(nibFile,
+                           forCellReuseIdentifier: "PersonalProfileCell")
     }
     
     @IBAction func sideBarMenuButton(_ sender: UIButton) {
@@ -72,7 +66,6 @@ final class PersonalProfileVC: UIViewController, PersonalProfileDelegate {
     func retrieveAllUserData() {
         // Removing current objects to prevent duplication
         userList.removeAll()
-        
         apiClient.downloadAllUserData { (listOfUsers) in
             self.userList = listOfUsers
             self.tableView.reloadData()

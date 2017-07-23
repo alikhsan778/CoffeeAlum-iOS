@@ -30,6 +30,7 @@ final class SignUpVC: UIViewController {
         case passwordIsInvalid
         case passwordConfirmationIsEmpty
         case passwordConfirmationDoesNotMatch
+        case firebase(Swift.Error)
     }
     
     private var state: State = .default {
@@ -62,6 +63,8 @@ final class SignUpVC: UIViewController {
     // MARK: - State Machine
     private func didChange(_ state: State) {
         switch state {
+        case .loading:
+            userHasCompletedProfileRequirements = false
         case .signUpWithFirebase:
             signUpWithFirebase()
         case .signUpSuccessful:
@@ -82,8 +85,14 @@ final class SignUpVC: UIViewController {
         let password = mainView.passwordTextField.text ?? ""
         
         if emailRequirementsIsFulfilled() && passwordRequirementsIsFulfilled() &&  confirmPasswordRequirementsIsFulfilled() {
-            apiClient.signUp(with: email, password: password) { [weak self] in
-                self?.state = .signUpSuccessful
+            apiClient.signUp(with: email, password: password) { [weak self] (error) in
+                
+                if let error = error {
+                    self?.state = .signUpFailed(as: .firebase(error))
+                } else {
+                    self?.state = .signUpSuccessful
+                }
+            
             }
         }
     }
@@ -115,6 +124,8 @@ final class SignUpVC: UIViewController {
             message = "Your password requires at least 6 characters."
         case .passwordConfirmationDoesNotMatch:
             message = "Your password confirmation does not match."
+        case .firebase(let error):
+            message = error.localizedDescription
         }
         
         func addAlertControllerTapGesture() {
@@ -248,11 +259,8 @@ final class SignUpVC: UIViewController {
     private func presentSearchViewController() {
         // Accessing the App Delegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        
-        let storyboard = UIStoryboard(
-            name: Storyboard.main.rawValue,
-            bundle: nil
-        )
+        let storyboard = UIStoryboard(name: Storyboard.main.rawValue,
+                                      bundle: nil)
         let targetController = storyboard.instantiateViewController(
             withIdentifier: ViewController.SWRevealViewController.rawValue) as! SWRevealViewController
         

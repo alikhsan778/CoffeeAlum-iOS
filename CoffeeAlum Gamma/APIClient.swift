@@ -143,7 +143,7 @@ final class APIClient {
         }
     }
     
-    func signUp(with email: String, password: String, completion: (() -> Void)?) {
+    func signUp(with email: String, password: String, completion: ((Error?) -> Void)?) {
         // TODO: Check if this is an asynchronous call
         // Success in signing up, create user in Firebase
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -162,8 +162,11 @@ final class APIClient {
                 // BUG: Format of the completion block must be correct
                 // because there is a bug in Firebase
                 userReference.setValue(emailDictionary) { (error, _) in
-                    completion?()
+                    completion?(nil)
                 }
+            } else {
+                // Passes the error
+                completion?(error)
             }
         })
 
@@ -192,15 +195,15 @@ final class APIClient {
     func downloadAllUserData(completion: (([User]) -> Void)?) {
         
         var filter = Set<User>()
-        
+    
         db.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             
             let user = User(snapshot: snapshot)
+            
             filter.insert(user)
             let filteredListOfUsers = Array(filter)
             
             completion?(filteredListOfUsers)
-            
         })
     }
     
@@ -219,7 +222,8 @@ final class APIClient {
             "uid": user.uid,
             "linkedIn": user.linkedIn,
             "website": user.website,
-            "bio": user.bio
+            "bio": user.bio,
+            "searchName": user.name.lowercased()
         ]
         
         userReference.child(uid).setValue(toJSON) { (error, _) in

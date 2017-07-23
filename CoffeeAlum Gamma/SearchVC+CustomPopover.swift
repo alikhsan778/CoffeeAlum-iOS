@@ -16,8 +16,7 @@ extension SearchVC {
         
         return true
     }
-    
-    
+
     // MARK: - Popover Method
     // Sets up the popover
     func setupPopover(view: UIView) {
@@ -43,23 +42,22 @@ extension SearchVC {
             view.transform = CGAffineTransform.identity
             
             // Creates the blur effect
-            self.view.addSubview(self.blurEffectView)
+            self.view.addSubview(self.searchVCMainView.blurEffectView)
             // Sending the blur effect to be behind the popover
-            self.view.sendSubview(toBack: self.blurEffectView)
+            self.view.sendSubview(toBack: self.searchVCMainView.blurEffectView)
             
         }, completion: nil)
-        
     }
     
     // Method to dimiss the popover
     func dismissPopover(view: UIView) {
         // Animation to dismiss the popover
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {() -> Void in
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: { () -> Void in
             // Animation to scale before disappearing
             view.transform = CGAffineTransform.init(scaleX: 1.1, y: 1.1)
             
             view.alpha = 0
-            self.blurEffectView.removeFromSuperview()
+            self.searchVCMainView.blurEffectView.removeFromSuperview()
             
             // Updating this bool to prevent this popup from showing again
             userHasCompletedProfileRequirements = true

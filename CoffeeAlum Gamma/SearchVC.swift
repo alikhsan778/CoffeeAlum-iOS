@@ -49,16 +49,13 @@ final class SearchVC: UIViewController, UITextFieldDelegate,  SWRevealViewContro
     var userRef: FIRDatabaseReference = FIRDatabase.database().reference(withPath: "users")
     // Creating an instance of each class
     var thisUser: User?
-    // Animation object
-    var blurEffect: UIBlurEffect!
-    var blurEffectView: UIVisualEffectView!
     // MARK: - Search Objects
     var filteredDataSet = Set<User>()
     var filteredUsers: [User] = []
 
     // Filtered Users
     // MARK: - Lists of Data
-    // Testing for Firebase
+    // TODO: Move the user registration to another View Controller
     var name: String!
     var email: String!
     var registeredUserReference: FIRDatabaseReference!
@@ -76,7 +73,6 @@ final class SearchVC: UIViewController, UITextFieldDelegate,  SWRevealViewContro
         email = FIRAuth.auth()?.currentUser?.email
        
         // Check if user has filled out intro form; populate the local user object
-
         thisUserRef.observe(.value, with: { snapshot in
             if !snapshot.hasChild("name") {
                 self.setupPopover(view: self.completeProfileView)
@@ -191,8 +187,8 @@ final class SearchVC: UIViewController, UITextFieldDelegate,  SWRevealViewContro
         }
         
         apiClient.save(user) { (error) in
-            if error != nil {
-                self.state = .getStartedFailed(as: .firebase(error!))
+            if let error = error {
+                self.state = .getStartedFailed(as: .firebase(error))
             } else {
                 self.state = .getStartedSuccessful
             }

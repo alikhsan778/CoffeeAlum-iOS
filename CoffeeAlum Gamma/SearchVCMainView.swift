@@ -23,30 +23,18 @@ final class SearchVCMainView: UIView {
     @IBOutlet weak var areYouAStudentLabel: UILabel!
     @IBOutlet weak var sidebarMenuButtonOutlet: UIButton!
     
-    private var blurEffect: UIBlurEffect!
-    private var blurEffectView: UIVisualEffectView!
+    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+    var blurEffectView: UIVisualEffectView!
     
     override func layoutSubviews() {
         super.layoutSubviews()
         addBlurEffect()
-        addSearchTextViewPlaceholder()
     }
     
     func addBlurEffect() {
-        blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    }
-    
-    func addSearchTextViewPlaceholder() {
-        // Creating a placeholder manually in text view
-        searchTextView.textColor = UIColor(
-            colorLiteralRed: 255/255,
-            green: 255/255,
-            blue: 255/255,
-            alpha: 0.5
-        )
     }
     
     func disableScrolling() {
