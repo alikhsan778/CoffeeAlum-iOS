@@ -125,6 +125,8 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
             for: .valueChanged
         )
         collectionView.addSubview(refreshController)
+        // Sends the refresh controller to back
+        refreshController.layer.zPosition = -1
         collectionView.alwaysBounceVertical = true
     }
     
@@ -150,13 +152,12 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         
         allCoffee.insert(invitation)
         collectionView.reloadData()
-        
+        // Hides or unhides the no invitation label
         if allCoffee.count > 0 {
             noInvitationLabel.isHidden = true
         } else {
             noInvitationLabel.isHidden = false
         }
-        
     }
     
     // TODO: Delete the coffee meetup declined
@@ -195,6 +196,11 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
 extension CoffeeMeetupsVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        if allCoffee.count == 0 {
+            return 0
+        }
+        
         return 3
     }
     
