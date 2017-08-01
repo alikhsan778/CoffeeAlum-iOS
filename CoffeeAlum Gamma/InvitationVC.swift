@@ -12,12 +12,15 @@ protocol CoffeeMeetupsDelegate: class {
 
 final class InvitationVC: UIViewController {
     
+    // MARK: - State Machine
     private enum State {
         case `default`
         case loading
         case viewDidLayoutSubviews
+        case viewDidAppear
         case acceptInvitation
         case rescheduleInvitation
+        case sendRescheduleMessage
         case declineInvitation(using: UIButton)
         case failedToReschedule(as: Error)
         case cancelReschedule
@@ -27,6 +30,30 @@ final class InvitationVC: UIViewController {
     private var state: State = .default {
         didSet {
             didChange(state)
+        }
+    }
+    
+    private func didChange(_ state: State) {
+        switch state {
+        case .loading:
+            break
+        case .viewDidAppear:
+            addRescheduleView()
+        case .acceptInvitation:
+            acceptInvitation()
+        case .declineInvitation(let button):
+            declineInvitation(from: button)
+        case .rescheduleInvitation:
+            displayRescheduleView()
+        case .sendRescheduleMessage:
+            sendRescheduleMessage()
+        case .cancelReschedule:
+            dismissRescheduleView()
+        case .viewDidLayoutSubviews:
+            // TODO: Remove the Bang Operator
+            mainView.prepareLabelTexts(with: invitation!)
+        default:
+            break
         }
     }
     
@@ -71,7 +98,13 @@ final class InvitationVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         state = .viewDidLayoutSubviews
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        state = .viewDidAppear
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +116,7 @@ final class InvitationVC: UIViewController {
         // TODO: Move this to viewDidAppear
         self.preferredContentSize = CGSize(
             width: window.width * 0.9,
-            height: window.height * 0.35
+            height: window.height * 0.27
         )
         
         self.popoverPresentationController?.sourceRect = CGRect(
@@ -96,27 +129,6 @@ final class InvitationVC: UIViewController {
         self.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
     }
     
-    // MARK: - State Machine
-    private func didChange(_ state: State) {
-        switch state {
-        case .loading:
-            break
-        case .acceptInvitation:
-            acceptInvitation()
-        case .declineInvitation(let button):
-            declineInvitation(from: button)
-        case .rescheduleInvitation:
-            sendRescheduleMessage()
-        case .cancelReschedule:
-            dismissRescheduleView()
-        case .viewDidLayoutSubviews:
-            // TODO: Remove the Bang Operator
-            mainView.prepareLabelTexts(with: invitation!)
-        default:
-            break
-        }
-    }
-    
     // MARK: - IBActions
     @IBAction func declineButtonAction(_ sender: UIButton) {
         state = .declineInvitation(using: sender)
@@ -127,7 +139,7 @@ final class InvitationVC: UIViewController {
     }
     
     @IBAction func sendRescheduleMessageAction(_ sender: UIButton) {
-        state = .rescheduleInvitation
+        state = .sendRescheduleMessage
     }
     
     @IBAction func cancelRescheduleButtonAction(_ sender: UIButton) {
@@ -142,7 +154,7 @@ final class InvitationVC: UIViewController {
             height: self.view.frame.height
         )
         mainView.rescheduleView.center = self.view.center
-        self.view.addSubview(view)
+        self.view.addSubview(mainView.rescheduleView)
     }
     
     private func acceptInvitation() {
@@ -177,12 +189,12 @@ final class InvitationVC: UIViewController {
             // Dismisses the popover
             self.dismiss(animated: true, completion: nil)
         } else if declineButtonTitle == "Reschedule" {
-            // TODO: Display the reschedule message
-            displayRescheduleView()
+            state = .rescheduleInvitation
         }
     }
     
     private func sendRescheduleMessage() {
+    
         guard let rescheduleMessage = mainView.rescheduleTextView.text else {
             state = .failedToReschedule(as: .rescheduleMessageIsEmpty)
             return

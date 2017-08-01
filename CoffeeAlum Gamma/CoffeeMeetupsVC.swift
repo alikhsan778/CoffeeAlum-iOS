@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate, UICollectionViewDelegate {
+final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, UIPopoverPresentationControllerDelegate, CoffeeMeetupsDelegate {
     
     fileprivate enum State {
         case `default`
@@ -193,7 +193,7 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
 
 
 // MARK: - UICollectionView extension
-extension CoffeeMeetupsVC: UICollectionViewDataSource {
+extension CoffeeMeetupsVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
@@ -201,6 +201,18 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
             return 0
         }
         
+        if upcomingCoffee.count > 0 && pendingCoffee.count > 0 && rescheduledCoffee.count > 0 {
+            return 3
+        }
+        
+        if upcomingCoffee.count > 0 && pendingCoffee.count > 0 {
+            return 2
+        }
+        
+        if upcomingCoffee.count > 0 {
+            return 1
+        }
+    
         return 3
     }
     
@@ -243,7 +255,6 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         
         return reusableView
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -301,15 +312,11 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource {
         return cell
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(
-            width: collectionView.frame.width * 0.9,
-            height: collectionView.frame.height / 4
-        )
+        let width = collectionView.frame.width
+        let height = collectionView.frame.height / 4.2
+        return CGSize(width: width, height: height)
     }
-
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10

@@ -23,9 +23,9 @@ final class CoffeeMeetupCollectionViewCell: UICollectionViewCell {
         if invitation.user.employer == "" {
             roleOfOther.text = "Student at \(invitation.user.education)"
         } else {
-            nameOfInviter.text = "\(invitation.user.role) at \(invitation.user.employer)"
+            roleOfOther.text = "\(invitation.user.role) at \(invitation.user.employer)"
         }
-        
+
         let url = URL(string: invitation.user.portrait)
         pictureOfInviter.sd_setImage(with: url)
     }

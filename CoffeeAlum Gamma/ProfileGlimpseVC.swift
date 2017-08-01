@@ -47,7 +47,7 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
     var data: [(header: String, expanded: Bool)] = []
     var userViewed: User?
     var thisUser: User?
-    fileprivate var imagePicker = UIImagePickerController()
+    private var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         
@@ -92,7 +92,7 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
     }
     
         
-    fileprivate func includeData(header: String) -> Bool {
+    private func includeData(header: String) -> Bool {
         
         guard let userViewed = userViewed else {
             return false
@@ -116,8 +116,7 @@ final class ProfileGlimpseVC: UIViewController, UIPopoverPresentationControllerD
         return selected != ""
     }
     
-    fileprivate func setupCloseButton() {
+    private func setupCloseButton() {
         closeButtonOutlet.layer.cornerRadius = closeButtonOutlet.frame.width / 2
     }
-    
 }
