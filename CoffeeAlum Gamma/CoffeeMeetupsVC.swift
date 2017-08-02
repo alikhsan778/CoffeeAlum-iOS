@@ -201,6 +201,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource, UICollectionViewDelegateF
             return 0
         }
         
+        /*
         if upcomingCoffee.count > 0 && pendingCoffee.count > 0 && rescheduledCoffee.count > 0 {
             return 3
         }
@@ -212,6 +213,7 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource, UICollectionViewDelegateF
         if upcomingCoffee.count > 0 {
             return 1
         }
+        */
     
         return 3
     }
