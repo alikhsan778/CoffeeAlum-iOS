@@ -200,20 +200,6 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource, UICollectionViewDelegateF
         if allCoffee.count == 0 {
             return 0
         }
-        
-        /*
-        if upcomingCoffee.count > 0 && pendingCoffee.count > 0 && rescheduledCoffee.count > 0 {
-            return 3
-        }
-        
-        if upcomingCoffee.count > 0 && pendingCoffee.count > 0 {
-            return 2
-        }
-        
-        if upcomingCoffee.count > 0 {
-            return 1
-        }
-        */
     
         return 3
     }
@@ -244,15 +230,35 @@ extension CoffeeMeetupsVC: UICollectionViewDataSource, UICollectionViewDelegateF
             // Accessing the labels
             let label = reusableView?.subviews[0] as! UILabel
             headerTitleLabel = label
+            // Array of section names
+            var sectionName: [String] = []
             
-            // Titles of the sections
-            let sectionNames = [
-                "Upcoming coffee meetups",
-                "Pending coffee invitations",
-                "Pending to be rescheduled"
-            ]
+            if upcomingCoffee.count > 0 {
+                // Appends the title to the section name
+                sectionName.append("Upcoming coffee meetups")
+            } else {
+                // Appends an empty title to the section name
+                sectionName.append("")
+            }
+             
+            if pendingCoffee.count > 0 {
+                // Appends the title to the section name
+                sectionName.append("Pending coffee invitations")
+            } else {
+                // Appends an empty title to the section name
+                sectionName.append("")
+            }
+             
+            if rescheduledCoffee.count > 0 {
+                // Appends the title to the section name
+                sectionName.append("Pending to be rescheduled")
+            } else {
+                // Appends an empty title to the section name
+                sectionName.append("")
+            }
+            
             // Assigning the title of the label
-            headerTitleLabel?.text = sectionNames[indexPath.section]
+            headerTitleLabel?.text = sectionName[indexPath.section]
         }
         
         return reusableView
