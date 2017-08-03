@@ -160,7 +160,6 @@ final class CoffeeMeetupsVC: UIViewController, SWRevealViewControllerDelegate, U
         }
     }
     
-    // TODO: Delete the coffee meetup declined
     func deleteCoffeeMeetupSelected() {
         
         // Check which section the user has selected
